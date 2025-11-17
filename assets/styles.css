@@ -58,11 +58,11 @@ body::before {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 2.5rem 0;
 }
 
 .section-alt {
-  padding: 5rem 0;
+  padding: 2.5rem 0;
   background:
     radial-gradient(circle at top right, rgba(62, 104, 104, 0.32), transparent 60%),
     #101214;
@@ -72,7 +72,8 @@ body::before {
 
 .section h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
 }
 
 .section p {
@@ -371,10 +372,13 @@ body::before {
   background: var(--card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
-  padding: 1.6rem 1.7rem;
+  padding: 1.5rem;
   box-shadow: 0 14px 30px rgba(3, 4, 5, 0.9);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
 }
 
 .project-card::before {
@@ -395,12 +399,11 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--accent-alt);
-  margin-bottom: 0.5rem;
   position: relative;
 }
 
 .project-card h3 {
-  margin: 0 0 0.4rem;
+  margin: 0;
   font-size: 1.05rem;
   position: relative;
 }
@@ -408,20 +411,21 @@ body::before {
 .project-card p {
   font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 0.8rem;
   position: relative;
+  margin: 0;
 }
 
 .project-meta {
   list-style: none;
   padding-left: 0;
-  margin: 0 0 0.8rem;
+  margin: 0;
   position: relative;
 }
 
 .project-meta li {
   font-size: 0.85rem;
   color: #f3e8da;
+  margin-bottom: 0.3rem;
 }
 
 .project-links {
@@ -429,6 +433,7 @@ body::before {
   gap: 0.8rem;
   flex-wrap: wrap;
   position: relative;
+  margin-top: auto;
 }
 
 .project-links a {
