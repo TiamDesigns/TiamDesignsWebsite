@@ -7,7 +7,7 @@
   --muted: #c1ab85;
   --accent: #c94e44;
   --accent-soft: rgba(201, 78, 68, 0.22);
-  --accent-alt: #3e6868;
+  --accent-alt: #c1ab85;
   --radius-lg: 1.25rem;
   --radius-xl: 1.75rem;
   --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
@@ -258,9 +258,10 @@ body::before {
 
 .btn.primary {
   background: linear-gradient(135deg, #c94e44, #c1ab85);
-  color: #100f10;
+  color: #0a0a0a;
   font-weight: 600;
   box-shadow: 0 14px 30px rgba(201, 78, 68, 0.4);
+  border-color: rgba(130, 50, 45, 0.6);
 }
 
 .btn.primary:hover {
@@ -270,13 +271,13 @@ body::before {
 
 .btn.ghost {
   background: transparent;
-  border-color: var(--border-subtle);
+  border-color: rgba(193, 171, 133, 0.8);
   color: var(--text);
 }
 
 .btn.ghost:hover {
-  border-color: rgba(193, 171, 133, 0.9);
-  background: rgba(16, 18, 20, 0.95);
+  border-color: rgba(193, 171, 133, 1);
+  background: rgba(193, 171, 133, 0.1);
 }
 
 .btn.full-width {
@@ -339,9 +340,9 @@ body::before {
 .filter-btn {
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(193, 171, 133, 0.4);
   background: rgba(14, 18, 20, 0.96);
-  color: var(--muted);
+  color: rgba(193, 171, 133, 0.7);
   font-size: 0.8rem;
   cursor: pointer;
   transition: background var(--transition), color var(--transition),
@@ -350,8 +351,8 @@ body::before {
 
 .filter-btn.active {
   background: var(--accent-soft);
-  border-color: rgba(201, 78, 68, 0.8);
-  color: var(--accent);
+  border-color: rgba(201, 78, 68, 1);
+  color: #f6f4ef;
   transform: translateY(-1px);
 }
 
