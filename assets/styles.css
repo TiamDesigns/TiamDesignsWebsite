@@ -436,6 +436,69 @@ body::before {
   text-decoration: underline;
 }
 
+/* Experience */
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.experience-item {
+  border-left: 2px solid rgba(201, 78, 68, 0.4);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.experience-item::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+.experience-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.experience-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.experience-company {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.experience-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.experience-details {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.experience-details li {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
 /* Skills */
 
 .skills-grid {
