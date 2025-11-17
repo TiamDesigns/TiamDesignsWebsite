@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiam Bennett – Portfolio</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#top" class="logo">Tiam<span>Designs</span></a>
+      <nav class="nav">
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="hero-kicker">Designer · Engineer · Maker</p>
+          <h1>Hi, I’m <span class="accent">Tiam</span>.</h1>
+          <p class="hero-subtitle">
+            I build physical and digital products – from mechanical keyboards
+            and robots to clean, functional interfaces and tools for engineers.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn primary">View Projects</a>
+            <a href="#contact" class="btn ghost">Let’s work together</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <h2>Current focus</h2>
+            <p>Hardware-focused prototyping, robotics, and design education for students.</p>
+            <ul>
+              <li>ESP32 robotics & control</li>
+              <li>3D printing & CAD workflows</li>
+              <li>Product visualization & storytelling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container section-grid">
+        <div>
+          <h2>About</h2>
+          <p>
+            I’m a designer-turned-engineer based in Ottawa, blending industrial
+            design thinking with hands-on electronics and mechanical prototyping.
+          </p>
+          <p>
+            I enjoy building tools, tutorials, and products that help students
+            and engineers move from idea to working prototype as smoothly as possible.
+          </p>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight">
+            <h3>What I do</h3>
+            <ul>
+              <li>Prototyping for product design</li>
+              <li>CAD & design for manufacturing</li>
+              <li>Embedded systems & robotics</li>
+              <li>Educational content & tutorials</li>
+            </ul>
+          </div>
+          <div class="highlight">
+            <h3>Currently</h3>
+            <ul>
+              <li>Studying Electrical Engineering</li>
+              <li>Exploring robot dogs & cycloidal drives</li>
+              <li>Building resources for student makers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2>Projects</h2>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="product">Product Design</button>
+            <button class="filter-btn" data-filter="hardware">Hardware</button>
+            <button class="filter-btn" data-filter="software">Software</button>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card" data-category="product hardware">
+            <div class="project-tag">Product · Hardware</div>
+            <h3>Enceladus 65-key Keyboard</h3>
+            <p>
+              A custom mechanical keyboard with hot-swap PCB, brass plates,
+              and DfX-driven decisions for assembly, usability, and manufacturability.
+            </p>
+            <ul class="project-meta">
+              <li>3D-printed & CNC components</li>
+              <li>DFM/DFMA analysis</li>
+              <li>Custom PCB & firmware</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Case study</a>
+              <a href="#" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card" data-category="hardware">
+            <div class="project-tag">Hardware</div>
+            <h3>Robot Dog Platform</h3>
+            <p>
+              ESP32-based quadruped capable of voice commands, object detection, and
+              self-stabilization when pushed.
+            </p>
+            <ul class="project-meta">
+              <li>ESP32 control architecture</li>
+              <li>Custom battery pack design</li>
+              <li>PID tuning & gait exploration</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Project log</a>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card" data-category="product software">
+            <div class="project-tag">Product · Software</div>
+            <h3>Student Maker Tutorials</h3>
+            <p>
+              A series of tutorials introducing Onshape, 3D printing, and laser cutting
+              for first-year engineering & design students.
+            </p>
+            <ul class="project-meta">
+              <li>Lesson design & scripting</li>
+              <li>Short-form video content</li>
+              <li>Downloadable project files</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Playlist</a>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card" data-category="software">
+            <div class="project-tag">Software</div>
+            <h3>Photo Triage App</h3>
+            <p>
+              A swipe-based Android app for quickly sorting photos, built as a
+              practical intro to Kotlin and app architectures.
+            </p>
+            <ul class="project-meta">
+              <li>Swipe interactions</li>
+              <li>Local storage</li>
+              <li>Minimal, focused UI</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Case study</a>
+              <a href="#" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Design</h3>
+            <ul>
+              <li>Industrial design & DfX</li>
+              <li>CAD (Onshape, Fusion)</li>
+              <li>Design for 3D printing & CNC</li>
+              <li>Storyboarding & visual communication</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Engineering</h3>
+            <ul>
+              <li>Embedded systems (ESP32, Arduino)</li>
+              <li>Motor selection & control</li>
+              <li>PCB design basics</li>
+              <li>Measurement & test rigs</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Software</h3>
+            <ul>
+              <li>HTML, CSS, JavaScript</li>
+              <li>Python & C for embedded</li>
+              <li>Basic Android (Kotlin)</li>
+              <li>Git & collaborative workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-alt">
+      <div class="container contact-grid">
+        <div>
+          <h2>Contact</h2>
+          <p>
+            Interested in collaborating, hiring, or bringing a prototype to life?
+            Send me a message and I’ll get back to you.
+          </p>
+          <ul class="contact-list">
+            <li><strong>Email:</strong> <a href="mailto:hello@tiamdesigns.com">hello@tiamdesigns.com</a></li>
+            <li><strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener">github.com/your-handle</a></li>
+            <li><strong>LinkedIn:</strong> <a href="#" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></li>
+          </ul>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/your-id" method="POST">
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button type="submit" class="btn primary full-width">Send message</button>
+          <p class="form-note">
+            This form is powered by a third-party service. Replace the endpoint with your own.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Tiam Bennett. All rights reserved.</p>
+      <a href="#top" class="back-to-top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
