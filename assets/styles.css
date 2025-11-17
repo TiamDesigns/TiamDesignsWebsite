@@ -86,12 +86,7 @@ body::before {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(18px);
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 16, 20, 0.96),
-    rgba(10, 16, 20, 0.8),
-    transparent
-  );
+  background: rgba(10, 16, 20, 0.98);
   border-bottom: 1px solid rgba(148, 163, 184, 0.22);
 }
 
@@ -149,6 +144,10 @@ body::before {
   border-radius: 999px;
   padding: 0.4rem 0.5rem;
   cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .nav-toggle span {
@@ -157,7 +156,7 @@ body::before {
   height: 2px;
   background: var(--text);
   border-radius: 999px;
-  margin: 3px 0;
+  margin: 0;
 }
 
 /* Hero */
@@ -249,7 +248,11 @@ body::before {
   padding: 0.6rem 1.3rem;
   border-radius: 999px;
   font-size: 0.95rem;
-  border: 1px solid transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 2px solid transparent;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   cursor: pointer;
   text-decoration: none;
   transition: background var(--transition), border-color var(--transition),
@@ -257,11 +260,13 @@ body::before {
 }
 
 .btn.primary {
-  background: linear-gradient(135deg, #c94e44, #c1ab85);
+  background: linear-gradient(135deg, #c94e44 0%, #cc7b5f 50%, #c1ab85 100%);
   color: #0a0a0a;
   font-weight: 600;
   box-shadow: 0 14px 30px rgba(201, 78, 68, 0.4);
-  border-color: rgba(130, 50, 45, 0.6);
+  border: 2px solid rgba(130, 50, 45, 0.96);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
 }
 
 .btn.primary:hover {
@@ -271,7 +276,7 @@ body::before {
 
 .btn.ghost {
   background: transparent;
-  border-color: rgba(193, 171, 133, 0.8);
+  border: 2px solid rgba(193, 171, 133, 0.96);
   color: var(--text);
 }
 
