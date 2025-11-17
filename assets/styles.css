@@ -300,8 +300,12 @@ body::before {
 }
 
 .about-highlights {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1.2rem;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .highlight {
@@ -309,6 +313,7 @@ body::before {
   border-radius: var(--radius-lg);
   padding: 1.4rem 1.5rem;
   border: 1px solid var(--border-subtle);
+  width: 100%;
 }
 
 .highlight h3 {
