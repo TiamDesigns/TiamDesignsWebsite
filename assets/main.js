@@ -53,3 +53,27 @@ const yearSpan = document.getElementById('year');
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
+
+// Prevent browser/extension editing overlays (Grammarly etc.)
+(() => {
+  try {
+    // Disable spellcheck globally
+    document.documentElement.setAttribute('spellcheck', 'false');
+
+    // Mark fields and content to opt-out where possible
+    document.querySelectorAll('input, textarea, [contenteditable]').forEach((el) => {
+      el.setAttribute('spellcheck', 'false');
+      el.setAttribute('autocomplete', 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('data-gramm', 'false');
+      el.setAttribute('data-gramm_editor', 'false');
+    });
+
+    // Add data-gramm attributes to body as extra hint
+    document.body.setAttribute('data-gramm', 'false');
+    document.body.setAttribute('data-gramm_editor', 'false');
+  } catch (e) {
+    // Fail silently — extensions may ignore these attributes
+    console.warn('Could not set editing opt-out attributes', e);
+  }
+})();
