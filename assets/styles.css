@@ -451,6 +451,54 @@ body::before {
   text-decoration: underline;
 }
 
+.project-card.sample-subway {
+  background-image: url('BWSampleSubway.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  background-clip: padding-box;
+  background-origin: padding-box;
+}
+
+
+
+.project-card.sample-subway::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(23, 25, 28, 0.92), rgba(23, 25, 28, 0.88));
+  z-index: 1;
+  pointer-events: none;
+  border-radius: var(--radius-lg);
+}
+
+.project-card.sample-subway > * {
+  position: relative;
+  z-index: 2;
+}
+
+.project-card.enceladus65 {
+  background-image: url('YOUR-ENCELADUS-IMAGE.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.project-card.enceladus65::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(23, 25, 28, 0.92), rgba(23, 25, 28, 0.88));
+  z-index: 1;
+  pointer-events: none;
+  border-radius: var(--radius-lg);
+}
+
+.project-card.enceladus65 > * {
+  position: relative;
+  z-index: 2;
+}
+
+
 /* Experience */
 
 .experience-list {
