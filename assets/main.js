@@ -48,6 +48,18 @@ filterButtons.forEach((btn) => {
   });
 });
 
+// Skill toggle on cards
+document.querySelectorAll('.skill-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    const card = button.closest('.project-card');
+    if (!card) return;
+    const expanded = card.dataset.expanded === 'true';
+    card.dataset.expanded = expanded ? 'false' : 'true';
+    button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    button.textContent = expanded ? 'Show all skills' : 'Hide skills';
+  });
+});
+
 // Dynamic year in footer
 const yearSpan = document.getElementById('year');
 if (yearSpan) {

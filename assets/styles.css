@@ -43,9 +43,17 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.6;
+  opacity: 0.35;
   mix-blend-mode: soft-light;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+}
+
+/* Keep page content above the grain layer */
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 /* Layout helpers */
@@ -210,7 +218,7 @@ body::before {
 
 .hero-card-inner {
   background:
-    radial-gradient(circle at top right, rgba(201, 78, 68, 0.3), transparent 65%),
+    radial-gradient(circle at top right, rgba(201, 78, 68, 0.3), transparent 60%), 
     var(--card);
   border-radius: var(--radius-xl);
   padding: 1.75rem 1.8rem;
@@ -368,9 +376,8 @@ body::before {
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  column-count: 2;
+  column-gap: 1.5rem;
 }
 
 .project-card {
@@ -384,6 +391,13 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  break-inside: avoid;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.project-card.sample-subway {
+  break-before: column;
 }
 
 .project-card::before {
@@ -391,12 +405,35 @@ body::before {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at top left, rgba(62, 104, 104, 0.16), transparent 55%);
-  opacity: 0.9;
+  opacity: 0.25;
   pointer-events: none;
+  z-index: 0;
 }
 
 .project-card:hover {
   border-color: rgba(201, 78, 68, 0.8);
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: -0.25rem -0.25rem 0.9rem;
+  background: transparent;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+}
+
+.project-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-tag {
@@ -425,12 +462,56 @@ body::before {
   padding-left: 0;
   margin: 0;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
 .project-meta li {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #f3e8da;
-  margin-bottom: 0.3rem;
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(193, 171, 133, 0.45);
+  background: rgba(193, 171, 133, 0.08);
+  display: inline-flex;
+  align-items: center;
+}
+
+.project-meta .extra-skill {
+  display: none;
+}
+
+.project-card[data-expanded="true"] .project-meta .extra-skill {
+  display: inline-flex;
+}
+
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: flex-start;
+}
+
+.skill-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px dashed rgba(193, 171, 133, 0.6);
+  background: rgba(16, 18, 20, 0.8);
+  color: var(--accent-alt);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.skill-toggle:hover {
+  border-color: rgba(201, 78, 68, 0.7);
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .project-links {
@@ -451,51 +532,7 @@ body::before {
   text-decoration: underline;
 }
 
-.project-card.sample-subway {
-  background-image: url('BWSampleSubway.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
-  background-clip: padding-box;
-  background-origin: padding-box;
-}
-
-
-
-.project-card.sample-subway::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(23, 25, 28, 0.92), rgba(23, 25, 28, 0.88));
-  z-index: 1;
-  pointer-events: none;
-  border-radius: var(--radius-lg);
-}
-
-.project-card.sample-subway > * {
-  position: relative;
-  z-index: 2;
-}
-
 .project-card.enceladus65 {
-  background-image: url('YOUR-ENCELADUS-IMAGE.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.project-card.enceladus65::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(23, 25, 28, 0.92), rgba(23, 25, 28, 0.88));
-  z-index: 1;
-  pointer-events: none;
-  border-radius: var(--radius-lg);
-}
-
-.project-card.enceladus65 > * {
-  position: relative;
-  z-index: 2;
 }
 
 
@@ -777,7 +814,6 @@ body::before {
 @media (max-width: 900px) {
   .hero-grid,
   .section-grid,
-  .projects-grid,
   .skills-grid,
   .contact-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -785,6 +821,10 @@ body::before {
 
   .hero-card {
     justify-self: stretch;
+  }
+
+  .projects-grid {
+    column-count: 1;
   }
 
   .skills-grid {
