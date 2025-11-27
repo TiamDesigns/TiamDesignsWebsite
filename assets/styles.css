@@ -376,8 +376,9 @@ footer {
 }
 
 .projects-grid {
-  column-count: 2;
-  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .project-card {
@@ -391,13 +392,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  break-inside: avoid;
   width: 100%;
-  margin-bottom: 1.5rem;
-}
-
-.project-card.sample-subway {
-  break-before: column;
 }
 
 .project-card::before {
@@ -837,13 +832,25 @@ footer {
     justify-self: stretch;
   }
 
-  .projects-grid {
-    column-count: 1;
-  }
-
   .skills-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.project-card.enceladus65 {
+  order: 1;
+}
+
+.project-card.student-maker {
+  order: 2;
+}
+
+.project-card.sample-subway {
+  order: 3;
+}
+
+.project-card.project-template {
+  order: 4;
 }
 
 @media (max-width: 720px) {
