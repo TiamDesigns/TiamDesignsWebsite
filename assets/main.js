@@ -89,3 +89,68 @@ if (yearSpan) {
     console.warn('Could not set editing opt-out attributes', e);
   }
 })();
+// Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Hero Animation Setup
+    const heroElements = document.querySelectorAll('.hero h1, .hero-subtitle, .hero-actions .btn');
+    heroElements.forEach(el => el.classList.add('has-animation'));
+
+    // Project Cards Setup
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(el => el.classList.add('has-animation'));
+
+    // Section Headers Setup
+    const sectionHeaders = document.querySelectorAll('.section h2');
+    sectionHeaders.forEach(el => el.classList.add('has-animation'));
+
+    // Initial Hero Animation
+    anime({
+        targets: '.hero .has-animation',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        delay: anime.stagger(100, {start: 300}),
+        easing: 'easeOutQuad',
+        duration: 800,
+        complete: function(anim) {
+             heroElements.forEach(el => el.classList.remove('has-animation'));
+        }
+    });
+
+    // Scroll Animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const animateOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate the element
+                anime({
+                    targets: entry.target,
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    easing: 'easeOutQuad',
+                    duration: 800,
+                    delay: entry.target.dataset.delay || 0 // Optional delay attribute
+                });
+                
+                // Stop observing once animated
+                observer.unobserve(entry.target);
+                entry.target.classList.remove('has-animation');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements
+    projectCards.forEach((el, index) => {
+        // Add a slight stagger delay for cards in the same grid
+        el.dataset.delay = index % 3 * 100; 
+        animateOnScroll.observe(el);
+    });
+
+    sectionHeaders.forEach(el => {
+        animateOnScroll.observe(el);
+    });
+});
