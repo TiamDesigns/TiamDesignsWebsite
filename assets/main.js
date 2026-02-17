@@ -91,66 +91,133 @@ if (yearSpan) {
 })();
 // Animations
 document.addEventListener('DOMContentLoaded', () => {
-    // Hero Animation Setup
-    const heroElements = document.querySelectorAll('.hero h1, .hero-subtitle, .hero-actions .btn');
-    heroElements.forEach(el => el.classList.add('has-animation'));
+  // Hero Animation Setup
+  const heroElements = document.querySelectorAll('.hero h1, .hero-subtitle, .hero-actions .btn');
+  heroElements.forEach(el => el.classList.add('has-animation'));
 
-    // Project Cards Setup
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(el => el.classList.add('has-animation'));
+  // Project Cards Setup
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(el => el.classList.add('has-animation'));
 
-    // Section Headers Setup
-    const sectionHeaders = document.querySelectorAll('.section h2');
-    sectionHeaders.forEach(el => el.classList.add('has-animation'));
+  // Section Headers Setup
+  const sectionHeaders = document.querySelectorAll('.section h2');
+  sectionHeaders.forEach(el => el.classList.add('has-animation'));
 
-    // Initial Hero Animation
-    anime({
-        targets: '.hero .has-animation',
-        opacity: [0, 1],
-        translateY: [20, 0],
-        delay: anime.stagger(100, {start: 300}),
-        easing: 'easeOutQuad',
+  // Initial Hero Animation
+  anime({
+    targets: '.hero .has-animation',
+    opacity: [0, 1],
+    translateY: [20, 0],
+    delay: anime.stagger(100, { start: 300 }),
+    easing: 'easeOutQuad',
+    duration: 800,
+    complete: function (anim) {
+      heroElements.forEach(el => el.classList.remove('has-animation'));
+    }
+  });
+
+  // --- NEW: Navigation Stagger ---
+  const navItems = document.querySelectorAll('.nav-links li');
+  // Set initial state to invisible to avoid flash
+  anime.set(navItems, { opacity: 0, translateY: -10 });
+
+  anime({
+    targets: navItems,
+    opacity: [0, 1],
+    translateY: [-10, 0],
+    delay: anime.stagger(80, { start: 800 }), // Start after hero begins
+    easing: 'easeOutExpo',
+    duration: 800
+  });
+
+  // --- NEW: Elastic Button Hovers ---
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      anime.remove(btn);
+      anime({
+        targets: btn,
+        scale: 1.05,
         duration: 800,
-        complete: function(anim) {
-             heroElements.forEach(el => el.classList.remove('has-animation'));
-        }
+        easing: 'easeOutElastic(1, .6)'
+      });
     });
+    btn.addEventListener('mouseleave', () => {
+      anime.remove(btn);
+      anime({
+        targets: btn,
+        scale: 1,
+        duration: 600,
+        easing: 'easeOutElastic(1, .6)'
+      });
+    });
+  });
 
-    // Scroll Animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const animateOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Animate the element
-                anime({
-                    targets: entry.target,
-                    opacity: [0, 1],
-                    translateY: [20, 0],
-                    easing: 'easeOutQuad',
-                    duration: 800,
-                    delay: entry.target.dataset.delay || 0 // Optional delay attribute
-                });
-                
-                // Stop observing once animated
-                observer.unobserve(entry.target);
-                entry.target.classList.remove('has-animation');
-            }
+  // --- NEW: Project Card Lift ---
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      // Only animate if not currently part of the initial scroll reveal
+      if (!card.classList.contains('has-animation')) {
+        anime.remove(card);
+        anime({
+          targets: card,
+          translateY: -8,
+          boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+          borderColor: 'rgba(201, 78, 68, 0.8)', // Sync with CSS hover
+          duration: 400,
+          easing: 'easeOutQuad'
         });
-    }, observerOptions);
-
-    // Observe elements
-    projectCards.forEach((el, index) => {
-        // Add a slight stagger delay for cards in the same grid
-        el.dataset.delay = index % 3 * 100; 
-        animateOnScroll.observe(el);
+      }
     });
-
-    sectionHeaders.forEach(el => {
-        animateOnScroll.observe(el);
+    card.addEventListener('mouseleave', () => {
+      if (!card.classList.contains('has-animation')) {
+        anime.remove(card);
+        anime({
+          targets: card,
+          translateY: 0,
+          boxShadow: '0 14px 30px rgba(3, 4, 5, 0.9)', // Reset to CSS default
+          borderColor: 'rgba(255, 255, 255, 0.06)', // Reset to CSS default
+          duration: 400,
+          easing: 'easeOutQuad'
+        });
+      }
     });
+  });
+
+  // Scroll Animations
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const animateOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate the element
+        anime({
+          targets: entry.target,
+          opacity: [0, 1],
+          translateY: [20, 0],
+          easing: 'easeOutQuad',
+          duration: 800,
+          delay: entry.target.dataset.delay || 0 // Optional delay attribute
+        });
+
+        // Stop observing once animated
+        observer.unobserve(entry.target);
+        entry.target.classList.remove('has-animation');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements
+  projectCards.forEach((el, index) => {
+    // Add a slight stagger delay for cards in the same grid
+    el.dataset.delay = index % 3 * 100;
+    animateOnScroll.observe(el);
+  });
+
+  sectionHeaders.forEach(el => {
+    animateOnScroll.observe(el);
+  });
 });
