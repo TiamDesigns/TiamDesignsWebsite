@@ -1,0 +1,295 @@
+
+
+=== Problem ===
+
+--- Page 13 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+1.1 Problem Definition 
+ 
+​
+Dance is a timeless representation of art and music expressed through the movement of 
+the body. Many young girls turn to dance as a recreational sport or extracurricular activity. Of 
+this demographic 81% report injuries within the first year of learning and 58% suffered a 
+substantial injury affecting both performance and day to day tasks (Rogier Van Rijin Feb. 2019). 
+These injuries can have a cascading effect that can be detrimental to their adult lives.  
+ 
+​
+This thesis report will take a look at contemporary dancers, how their injuries occur and 
+current methods of injury prevention. The research will be focused on developing a conceptual 
+design solution that will reduce the risk of injury. It is also important to keep the solution 
+ergonomic and intuitive to use.  
+ 
+1.2 Rationale and Significance 
+ 
+​
+The risk of dance injuries for learning students is extremely high with an 81% occurrence 
+rate in the first year. It is not uncommon for knee, back and ankle related injuries to severely 
+impact an individual's life.  
+ 
+Dance injuries are often overlooked compared to other similar sports injuries. Although 
+there is a lot of similarity in the therapy for these injuries, the prevention is often neglected. 
+Primary injuries can cascade into long term pain and even disability. How may we reduce the 
+risk of injury for learning contemporary dancers? Current aids for dancers look to reduce joint 
+strain and often require significant space, or complete re-installation of flooring. Alternative 
+13 
+
+
+=== Personas ===
+
+--- Page 17 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+2.1 User Research  
+ 
+​
+This thesis is based on a research topic to be studied using various research methods. The 
+research topic being looked at is to look at ways in which injury occurrence in learning dancers 
+can be reduced. Resources such as the Humber Library, Google Scholar and other library 
+databases will be used.  
+ 
+​
+Focus points of information include user demographics, surveys, user needs, full-bodied 
+interaction design and benchmarked projects.  
+2.1.1 User Profiles / Personas 
+ 
+For the key demographic and user groups, four different personas were recognized. The 
+dancers themselves, dance teachers, parents and physiotherapists may be involved in the dancer's 
+training. It was important to define four different personas, as their individual needs and 
+interactions with the student were very intertwined. Students often find themselves depending on 
+parents, teachers and physiotherapists.  
+2.1.1.1 Primary User 
+ 
+Name 
+Jennifer White 
+Age 
+15 - 18 
+Occupation 
+Student/Dancer 
+Family 
+Parents, one sibling 
+Schedule 
+Tuesday, Thursday 
+Duration 
+140 mins, 2 times a week 
+Table 1 - Fictitious User Profile 1 
+17 
+
+--- Page 18 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+ 
+​
+This fictitious persona is to focus on the user's needs and allow the product developed to 
+aid those needs. Based on the research conducted, learning dancers that start to push themselves 
+and incur injuries are between the ages of 15 - 18. This is largely due to high school students 
+seeking social activities outside of school. Some of the dancers aim to professionally study dance 
+after graduating high school.  
+2.1.1.2 Secondary User 
+ 
+Name 
+Jacqueline Green 
+Occupation 
+Dance Teacher 
+Involvement  
+Instructs classes 
+Schedule 
+Monday - Saturday 
+Duration 
+12 classes, 140 mins each 
+Table 2 - Fictitious User Profile 2 
+ 
+This secondary user has the most amount of interaction with students. It is their role to 
+look for injuries before it occurs and ensure safe practice. Dance teachers are also the user group 
+looking to push the students the most. Teachers may have to see hundreds of students a week, 
+often teaching many classes. A common occurrence is some students being neglected not at the 
+fault of the teacher, who may not be able to focus and attend to all the students.  
+18 
+
+--- Page 19 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+2.1.1.3 Tertiary User One 
+ 
+Name 
+Anna White 
+Occupation 
+Accountant 
+Relationship to Student 
+Parent 
+Family 
+Two Children 
+Involvement 
+Drops student off 
+Table 3 - Fictitious User Profile 3 
+ 
+​
+The first of the two tertiary users is the parent. Parents have the most intimate 
+relationship with the student. Often parents are asked to buy the student materials and aid in 
+ensuring the student is able to attend class. Their budget as such is an important factor when 
+checking the feasibility of solutions.  
+2.1.1.3.1 Tertiary User Two 
+ 
+Name 
+Jasmine Orville 
+Occupation 
+Physiotherapist  
+Relationship to Student 
+Helps with injury prevention 
+Table 4 - Fictitious User Profile 4 
+ 
+ 
+ 
+Physiotherapists act as yet another tertiary user. Physiotherapists may help students better 
+understand how muscles move or help provide relief for cramps amongst other aids. In the event 
+of an injury, physiotherapists often help rehabilitate the user.  
+19 
+
+
+=== Needs ===
+
+--- Page 32 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+3.1 Needs Analysis 
+ 
+​
+This section will look at the three categories of needs for a user. Wants and  wishes, latent 
+needs and immediate needs were charted out to define potential goals for the product developed.  
+ 
+Wants + Wishes 
+Latent Needs 
+Immediate Needs 
+Parental Support 
+Better indicators of movement 
+Consistency in practice 
+Fun Activity Potential 
+Communication between teacher 
+and therapist 
+Feedback from the teacher 
+Access to Environment 
+ 
+Attentiveness to all 
+students 
+Table 13 - Needs Analysis 
+ 
+3.1.1 Needs / Benefits Not Met by Current Products 
+ 
+Current products do not meet the needs of communication and indication. Generally, 
+most products do not have any exciting aspects to them as well.In interviews with a teacher, a 
+common need expressed is to be able to view and assist all the students equally, which was a 
+challenge due to the large class sizes.  
+3.1.2 Latent Needs 
+ 
+Communication was one of the more notable needs mentioned in interviews and research 
+articles. Being able to have a direct dialogue between the personas allows for a more thorough 
+understanding for the student. The therapist to teacher interaction seemed to lack intimacy the 
+most.  
+32 
+
+--- Page 33 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+ 
+Falling in a similar category as communication, teachers find themselves watching students' 
+movements very closely to look for indicators that may cause potential injury. One issue is 
+teachers don't have a way of checking through every student. Solutions that either portray 
+indicators much more clearly or allow the teachers to review and search for indicators seem 
+much needed.  
+ 
+3.1.3 Categorization of Needs 
+ 
+Figure 4 - Categorization of Needs 
+ 
+ 
+ 
+33 
+
+
+=== MindMap ===
+
+--- Page 46 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+4.1 Initial Idea Generation 
+ 
+​
+The approach to idea generation started with understanding the user needs, existing 
+products and the environment in which the products are used. Common possible injuries were 
+also mapped out to understand where issues occurred. Ideas were initially kept broad to come up 
+with a variety of potential solutions. 
+4.1.1 Mind Mapping
+ 
+Figure 9 - Mind Mapping General 
+46 
+
+--- Page 47 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+ 
+Figure 10 - Mind Mapping Injuries 
+ 
+47 
+
+
+=== Ideation ===
+
+--- Page 48 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+4.1.2 Ideation Sketches 
+ 
+Portable Dance Barre 
+ 
+Figure 11 - Ideation 1 
+ 
+ 
+Ankle and Knee Braces 
+ 
+Figure 12 - Ideation 2 + 3 
+ 
+48 
+
+--- Page 49 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+4.2 Concept Exploration 
+​
+Taken forward from the ideations, the legging concept, the ankle exercise device and 
+floor panels were further developed. The conceptualisation of how these devices function, and 
+how the user may set them up is shown here. One component in this current stage of 
+development that is of concern is the hip-mounted control module. It poses a minor threat to 
+moveability and shifting the device could cause the leggings to disconnect with the method of 
+attachment demonstrated in Figure 14.  
+4.2.1 Concept One 
+ 
+Figure 13 - Concept Leggings 
+ 
+ 
+Figure 14 - Concept Leggings Controller 
+49 
+
+--- Page 50 ---
+Bachelor of Industrial Design​
+         Augmented Dance Education         Tiam B Morrow-Rogers 
+ 
+4.2.2 Concept Two 
+​
+Concept 2 where the floor panel was derived from was initially not a smart 
+device, however it fully built a dance environment including the dance barre.  
+ 
+Figure 15 - Concept Environment Building 
+4.2.3 Concept Three 
+ 
+Figure 16 - Concept Exercise 
+50 
