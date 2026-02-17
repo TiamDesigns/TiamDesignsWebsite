@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Augmented Dance Education – Thesis</title>
-    <link rel="stylesheet" href="assets/styles.css?v=5" />
+    <link rel="stylesheet" href="assets/styles.css?v=6" />
 </head>
 
 <body>
@@ -71,41 +71,82 @@
                             during practice, leading to poor form habits that cause injury.
                         </p>
                     </div>
-                    <div>
-                        <h3>User Research</h3>
-                        <p>
-                            Interviews with dancers and instructors revealed that while instructors correct form, they
-                            cannot be everywhere at once. Dancers practicing alone often reinforce bad habits
-                            unknowingly.
-                        </p>
-                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Categorization of Needs</h3>
+                    <img src="assets/Thesis Project/images/rendered/Figure_4_Categorization_of_Needs.png"
+                        alt="Figure 4 - Categorization of Needs" class="analysis-table-img">
                 </div>
 
                 <div class="research-gallery" style="margin-top: 3rem;">
-                    <h3>User Personas</h3>
+                    <h3>User Research</h3>
                     <p>
-                        To understand the needs of the target audience, specific personas were developed representing
-                        the young professional dancer and the dance instructor.
+                        Interviews and analysis were conducted to build a comprehensive understanding of the user.
+                    </p>
+
+                    <h4>Needs Analysis</h4>
+                    <img src="assets/Thesis Project/images/rendered/Table_14_Needs_Analysis_1.png"
+                        alt="Table 14 - Needs Analysis Part 1" class="analysis-table-img">
+                    <img src="assets/Thesis Project/images/rendered/Table_14_Needs_Analysis_2.png"
+                        alt="Table 14 - Needs Analysis Part 2" class="analysis-table-img">
+
+                    <h4>User Personas</h4>
+                    <p>
+                        Specific personas were developed representing the young professional dancer and the dance
+                        instructor.
                     </p>
                     <img src="assets/Thesis Project/images/page_16_X213.jpg" alt="User Personas"
                         style="width: 100%; border-radius: 8px; margin-bottom: 2rem;">
 
-                    <h3>Empathy & Journey Mapping</h3>
+                    <h4>User Experience Mapping</h4>
                     <p>
-                        Mapping the dancer's journey through a typical practice session highlighted key pain points
-                        where fatigue and lack of supervision led to injury risks.
+                        Mapping the dancer's journey through a typical practice session to highlight pain points.
                     </p>
+                    <img src="assets/Thesis Project/images/rendered/Table_15_UX_Mapping.png"
+                        alt="Table 15 - User Experience Mapping" class="analysis-table-img">
+                </div>
+
+                <div class="research-gallery" style="margin-top: 3rem;">
+                    <h3>Mind Mapping</h3>
                     <div class="two-col-grid">
-                        <img src="assets/Thesis Project/images/page_34_X269.png" alt="Empathy Map"
-                            style="width: 100%; border-radius: 8px;">
-                        <img src="assets/Thesis Project/images/page_35_X278.png" alt="Journey Map"
-                            style="width: 100%; border-radius: 8px;">
+                        <img src="assets/Thesis Project/images/rendered/Figure_9_Mind_Mapping_General.png"
+                            alt="Figure 9 - Mind Mapping General" class="analysis-table-img">
+                        <img src="assets/Thesis Project/images/rendered/Figure_10_Mind_Mapping_Injuries.png"
+                            alt="Figure 10 - Mind Mapping Injuries" class="analysis-table-img">
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="section section-alt">
+            <div class="container">
+                <h2>Ideation & Concepts</h2>
+                <p>
+                    Exploration of various form factors and interaction models for the wearable and environment.
+                    The design process involved multiple iterations of the "Cutters Must" wearable and the modular floor
+                    panel system.
+                </p>
+
+                <div class="carousel-container" id="ideationCarousel">
+                    <div class="carousel-slide" style="opacity: 1;">
+                        <img src="assets/Thesis Project/images/rendered/Ideation_Page_46.png" alt="Ideation Sketches 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/Thesis Project/images/rendered/Ideation_Page_47.png" alt="Ideation Sketches 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/Thesis Project/images/rendered/Ideation_Page_48.png" alt="Ideation Sketches 3">
+                    </div>
+
+                    <div class="carousel-nav" id="carouselNav">
+                        <!-- Dots inserted via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
             <div class="container">
                 <h2>The Solution</h2>
                 <div class="section-grid icon-grid">
@@ -133,7 +174,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section section-alt">
             <div class="container">
                 <h2>Design Process</h2>
 
@@ -165,7 +206,7 @@
             </div>
         </section>
 
-        <section class="section section-alt">
+        <section class="section">
             <div class="container">
                 <h2>Final Design</h2>
                 <p>The final system consists of the "Cutters Must" wearable and the modular floor panel system.</p>
@@ -185,6 +226,70 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="assets/main.js" defer></script>
+    <script>
+        // Carousel Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('ideationCarousel');
+            if (!container) return;
+
+            const slides = container.querySelectorAll('.carousel-slide');
+            const nav = document.getElementById('carouselNav');
+            let currentSlide = 0;
+            let isAnimating = false;
+
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                nav.appendChild(dot);
+            });
+
+            const dots = nav.querySelectorAll('.carousel-dot');
+
+            function goToSlide(index) {
+                if (isAnimating || index === currentSlide) return;
+                isAnimating = true;
+
+                const nextSlide = slides[index];
+                const prevSlide = slides[currentSlide];
+
+                // Update dots
+                dots[currentSlide].classList.remove('active');
+                dots[index].classList.add('active');
+
+                // Animate
+                anime({
+                    targets: nextSlide,
+                    opacity: [0, 1],
+                    duration: 600,
+                    easing: 'easeInOutQuad',
+                    begin: function () {
+                        nextSlide.style.zIndex = 2;
+                    }
+                });
+
+                anime({
+                    targets: prevSlide,
+                    opacity: [1, 0],
+                    duration: 600,
+                    easing: 'easeInOutQuad',
+                    complete: function () {
+                        prevSlide.style.zIndex = 1;
+                        currentSlide = index;
+                        isAnimating = false;
+                    }
+                });
+            }
+
+            // Auto advance
+            setInterval(() => {
+                const next = (currentSlide + 1) % slides.length;
+                goToSlide(next);
+            }, 5000);
+        });
+    </script>
 </body>
 
 </html>
