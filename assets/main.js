@@ -183,6 +183,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- NEW: Expanded Project Page Animations ---
+
+  // 1. Identification: Add `.has-animation` to key elements
+  const scrollTargets = [
+    '.feature-item',          // Icon grids
+    '.gallery-grid img',      // Gallery images
+    '.process-step',          // Design process steps
+    '.project-intro-text',    // Intro text
+    '.two-col-grid > div',    // Split content columns
+    '.research-gallery h3',   // Research headers
+    '.analysis-table-img',    // Analysis images
+    '.carousel-container'     // Carousels
+  ];
+
+  scrollTargets.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.classList.add('has-animation');
+      // Set initial opacity via JS to avoid CSS issues if JS fails,
+      // though CSS class is better. For now, Anime helper:
+      el.style.opacity = '0';
+    });
+  });
+
   // Scroll Animations
   const observerOptions = {
     root: null,
@@ -197,10 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
           targets: entry.target,
           opacity: [0, 1],
-          translateY: [20, 0],
-          easing: 'easeOutQuad',
-          duration: 800,
-          delay: entry.target.dataset.delay || 0 // Optional delay attribute
+          translateY: [30, 0], // Slightly larger movement for content
+          easing: 'easeOutCubic',
+          duration: 1000,
+          delay: entry.target.dataset.delay || 0
         });
 
         // Stop observing once animated
@@ -210,14 +233,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, observerOptions);
 
-  // Observe elements
+  // Observe Project Cards (Existing)
   projectCards.forEach((el, index) => {
-    // Add a slight stagger delay for cards in the same grid
     el.dataset.delay = index % 3 * 100;
     animateOnScroll.observe(el);
   });
 
+  // Observe Section Headers (Existing)
   sectionHeaders.forEach(el => {
+    animateOnScroll.observe(el);
+  });
+
+  // Observe NEW Targets with Stagger Logic
+  document.querySelectorAll('.gallery-grid img').forEach((el, index) => {
+    el.dataset.delay = (index % 3) * 150; // Stagger gallery images
+    animateOnScroll.observe(el);
+  });
+
+  document.querySelectorAll('.feature-item').forEach((el, index) => {
+    el.dataset.delay = (index % 4) * 100; // Stagger feature icons
+    animateOnScroll.observe(el);
+  });
+
+  document.querySelectorAll('.process-step').forEach((el, index) => {
+    el.dataset.delay = index * 200; // Sequential process steps
+    animateOnScroll.observe(el);
+  });
+
+  // Observe remaining generic targets without specific stagger logic
+  document.querySelectorAll('.project-intro-text, .two-col-grid > div, .research-gallery h3, .analysis-table-img, .carousel-container').forEach(el => {
     animateOnScroll.observe(el);
   });
 });
