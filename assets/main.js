@@ -103,6 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const sectionHeaders = document.querySelectorAll('.section h2');
   sectionHeaders.forEach(el => el.classList.add('has-animation'));
 
+  // Check if anime is loaded
+  if (typeof anime === 'undefined') {
+    console.warn('Anime.js not loaded. Skipping animations.');
+    document.querySelectorAll('.has-animation').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.classList.remove('has-animation');
+    });
+    return;
+  }
+
   // Initial Hero Animation
   anime({
     targets: '.hero .has-animation',
@@ -329,16 +340,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (currentY !== 0) {
-      anime({
-        targets: body,
-        translateY: 0,
-        easing: 'easeOutElastic(1, .8)', // Slightly less bouncy, more snappy
-        duration: SNAP_DURATION,
-        complete: () => {
-          currentY = 0;
-          body.style.transform = '';
-        }
-      });
+      if (typeof anime !== 'undefined') {
+        anime({
+          targets: body,
+          translateY: 0,
+          easing: 'easeOutElastic(1, .8)', // Slightly less bouncy, more snappy
+          duration: SNAP_DURATION,
+          complete: () => {
+            currentY = 0;
+            body.style.transform = '';
+          }
+        });
+      } else {
+        body.style.transform = '';
+        currentY = 0;
+      }
     }
   });
 
@@ -362,16 +378,21 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset after pause
       clearTimeout(wheelTimeout);
       wheelTimeout = setTimeout(() => {
-        anime({
-          targets: body,
-          translateY: 0,
-          easing: 'easeOutElastic(1, .8)',
-          duration: SNAP_DURATION,
-          complete: () => {
-            currentY = 0;
-            body.style.transform = '';
-          }
-        });
+        if (typeof anime !== 'undefined') {
+          anime({
+            targets: body,
+            translateY: 0,
+            easing: 'easeOutElastic(1, .8)',
+            duration: SNAP_DURATION,
+            complete: () => {
+              currentY = 0;
+              body.style.transform = '';
+            }
+          });
+        } else {
+          body.style.transform = '';
+          currentY = 0;
+        }
       }, 150);
     }
   }, { passive: false });

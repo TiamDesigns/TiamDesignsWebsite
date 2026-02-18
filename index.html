@@ -117,7 +117,11 @@
           <article class="project-card enceladus65" data-category="product hardware">
             <div class="project-tag">Product &bull; Hardware</div>
             <div class="project-hero">
-              <img src="assets/Keyboard.png" alt="Titan65 mechanical keyboard" />
+              <picture>
+                <source srcset="assets/Keyboard.webp" type="image/webp">
+                <img src="assets/Keyboard.png" alt="Titan65 mechanical keyboard" loading="lazy" width="600"
+                  height="400" />
+              </picture>
             </div>
             <h3>Titan65</h3>
             <p>
@@ -177,7 +181,11 @@
           <article class="project-card sample-subway" data-category="hardware product">
             <div class="project-tag">Hardware &bull; Product</div>
             <div class="project-hero">
-              <img src="assets/BWSampleSubway.png" alt="Sample Subway sampling system" />
+              <picture>
+                <source srcset="assets/BWSampleSubway.webp" type="image/webp">
+                <img src="assets/BWSampleSubway.png" alt="Sample Subway sampling system" loading="lazy" width="600"
+                  height="400" />
+              </picture>
             </div>
             <h3>Sample Subway - Nuclear Pressure Tube Sampling System</h3>
             <p>
@@ -210,8 +218,13 @@
           <article class="project-card thesis-project" data-category="product hardware">
             <div class="project-tag">Research &bull; Engineering</div>
             <div class="project-hero">
-              <img src="assets/Thesis Project/images/page_78_X418.png" alt="Augmented Dance Education Final Design"
-                style="object-fit: contain; background-color: #000;" />
+              <picture>
+                <source srcset="assets/Thesis Project/images/page_78_X418-mobile.webp" media="(max-width: 768px)"
+                  type="image/webp">
+                <source srcset="assets/Thesis Project/images/page_78_X418.webp" type="image/webp">
+                <img src="assets/Thesis Project/images/page_78_X418.png" alt="Augmented Dance Education Final Design"
+                  style="object-fit: contain; background-color: #000;" loading="lazy" width="600" height="400" />
+              </picture>
             </div>
             <h3>Augmented Dance Education</h3>
             <p>
@@ -398,9 +411,9 @@
           <ul class="contact-list">
             <li><strong>Email:</strong> <a href="mailto:tiambennett@gmail.com">tiambennett@gmail.com</a></li>
             <li><strong>GitHub:</strong> <a href="https://github.com/TiamDesigns" target="_blank"
-                rel="noopener">github.com/TiamDesigns</a></li>
+                rel="noopener noreferrer" class="external-link">github.com/TiamDesigns</a></li>
             <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/tiam-morrow-rogers-40aa9212b"
-                target="_blank" rel="noopener">linkedin.com/in/tiam-morrow-rogers-40aa9212b</a></li>
+                target="_blank" rel="noopener noreferrer" class="external-link">linkedin.com/in/tiam-morrow-rogers-40aa9212b</a></li>
           </ul>
         </div>
         <form class="contact-form" action="https://formspree.io/f/mnnlwndb" method="POST">
@@ -434,7 +447,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="assets/anime.min.js"></script>
   <script src="assets/main.js" defer></script>
 </body>
 
