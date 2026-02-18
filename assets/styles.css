@@ -26,6 +26,8 @@ html {
   background-color: #050608;
   /* Darkest gradient shade */
   height: 100%;
+  overscroll-behavior-y: none;
+  /* Required for Chrome to respect custom overscroll */
 }
 
 body {

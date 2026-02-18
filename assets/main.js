@@ -300,13 +300,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.scrollY === 0 && deltaY > 0) {
       currentY = deltaY * FRICTION;
       currentY = clamp(currentY, 0, MAX_PULL);
-      body.style.transform = `translateY(${currentY}px)`;
+
+      if (currentY > 0) {
+        if (e.cancelable) e.preventDefault(); // Stop Chrome native refresh/overscroll
+        body.style.transform = `translateY(${currentY}px)`;
+      }
     }
     // At Bottom: Pulling Up (deltaY < 0)
     else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5 && deltaY < 0) {
       currentY = deltaY * FRICTION;
       currentY = clamp(currentY, -MAX_PULL, 0); // Negative for pulling up
-      body.style.transform = `translateY(${currentY}px)`;
+
+      if (currentY < 0) {
+        if (e.cancelable) e.preventDefault(); // Stop Chrome native overscroll
+        body.style.transform = `translateY(${currentY}px)`;
+      }
     }
   }, { passive: false });
 
