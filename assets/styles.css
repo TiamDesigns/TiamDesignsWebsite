@@ -415,7 +415,13 @@ footer {
 
 .project-card:hover {
   border-color: rgba(201, 78, 68, 0.8);
+  transform: translateY(-4px);
   cursor: pointer;
+}
+
+.project-card:active {
+  transform: scale(0.98);
+  border-color: var(--accent);
 }
 
 /* Stretched Link Pattern to make whole card clickable while keeping semantic buttons working */
