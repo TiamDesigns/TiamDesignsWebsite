@@ -891,17 +891,6 @@ footer {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.bom-table a {
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 0.8rem;
-  border-bottom: 1px dashed var(--accent);
-}
-
-.bom-table a:hover {
-  color: #fff;
-  border-bottom-style: solid;
-}
 
 .bom-table tr:hover td:not(.bom-group-header td) {
   background: rgba(255, 255, 255, 0.02);

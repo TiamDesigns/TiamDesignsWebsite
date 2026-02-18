@@ -74,6 +74,75 @@
       </div>
     </section>
 
+    <!-- Design Process -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2>Design Process</h2>
+
+        <!-- Empathize & Define -->
+        <div class="two-col-grid">
+          <div>
+            <h3>1. Empathize</h3>
+            <p>Operators in nuclear facilities work under extreme constraints: high radiation levels, limited time
+              windows, and restricted physical access. Understanding the danger and stress of this environment was
+              crucial. The primary user need was <strong>safety</strong>—ensuring no direct contact with the radioactive
+              sample while maintaining operational efficiency.</p>
+          </div>
+          <div>
+            <h3>2. Define</h3>
+            <p>We defined the core problem: How to remotely extract a specific mass (30-80mg) from a 4-inch diameter
+              tube, 15 feet deep, without manual intervention? The solution required a self-contained, wireless robot
+              capable of:</p>
+            <ul style="color: var(--muted); margin-top: 0.5rem; padding-left: 1.2rem;">
+              <li>Traversing the tube horizontally.</li>
+              <li>Scraping a precise sample.</li>
+              <li>Weighing it in real-time.</li>
+              <li>Returning safely, even in power failure.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Ideate -->
+        <div style="margin-top: 3rem;">
+          <h3>3. Ideate & Concept</h3>
+          <p>We explored multiple scraping mechanisms, from rotary cutters to linear scrapers. Hand-drawn sketches
+            helped visualize the "Subway" form factor—a cylindrical carriage that could ride inside the tube.</p>
+          <div class="gallery-grid">
+            <figure>
+              <img src="assets/SampleSubway/web_images/Concept Drawing.png" alt="Initial Concept Sketch" loading="lazy">
+              <figcaption>Early concept sketch of the linear scraping mechanism.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/SampleSubway/web_images/Concept Drawing 2.png" alt="Chassis Ideation" loading="lazy">
+              <figcaption>Ideation for the chassis and wheel suspension.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/SampleSubway/web_images/Concept Drawing 3.png" alt="Containment Concept" loading="lazy">
+              <figcaption>Concept for the isolated sample containment vessel.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- Prototype -->
+        <div style="margin-top: 3rem;">
+          <h3>4. Prototype & Test</h3>
+          <p>We moved to CAD and 3D printing to test fit and function. The "Sample Subway" prototype integrated a
+            high-torque DC motor for the scraper and a load cell for real-time weighing. Testing verified that our
+            scraping mechanism could consistently achieve the <strong>+/- 9.5mg</strong> accuracy required.</p>
+          <div class="two-col-grid">
+            <figure>
+              <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Winch Testing" loading="lazy">
+              <figcaption>Testing the fail-safe winch retrieval system.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/SampleSubway/web_images/Final Design_p1_X11.png" alt="CAD Assembly" loading="lazy">
+              <figcaption>Final CAD assembly ready for manufacture.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-alt" id="bom">
       <div class="container">
         <h2>Bill of Materials</h2>
@@ -89,13 +158,12 @@
                 <th>Description</th>
                 <th>Qty</th>
                 <th>Cost (CAD)</th>
-                <th>Link</th>
               </tr>
             </thead>
             <tbody>
               <!-- Battery and Power Delivery -->
               <tr class="bom-group-header">
-                <td colspan="7">Battery and Power Delivery (PDXX)</td>
+                <td colspan="6">Battery and Power Delivery (PDXX)</td>
               </tr>
               <tr>
                 <td>PD01</td>
@@ -104,7 +172,6 @@
                 <td>Wires for connecting components to circuit</td>
                 <td>1</td>
                 <td>$0.80</td>
-                <td>Generic</td>
               </tr>
               <tr>
                 <td>PD02</td>
@@ -113,7 +180,6 @@
                 <td>Connectors for battery pack</td>
                 <td>1</td>
                 <td>$1.60</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>PD03</td>
@@ -122,7 +188,6 @@
                 <td>Wires for 12v components</td>
                 <td>1</td>
                 <td>$0.80</td>
-                <td>Generic</td>
               </tr>
               <tr>
                 <td>PD04</td>
@@ -131,7 +196,6 @@
                 <td>For battery pack assembly</td>
                 <td>3</td>
                 <td>$15.00</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>PD05</td>
@@ -140,7 +204,6 @@
                 <td>For safety</td>
                 <td>1</td>
                 <td>$2.94</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>PD07</td>
@@ -149,12 +212,11 @@
                 <td>Step down buck converter, 36V/24V/12V/5V/3V</td>
                 <td>1</td>
                 <td>$0.45</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
 
               <!-- Control and Logic -->
               <tr class="bom-group-header">
-                <td colspan="7">Control and Logic (CLXX)</td>
+                <td colspan="6">Control and Logic (CLXX)</td>
               </tr>
               <tr>
                 <td>CL01</td>
@@ -163,7 +225,6 @@
                 <td>Controller w/ Wifi + BT</td>
                 <td>1</td>
                 <td>$9.99</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>CL02</td>
@@ -172,7 +233,6 @@
                 <td>Driving 12V motor for scraping</td>
                 <td>1</td>
                 <td>$7.41</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>CL03</td>
@@ -181,12 +241,11 @@
                 <td>Strain gauge for mass analysis</td>
                 <td>1</td>
                 <td>$1.80</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
 
               <!-- Measurement -->
               <tr class="bom-group-header">
-                <td colspan="7">Measurement (MXX)</td>
+                <td colspan="6">Measurement (MXX)</td>
               </tr>
               <tr>
                 <td>M01</td>
@@ -195,12 +254,11 @@
                 <td>Strain gauge to measure mass</td>
                 <td>1</td>
                 <td>$4.93</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
 
               <!-- Structural Components -->
               <tr class="bom-group-header">
-                <td colspan="7">Structural Components (SCXX)</td>
+                <td colspan="6">Structural Components (SCXX)</td>
               </tr>
               <tr>
                 <td>SC01</td>
@@ -209,7 +267,6 @@
                 <td>Filament for chassis</td>
                 <td>1</td>
                 <td>$7.99</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>SC02</td>
@@ -218,7 +275,6 @@
                 <td>Heat set threaded inserts for chassis</td>
                 <td>1</td>
                 <td>$0.80</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>SC03</td>
@@ -227,7 +283,6 @@
                 <td>Various length M3 Machine Screws</td>
                 <td>1</td>
                 <td>$1.00</td>
-                <td>Generic</td>
               </tr>
               <tr>
                 <td>SC04</td>
@@ -236,12 +291,11 @@
                 <td>Ball bearings</td>
                 <td>3</td>
                 <td>$1.80</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
 
               <!-- Sampling Tooling Components -->
               <tr class="bom-group-header">
-                <td colspan="7">Sampling Tooling Components (STXX)</td>
+                <td colspan="6">Sampling Tooling Components (STXX)</td>
               </tr>
               <tr>
                 <td>ST01</td>
@@ -250,7 +304,6 @@
                 <td>Lathe Bit and armature</td>
                 <td>1</td>
                 <td>$9.28</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
               <tr>
                 <td>ST02</td>
@@ -259,13 +312,12 @@
                 <td>For moving the armature with lathe bit</td>
                 <td>1</td>
                 <td>$11.28</td>
-                <td><a href="#" target="_blank">Link</a></td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td colspan="5" style="text-align: right; padding-right: 2rem;"><strong>Total</strong></td>
-                <td colspan="2"><strong>CA$77.87</strong></td>
+                <td><strong>CA$77.87</strong></td>
               </tr>
             </tfoot>
           </table>
