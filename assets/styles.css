@@ -415,6 +415,30 @@ footer {
 
 .project-card:hover {
   border-color: rgba(201, 78, 68, 0.8);
+  cursor: pointer;
+}
+
+/* Stretched Link Pattern to make whole card clickable while keeping semantic buttons working */
+.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* Covers standard content (z-index 1) */
+}
+
+/* Ensure interactive elements sit above the link */
+.skill-toggle,
+.project-tag {
+  /* tag could be clickable if it was a link, but currently just text. Let's keep it under unless user wants granular. 
+     Actually, let's keep everything under except the toggle button. */
+  position: relative;
+  z-index: 1;
+  /* Default matches others, but we need toggle higher */
+}
+
+.skill-toggle {
+  z-index: 3;
+  /* Above the card-link */
 }
 
 .project-card>* {
