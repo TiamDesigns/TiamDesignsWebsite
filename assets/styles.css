@@ -149,10 +149,10 @@ footer {
 
 .nav-links a:hover {
   color: var(--accent);
-  transform: translateY(-1px);
+  transform: translate(2px, -2px);
 }
 
-/* Mobile nav toggle */
+/* Figure & Caption Styles */
 
 .nav-toggle {
   display: none;
@@ -1232,5 +1232,38 @@ footer {
 
 .external-link:hover::after {
   opacity: 1;
+
+
   transform: translate(2px, -2px);
+}
+
+/* Figure & Caption Styles */
+figure {
+  margin: 0;
+  width: 100%;
+}
+
+figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+
+/* Ensure images within figures behave correctly in grids */
+.gallery-grid figure {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-grid figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  margin-bottom: 0px;
+  /* Caption handles spacing */
 }
