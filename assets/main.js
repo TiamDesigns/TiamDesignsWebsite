@@ -265,3 +265,102 @@ document.addEventListener('DOMContentLoaded', () => {
     animateOnScroll.observe(el);
   });
 });
+
+
+// --- NEW: Elastic Overscroll (Stretchy Bounce) ---
+document.addEventListener('DOMContentLoaded', () => {
+  let currentY = 0;
+  let startY = 0;
+  let isDragging = false;
+  const body = document.body;
+
+  // Resistance factor (higher = harder to pull)
+  const friction = 0.4;
+
+  // Touch Events
+  document.addEventListener('touchstart', (e) => {
+    // Only trigger if at top or bottom
+    if (window.scrollY === 0 || (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+
+    const deltaY = e.touches[0].clientY - startY;
+
+    // At Top: Pulling Down (deltaY > 0)
+    if (window.scrollY === 0 && deltaY > 0) {
+      // e.preventDefault(); // Stop native refresh if desired? Let's allow native for now unless it conflicts.
+      // Actually, to get the bounce we want to prevent native scroll if we are hijacking.
+      // But browsers are tricky with this.
+      currentY = deltaY * friction;
+      body.style.transform = `translateY(${currentY}px)`;
+    }
+    // At Bottom: Pulling Up (deltaY < 0)
+    else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5 && deltaY < 0) {
+      // e.preventDefault(); 
+      currentY = deltaY * friction;
+      body.style.transform = `translateY(${currentY}px)`;
+    }
+  }, { passive: false });
+
+  // Snap back on release
+  document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (currentY !== 0) {
+      anime({
+        targets: body,
+        translateY: 0,
+        easing: 'easeOutElastic(1, .5)',
+        duration: 1200,
+        complete: () => {
+          currentY = 0;
+          body.style.transform = '';
+        }
+      });
+    }
+  });
+
+  // Wheel Events (Mouse/Trackpad) - Debounced elasticity
+  let wheelTimeout;
+
+  document.addEventListener('wheel', (e) => {
+    // Check boundaries
+    const isAtTop = window.scrollY === 0;
+    const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2;
+
+    if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+      // e.preventDefault(); // Usually can't prevent default on passive listeners, but we can try if non-passive.
+      // We'll just visualize the bounce.
+
+      // Accumulate scroll
+      currentY -= e.deltaY * 0.5; // Invert delta because scroll up is negative delta
+
+      // Cap max pull for mouse
+      if (currentY > 150) currentY = 150;
+      if (currentY < -150) currentY = -150;
+
+      body.style.transform = `translateY(${currentY}px)`;
+
+      // Reset after pause
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        anime({
+          targets: body,
+          translateY: 0,
+          easing: 'easeOutElastic(1, .5)',
+          duration: 1000,
+          complete: () => {
+            currentY = 0;
+            body.style.transform = '';
+          }
+        });
+      }, 150);
+    }
+  }, { passive: false }); // Needs to be non-passive to theoretically prevent default, but chrome blocks this often.
+});

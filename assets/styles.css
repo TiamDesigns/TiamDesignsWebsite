@@ -23,11 +23,16 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg);
+  background-color: #050608;
+  /* Darkest gradient shade */
+  height: 100%;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  overscroll-behavior-y: none;
+  /* Disable native bounce to use custom anime.js effect */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
     "Segoe UI", sans-serif;
   background:
