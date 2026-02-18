@@ -320,8 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Snap back on release
   document.addEventListener('touchend', () => {
-    if (!isDragging) return;
     isDragging = false;
+
+    // Pull-to-refresh Trigger
+    if (currentY > 70) { // Threshold for refresh (MAX_PULL is 80)
+      window.location.reload();
+      return; // Stop snap-back animation since we are reloading
+    }
 
     if (currentY !== 0) {
       anime({
