@@ -274,8 +274,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let isDragging = false;
   const body = document.body;
 
-  // Resistance factor (higher = harder to pull)
-  const friction = 0.4;
+  // Physics constants
+  const MAX_PULL = 80;  // Max pixels to translate
+  const FRICTION = 0.3; // Resistance factor
+  const SNAP_DURATION = 600; // ms for return animation
+
+  // Helper to clamp values
+  const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
   // Touch Events
   document.addEventListener('touchstart', (e) => {
@@ -293,16 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // At Top: Pulling Down (deltaY > 0)
     if (window.scrollY === 0 && deltaY > 0) {
-      // e.preventDefault(); // Stop native refresh if desired? Let's allow native for now unless it conflicts.
-      // Actually, to get the bounce we want to prevent native scroll if we are hijacking.
-      // But browsers are tricky with this.
-      currentY = deltaY * friction;
+      currentY = deltaY * FRICTION;
+      currentY = clamp(currentY, 0, MAX_PULL);
       body.style.transform = `translateY(${currentY}px)`;
     }
     // At Bottom: Pulling Up (deltaY < 0)
     else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5 && deltaY < 0) {
-      // e.preventDefault(); 
-      currentY = deltaY * friction;
+      currentY = deltaY * FRICTION;
+      currentY = clamp(currentY, -MAX_PULL, 0); // Negative for pulling up
       body.style.transform = `translateY(${currentY}px)`;
     }
   }, { passive: false });
@@ -316,8 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
       anime({
         targets: body,
         translateY: 0,
-        easing: 'easeOutElastic(1, .5)',
-        duration: 1200,
+        easing: 'easeOutElastic(1, .8)', // Slightly less bouncy, more snappy
+        duration: SNAP_DURATION,
         complete: () => {
           currentY = 0;
           body.style.transform = '';
@@ -330,20 +333,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let wheelTimeout;
 
   document.addEventListener('wheel', (e) => {
-    // Check boundaries
     const isAtTop = window.scrollY === 0;
     const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2;
 
     if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
-      // e.preventDefault(); // Usually can't prevent default on passive listeners, but we can try if non-passive.
-      // We'll just visualize the bounce.
-
       // Accumulate scroll
-      currentY -= e.deltaY * 0.5; // Invert delta because scroll up is negative delta
+      currentY -= e.deltaY * 0.5;
 
       // Cap max pull for mouse
-      if (currentY > 150) currentY = 150;
-      if (currentY < -150) currentY = -150;
+      if (currentY > MAX_PULL) currentY = MAX_PULL;
+      if (currentY < -MAX_PULL) currentY = -MAX_PULL;
 
       body.style.transform = `translateY(${currentY}px)`;
 
@@ -353,8 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
           targets: body,
           translateY: 0,
-          easing: 'easeOutElastic(1, .5)',
-          duration: 1000,
+          easing: 'easeOutElastic(1, .8)',
+          duration: SNAP_DURATION,
           complete: () => {
             currentY = 0;
             body.style.transform = '';
@@ -362,5 +361,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, 150);
     }
-  }, { passive: false }); // Needs to be non-passive to theoretically prevent default, but chrome blocks this often.
+  }, { passive: false });
 });
