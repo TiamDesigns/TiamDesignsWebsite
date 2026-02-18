@@ -862,10 +862,12 @@ footer {
   text-align: left;
 }
 
+
 .bom-table th,
 .bom-table td {
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
 }
 
 .bom-table th {
@@ -877,6 +879,32 @@ footer {
 
 .bom-table td {
   color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.bom-group-header td {
+  background: rgba(193, 171, 133, 0.15);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bom-table a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.8rem;
+  border-bottom: 1px dashed var(--accent);
+}
+
+.bom-table a:hover {
+  color: #fff;
+  border-bottom-style: solid;
+}
+
+.bom-table tr:hover td:not(.bom-group-header td) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .bom-table tr:last-child td {
@@ -884,9 +912,10 @@ footer {
 }
 
 .bom-table tfoot td {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   border-top: 2px solid var(--border-subtle);
+  font-size: 1rem;
 }
 
 /* Gallery Grid */
