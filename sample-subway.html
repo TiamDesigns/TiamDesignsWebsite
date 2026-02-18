@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sample Subway – Project</title>
   <link rel="stylesheet" href="assets/styles.css?v=5" />
 </head>
+
 <body>
   <header class="site-header">
     <div class="container nav-container">
@@ -14,27 +16,173 @@
   </header>
   <main>
     <section class="hero">
-      <div class="container">
-        <h1>Sample Subway – Nuclear Pressure Tube Sampling System</h1>
-        <p class="hero-subtitle">Hardware system for remote nuclear sampling</p>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="hero-kicker">Engineering Design Project</p>
+          <h1>Sample Subway – Nuclear Pressure Tube Sampling System</h1>
+          <p class="hero-subtitle">A remote-controlled device for retrieving metal samples from nuclear pressure tubes
+            to assess hydrogen embrittlement.</p>
+          <div class="hero-actions">
+            <a href="#details" class="btn primary">View Details</a>
+            <a href="#gallery" class="btn ghost">Gallery</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <h2>Project Specs</h2>
+            <ul>
+              <li><strong>Client:</strong> Canadian Nuclear Laboratories</li>
+              <li><strong>Role:</strong> Mechanical Design & Logic</li>
+              <li><strong>Timeline:</strong> 4 Months</li>
+              <li><strong>Status:</strong> Prototype Completed</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-    <section class="section">
-      <div class="container">
-        <h2>Overview</h2>
-        <p>Placeholder for project overview and details.</p>
+
+    <section class="section" id="details">
+      <div class="container section-grid">
+        <div class="content">
+          <h2>Overview</h2>
+          <p>The "Sample Subway" is a specialized tool designed to scrape and collect a 30-80mg metal sample from the
+            inside of a nuclear reactor pressure tube. The sample is used to analyze hydrogen levels, a key indicator of
+            structural integrity.</p>
+          <p>Our solution operates remotely to minimize operator exposure to radiation. It features a self-sealing
+            containment system that weighs the sample in real-time, ensuring precise collection without direct human
+            contact.</p>
+
+          <h3>Key Features</h3>
+          <ul class="feature-list">
+            <li><strong>Remote Operation:</strong> Reduces radiation exposure for operators.</li>
+            <li><strong>Automated Sampling:</strong> Precise scraping mechanism targets 30-80mg samples.</li>
+            <li><strong>Real-time Feedback:</strong> Integrated load cells and sensors report status to the operator.
+            </li>
+            <li><strong>Fail-Safe Design:</strong> Winch retrieval system ensures the tool can be recovered if power
+              fails.</li>
+            <li><strong>Self-Contained Power:</strong> On-board battery system eliminates trailing cables.</li>
+          </ul>
+        </div>
+        <div class="media">
+          <!-- Placeholder for a key diagram or render -->
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X40.png" alt="Sample Subway CAD Render"
+            class="feature-image">
+        </div>
       </div>
     </section>
+
+    <section class="section section-alt" id="bom">
+      <div class="container">
+        <h2>Bill of Materials</h2>
+        <p>A breakdown of the core components used in the prototype.</p>
+
+        <div class="table-container">
+          <table class="bom-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Cost (CAD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ESP32-WROOM-C3</td>
+                <td>Microcontroller w/ Wi-Fi + BT</td>
+                <td>1</td>
+                <td>$9.99</td>
+              </tr>
+              <tr>
+                <td>JGB37-520 Motor</td>
+                <td>12V 7RPM High Torque Motor</td>
+                <td>1</td>
+                <td>$11.28</td>
+              </tr>
+              <tr>
+                <td>BTS7960 Driver</td>
+                <td>H-Bridge Motor Driver (43A)</td>
+                <td>1</td>
+                <td>$7.41</td>
+              </tr>
+              <tr>
+                <td>P42A Molicel 21700</td>
+                <td>4200mAh High Drain Batteries</td>
+                <td>3</td>
+                <td>$15.00</td>
+              </tr>
+              <tr>
+                <td>HX711 + Load Cell</td>
+                <td>Strain gauge measurement system</td>
+                <td>1</td>
+                <td>$6.73</td>
+              </tr>
+              <tr>
+                <td>MGEHR1212 Bit</td>
+                <td>Carbide Lathe Cut Off Tool</td>
+                <td>1</td>
+                <td>$9.28</td>
+              </tr>
+              <tr>
+                <td>PLA / PETG</td>
+                <td>3D Printed Chassis Parts</td>
+                <td>1</td>
+                <td>$7.99</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3"><strong>Total Prototype Cost</strong></td>
+                <td><strong>~$78.00</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <h2>Gallery</h2>
+        </div>
+        <div class="gallery-grid">
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X39.png" alt="Prototype Assembly" loading="lazy">
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X13.png" alt="Mechanism Detail" loading="lazy">
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X41.png" alt="Circuit Design" loading="lazy">
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X11.png" alt="CAD Exploded View" loading="lazy">
+          <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Testing Setup" loading="lazy">
+        </div>
+        <p class="gallery-note">Renderings and photos from the design and testing phases.</p>
+      </div>
+    </section>
+
     <section class="section section-alt">
       <div class="container">
-        <h2>Gallery</h2>
-        <p>Placeholder for images and media.</p>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <h2>Technical Details</h2>
-        <p>Placeholder for technical writeup.</p>
+        <h2>Project Documents</h2>
+        <div class="downloads-grid">
+          <a href="assets/SampleSubway/Final Design.pdf" class="download-card" target="_blank">
+            <span class="icon">📄</span>
+            <div class="meta">
+              <h3>Final Design Report</h3>
+              <p>Comprehensive technical documentation (PDF)</p>
+            </div>
+          </a>
+          <a href="assets/SampleSubway/GNG1103 - User Manual.pdf" class="download-card" target="_blank">
+            <span class="icon">📘</span>
+            <div class="meta">
+              <h3>User Manual</h3>
+              <p>Operating instructions and safety procedures (PDF)</p>
+            </div>
+          </a>
+          <a href="assets/SampleSubway/GNG1103 - Project - Bill of Materials.pdf" class="download-card" target="_blank">
+            <span class="icon">📊</span>
+            <div class="meta">
+              <h3>Bill of Materials</h3>
+              <p>Detailed component list and costing (PDF)</p>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -45,4 +193,5 @@
     </div>
   </footer>
 </body>
+
 </html>
