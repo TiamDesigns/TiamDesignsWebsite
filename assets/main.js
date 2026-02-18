@@ -163,36 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- NEW: Project Card Lift ---
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      // Only animate if not currently part of the initial scroll reveal
-      if (!card.classList.contains('has-animation')) {
-        anime.remove(card);
-        anime({
-          targets: card,
-          translateY: -8,
-          boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
-          borderColor: 'rgba(201, 78, 68, 0.8)', // Sync with CSS hover
-          duration: 400,
-          easing: 'easeOutQuad'
-        });
-      }
-    });
-    card.addEventListener('mouseleave', () => {
-      if (!card.classList.contains('has-animation')) {
-        anime.remove(card);
-        anime({
-          targets: card,
-          translateY: 0,
-          boxShadow: '0 14px 30px rgba(3, 4, 5, 0.9)', // Reset to CSS default
-          borderColor: 'rgba(255, 255, 255, 0.06)', // Reset to CSS default
-          duration: 400,
-          easing: 'easeOutQuad'
-        });
-      }
-    });
-  });
+
 
   // --- NEW: Expanded Project Page Animations ---
 
