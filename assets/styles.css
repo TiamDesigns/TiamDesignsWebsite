@@ -1291,6 +1291,7 @@ figcaption {
 /* Specific modifier for concept drwaings/diagrams that need to be fully visible */
 .concept-gallery figure img {
   object-fit: contain;
+}
 
 /* Lightbox Styles */
 .lightbox-overlay {
@@ -1298,11 +1299,13 @@ figcaption {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
-  z-index: 2000; /* High z-index to be on top of everything */
+  z-index: 2000;
+  /* High z-index to be on top of everything */
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  opacity: 0; /* Handled by JS animation */
+  opacity: 0;
+  /* Handled by JS animation */
   backdrop-filter: blur(5px);
 }
 
@@ -1319,9 +1322,10 @@ figcaption {
   max-width: 100%;
   max-height: 85vh;
   object-fit: contain;
-  transition: transform 0.1s ease-out; /* Smooth drag */
+  transition: transform 0.1s ease-out;
+  /* Smooth drag */
   border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-controls {
@@ -1369,10 +1373,10 @@ figcaption {
 /* Hide controls on mobile landscape if height is small */
 @media (max-height: 500px) {
   .lightbox-controls {
-      bottom: 10px;
-      right: 10px;
-      left: auto;
-      transform: none;
-      flex-direction: column;
+    bottom: 10px;
+    right: 10px;
+    left: auto;
+    transform: none;
+    flex-direction: column;
   }
-}
+}
