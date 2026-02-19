@@ -418,52 +418,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Open Lightbox
   function openLightbox(img) {
     if (typeof anime !== 'undefined') {
-        anime({
-            targets: lightbox,
-            opacity: [0, 1],
-            duration: 300,
-            easing: 'easeOutQuad',
-            begin: () => {
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-                
-                // Try to find caption
-                const figcaption = img.closest('figure')?.querySelector('figcaption');
-                if (figcaption) {
-                    captionText.textContent = figcaption.textContent;
-                } else {
-                    captionText.textContent = img.alt;
-                }
+      anime({
+        targets: lightbox,
+        opacity: [0, 1],
+        duration: 300,
+        easing: 'easeOutQuad',
+        begin: () => {
+          lightbox.style.display = 'flex';
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
 
-                currentZoom = 1;
-                translateX = 0;
-                translateY = 0;
-                updateTransform();
-            }
-        });
+          // Try to find caption
+          const figcaption = img.closest('figure')?.querySelector('figcaption');
+          if (figcaption) {
+            captionText.textContent = figcaption.textContent;
+          } else {
+            captionText.textContent = img.alt;
+          }
+
+          currentZoom = 1;
+          translateX = 0;
+          translateY = 0;
+          updateTransform();
+        }
+      });
     } else {
-        lightbox.style.display = 'flex';
-        lightboxImg.src = img.src;
-        // Caption logic same as above
+      lightbox.style.display = 'flex';
+      lightbox.style.opacity = '1';
+      lightboxImg.src = img.src;
+      // Caption logic same as above
+      const figcaption = img.closest('figure')?.querySelector('figcaption');
+      if (figcaption) {
+        captionText.textContent = figcaption.textContent;
+      } else {
+        captionText.textContent = img.alt;
+      }
     }
   }
 
   // 4. Close Lightbox
   function closeLightbox() {
     if (typeof anime !== 'undefined') {
-        anime({
-            targets: lightbox,
-            opacity: 0,
-            duration: 300,
-            easing: 'easeOutQuad',
-            complete: () => {
-                lightbox.style.display = 'none';
-                lightboxImg.src = ''; 
-            }
-        });
+      anime({
+        targets: lightbox,
+        opacity: 0,
+        duration: 300,
+        easing: 'easeOutQuad',
+        complete: () => {
+          lightbox.style.display = 'none';
+          lightboxImg.src = '';
+        }
+      });
     } else {
-        lightbox.style.display = 'none';
+      lightbox.style.display = 'none';
     }
   }
 
@@ -496,28 +503,28 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
     lightboxImg.style.cursor = currentZoom > 1 ? 'grab' : 'default';
   }
-  
+
   // Pan Logic (Optional simple drag when zoomed)
   lightboxImg.addEventListener('mousedown', (e) => {
-      if (currentZoom <= 1) return;
-      isDragging = true;
-      startX = e.clientX - translateX;
-      startY = e.clientY - translateY;
-      lightboxImg.style.cursor = 'grabbing';
-      e.preventDefault(); // Prevent standard drag
+    if (currentZoom <= 1) return;
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+    lightboxImg.style.cursor = 'grabbing';
+    e.preventDefault(); // Prevent standard drag
   });
 
   document.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      translateX = e.clientX - startX;
-      translateY = e.clientY - startY;
-      lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX / currentZoom}px, ${translateY / currentZoom}px)`;
+    if (!isDragging) return;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX / currentZoom}px, ${translateY / currentZoom}px)`;
   });
 
   document.addEventListener('mouseup', () => {
-      if (isDragging) {
-          isDragging = false;
-          lightboxImg.style.cursor = 'grab';
-      }
+    if (isDragging) {
+      isDragging = false;
+      lightboxImg.style.cursor = 'grab';
+    }
   });
 });
