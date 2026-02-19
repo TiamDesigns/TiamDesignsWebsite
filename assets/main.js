@@ -368,3 +368,156 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: false });
 });
+
+// --- Lightbox Gallery Implementation ---
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Create Lightbox HTML Structure
+  const lightbox = document.createElement('div');
+  lightbox.id = 'lightbox';
+  lightbox.className = 'lightbox-overlay';
+  lightbox.innerHTML = `
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Zoomed Image">
+      <div class="lightbox-controls">
+        <button id="lightbox-zoom-out" aria-label="Zoom Out">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button id="lightbox-zoom-in" aria-label="Zoom In">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button id="lightbox-close" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+  const zoomInBtn = document.getElementById('lightbox-zoom-in');
+  const zoomOutBtn = document.getElementById('lightbox-zoom-out');
+  const captionText = document.getElementById('lightbox-caption');
+
+  let currentZoom = 1;
+  let isDragging = false;
+  let startX, startY, translateX = 0, translateY = 0;
+
+  // 2. Select Images
+  // Targeting images inside specific containers to specific galleries or feature images
+  const images = document.querySelectorAll('.gallery-grid figure img, .two-col-grid figure img, .feature-image, .analysis-table-img');
+
+  images.forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      openLightbox(img);
+    });
+  });
+
+  // 3. Open Lightbox
+  function openLightbox(img) {
+    if (typeof anime !== 'undefined') {
+        anime({
+            targets: lightbox,
+            opacity: [0, 1],
+            duration: 300,
+            easing: 'easeOutQuad',
+            begin: () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                
+                // Try to find caption
+                const figcaption = img.closest('figure')?.querySelector('figcaption');
+                if (figcaption) {
+                    captionText.textContent = figcaption.textContent;
+                } else {
+                    captionText.textContent = img.alt;
+                }
+
+                currentZoom = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+            }
+        });
+    } else {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+        // Caption logic same as above
+    }
+  }
+
+  // 4. Close Lightbox
+  function closeLightbox() {
+    if (typeof anime !== 'undefined') {
+        anime({
+            targets: lightbox,
+            opacity: 0,
+            duration: 300,
+            easing: 'easeOutQuad',
+            complete: () => {
+                lightbox.style.display = 'none';
+                lightboxImg.src = ''; 
+            }
+        });
+    } else {
+        lightbox.style.display = 'none';
+    }
+  }
+
+  // Event Listeners for controls
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+      closeLightbox();
+    }
+  });
+
+  // 5. Zoom Logic
+  zoomInBtn.addEventListener('click', () => {
+    currentZoom += 0.5;
+    updateTransform();
+  });
+
+  zoomOutBtn.addEventListener('click', () => {
+    if (currentZoom > 0.5) {
+      currentZoom -= 0.5;
+      updateTransform();
+    }
+  });
+
+  function updateTransform() {
+    lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
+    lightboxImg.style.cursor = currentZoom > 1 ? 'grab' : 'default';
+  }
+  
+  // Pan Logic (Optional simple drag when zoomed)
+  lightboxImg.addEventListener('mousedown', (e) => {
+      if (currentZoom <= 1) return;
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      lightboxImg.style.cursor = 'grabbing';
+      e.preventDefault(); // Prevent standard drag
+  });
+
+  document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX / currentZoom}px, ${translateY / currentZoom}px)`;
+  });
+
+  document.addEventListener('mouseup', () => {
+      if (isDragging) {
+          isDragging = false;
+          lightboxImg.style.cursor = 'grab';
+      }
+  });
+});
