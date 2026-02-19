@@ -26,43 +26,59 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-project"
-            style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/Thesis Project/images/page_78_X418.webp'); background-size: contain; background-repeat: no-repeat; background-position: center; padding: 6rem 0; color: white; text-align: left; background-color: #000;">
-            <div class="container" style="max-width: 65%; margin-left: 0; padding-left: 1.5rem;">
-                <h1 style="font-size: 3rem; margin-bottom: 1rem;">Augmented Dance Education</h1>
-                <p class="hero-subtitle" style="font-size: 1.5rem; opacity: 0.9;">Bachelor of Industrial Design Thesis
-                </p>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="hero-kicker">Industrial Design Thesis</p>
+                    <h1>Augmented Dance Education</h1>
+                    <p class="hero-subtitle">A system combining wearable technology and a smart environment to deter
+                        injury in young professional dancers.</p>
+                    <div class="hero-actions">
+                        <a href="assets/Thesis%20Project/4502_W22_THESIS-REPORT_Morrow-Rogers_Tiam-compressed.pdf"
+                            target="_blank" class="btn primary">Read Full Thesis (PDF)</a>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-card-inner">
+                        <h2>Project Specs</h2>
+                        <ul>
+                            <li><strong>Context:</strong> Bachelor of Industrial Design Thesis</li>
+                            <li><strong>Timeline:</strong> 12 Weeks (Research to Fabrication)</li>
+                            <li><strong>Focus:</strong> Ergonomics, User Research, Soft Goods</li>
+                            <li><strong>Tools:</strong> CLO3D, Fusion360, Physical Prototyping</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Overview -->
-        <section class="section">
-            <div class="container">
-                <div class="project-intro-grid">
-                    <div class="project-intro-text">
-                        <h2>Overview</h2>
-                        <p>
-                            Dance is a timeless representation of art and music expressed through the movement of the
-                            body.
-                            Many young girls turn to dance as a recreational sport or extracurricular activity.
-                        </p>
-                        <p>
-                            However, there is a presumption that dancing is merely a leisurely activity. In reality, it
-                            involves
-                            intense physical exertion. Research shows that <strong>81% of dancers report injuries within
-                                their first year of learning</strong>,
-                            and 58% suffer a substantial injury affecting both performance and daily tasks. These
-                            injuries can have a cascading
-                            effect that impacts their adult lives.
-                        </p>
-                        <p>
-                            This thesis proposes a solution to deter injury occurrence rates in young professional
-                            dancers through augmented education,
-                            combining wearable technology with a smart environment.
-                        </p>
-                        <a href="assets/Thesis%20Project/4502_W22_THESIS-REPORT_Morrow-Rogers_Tiam-compressed.pdf"
-                            target="_blank" class="btn primary">Read Full Thesis (PDF)</a>
-                    </div>
+        <section class="section" id="details">
+            <div class="container section-grid">
+                <div class="content">
+                    <h2>Overview</h2>
+                    <p>
+                        Dance is a timeless representation of art and music expressed through the movement of the
+                        body. Many turn to dance as a recreational sport or extracurricular activity.
+                    </p>
+                    <p>
+                        However, there is a presumption that dancing is merely a leisurely activity. In reality, it
+                        involves intense physical exertion. Research shows that <strong>81% of dancers report injuries
+                            within their first year of learning</strong>, and 58% suffer a substantial injury affecting
+                        both performance and daily tasks.
+                    </p>
+                    <p>
+                        This thesis proposes a solution to deter injury occurrence rates in young professional
+                        dancers through augmented education, combining <strong>wearable technology</strong> with a
+                        <strong>smart environment</strong>.
+                    </p>
+                </div>
+                <div class="media">
+                    <figure>
+                        <img src="assets/Thesis Project/images/page_78_X418.webp" alt="Thesis Project Hero Shot"
+                            class="feature-image">
+                        <figcaption>Conceptual visualization of the Augmented Dance Education system.</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
@@ -91,6 +107,11 @@
                             <strong>Key Insight:</strong> Dancers often lack real-time feedback on their bio-mechanics
                             during practice, leading to poor form habits that cause injury.
                         </p>
+                        <figure style="margin-top: 1.5rem;">
+                            <img src="assets/Thesis Project/Injury Analysis.png" alt="Injury Analysis Statistics"
+                                class="analysis-table-img" loading="lazy">
+                            <figcaption>Statistical analysis of common dance injuries.</figcaption>
+                        </figure>
                     </div>
                 </div>
 
@@ -111,13 +132,18 @@
                                 injuries,
                                 spanning physical, environmental, and educational factors.
                             </p>
-                            <picture>
-                                <source srcset="assets/Thesis Project/ProblemAssessment-mobile.webp"
-                                    media="(max-width: 768px)" type="image/webp">
-                                <source srcset="assets/Thesis Project/ProblemAssessment.webp" type="image/webp">
-                                <img src="assets/Thesis Project/ProblemAssessment.png" alt="Problem Assessment Diagram"
-                                    class="analysis-table-img" style="margin-top: 1rem;" loading="lazy">
-                            </picture>
+                            <figure>
+                                <picture>
+                                    <source srcset="assets/Thesis Project/ProblemAssessment-mobile.webp"
+                                        media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="assets/Thesis Project/ProblemAssessment.webp" type="image/webp">
+                                    <img src="assets/Thesis Project/ProblemAssessment.png"
+                                        alt="Problem Assessment Diagram" class="analysis-table-img"
+                                        style="margin-top: 1rem;" loading="lazy">
+                                </picture>
+                                <figcaption>A detailed breakdown of the problem space spanning physical, environmental,
+                                    and educational factors.</figcaption>
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -148,20 +174,26 @@
                             Anthropometric data for female dancers aged 15-18 informed the sizing strategy.
                         </p>
                         <div class="two-col-grid">
-                            <picture>
-                                <source srcset="assets/Thesis Project/UserPercentileDiagram-mobile.webp"
-                                    media="(max-width: 768px)" type="image/webp">
-                                <source srcset="assets/Thesis Project/UserPercentileDiagram.webp" type="image/webp">
-                                <img src="assets/Thesis Project/UserPercentileDiagram.png" alt="User Percentile Diagram"
-                                    class="analysis-table-img" loading="lazy">
-                            </picture>
-                            <picture>
-                                <source srcset="assets/Thesis Project/UserPercentiles-mobile.webp"
-                                    media="(max-width: 768px)" type="image/webp">
-                                <source srcset="assets/Thesis Project/UserPercentiles.webp" type="image/webp">
-                                <img src="assets/Thesis Project/UserPercentiles.png" alt="User Percentile Data"
-                                    class="analysis-table-img" loading="lazy">
-                            </picture>
+                            <figure>
+                                <picture>
+                                    <source srcset="assets/Thesis Project/UserPercentileDiagram-mobile.webp"
+                                        media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="assets/Thesis Project/UserPercentileDiagram.webp" type="image/webp">
+                                    <img src="assets/Thesis Project/UserPercentileDiagram.png"
+                                        alt="User Percentile Diagram" class="analysis-table-img" loading="lazy">
+                                </picture>
+                                <figcaption>Anthropometric data for female dancers aged 15-18.</figcaption>
+                            </figure>
+                            <figure>
+                                <picture>
+                                    <source srcset="assets/Thesis Project/UserPercentiles-mobile.webp"
+                                        media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="assets/Thesis Project/UserPercentiles.webp" type="image/webp">
+                                    <img src="assets/Thesis Project/UserPercentiles.png" alt="User Percentile Data"
+                                        class="analysis-table-img" loading="lazy">
+                                </picture>
+                                <figcaption>Sizing strategy based on user demographics.</figcaption>
+                            </figure>
                         </div>
                     </div>
 
@@ -202,8 +234,11 @@
                     Mapping the dancer's journey through a typical practice session highlights where pain points and
                     opportunities for intervention occur.
                 </p>
-                <img src="assets/Thesis Project/UserExperienceGraph.png" alt="User Experience Graph"
-                    class="analysis-table-img" style="width: 100%;" loading="lazy">
+                <figure>
+                    <img src="assets/Thesis Project/UserExperienceGraph.png" alt="User Experience Graph"
+                        class="analysis-table-img" style="width: 100%;" loading="lazy">
+                    <figcaption>Dancer's journey through a typical practice session.</figcaption>
+                </figure>
             </div>
             </div>
         </section>
@@ -217,13 +252,16 @@
                     Synthesizing research data into themes helped identify key areas for design intervention.
                     The affinity map categorizes insights from interviews, observations, and literature reviews.
                 </p>
-                <picture>
-                    <source srcset="assets/Thesis Project/AffinityMap-mobile.webp" media="(max-width: 768px)"
-                        type="image/webp">
-                    <source srcset="assets/Thesis Project/AffinityMap.webp" type="image/webp">
-                    <img src="assets/Thesis Project/AffinityMap.jpg" alt="Affinity Map" class="analysis-table-img"
-                        style="width: 100%;" loading="lazy">
-                </picture>
+                <figure>
+                    <picture>
+                        <source srcset="assets/Thesis Project/AffinityMap-mobile.webp" media="(max-width: 768px)"
+                            type="image/webp">
+                        <source srcset="assets/Thesis Project/AffinityMap.webp" type="image/webp">
+                        <img src="assets/Thesis Project/AffinityMap.jpg" alt="Affinity Map" class="analysis-table-img"
+                            style="width: 100%;" loading="lazy">
+                    </picture>
+                    <figcaption>Affinity map categorizing insights from research.</figcaption>
+                </figure>
             </div>
             </div>
         </section>
@@ -239,6 +277,13 @@
                     Early concepts included portable dance barres and basic ankle braces, eventually evolving into the
                     integrated smart system.
                 </p>
+
+                <figure style="margin: 2rem 0;">
+                    <img src="assets/Thesis Project/Full Concept Drawing with platform base and leggings.png"
+                        alt="Full System Concept" style="width: 100%; border-radius: 8px;" loading="lazy">
+                    <figcaption>Comprehensive concept illustrating the platform base and wearable leggings system.
+                    </figcaption>
+                </figure>
 
                 <div class="carousel-container" id="ideationCarousel">
                     <div class="carousel-slide" style="opacity: 1;">
@@ -273,14 +318,18 @@
                             in real-time. This wearable technology provides haptic feedback to the dancer, correcting
                             posture before injuries occur.
                         </p>
-                        <picture>
-                            <source srcset="assets/Thesis Project/CloseUpElectronicConnection-mobile.webp"
-                                media="(max-width: 768px)" type="image/webp">
-                            <source srcset="assets/Thesis Project/CloseUpElectronicConnection.webp" type="image/webp">
-                            <img src="assets/Thesis Project/CloseUpElectronicConnection.png"
-                                alt="Wearable Feedback Detail" class="feature-image"
-                                style="margin-top: 1rem; width: 100%; border-radius: 8px;" loading="lazy">
-                        </picture>
+                        <figure>
+                            <picture>
+                                <source srcset="assets/Thesis Project/CloseUpElectronicConnection-mobile.webp"
+                                    media="(max-width: 768px)" type="image/webp">
+                                <source srcset="assets/Thesis Project/CloseUpElectronicConnection.webp"
+                                    type="image/webp">
+                                <img src="assets/Thesis Project/CloseUpElectronicConnection.png"
+                                    alt="Wearable Feedback Detail" class="feature-image"
+                                    style="margin-top: 1rem; width: 100%; border-radius: 8px;" loading="lazy">
+                            </picture>
+                            <figcaption>Smart sensors embedded in the fabric.</figcaption>
+                        </figure>
                     </div>
                     <div class="feature-item">
                         <h3>Smart Environment</h3>
@@ -289,14 +338,17 @@
                             visual cues and pressure sensing to ensure proper foot placement and weight distribution
                             during practice.
                         </p>
-                        <picture>
-                            <source srcset="assets/Thesis Project/images/page_74_X408-mobile.webp"
-                                media="(max-width: 768px)" type="image/webp">
-                            <source srcset="assets/Thesis Project/images/page_74_X408.webp" type="image/webp">
-                            <img src="assets/Thesis Project/images/page_74_X408.png" alt="Smart Environment Floor Panel"
-                                class="feature-image" style="margin-top: 1rem; width: 100%; border-radius: 8px;"
-                                loading="lazy">
-                        </picture>
+                        <figure>
+                            <picture>
+                                <source srcset="assets/Thesis Project/images/page_74_X408-mobile.webp"
+                                    media="(max-width: 768px)" type="image/webp">
+                                <source srcset="assets/Thesis Project/images/page_74_X408.webp" type="image/webp">
+                                <img src="assets/Thesis Project/images/page_74_X408.png"
+                                    alt="Smart Environment Floor Panel" class="feature-image"
+                                    style="margin-top: 1rem; width: 100%; border-radius: 8px;" loading="lazy">
+                            </picture>
+                            <figcaption>Modular floor panel system with pressure sensing.</figcaption>
+                        </figure>
                     </div>
                     <div class="feature-item" style="grid-column: 1 / -1;">
                         <h3>App Interface</h3>
@@ -305,20 +357,26 @@
                             detailed progress tracking for teachers and therapists.
                         </p>
                         <div class="two-col-grid" style="margin-top: 1rem;">
-                            <picture>
-                                <source srcset="assets/Thesis Project/UIPrototype1-mobile.webp"
-                                    media="(max-width: 768px)" type="image/webp">
-                                <source srcset="assets/Thesis Project/UIPrototype1.webp" type="image/webp">
-                                <img src="assets/Thesis Project/UIPrototype1.png" alt="UI Dashboard"
-                                    class="feature-image" style="border-radius: 8px;" loading="lazy">
-                            </picture>
-                            <picture>
-                                <source srcset="assets/Thesis Project/UIPrototype2-mobile.webp"
-                                    media="(max-width: 768px)" type="image/webp">
-                                <source srcset="assets/Thesis Project/UIPrototype2.webp" type="image/webp">
-                                <img src="assets/Thesis Project/UIPrototype2.png" alt="UI Analytics"
-                                    class="feature-image" style="border-radius: 8px;" loading="lazy">
-                            </picture>
+                            <figure>
+                                <picture>
+                                    <source srcset="assets/Thesis Project/UIPrototype1-mobile.webp"
+                                        media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="assets/Thesis Project/UIPrototype1.webp" type="image/webp">
+                                    <img src="assets/Thesis Project/UIPrototype1.png" alt="UI Dashboard"
+                                        class="feature-image" style="border-radius: 8px;" loading="lazy">
+                                </picture>
+                                <figcaption>Real-time data visualization dashboard.</figcaption>
+                            </figure>
+                            <figure>
+                                <picture>
+                                    <source srcset="assets/Thesis Project/UIPrototype2-mobile.webp"
+                                        media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="assets/Thesis Project/UIPrototype2.webp" type="image/webp">
+                                    <img src="assets/Thesis Project/UIPrototype2.png" alt="UI Analytics"
+                                        class="feature-image" style="border-radius: 8px;" loading="lazy">
+                                </picture>
+                                <figcaption>Detailed analytics and progress tracking.</figcaption>
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -333,13 +391,16 @@
                 <div class="process-step">
                     <h3>Project Timeline</h3>
                     <p>A 12-week timeline governed the research, ideation, and fabrications phases.</p>
-                    <picture>
-                        <source srcset="assets/Thesis Project/ProjectTimeline-mobile.webp" media="(max-width: 768px)"
-                            type="image/webp">
-                        <source srcset="assets/Thesis Project/ProjectTimeline.webp" type="image/webp">
-                        <img src="assets/Thesis Project/ProjectTimeline.png" alt="Project Timeline"
-                            style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
-                    </picture>
+                    <figure>
+                        <picture>
+                            <source srcset="assets/Thesis Project/ProjectTimeline-mobile.webp"
+                                media="(max-width: 768px)" type="image/webp">
+                            <source srcset="assets/Thesis Project/ProjectTimeline.webp" type="image/webp">
+                            <img src="assets/Thesis Project/ProjectTimeline.png" alt="Project Timeline"
+                                style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
+                        </picture>
+                        <figcaption>12-week research and fabrication timeline.</figcaption>
+                    </figure>
                 </div>
 
                 <div class="process-step">
@@ -357,13 +418,16 @@
                         was used for hard-surface modeling of the floor panels, while <strong>CLO3D</strong> was
                         utilized to simulate the fabric physics and fit of the smart leggings.
                     </p>
-                    <picture>
-                        <source srcset="assets/Thesis Project/RenderMockup-mobile.webp" media="(max-width: 768px)"
-                            type="image/webp">
-                        <source srcset="assets/Thesis Project/RenderMockup.webp" type="image/webp">
-                        <img src="assets/Thesis Project/RenderMockup.png" alt="Simulation Render"
-                            style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
-                    </picture>
+                    <figure>
+                        <picture>
+                            <source srcset="assets/Thesis Project/RenderMockup-mobile.webp" media="(max-width: 768px)"
+                                type="image/webp">
+                            <source srcset="assets/Thesis Project/RenderMockup.webp" type="image/webp">
+                            <img src="assets/Thesis Project/RenderMockup.png" alt="Simulation Render"
+                                style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
+                        </picture>
+                        <figcaption>CLO3D simulation of the smart leggings fit.</figcaption>
+                    </figure>
                 </div>
 
                 <div class="process-step">
@@ -374,28 +438,63 @@
                         not involve functional electronics prototyping.
                     </p>
                     <div class="two-col-grid" style="margin-top: 1rem;">
-                        <picture>
-                            <source srcset="assets/Thesis Project/Prototype3-mobile.webp" media="(max-width: 768px)"
-                                type="image/webp">
-                            <source srcset="assets/Thesis Project/Prototype3.webp" type="image/webp">
-                            <img src="assets/Thesis Project/Prototype3.png" alt="Prototype Iteration 3"
-                                class="analysis-table-img" loading="lazy">
-                        </picture>
-                        <picture>
-                            <source srcset="assets/Thesis Project/Prototype4-mobile.webp" media="(max-width: 768px)"
-                                type="image/webp">
-                            <source srcset="assets/Thesis Project/Prototype4.webp" type="image/webp">
-                            <img src="assets/Thesis Project/Prototype4.png" alt="Prototype Iteration 4"
-                                class="analysis-table-img" loading="lazy">
-                        </picture>
+                        <figure>
+                            <picture>
+                                <source srcset="assets/Thesis Project/Prototype3-mobile.webp" media="(max-width: 768px)"
+                                    type="image/webp">
+                                <source srcset="assets/Thesis Project/Prototype3.webp" type="image/webp">
+                                <img src="assets/Thesis Project/Prototype3.png" alt="Prototype Iteration 3"
+                                    class="analysis-table-img" loading="lazy">
+                            </picture>
+                            <figcaption>Physical study model - Iteration 3.</figcaption>
+                        </figure>
+                        <figure>
+                            <picture>
+                                <source srcset="assets/Thesis Project/Prototype4-mobile.webp" media="(max-width: 768px)"
+                                    type="image/webp">
+                                <source srcset="assets/Thesis Project/Prototype4.webp" type="image/webp">
+                                <img src="assets/Thesis Project/Prototype4.png" alt="Prototype Iteration 4"
+                                    class="analysis-table-img" loading="lazy">
+                            </picture>
+                            <figcaption>Physical study model - Iteration 4.</figcaption>
+                        </figure>
                     </div>
-                    <picture>
-                        <source srcset="assets/Thesis Project/PrototypeLayout-mobile.webp" media="(max-width: 768px)"
-                            type="image/webp">
-                        <source srcset="assets/Thesis Project/PrototypeLayout.webp" type="image/webp">
-                        <img src="assets/Thesis Project/PrototypeLayout.jpg" alt="Prototype Layout"
-                            style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
-                    </picture>
+
+                    <h3>Physical Prototyping</h3>
+                    <p style="margin-bottom: 1rem;">Early form studies using foam core and paper to test scale and
+                        layout.</p>
+                    <div class="gallery-grid"
+                        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <figure>
+                            <img src="assets/Thesis Project/Paper and Foamcore Prototype.jpg" alt="Paper Prototype"
+                                style="width: 100%; border-radius: 8px; object-fit: cover; aspect-ratio: 4/3;"
+                                loading="lazy">
+                            <figcaption>Initial paper and foamcore volume studies.</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="assets/Thesis Project/Foam Core Prototype of Base.jpg" alt="Base Prototype"
+                                style="width: 100%; border-radius: 8px; object-fit: cover; aspect-ratio: 4/3;"
+                                loading="lazy">
+                            <figcaption>Scale model of the modular base platform.</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="assets/Thesis Project/Physical Layout Test.jpg" alt="Layout Test"
+                                style="width: 100%; border-radius: 8px; object-fit: cover; aspect-ratio: 4/3;"
+                                loading="lazy">
+                            <figcaption>Testing the physical layout and user footprint.</figcaption>
+                        </figure>
+                    </div>
+
+                    <figure>
+                        <picture>
+                            <source srcset="assets/Thesis Project/PrototypeLayout-mobile.webp"
+                                media="(max-width: 768px)" type="image/webp">
+                            <source srcset="assets/Thesis Project/PrototypeLayout.webp" type="image/webp">
+                            <img src="assets/Thesis Project/PrototypeLayout.jpg" alt="Prototype Layout"
+                                style="width: 100%; margin-top: 1rem; border-radius: 8px;" loading="lazy">
+                        </picture>
+                        <figcaption>Layout of the physical prototype components.</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
@@ -405,13 +504,21 @@
             <div class="container">
                 <h2>Final Design</h2>
                 <p>The final system consists of the "Cutters Must" wearable and the modular floor panel system.</p>
-                <picture>
-                    <source srcset="assets/Thesis Project/CuttersMust-mobile.webp" media="(max-width: 768px)"
-                        type="image/webp">
-                    <source srcset="assets/Thesis Project/CuttersMust.webp" type="image/webp">
-                    <img src="assets/Thesis Project/CuttersMust.png" alt="Final Design Render"
+                <figure>
+                    <picture>
+                        <source srcset="assets/Thesis Project/CuttersMust-mobile.webp" media="(max-width: 768px)"
+                            type="image/webp">
+                        <source srcset="assets/Thesis Project/CuttersMust.webp" type="image/webp">
+                        <img src="assets/Thesis Project/CuttersMust.png" alt="Final Design Render"
+                            style="width: 100%; margin-top: 2rem; border-radius: 8px;" loading="lazy">
+                    </picture>
+                    <figcaption>Final design of the "Cutters Must" wearable system.</figcaption>
+                </figure>
+                <figure>
+                    <img src="assets/Thesis Project/High Quality Platform Base Render.png" alt="Platform Base Render"
                         style="width: 100%; margin-top: 2rem; border-radius: 8px;" loading="lazy">
-                </picture>
+                    <figcaption>High-fidelity render of the smart platform base.</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -485,7 +592,7 @@
 
             // Auto advance
             setInterval(() => {
-                const next = (currentSlide + 1) % slides.length;
+                const nex(cuide + 1) % slides.length;
                 goToSlide(next);
             }, 5000);
         });
