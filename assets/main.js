@@ -14,18 +14,7 @@ if (navToggle && navLinks) {
   });
 }
 
-// Smooth scroll for in-page links
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener('click', (event) => {
-    const targetId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
-
-    if (target) {
-      event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+// Smooth scroll for in-page links is handled natively via CSS `scroll-behavior: smooth` and `scroll-padding-top`
 
 // Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');

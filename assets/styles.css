@@ -29,6 +29,7 @@ img {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   background-color: #050608;
   /* Darkest gradient shade */
   height: 100%;
