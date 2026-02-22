@@ -570,7 +570,7 @@
                     LinkedIn
                 </a>
             </div>
-            <a href="#" class="back-to-top">Back to top</a>
+            <a href="#" class="back-to-top">Back to top ↑</a>
         </div>
     </footer>
 
@@ -635,7 +635,7 @@
 
             // Auto advance
             setInterval(() => {
-                const nex(cuide + 1) % slides.length;
+                const next = (currentSlide + 1) % slides.length;
                 goToSlide(next);
             }, 5000);
         });
