@@ -256,58 +256,52 @@ document.addEventListener('DOMContentLoaded', () => {
   let isDragging = false;
   const body = document.body;
 
-  // Physics constants
-  const MAX_PULL = 80;  // Max pixels to translate
-  const FRICTION = 0.3; // Resistance factor
-  const SNAP_DURATION = 600; // ms for return animation
+  // Physics constants - softer and less aggressive pull
+  const MAX_PULL = 40;
+  const FRICTION = 0.15;
+  const SNAP_DURATION = 400;
 
   // Helper to clamp values
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
+  // Helper to stop current animation
+  const stopAnimation = () => {
+    if (typeof anime !== 'undefined') anime.remove(body);
+  };
+
   // Touch Events
   document.addEventListener('touchstart', (e) => {
-    // Only trigger if at top or bottom
-    if (window.scrollY === 0 || (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
-      startY = e.touches[0].clientY;
+    // Tighter bottom tolerance (-1px) ensures native scroll reaches the absolute bottom before intercepting
+    if (window.scrollY <= 0 || Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+      startY = e.touches[0].clientY - (currentY / FRICTION); // Account for existing pull
       isDragging = true;
+      stopAnimation();
     }
-  }, { passive: false });
+  }, { passive: true });
 
   document.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
 
     const deltaY = e.touches[0].clientY - startY;
 
-    // At Top: Pulling Down (deltaY > 0)
-    if (window.scrollY === 0 && deltaY > 0) {
-      currentY = deltaY * FRICTION;
-      currentY = clamp(currentY, 0, MAX_PULL);
-
-      if (currentY > 0) {
-        if (e.cancelable) e.preventDefault(); // Stop Chrome native refresh/overscroll
-        body.style.transform = `translateY(${currentY}px)`;
-      }
+    if (window.scrollY <= 0 && deltaY > 0) {
+      currentY = Math.min(deltaY * FRICTION, MAX_PULL);
+      if (e.cancelable) e.preventDefault();
+      body.style.transform = `translateY(${currentY}px)`;
     }
-    // At Bottom: Pulling Up (deltaY < 0)
-    else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5 && deltaY < 0) {
-      currentY = deltaY * FRICTION;
-      currentY = clamp(currentY, -MAX_PULL, 0); // Negative for pulling up
-
-      if (currentY < 0) {
-        if (e.cancelable) e.preventDefault(); // Stop Chrome native overscroll
-        body.style.transform = `translateY(${currentY}px)`;
-      }
+    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+      currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
+      if (e.cancelable) e.preventDefault();
+      body.style.transform = `translateY(${currentY}px)`;
     }
   }, { passive: false });
 
-  // Snap back on release
   document.addEventListener('touchend', () => {
     isDragging = false;
 
-    // Pull-to-refresh Trigger
-    if (currentY > 70) { // Threshold for refresh (MAX_PULL is 80)
+    if (currentY > 60) {
       window.location.reload();
-      return; // Stop snap-back animation since we are reloading
+      return;
     }
 
     if (currentY !== 0) {
@@ -315,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
           targets: body,
           translateY: 0,
-          easing: 'easeOutElastic(1, .8)', // Slightly less bouncy, more snappy
+          easing: 'easeOutCubic', // Softer curve, less aggressive snap
           duration: SNAP_DURATION,
           complete: () => {
             currentY = 0;
@@ -329,31 +323,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Wheel Events (Mouse/Trackpad) - Debounced elasticity
   let wheelTimeout;
-
   document.addEventListener('wheel', (e) => {
-    const isAtTop = window.scrollY === 0;
-    const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2;
+    const isAtTop = window.scrollY <= 0;
+    const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+
+    // Instant cancel if user scrolls opposite to overscroll
+    if (currentY !== 0 && ((currentY > 0 && e.deltaY > 0) || (currentY < 0 && e.deltaY < 0))) {
+      stopAnimation();
+      currentY = 0;
+      body.style.transform = '';
+      return; // Handled by native scroll
+    }
 
     if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
-      // Accumulate scroll
-      currentY -= e.deltaY * 0.5;
+      if (e.cancelable) e.preventDefault(); // Prevent native browser overscroll glow/bounce
+      stopAnimation();
 
-      // Cap max pull for mouse
-      if (currentY > MAX_PULL) currentY = MAX_PULL;
-      if (currentY < -MAX_PULL) currentY = -MAX_PULL;
-
+      currentY -= e.deltaY * FRICTION;
+      currentY = clamp(currentY, -MAX_PULL, MAX_PULL);
       body.style.transform = `translateY(${currentY}px)`;
 
-      // Reset after pause
       clearTimeout(wheelTimeout);
       wheelTimeout = setTimeout(() => {
         if (typeof anime !== 'undefined') {
           anime({
             targets: body,
             translateY: 0,
-            easing: 'easeOutElastic(1, .8)',
+            easing: 'easeOutCubic',
             duration: SNAP_DURATION,
             complete: () => {
               currentY = 0;
@@ -364,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
           body.style.transform = '';
           currentY = 0;
         }
-      }, 150);
+      }, 50); // fast timeout makes it snap back immediately when scrolling stops
     }
   }, { passive: false });
 });
