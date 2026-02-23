@@ -918,19 +918,24 @@ footer {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-gap: 1.5rem;
+  grid-auto-rows: 10px;
+  /* Small base row height for masonry spanning */
   margin-bottom: 1rem;
+  align-items: start;
 }
 
 .gallery-grid img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
   transition: transform var(--transition), border-color var(--transition);
   cursor: pointer;
   background: var(--card);
+  display: block;
+  /* prevent phantom bottom margin */
 }
 
 .gallery-grid img:hover {
@@ -1093,16 +1098,16 @@ footer {
   order: 1;
 }
 
-.project-card.student-maker {
+.project-card.sample-subway {
   order: 2;
 }
 
-.project-card.sample-subway {
+.project-card.thesis-project {
   order: 3;
 }
 
-.project-card.project-template {
-  order: 4;
+.project-card.recycling-system {
+  display: none !important;
 }
 
 @media (max-width: 720px) {
@@ -1280,19 +1285,15 @@ figcaption {
 
 /* Ensure images within figures behave correctly in grids */
 .gallery-grid figure {
-  display: flex;
-  flex-direction: column;
+  margin: 0;
 }
 
 .gallery-grid figure img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
-  margin-bottom: 0px;
-  /* Caption handles spacing */
+  display: block;
 }
 
 /* Specific modifier for concept drwaings/diagrams that need to be fully visible */

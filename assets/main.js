@@ -514,3 +514,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// --- Masonry Grid Logic ---
+function resizeGridItem(item) {
+  const grid = item.closest('.gallery-grid');
+  if (!grid) return;
+
+  // Get the row height and gap from the grid
+  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
+
+  // The content inside the figure (the img + figcaption)
+  const content = item.querySelector('img');
+  const caption = item.querySelector('figcaption');
+
+  // Wait for image to load to get true height if necessary, though ideally they are loaded
+  if (!content) return;
+
+  let totalHeight = content.getBoundingClientRect().height;
+  if (caption) {
+    totalHeight += caption.getBoundingClientRect().height;
+  }
+
+  // Calculate how many rows this item needs to span
+  const rowSpan = Math.ceil((totalHeight + rowGap) / (rowHeight + rowGap));
+  item.style.gridRowEnd = "span " + rowSpan;
+}
+
+function resizeAllGridItems() {
+  const allItems = document.querySelectorAll(".gallery-grid figure");
+  allItems.forEach(item => {
+    resizeGridItem(item);
+  });
+}
+
+// Recalculate on window resize
+window.addEventListener("resize", resizeAllGridItems);
+
+// Initial calculation and lazy-load handling
+document.addEventListener('DOMContentLoaded', () => {
+  // Initial call
+  resizeAllGridItems();
+
+  // Add load event listener to each image to recalculate when lazy-loaded
+  const allImages = document.querySelectorAll(".gallery-grid figure img");
+  allImages.forEach(img => {
+    if (img.complete) {
+      resizeGridItem(img.closest('figure'));
+    } else {
+      img.addEventListener('load', () => {
+        resizeGridItem(img.closest('figure'));
+      });
+    }
+  });
+});
+
