@@ -8,7 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Tiam Designs</title>
   <link rel="icon" type="image/png" href="assets/TD Logo Mastercopy.png" />
-  <link rel="stylesheet" href="assets/styles.css?v=8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=10" />
 </head>
 
 <body>
@@ -35,29 +40,116 @@
       <div class="container hero-grid">
         <div class="hero-text">
           <p class="hero-kicker">Industrial design · Aspiring engineer · Maker</p>
-          <h1>Hi, I’m <span class="accent">Tiam</span>.</h1>
-          <p class="hero-subtitle">
-            I design and prototype physical and digital products – from mechanical keyboards
-            and robots, to clean functional interfaces, and lifestyle products and designs.
-          </p>
+          <h1 class="hero-sans">Industrial design & hardware engineering.</h1>
+          <h2 class="hero-display">Hi, I'm Tiam.</h2>
           <div class="hero-actions">
-            <a href="#projects" class="btn primary">View Projects</a>
-            <a href="#contact" class="btn ghost">Let’s work together</a>
+            <a href="#projects" class="btn primary"><span class="btn-bg"></span><span class="btn-text">View
+                Projects</span></a>
+            <a href="#contact" class="btn ghost"><span class="btn-bg"></span><span class="btn-text">Let’s work
+                together</span></a>
           </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <h2>Current focus</h2>
-            <p>
-              Industrial design foundations, hands-on hardware projects, and
-              studying electrical engineering in Canada.
-            </p>
-            <ul>
-              <li>Lifestyle unique products</li>
-              <li>Embedded and robotics prototyping</li>
-              <li>Practical design-for-manufacturing decisions</li>
-            </ul>
-          </div>
+        <div class="hero-visual">
+          <svg class="hero-toolbox-svg" viewBox="-50 -150 500 600" style="overflow: visible;"
+            xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="toolbox-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1A1C1F" />
+                <stop offset="100%" stop-color="#101214" />
+              </linearGradient>
+              <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F75142" />
+                <stop offset="100%" stop-color="#cc4235" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Entire Toolbox Group for Entrance Animation -->
+            <g id="toolbox-entire" transform="translate(100, 240)" opacity="0">
+
+              <!-- 1. Back Wall / Inside of box -->
+              <g id="toolbox-back">
+                <path d="M 20,-10 L 180,-10 L 180,20 L 20,20 Z" fill="#0A0B0E" />
+                <path d="M 20,-10 L 180,-10" fill="none" stroke="#F6F4EF" stroke-width="2" stroke-opacity="0.2" />
+              </g>
+
+              <!-- 2. Floating Icons Group -->
+              <!-- Icons start at y=10 (inside the box) and move to negative y values -->
+              <g id="toolbox-contents" transform="translate(100, 10)">
+
+                <!-- Electronics/PCB Node -->
+                <g id="icon-electronics" class="floating-icon">
+                  <circle cx="0" cy="0" r="28" fill="#182325" stroke="#C1AB85" stroke-width="1.5" />
+                  <!-- Microchip Body -->
+                  <rect x="-10" y="-10" width="20" height="20" rx="2" fill="none" stroke="#F6F4EF" stroke-width="2" />
+                  <!-- Chip Legs -->
+                  <line x1="-14" y1="-6" x2="-10" y2="-6" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="-14" y1="0" x2="-10" y2="0" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="-14" y1="6" x2="-10" y2="6" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="10" y1="-6" x2="14" y2="-6" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="10" y1="0" x2="14" y2="0" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="10" y1="6" x2="14" y2="6" stroke="#F6F4EF" stroke-width="2" />
+                </g>
+
+                <!-- Code/Embedded Node -->
+                <g id="icon-code" class="floating-icon">
+                  <circle cx="0" cy="0" r="28" fill="#182325" stroke="#C1AB85" stroke-width="1.5" />
+                  <polyline points="-8,-6 -14,0 -8,6" fill="none" stroke="#F75142" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <polyline points="8,-6 14,0 8,6" fill="none" stroke="#F75142" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <line x1="-2" y1="10" x2="2" y2="-10" stroke="#F6F4EF" stroke-width="2" stroke-linecap="round" />
+                </g>
+
+                <!-- Prototyping/Hardware Node -->
+                <g id="icon-hw" class="floating-icon">
+                  <circle cx="0" cy="0" r="28" fill="#182325" stroke="#C1AB85" stroke-width="1.5" />
+                  <!-- Gear -->
+                  <path d="M 0,-14 A 14,14 0 1,0 0,14 A 14,14 0 1,0 0,-14 M 0,-6 A 6,6 0 1,1 0,6 A 6,6 0 1,1 0,-6"
+                    fill="none" stroke="#F6F4EF" stroke-width="2" />
+                  <line x1="0" y1="-18" x2="0" y2="-12" stroke="#F6F4EF" stroke-width="3" />
+                  <line x1="0" y1="12" x2="0" y2="18" stroke="#F6F4EF" stroke-width="3" />
+                  <line x1="-18" y1="0" x2="-12" y2="0" stroke="#F6F4EF" stroke-width="3" />
+                  <line x1="12" y1="0" x2="18" y2="0" stroke="#F6F4EF" stroke-width="3" />
+                </g>
+              </g>
+
+              <!-- 3. Front Wall / Base Body -->
+              <g id="toolbox-front">
+                <!-- Main body -->
+                <rect x="0" y="0" width="200" height="90" rx="4" fill="url(#toolbox-grad)" stroke="#C1AB85"
+                  stroke-width="1" stroke-opacity="0.3" />
+                <!-- Side panels -->
+                <path d="M 0,0 L 20,-10 L 20,80 L 0,90 Z" fill="#14161A" />
+                <path d="M 200,0 L 180,-10 L 180,80 L 200,90 Z" fill="#0D0E11" />
+                <!-- Tech Lines -->
+                <line x1="20" y1="30" x2="180" y2="30" stroke="#F6F4EF" stroke-width="1" stroke-opacity="0.1" />
+                <line x1="20" y1="60" x2="180" y2="60" stroke="#F6F4EF" stroke-width="1" stroke-opacity="0.1" />
+                <!-- Glowing Indicator -->
+                <circle id="toolbox-led" cx="160" cy="45" r="3" fill="#F75142" filter="url(#glow)" />
+              </g>
+
+              <!-- 4. Toolbox Lid -->
+              <g id="toolbox-lid">
+                <!-- Lid is placed directly aligning with the back wall so it can hinge cleanly -->
+                <rect x="0" y="-30" width="200" height="30" rx="3" fill="url(#toolbox-grad)" stroke="#C1AB85"
+                  stroke-width="1" stroke-opacity="0.5" />
+                <!-- Handle -->
+                <path d="M 70,-30 L 70,-45 L 130,-45 L 130,-30" fill="none" stroke="#F6F4EF" stroke-width="4"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <!-- Machined vents -->
+                <line x1="20" y1="-15" x2="40" y2="-15" stroke="#050608" stroke-width="4" stroke-linecap="round" />
+                <line x1="160" y1="-15" x2="180" y2="-15" stroke="#050608" stroke-width="4" stroke-linecap="round" />
+              </g>
+
+            </g> <!-- End of entire toolbox -->
+          </svg>
         </div>
       </div>
     </section>
@@ -429,7 +521,8 @@
             Message
             <textarea name="message" rows="5" required></textarea>
           </label>
-          <button type="submit" class="btn primary full-width">Send message</button>
+          <button type="submit" class="btn primary full-width"><span class="btn-bg"></span><span class="btn-text">Send
+              message</span></button>
           <p class="form-note">
             If you experience any issues, please reach out directly to <a
               href="mailto:tiambennett@gmail.com">tiambennett@gmail.com</a>.
@@ -477,7 +570,7 @@
   </footer>
 
   <script src="assets/anime.min.js"></script>
-  <script src="assets/main.js?v=2" defer></script>
+  <script src="assets/main.js?v=4" defer></script>
 </body>
 
 </html>

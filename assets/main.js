@@ -16,6 +16,16 @@ if (navToggle && navLinks) {
 
 // Smooth scroll for in-page links is handled natively via CSS `scroll-behavior: smooth` and `scroll-padding-top`
 
+// Header scroll effect
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
 // Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
@@ -113,6 +123,66 @@ document.addEventListener('DOMContentLoaded', () => {
     duration: 800,
     complete: function (anim) {
       heroElements.forEach(el => el.classList.remove('has-animation'));
+
+      // Trigger SVG Toolbox Animation AFTER text finishes
+      if (document.querySelector('.hero-toolbox-svg')) {
+        const tl = anime.timeline({
+          easing: 'easeOutExpo',
+        });
+
+        // 1. Fade in and slide up the ENTIRE toolbox
+        tl.add({
+          targets: '#toolbox-entire',
+          opacity: [0, 1],
+          translateY: [40, 0], // Larger initial slide
+          duration: 1500, // Slowed down from 800
+          easing: 'easeOutQuart'
+        })
+          // 2. Open the lid naturally (hinge from the bottom-back edge)
+          .add({
+            targets: '#toolbox-lid',
+            rotate: -130, // Hinge backwards
+            transformOrigin: '50% 100%', // Bottom center of the lid element
+            duration: 1800, // Slowed down from 1000
+            easing: 'easeOutElastic(1, .8)' // Smoother elasticity
+          }, '-=600')
+          // 3. Pop out the icons from INSIDE the box
+          .add({
+            targets: '#toolbox-contents',
+            opacity: 1,
+            duration: 200
+          }, '-=1000')
+          .add({
+            targets: '.floating-icon',
+            translateY: function (el, i) {
+              return [0, [-90, -150, -80][i]]; // Rise higher out of the box
+            },
+            translateX: function (el, i) {
+              return [0, [-100, 0, 100][i]]; // Spread out horizontally wider
+            },
+            scale: [0, 1],
+            opacity: [0, 1],
+            delay: anime.stagger(250), // Stagger slower
+            duration: 1800, // Float up slower
+            easing: 'easeOutElastic(1, .7)',
+            complete: function () {
+              // Add continuous floating animation
+              anime({
+                targets: '.floating-icon',
+                translateY: function (el) {
+                  // Get current absolute Y translation
+                  const currentY = parseFloat(el.style.transform.split('translateY(')[1]);
+                  return [currentY, currentY - 20];
+                },
+                direction: 'alternate',
+                loop: true,
+                duration: function () { return anime.random(3000, 4500); }, // Slower infinite loop
+                easing: 'easeInOutSine',
+                delay: function () { return anime.random(0, 1000); }
+              });
+            }
+          }, '-=1000');
+      }
     }
   });
 
