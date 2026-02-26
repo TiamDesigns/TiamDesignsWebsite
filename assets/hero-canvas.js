@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         canvas.width = width * window.devicePixelRatio;
         canvas.height = height * window.devicePixelRatio;
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
 
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
