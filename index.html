@@ -35,8 +35,8 @@
   </header>
 
   <main id="top">
-    <!-- Hero -->
     <section class="hero">
+      <canvas id="hero-canvas" class="hero-canvas"></canvas>
       <div class="container hero-grid">
         <div class="hero-text">
           <p class="hero-kicker">Industrial design · Aspiring engineer · Maker</p>
@@ -107,16 +107,21 @@
                   <line x1="-2" y1="10" x2="2" y2="-10" stroke="#F6F4EF" stroke-width="2" stroke-linecap="round" />
                 </g>
 
-                <!-- Prototyping/Hardware Node -->
+                <!-- Prototyping/Hardware Node (CAD Cube) -->
                 <g id="icon-hw" class="floating-icon">
                   <circle cx="0" cy="0" r="28" fill="#182325" stroke="#C1AB85" stroke-width="1.5" />
-                  <!-- Gear -->
-                  <path d="M 0,-14 A 14,14 0 1,0 0,14 A 14,14 0 1,0 0,-14 M 0,-6 A 6,6 0 1,1 0,6 A 6,6 0 1,1 0,-6"
-                    fill="none" stroke="#F6F4EF" stroke-width="2" />
-                  <line x1="0" y1="-18" x2="0" y2="-12" stroke="#F6F4EF" stroke-width="3" />
-                  <line x1="0" y1="12" x2="0" y2="18" stroke="#F6F4EF" stroke-width="3" />
-                  <line x1="-18" y1="0" x2="-12" y2="0" stroke="#F6F4EF" stroke-width="3" />
-                  <line x1="12" y1="0" x2="18" y2="0" stroke="#F6F4EF" stroke-width="3" />
+                  <!-- Isometric Cube representing CAD -->
+                  <!-- Top Face -->
+                  <polygon points="0,-16 14,-8 0,0 -14,-8" fill="none" stroke="#F6F4EF" stroke-width="2"
+                    stroke-linejoin="round" />
+                  <!-- Left Face -->
+                  <polygon points="-14,-8 0,0 0,16 -14,8" fill="none" stroke="#F6F4EF" stroke-width="2"
+                    stroke-linejoin="round" />
+                  <!-- Right Face -->
+                  <polygon points="0,0 14,-8 14,8 0,16" fill="none" stroke="#F75142" stroke-width="2"
+                    stroke-linejoin="round" />
+                  <!-- Center Y-axis line -->
+                  <line x1="0" y1="0" x2="0" y2="16" stroke="#F6F4EF" stroke-width="2" />
                 </g>
               </g>
 
@@ -571,6 +576,7 @@
 
   <script src="assets/anime.min.js"></script>
   <script src="assets/main.js?v=4" defer></script>
+  <script src="assets/hero-canvas.js" defer></script>
 </body>
 
 </html>
