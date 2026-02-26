@@ -254,7 +254,7 @@ footer {
 .hero-toolbox-svg {
   width: 100%;
   height: auto;
-  transform: scale(1.15) translate(30px, 40px);
+  transform: scale(1.15) translate(50px, 65px);
   /* Scaled up and moved right/down */
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
 }
