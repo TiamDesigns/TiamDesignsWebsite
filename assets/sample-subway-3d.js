@@ -158,8 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fade out and remove the loading overlay now that the model is ready
     const loaderElement = document.getElementById('model-loader');
     if (loaderElement) {
+      // Force a reflow before applying the transition to guarantee the browser sees it
+      void loaderElement.offsetWidth;
       loaderElement.style.opacity = '0';
-      setTimeout(() => loaderElement.remove(), 500); // Remove from DOM after fade transition
+      loaderElement.style.pointerEvents = 'none'; // Ensure it doesn't block interactions while fading
+      setTimeout(() => {
+        if (loaderElement && loaderElement.parentNode) {
+          loaderElement.parentNode.removeChild(loaderElement);
+        }
+      }, 600); // Wait slightly longer than the 0.5s CSS transition
     }
 
     // Adjust controls settings
