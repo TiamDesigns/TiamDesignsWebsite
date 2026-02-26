@@ -22,29 +22,22 @@
     </div>
   </header>
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <section class="hero" style="position: relative; overflow: hidden; min-height: 100vh;">
+      <div id="3d-container" class="hero-canvas"
+        style="pointer-events: auto; cursor: grab; z-index: 0; width: 100%; height: 100%; transform: translateX(20vw);">
+      </div>
+      <div class="container hero-grid" style="pointer-events: none;">
+        <div class="hero-content" style="pointer-events: none; z-index: 2; position: relative;">
           <p class="hero-kicker">Engineering Design Project</p>
           <h1>Sample Subway – Nuclear Pressure Tube Sampling System</h1>
           <p class="hero-subtitle">A remote-controlled device for retrieving metal samples from nuclear pressure tubes
             to assess hydrogen embrittlement.</p>
-          <div class="hero-actions">
+          <div class="hero-actions" style="pointer-events: auto;">
             <a href="#details" class="btn primary">View Details</a>
             <a href="#gallery" class="btn ghost">Gallery</a>
           </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <h2>Project Specs</h2>
-            <ul>
-              <li><strong>Client:</strong> Canadian Nuclear Laboratories</li>
-              <li><strong>Role:</strong> Mechanical Design & Logic</li>
-              <li><strong>Timeline:</strong> 4 Months</li>
-              <li><strong>Status:</strong> Prototype Completed</li>
-            </ul>
-          </div>
-        </div>
+        <div class="hero-visual" style="display: none;"></div>
       </div>
     </section>
 
@@ -459,6 +452,13 @@
   </footer>
   <script src="assets/anime.min.js"></script>
   <script src="assets/main.js?v=2"></script>
+
+  <!-- Three.js and dependencies for 3D Viewer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TrackballControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+  <script src="assets/sample-subway-3d.js"></script>
 </body>
 
 </html>
