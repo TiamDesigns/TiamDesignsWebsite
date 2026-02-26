@@ -155,6 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
     camera.position.set(distance, distance * 0.8, distance);
     camera.lookAt(0, 0, 0);
 
+    // Fade out and remove the loading overlay now that the model is ready
+    const loaderElement = document.getElementById('model-loader');
+    if (loaderElement) {
+      loaderElement.style.opacity = '0';
+      setTimeout(() => loaderElement.remove(), 500); // Remove from DOM after fade transition
+    }
+
     // Adjust controls settings
     controls.maxDistance = radius * 3;
     controls.minDistance = radius * 0.3;
