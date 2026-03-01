@@ -3,10 +3,10 @@ from PIL import Image
 
 # Directories to scan
 TARGET_DIRS = [
-    r"c:\Users\tiamb\Documents\Coding\TiamDesignsWebsite\assets",
-    r"c:\Users\tiamb\Documents\Coding\TiamDesignsWebsite\assets\Titan65",
-    r"c:\Users\tiamb\Documents\Coding\TiamDesignsWebsite\assets\Thesis Project",
-    r"c:\Users\tiamb\Documents\Coding\TiamDesignsWebsite\assets\Thesis Project\images"
+    r"c:\Users\tiamb\OneDrive\Documents\TiamDesigns\TiamDesignsWebsite\assets",
+    r"c:\Users\tiamb\OneDrive\Documents\TiamDesigns\TiamDesignsWebsite\assets\Titan65",
+    r"c:\Users\tiamb\OneDrive\Documents\TiamDesigns\TiamDesignsWebsite\assets\Thesis Project",
+    r"c:\Users\tiamb\OneDrive\Documents\TiamDesigns\TiamDesignsWebsite\assets\Thesis Project\images"
 ]
 
 # Supported formats
