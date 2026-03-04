@@ -164,11 +164,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Animation Loop
+    let animationId;
+    let isVisible = true;
+
     function animate() {
+        if (!isVisible) return;
         updateParticles();
         render();
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
     }
+
+    // Setup Intersection Observer to pause when off-screen
+    const canvasObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!isVisible) {
+                    isVisible = true;
+                    animate(); // restart animation loop
+                }
+            } else {
+                isVisible = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            }
+        });
+    }, { rootMargin: '100px' });
+
+    canvasObserver.observe(canvas.parentElement);
 
     // Event Listeners
     window.addEventListener('resize', initParticles);

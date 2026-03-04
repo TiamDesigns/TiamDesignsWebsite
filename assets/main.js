@@ -586,36 +586,41 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Masonry Grid Logic ---
-function resizeGridItem(item) {
-  const grid = item.closest('.gallery-grid');
-  if (!grid) return;
-
-  // Get the row height and gap from the grid
-  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
-
-  // The content inside the figure (the img + figcaption)
-  const content = item.querySelector('img');
-  const caption = item.querySelector('figcaption');
-
-  // Wait for image to load to get true height if necessary, though ideally they are loaded
-  if (!content) return;
-
-  let totalHeight = content.getBoundingClientRect().height;
-  if (caption) {
-    totalHeight += caption.getBoundingClientRect().height;
-  }
-
-  // Calculate how many rows this item needs to span
-  const rowSpan = Math.ceil((totalHeight + rowGap) / (rowHeight + rowGap));
-  item.style.gridRowEnd = "span " + rowSpan;
-}
-
 function resizeAllGridItems() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
+  const updates = [];
+
+  // READ PHASE
   allItems.forEach(item => {
-    resizeGridItem(item);
+    const grid = item.closest('.gallery-grid');
+    if (!grid) return;
+
+    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
+
+    const content = item.querySelector('img');
+    const caption = item.querySelector('figcaption');
+
+    if (!content) return;
+
+    let totalHeight = content.getBoundingClientRect().height;
+    if (caption) {
+      totalHeight += caption.getBoundingClientRect().height;
+    }
+
+    const rowSpan = Math.ceil((totalHeight + rowGap) / (rowHeight + rowGap));
+    updates.push({ item, rowSpan });
   });
+
+  // WRITE PHASE
+  updates.forEach(({ item, rowSpan }) => {
+    item.style.gridRowEnd = "span " + rowSpan;
+  });
+}
+
+function resizeGridItem(item) {
+  // To avoid thrashing, even single item resizes will trigger a full batched resize
+  resizeAllGridItems();
 }
 
 // Recalculate on window resize
