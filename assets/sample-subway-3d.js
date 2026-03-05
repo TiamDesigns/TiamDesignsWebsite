@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameToColor = new Map();
   let activeModel = null; // Store reference to apply rotation
 
-  loader.load('assets/SampleSubway/SampleSubway.glb', (gltf) => {
+  loader.load('assets/SampleSubway/SampleSubwayExtremeCompress.glb', (gltf) => {
     const model = gltf.scene;
 
     // Apply materials based on component name
@@ -91,27 +91,29 @@ document.addEventListener('DOMContentLoaded', () => {
         let matOpacity = 1.0;
 
         // Custom material overrides matching combinedName
-        if (combinedName.includes('608 Bearing') || combinedName.includes('Nickel Strip') || combinedName.includes('Hex socket') || combinedName.includes('Screw') || combinedName.includes('Nut')) {
+        if (combinedName.includes('608 Bearing') || combinedName.includes('Nickel Strip') || combinedName.includes('Hex socket') || combinedName.includes('SHAFT') || combinedName.includes('CONNECTION')) {
           matColor = 0xb0b5ba; // Bright shiny silver color
           matMetalness = 0.5; // Lowered from 1.0 to prevent rendering solid black without an environment map
           matRoughness = 0.2; // Keep it smooth so it has specular highlights
-        } else if (combinedName.includes('Part 1')) { // Reverting to .includes to ensure the whole orange collar (Part 10, Part 11 etc) matches
-          matColor = 0xdd7222; // Vibrant Orange (matching the reference image)
+        } else if (combinedName.includes('Part 16') || combinedName.includes('Part 14') || combinedName.includes('Part 18') || combinedName.includes('Part 21') || combinedName.includes('COVER')) {
+          matColor = 0xdd7222; // Vibrant Orange (matching the reference image for 3D printed parts)
           matMetalness = 0.2;
           matRoughness = 0.4; // Slightly tighter gloss
-        } else if (combinedName.includes('Panel Cover')) {
+        } else if (combinedName.includes('Panel Cover') || combinedName.includes('Lid')) {
           matColor = 0x88929b; // Keep a soft color but 70% transparent (30% opaque)
           matTransparent = true;
-          matOpacity = 0.3; // 70% transparency = 0.3 opacity
+          matOpacity = 0.4;
           matMetalness = 0.4;
           matRoughness = 0.1; // Glassy feel
-        } else if (combinedName.includes('Battery') || combinedName.includes('Cell')) {
-          matColor = 0x4466cc; // Blue for the batteries assuming they are standard 18650s like the photo
+        } else if (combinedName.includes('Molicel') || combinedName.includes('Cell')) {
+          matColor = 0x4466cc; // Blue for the 21700 batteries
           matMetalness = 0.3;
           matRoughness = 0.6;
+        } else if (combinedName.includes('ContainerInterior') || combinedName.includes('ContainerBody') || combinedName.includes('Frame') || combinedName.includes('load_cell')) {
+          matColor = 0xe0e0e0; // Light grey for the main chassis/frame
+          matMetalness = 0.2;
+          matRoughness = 0.5;
         }
-
-        // We completely ignore the random palette now, everything is light grey unless specified above.
 
         child.material = new THREE.MeshStandardMaterial({
           color: matColor,
