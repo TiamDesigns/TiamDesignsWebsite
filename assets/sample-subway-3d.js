@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
   container.appendChild(renderer.domElement);
 
   // Lighting to match the dark aesthetic but with cool, futuristic tones
-  const ambientLight = new THREE.AmbientLight(0xddeeff, 1.0); // Slightly cool, bright ambient light
+  const ambientLight = new THREE.AmbientLight(0xcceeff, 1.2); // Cooler, brighter ambient light
   scene.add(ambientLight);
 
-  const directionalLight1 = new THREE.DirectionalLight(0xaaccff, 0.6); // Cool blue-ish main light
+  const directionalLight1 = new THREE.DirectionalLight(0x88bbff, 0.5); // Very cool blue main light
   directionalLight1.position.set(100, 200, 100);
   scene.add(directionalLight1);
 
-  const directionalLight2 = new THREE.DirectionalLight(0x7799cc, 0.4); // Deeper cool backlight
+  const directionalLight2 = new THREE.DirectionalLight(0x5588cc, 0.5); // Stronger, deeper cool backlight
   directionalLight2.position.set(-100, -50, -100);
   scene.add(directionalLight2);
 
-  const directionalLight3 = new THREE.DirectionalLight(0xebeff5, 0.2); // Very soft neutral-cool fill light
+  const directionalLight3 = new THREE.DirectionalLight(0xddeeff, 0.3); // Cool white fill light
   directionalLight3.position.set(100, 0, -100);
   scene.add(directionalLight3);
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
           matMetalness = 0.5; // Lowered from 1.0 to prevent rendering solid black without an environment map
           matRoughness = 0.2; // Keep it smooth so it has specular highlights
         } else if (combinedName.includes('Part 16') || combinedName.includes('Part 14') || combinedName.includes('Part 18') || combinedName.includes('Part 21') || combinedName.includes('COVER')) {
-          matColor = 0xdd7222; // Vibrant Orange (matching the reference image for 3D printed parts)
+          matColor = 0xcc6611; // Slightly cooler/desaturated orange so it doesn't reflect warm light
           matMetalness = 0.2;
           matRoughness = 0.4; // Slightly tighter gloss
         } else if (combinedName.includes('Panel Cover') || combinedName.includes('Lid')) {
