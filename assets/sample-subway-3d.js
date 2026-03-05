@@ -21,19 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
 
-  // Lighting to match the dark aesthetic
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Softer, brighter ambient
+  // Lighting to match the dark aesthetic but with neutral, soft tones
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); // Brighter, softer neutral ambient light
   scene.add(ambientLight);
 
-  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.4); // Less harsh main light
+  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5); // Soft neutral main light
   directionalLight1.position.set(100, 200, 100);
   scene.add(directionalLight1);
 
-  const directionalLight2 = new THREE.DirectionalLight(0x90b0d0, 0.3); // Slight cool backlight
+  const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.2); // Very soft neutral backlight
   directionalLight2.position.set(-100, -50, -100);
   scene.add(directionalLight2);
 
-  const directionalLight3 = new THREE.DirectionalLight(0xc1ab85, 0.3); // Warm fill light matching --accent-alt
+  const directionalLight3 = new THREE.DirectionalLight(0xe0e0e0, 0.2); // Soft neutral fill light
   directionalLight3.position.set(100, 0, -100);
   scene.add(directionalLight3);
 
