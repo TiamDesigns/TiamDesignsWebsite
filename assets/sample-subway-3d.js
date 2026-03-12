@@ -21,19 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
 
-  // Lighting to match the dark aesthetic but with cool, futuristic tones
-  const ambientLight = new THREE.AmbientLight(0xcceeff, 1.2); // Cooler, brighter ambient light
+  // Neutral lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); // Neutral white
   scene.add(ambientLight);
 
-  const directionalLight1 = new THREE.DirectionalLight(0x88bbff, 0.5); // Very cool blue main light
+  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5); // Neutral main light
   directionalLight1.position.set(100, 200, 100);
   scene.add(directionalLight1);
 
-  const directionalLight2 = new THREE.DirectionalLight(0x5588cc, 0.5); // Stronger, deeper cool backlight
+  const directionalLight2 = new THREE.DirectionalLight(0xeeeeee, 0.5); // Neutral backlight
   directionalLight2.position.set(-100, -50, -100);
   scene.add(directionalLight2);
 
-  const directionalLight3 = new THREE.DirectionalLight(0xddeeff, 0.3); // Cool white fill light
+  const directionalLight3 = new THREE.DirectionalLight(0xf5f5f5, 0.3); // Neutral fill light
   directionalLight3.position.set(100, 0, -100);
   scene.add(directionalLight3);
 
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
           matMetalness = 0.4;
           matRoughness = 0.1; // Glassy feel
         } else if (combinedName.includes('Molicel') || combinedName.includes('Cell')) {
-          matColor = 0x4466cc; // Blue for the 21700 batteries
+          matColor = 0xa39d96; // Warm grey for the 21700 batteries
           matMetalness = 0.3;
           matRoughness = 0.6;
         } else if (combinedName.includes('ContainerInterior') || combinedName.includes('ContainerBody') || combinedName.includes('Frame') || combinedName.includes('load_cell')) {
