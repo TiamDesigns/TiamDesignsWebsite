@@ -1,6 +1,61 @@
 // Hero Canvas: Interactive Node Particle Network
 // A subtle dark particle network that connects dots and reacts to the cursor
 
+function _updateParticlesLogic(particles, width, height, mouse, config) {
+    const repelDistSq = config.mouseRepelDistance * config.mouseRepelDistance;
+    const targetSpeedSq = config.particleSpeed * config.particleSpeed;
+    const minSpeedSq = (config.particleSpeed * 0.5) * (config.particleSpeed * 0.5);
+
+    for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        // Move particle
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Bounce off edges
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // Keep within bounds just in case
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        // Mouse interaction: Repulse
+        if (mouse.isActive) {
+            let dx = p.x - mouse.x;
+            let dy = p.y - mouse.y;
+            let distSq = dx * dx + dy * dy;
+
+            if (distSq < repelDistSq && distSq > 0) {
+                let dist = Math.sqrt(distSq);
+                let forceDirectionX = dx / dist;
+                let forceDirectionY = dy / dist;
+                let force = (config.mouseRepelDistance - dist) / config.mouseRepelDistance;
+
+                p.vx += forceDirectionX * force * config.mouseForce;
+                p.vy += forceDirectionY * force * config.mouseForce;
+            }
+        }
+
+        // Apply friction/damping to return to base speed
+        let currentSpeedSq = p.vx * p.vx + p.vy * p.vy;
+        if (currentSpeedSq > targetSpeedSq) {
+            p.vx *= 0.98;
+            p.vy *= 0.98;
+        } else if (currentSpeedSq < minSpeedSq) {
+            // Gentle nudge if too slow
+            p.vx *= 1.02;
+            p.vy *= 1.02;
+        }
+    }
+}
+
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { _updateParticlesLogic };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
@@ -58,47 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update Particles physics
     function updateParticles() {
-        for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-
-            // Move particle
-            p.x += p.vx;
-            p.y += p.vy;
-
-            // Bounce off edges
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-
-            // Keep within bounds just in case
-            p.x = Math.max(0, Math.min(width, p.x));
-            p.y = Math.max(0, Math.min(height, p.y));
-
-            // Mouse interaction: Repulse
-            if (mouse.isActive) {
-                let dx = p.x - mouse.x;
-                let dy = p.y - mouse.y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < config.mouseRepelDistance && dist > 0) {
-                    let forceDirectionX = dx / dist;
-                    let forceDirectionY = dy / dist;
-                    let force = (config.mouseRepelDistance - dist) / config.mouseRepelDistance;
-
-                    p.vx += forceDirectionX * force * config.mouseForce;
-                    p.vy += forceDirectionY * force * config.mouseForce;
-                }
-            }
-
-            // Apply friction/damping to return to base speed
-            let currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-            if (currentSpeed > config.particleSpeed) {
-                p.vx *= 0.98;
-                p.vy *= 0.98;
-            } else if (currentSpeed < config.particleSpeed * 0.5) {
-                // Gentle nudge if too slow
-                p.vx *= 1.02;
-                p.vy *= 1.02;
-            }
+        if (typeof _updateParticlesLogic === 'function') {
+            _updateParticlesLogic(particles, width, height, mouse, config);
         }
     }
 
@@ -108,6 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, width, height);
 
         ctx.lineWidth = 1;
+
+        const linkDistanceSq = config.linkDistance * config.linkDistance;
+        const mouseLinkDistanceSq = config.mouseLinkDistance * config.mouseLinkDistance;
+        const linkDistanceInv = 1 / config.linkDistance;
+        const mouseLinkDistanceInv = 1 / config.mouseLinkDistance;
 
         // Draw links between particles
         for (let i = 0; i < particles.length; i++) {
@@ -120,9 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dy = p1.y - p2.y;
                 let distSq = dx * dx + dy * dy;
 
-                if (distSq < config.linkDistance * config.linkDistance) {
-                    let dist = Math.sqrt(distSq);
-                    let opacity = 1 - (dist / config.linkDistance);
+                if (distSq < linkDistanceSq) {
+                    let opacity = 1 - (Math.sqrt(distSq) * linkDistanceInv);
 
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
@@ -138,9 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let mdy = p1.y - mouse.y;
                 let mDistSq = mdx * mdx + mdy * mdy;
 
-                if (mDistSq < config.mouseLinkDistance * config.mouseLinkDistance) {
-                    let mDist = Math.sqrt(mDistSq);
-                    let opacity = 1 - (mDist / config.mouseLinkDistance);
+                if (mDistSq < mouseLinkDistanceSq) {
+                    let opacity = 1 - (Math.sqrt(mDistSq) * mouseLinkDistanceInv);
 
                     // Use a slightly different color or brightness for mouse connections
                     ctx.beginPath();

@@ -54,18 +54,18 @@ describe('Masonry Layout functions', () => {
       };
     });
 
-    // Mock getBoundingClientRect
+    // Mock offsetHeight
     const img1 = document.querySelector('.item1 img');
-    img1.getBoundingClientRect = jest.fn(() => ({ height: 100 }));
+    Object.defineProperty(img1, 'offsetHeight', { value: 100, configurable: true });
 
     const cap1 = document.querySelector('.item1 figcaption');
-    cap1.getBoundingClientRect = jest.fn(() => ({ height: 40 }));
+    Object.defineProperty(cap1, 'offsetHeight', { value: 40, configurable: true });
 
     const img2 = document.querySelector('.item2 img');
-    img2.getBoundingClientRect = jest.fn(() => ({ height: 80 }));
+    Object.defineProperty(img2, 'offsetHeight', { value: 80, configurable: true });
 
     const img4 = document.querySelector('.item4 img');
-    img4.getBoundingClientRect = jest.fn(() => ({ height: 50 }));
+    Object.defineProperty(img4, 'offsetHeight', { value: 50, configurable: true });
 
     // Read the script content
     const scriptContent = fs.readFileSync(path.resolve(__dirname, '../assets/main.js'), 'utf8');
