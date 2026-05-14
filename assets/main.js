@@ -586,22 +586,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Masonry Grid Logic ---
-function resizeAllGridItems() {
+let masonryRafId = null;
+
+function performMasonryLayout() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
   const updates = [];
+  const gridStyleCache = new Map();
 
   // READ PHASE
   allItems.forEach(item => {
     const grid = item.closest('.gallery-grid');
     if (!grid) return;
 
-    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
+    let gridStyle = gridStyleCache.get(grid);
+    if (!gridStyle) {
+      const computedStyle = window.getComputedStyle(grid);
+      gridStyle = {
+        rowHeight: parseInt(computedStyle.getPropertyValue('grid-auto-rows')) || 0,
+        rowGap: parseInt(computedStyle.getPropertyValue('grid-row-gap')) || parseInt(computedStyle.getPropertyValue('gap')) || 0
+      };
+      gridStyleCache.set(grid, gridStyle);
+    }
+
+    const { rowHeight, rowGap } = gridStyle;
 
     const content = item.querySelector('img');
     const caption = item.querySelector('figcaption');
 
-    if (!content) return;
+    if (!content || rowHeight === 0) return;
 
     let totalHeight = content.getBoundingClientRect().height;
     if (caption) {
@@ -616,6 +628,13 @@ function resizeAllGridItems() {
   updates.forEach(({ item, rowSpan }) => {
     item.style.gridRowEnd = "span " + rowSpan;
   });
+}
+
+function resizeAllGridItems() {
+  if (masonryRafId) {
+    cancelAnimationFrame(masonryRafId);
+  }
+  masonryRafId = requestAnimationFrame(performMasonryLayout);
 }
 
 function resizeGridItem(item) {
