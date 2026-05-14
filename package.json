@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test-benchmark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TiamDesigns/TiamDesignsWebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TiamDesigns/TiamDesignsWebsite/issues"
+  },
+  "homepage": "https://github.com/TiamDesigns/TiamDesignsWebsite#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

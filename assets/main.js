@@ -590,25 +590,35 @@ function resizeAllGridItems() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
   const updates = [];
 
+  // Cache grid properties to avoid repeated getComputedStyle calls
+  const gridCache = new Map();
+
   // READ PHASE
   allItems.forEach(item => {
     const grid = item.closest('.gallery-grid');
     if (!grid) return;
 
-    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
+    let gridProps = gridCache.get(grid);
+    if (!gridProps) {
+      const computedStyle = window.getComputedStyle(grid);
+      gridProps = {
+        rowHeight: parseInt(computedStyle.getPropertyValue('grid-auto-rows')) || 0,
+        rowGap: parseInt(computedStyle.getPropertyValue('grid-row-gap')) || parseInt(computedStyle.getPropertyValue('gap')) || 0
+      };
+      gridCache.set(grid, gridProps);
+    }
 
     const content = item.querySelector('img');
     const caption = item.querySelector('figcaption');
 
     if (!content) return;
 
-    let totalHeight = content.getBoundingClientRect().height;
+    let totalHeight = content.offsetHeight;
     if (caption) {
-      totalHeight += caption.getBoundingClientRect().height;
+      totalHeight += caption.offsetHeight;
     }
 
-    const rowSpan = Math.ceil((totalHeight + rowGap) / (rowHeight + rowGap));
+    const rowSpan = Math.ceil((totalHeight + gridProps.rowGap) / (gridProps.rowHeight + gridProps.rowGap));
     updates.push({ item, rowSpan });
   });
 
