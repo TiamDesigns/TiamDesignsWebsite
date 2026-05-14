@@ -89,7 +89,7 @@ if (yearSpan) {
   }
 })();
 // Animations
-document.addEventListener('DOMContentLoaded', () => {
+function initAnimations() {
   // Hero Animation Setup
   const heroElements = document.querySelectorAll('.hero h1, .hero-subtitle, .hero-actions .btn');
   heroElements.forEach(el => el.classList.add('has-animation'));
@@ -305,11 +305,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.project-intro-text, .two-col-grid > div, .research-gallery h3, .analysis-table-img, .carousel-container').forEach(el => {
     animateOnScroll.observe(el);
   });
-});
+}
 
 
 // --- NEW: Elastic Overscroll (Stretchy Bounce) ---
-document.addEventListener('DOMContentLoaded', () => {
+function initElasticOverscroll() {
   let currentY = 0;
   let startY = 0;
   let isDragging = false;
@@ -423,10 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 50); // fast timeout makes it snap back immediately when scrolling stops
     }
   }, { passive: false });
-});
+}
 
 // --- Lightbox Gallery Implementation ---
-document.addEventListener('DOMContentLoaded', () => {
+function initLightbox() {
   // 1. Create Lightbox HTML Structure
   const lightbox = document.createElement('div');
   lightbox.id = 'lightbox';
@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxImg.style.cursor = 'grab';
     }
   });
-});
+}
 
 // --- Masonry Grid Logic ---
 function resizeAllGridItems() {
@@ -627,7 +627,7 @@ function resizeGridItem(item) {
 window.addEventListener("resize", resizeAllGridItems);
 
 // Initial calculation and lazy-load handling
-document.addEventListener('DOMContentLoaded', () => {
+function initMasonryGrid() {
   // Initial call
   resizeAllGridItems();
 
@@ -642,5 +642,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+}
+
+// --- Initialize All Features ---
+document.addEventListener('DOMContentLoaded', () => {
+  initAnimations();
+  initElasticOverscroll();
+  initLightbox();
+  initMasonryGrid();
 });
 
