@@ -1,3 +1,6 @@
+<<<<<<< HEAD
 .gemini/
 gha-creds-*.json
+=======
+>>>>>>> origin/pr/4
 node_modules/
