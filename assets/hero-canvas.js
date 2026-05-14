@@ -58,6 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update Particles physics
     function updateParticles() {
+        const repelDistSq = config.mouseRepelDistance * config.mouseRepelDistance;
+        const targetSpeedSq = config.particleSpeed * config.particleSpeed;
+        const minSpeedSq = (config.particleSpeed * 0.5) * (config.particleSpeed * 0.5);
+
         for (let i = 0; i < particles.length; i++) {
             let p = particles[i];
 
@@ -77,9 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mouse.isActive) {
                 let dx = p.x - mouse.x;
                 let dy = p.y - mouse.y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
+                let distSq = dx * dx + dy * dy;
 
-                if (dist < config.mouseRepelDistance && dist > 0) {
+                if (distSq < repelDistSq && distSq > 0) {
+                    let dist = Math.sqrt(distSq);
                     let forceDirectionX = dx / dist;
                     let forceDirectionY = dy / dist;
                     let force = (config.mouseRepelDistance - dist) / config.mouseRepelDistance;
@@ -90,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Apply friction/damping to return to base speed
-            let currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-            if (currentSpeed > config.particleSpeed) {
+            let currentSpeedSq = p.vx * p.vx + p.vy * p.vy;
+            if (currentSpeedSq > targetSpeedSq) {
                 p.vx *= 0.98;
                 p.vy *= 0.98;
-            } else if (currentSpeed < config.particleSpeed * 0.5) {
+            } else if (currentSpeedSq < minSpeedSq) {
                 // Gentle nudge if too slow
                 p.vx *= 1.02;
                 p.vy *= 1.02;
