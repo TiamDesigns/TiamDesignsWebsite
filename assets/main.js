@@ -589,14 +589,24 @@ document.addEventListener('DOMContentLoaded', () => {
 function resizeAllGridItems() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
   const updates = [];
+  const gridCache = new Map();
 
   // READ PHASE
   allItems.forEach(item => {
     const grid = item.closest('.gallery-grid');
     if (!grid) return;
 
-    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')) || parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 0;
+    let gridProps = gridCache.get(grid);
+    if (!gridProps) {
+      const style = window.getComputedStyle(grid);
+      gridProps = {
+        rowHeight: parseInt(style.getPropertyValue('grid-auto-rows')) || 0,
+        rowGap: parseInt(style.getPropertyValue('grid-row-gap')) || parseInt(style.getPropertyValue('gap')) || 0
+      };
+      gridCache.set(grid, gridProps);
+    }
+
+    const { rowHeight, rowGap } = gridProps;
 
     const content = item.querySelector('img');
     const caption = item.querySelector('figcaption');
