@@ -54,22 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const loader = new THREE.GLTFLoader();
   loader.setDRACOLoader(dracoLoader);
 
-  // Tiam Designs brand stylization (high saturation)
-  const palette = [
-    0x101214, // Void
-    0xF75142, // Ember
-    0xF6F4EF, // Sand
-    0xC1AB85, // Brass
-    0xFF1E0A, // Highly Saturated Ember
-    0xDABB8A, // Bright Shiny Brass
-    0x252930, // Charcoal/Light Void
-    0xEAE0D0, // Saturated Sand
-    0x14161A, // Deep Void
-    0xE83F30, // Crimson Ember
-  ];
-
-  let colorIndex = 0;
-  const nameToColor = new Map();
   let activeModel = null; // Store reference to apply rotation
 
   loader.load('assets/SampleSubway/SampleSubwayExtremeCompress.glb', (gltf) => {
