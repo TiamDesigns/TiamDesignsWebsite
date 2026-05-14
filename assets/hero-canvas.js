@@ -109,6 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.lineWidth = 1;
 
+        const linkDistanceSq = config.linkDistance * config.linkDistance;
+        const mouseLinkDistanceSq = config.mouseLinkDistance * config.mouseLinkDistance;
+        const linkDistanceInv = 1 / config.linkDistance;
+        const mouseLinkDistanceInv = 1 / config.mouseLinkDistance;
+
         // Draw links between particles
         for (let i = 0; i < particles.length; i++) {
             let p1 = particles[i];
@@ -120,9 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dy = p1.y - p2.y;
                 let distSq = dx * dx + dy * dy;
 
-                if (distSq < config.linkDistance * config.linkDistance) {
-                    let dist = Math.sqrt(distSq);
-                    let opacity = 1 - (dist / config.linkDistance);
+                if (distSq < linkDistanceSq) {
+                    let opacity = 1 - (Math.sqrt(distSq) * linkDistanceInv);
 
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
@@ -138,9 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let mdy = p1.y - mouse.y;
                 let mDistSq = mdx * mdx + mdy * mdy;
 
-                if (mDistSq < config.mouseLinkDistance * config.mouseLinkDistance) {
-                    let mDist = Math.sqrt(mDistSq);
-                    let opacity = 1 - (mDist / config.mouseLinkDistance);
+                if (mDistSq < mouseLinkDistanceSq) {
+                    let opacity = 1 - (Math.sqrt(mDistSq) * mouseLinkDistanceInv);
 
                     // Use a slightly different color or brightness for mouse connections
                     ctx.beginPath();

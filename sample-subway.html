@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- 
+1. What it is: Site Metadata (Head)
+2. How it works: Contains SEO metadata, font links, and CSS styles.
+3. How to change it: Update title/description strings or add/remove <link> tags for external assets.
+-->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,6 +46,11 @@
     ::after,
     ::before {
       box-sizing: border-box
+    }
+
+    ::selection {
+      background-color: var(--accent);
+      color: #050608;
     }
 
     img {
@@ -1521,7 +1531,12 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <!-- 
+1. What it is: Site Navigation (Header)
+2. How it works: A fixed position nav bar that blurs the background. Links anchor to IDs on this page.
+3. How to change it: Add new <li> elements inside .nav-links or change the logo text.
+-->
+<header class="site-header">
     <div class="container nav-container">
       <a href="index.html" class="logo">Tiam<span>Designs</span></a>
       <nav class="nav">
@@ -1981,21 +1996,21 @@
       <div class="container">
         <h2>Project Documents</h2>
         <div class="downloads-grid">
-          <a href="assets/SampleSubway/Final Design.pdf" class="download-card" target="_blank">
+          <a href="assets/SampleSubway/Final Design.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
             <span class="icon">📄</span>
             <div class="meta">
               <h3>Final Design Report</h3>
               <p>Comprehensive technical documentation (PDF)</p>
             </div>
           </a>
-          <a href="assets/SampleSubway/GNG1103 - User Manual.pdf" class="download-card" target="_blank">
+          <a href="assets/SampleSubway/GNG1103 - User Manual.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
             <span class="icon">📘</span>
             <div class="meta">
               <h3>User Manual</h3>
               <p>Operating instructions and safety procedures (PDF)</p>
             </div>
           </a>
-          <a href="assets/SampleSubway/GNG1103 - Project - Bill of Materials.pdf" class="download-card" target="_blank">
+          <a href="assets/SampleSubway/GNG1103 - Project - Bill of Materials.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
             <span class="icon">📊</span>
             <div class="meta">
               <h3>Bill of Materials</h3>
@@ -2006,7 +2021,12 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer">
+  <!-- 
+1. What it is: Site Footer
+2. How it works: Contains copyright info, secondary links, and social links.
+3. How to change it: Update the year, add new a href links inside .footer-socials.
+-->
+<footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-info">
         <p>&copy; <span id="year">2026</span> Tiam Bennett</p>
