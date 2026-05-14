@@ -431,23 +431,109 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.createElement('div');
   lightbox.id = 'lightbox';
   lightbox.className = 'lightbox-overlay';
-  lightbox.innerHTML = `
-    <div class="lightbox-content">
-      <img id="lightbox-img" src="" alt="Zoomed Image">
-      <div class="lightbox-controls">
-        <button id="lightbox-zoom-out" aria-label="Zoom Out">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-        </button>
-        <button id="lightbox-zoom-in" aria-label="Zoom In">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-        </button>
-        <button id="lightbox-close" aria-label="Close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-      <div id="lightbox-caption" class="lightbox-caption"></div>
-    </div>
-  `;
+  const content = document.createElement('div');
+  content.className = 'lightbox-content';
+
+  const img = document.createElement('img');
+  img.id = 'lightbox-img';
+  img.src = '';
+  img.alt = 'Zoomed Image';
+
+  const controls = document.createElement('div');
+  controls.className = 'lightbox-controls';
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+
+  const zoomOutBtnElement = document.createElement('button');
+  zoomOutBtnElement.id = 'lightbox-zoom-out';
+  zoomOutBtnElement.setAttribute('aria-label', 'Zoom Out');
+  const svgZoomOut = document.createElementNS(svgNS, 'svg');
+  svgZoomOut.setAttribute('width', '24');
+  svgZoomOut.setAttribute('height', '24');
+  svgZoomOut.setAttribute('viewBox', '0 0 24 24');
+  svgZoomOut.setAttribute('fill', 'none');
+  svgZoomOut.setAttribute('stroke', 'currentColor');
+  svgZoomOut.setAttribute('stroke-width', '2');
+  const circleOut = document.createElementNS(svgNS, 'circle');
+  circleOut.setAttribute('cx', '11');
+  circleOut.setAttribute('cy', '11');
+  circleOut.setAttribute('r', '8');
+  const lineOut1 = document.createElementNS(svgNS, 'line');
+  lineOut1.setAttribute('x1', '21');
+  lineOut1.setAttribute('y1', '21');
+  lineOut1.setAttribute('x2', '16.65');
+  lineOut1.setAttribute('y2', '16.65');
+  const lineOut2 = document.createElementNS(svgNS, 'line');
+  lineOut2.setAttribute('x1', '8');
+  lineOut2.setAttribute('y1', '11');
+  lineOut2.setAttribute('x2', '14');
+  lineOut2.setAttribute('y2', '11');
+  svgZoomOut.append(circleOut, lineOut1, lineOut2);
+  zoomOutBtnElement.appendChild(svgZoomOut);
+
+  const zoomInBtnElement = document.createElement('button');
+  zoomInBtnElement.id = 'lightbox-zoom-in';
+  zoomInBtnElement.setAttribute('aria-label', 'Zoom In');
+  const svgZoomIn = document.createElementNS(svgNS, 'svg');
+  svgZoomIn.setAttribute('width', '24');
+  svgZoomIn.setAttribute('height', '24');
+  svgZoomIn.setAttribute('viewBox', '0 0 24 24');
+  svgZoomIn.setAttribute('fill', 'none');
+  svgZoomIn.setAttribute('stroke', 'currentColor');
+  svgZoomIn.setAttribute('stroke-width', '2');
+  const circleIn = document.createElementNS(svgNS, 'circle');
+  circleIn.setAttribute('cx', '11');
+  circleIn.setAttribute('cy', '11');
+  circleIn.setAttribute('r', '8');
+  const lineIn1 = document.createElementNS(svgNS, 'line');
+  lineIn1.setAttribute('x1', '21');
+  lineIn1.setAttribute('y1', '21');
+  lineIn1.setAttribute('x2', '16.65');
+  lineIn1.setAttribute('y2', '16.65');
+  const lineIn2 = document.createElementNS(svgNS, 'line');
+  lineIn2.setAttribute('x1', '11');
+  lineIn2.setAttribute('y1', '8');
+  lineIn2.setAttribute('x2', '11');
+  lineIn2.setAttribute('y2', '14');
+  const lineIn3 = document.createElementNS(svgNS, 'line');
+  lineIn3.setAttribute('x1', '8');
+  lineIn3.setAttribute('y1', '11');
+  lineIn3.setAttribute('x2', '14');
+  lineIn3.setAttribute('y2', '11');
+  svgZoomIn.append(circleIn, lineIn1, lineIn2, lineIn3);
+  zoomInBtnElement.appendChild(svgZoomIn);
+
+  const closeBtnElement = document.createElement('button');
+  closeBtnElement.id = 'lightbox-close';
+  closeBtnElement.setAttribute('aria-label', 'Close');
+  const svgClose = document.createElementNS(svgNS, 'svg');
+  svgClose.setAttribute('width', '24');
+  svgClose.setAttribute('height', '24');
+  svgClose.setAttribute('viewBox', '0 0 24 24');
+  svgClose.setAttribute('fill', 'none');
+  svgClose.setAttribute('stroke', 'currentColor');
+  svgClose.setAttribute('stroke-width', '2');
+  const lineClose1 = document.createElementNS(svgNS, 'line');
+  lineClose1.setAttribute('x1', '18');
+  lineClose1.setAttribute('y1', '6');
+  lineClose1.setAttribute('x2', '6');
+  lineClose1.setAttribute('y2', '18');
+  const lineClose2 = document.createElementNS(svgNS, 'line');
+  lineClose2.setAttribute('x1', '6');
+  lineClose2.setAttribute('y1', '6');
+  lineClose2.setAttribute('x2', '18');
+  lineClose2.setAttribute('y2', '18');
+  svgClose.append(lineClose1, lineClose2);
+  closeBtnElement.appendChild(svgClose);
+
+  controls.append(zoomOutBtnElement, zoomInBtnElement, closeBtnElement);
+
+  const caption = document.createElement('div');
+  caption.id = 'lightbox-caption';
+  caption.className = 'lightbox-caption';
+
+  content.append(img, controls, caption);
+  lightbox.appendChild(content);
   document.body.appendChild(lightbox);
 
   const lightboxImg = document.getElementById('lightbox-img');
