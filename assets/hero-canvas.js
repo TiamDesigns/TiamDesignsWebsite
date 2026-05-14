@@ -1,6 +1,56 @@
 // Hero Canvas: Interactive Node Particle Network
 // A subtle dark particle network that connects dots and reacts to the cursor
 
+function _updateParticlesLogic(particles, width, height, mouse, config) {
+    for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        // Move particle
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Bounce off edges
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // Keep within bounds just in case
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        // Mouse interaction: Repulse
+        if (mouse.isActive) {
+            let dx = p.x - mouse.x;
+            let dy = p.y - mouse.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < config.mouseRepelDistance && dist > 0) {
+                let forceDirectionX = dx / dist;
+                let forceDirectionY = dy / dist;
+                let force = (config.mouseRepelDistance - dist) / config.mouseRepelDistance;
+
+                p.vx += forceDirectionX * force * config.mouseForce;
+                p.vy += forceDirectionY * force * config.mouseForce;
+            }
+        }
+
+        // Apply friction/damping to return to base speed
+        let currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (currentSpeed > config.particleSpeed) {
+            p.vx *= 0.98;
+            p.vy *= 0.98;
+        } else if (currentSpeed < config.particleSpeed * 0.5) {
+            // Gentle nudge if too slow
+            p.vx *= 1.02;
+            p.vy *= 1.02;
+        }
+    }
+}
+
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { _updateParticlesLogic };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
@@ -58,47 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update Particles physics
     function updateParticles() {
-        for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-
-            // Move particle
-            p.x += p.vx;
-            p.y += p.vy;
-
-            // Bounce off edges
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-
-            // Keep within bounds just in case
-            p.x = Math.max(0, Math.min(width, p.x));
-            p.y = Math.max(0, Math.min(height, p.y));
-
-            // Mouse interaction: Repulse
-            if (mouse.isActive) {
-                let dx = p.x - mouse.x;
-                let dy = p.y - mouse.y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < config.mouseRepelDistance && dist > 0) {
-                    let forceDirectionX = dx / dist;
-                    let forceDirectionY = dy / dist;
-                    let force = (config.mouseRepelDistance - dist) / config.mouseRepelDistance;
-
-                    p.vx += forceDirectionX * force * config.mouseForce;
-                    p.vy += forceDirectionY * force * config.mouseForce;
-                }
-            }
-
-            // Apply friction/damping to return to base speed
-            let currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-            if (currentSpeed > config.particleSpeed) {
-                p.vx *= 0.98;
-                p.vy *= 0.98;
-            } else if (currentSpeed < config.particleSpeed * 0.5) {
-                // Gentle nudge if too slow
-                p.vx *= 1.02;
-                p.vy *= 1.02;
-            }
+        if (typeof _updateParticlesLogic === 'function') {
+            _updateParticlesLogic(particles, width, height, mouse, config);
         }
     }
 
