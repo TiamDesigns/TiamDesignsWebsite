@@ -76,12 +76,7 @@ footer {
   z-index: 1;
 }
 
-/*/* 
-1. What it is: Layout Helpers
-2. How it works: Contains reusable utility descriptions for structural containers like .container and .section.
-3. How to change it: Adjust padding, max-width, or margins to alter the global page spacing.
-*/
-/* Layout helpers */*/
+/*/* Layout helpers */*/
 
 .container {
   width: 100%;
@@ -113,12 +108,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* 
-1. What it is: Site Header & Navigation Styles
-2. How it works: Controls the sticky blurred header, logo styling, and navigation links. Includes scroll effects.
-3. How to change it: Modify .site-header background colors, padding, or text sizing for links.
-*/
-/* Header & nav */*/
+/*/* Header & nav */*/
 
 .site-header {
   position: fixed;
@@ -209,12 +199,7 @@ footer {
   margin: 0;
 }
 
-/*/* 
-1. What it is: Hero Section Styles
-2. How it works: Uses CSS Grid and Flexbox for the top section layout, typography sizes, and spacing.
-3. How to change it: Edit .hero-grid grid-template-columns for layout, or change font sizes inside .hero-display.
-*/
-/* Hero */*/
+/*/* Hero */*/
 
 .hero {
   min-height: 100dvh;
@@ -313,12 +298,7 @@ footer {
   flex-wrap: wrap;
 }
 
-/*/* 
-1. What it is: Hero Section Styles
-2. How it works: Uses CSS Grid and Flexbox for the top section layout, typography sizes, and spacing.
-3. How to change it: Edit .hero-grid grid-template-columns for layout, or change font sizes inside .hero-display.
-*/
-/* Hero */card */
+/*/* Hero */card */
 
 .hero-card {
   display: none;
@@ -357,12 +337,7 @@ footer {
   margin-bottom: 0.3rem;
 }
 
-/*/* 
-1. What it is: Button Styles Component
-2. How it works: Core button logic (.btn) and variants (.primary, .ghost). Includes hover transform animations and colors.
-3. How to change it: Adjust gradients, border radius, or hover effects to change global button styling.
-*/
-/* Buttons */*/
+/*/* Buttons */*/
 
 .btn {
   display: inline-flex;
@@ -485,12 +460,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* 
-1. What it is: Projects / Portfolio Grid Styles
-2. How it works: Styles the project filters and the main .projects-grid layout with responsive cards.
-3. How to change it: Change gap sizes, card hover colors, or the internal padding of .project-card.
-*/
-/* Projects */*/
+/*/* Projects */*/
 
 .section-header {
   display: flex;
@@ -827,12 +797,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* 
-1. What it is: Contact Section Styles
-2. How it works: Forms the grid for contact information and styles the form inputs/textareas.
-3. How to change it: Adjust border colors on focus, or the gap between form fields.
-*/
-/* Contact */*/
+/*/* Contact */*/
 
 .contact-grid {
   display: grid;

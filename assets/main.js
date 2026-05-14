@@ -200,27 +200,7 @@ function initAnimations() {
     duration: 800
   });
 
-  // --- NEW: Elastic Button Hovers ---
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      anime.remove(btn);
-      anime({
-        targets: btn,
-        scale: 1.05,
-        duration: 800,
-        easing: 'easeOutElastic(1, .6)'
-      });
-    });
-    btn.addEventListener('mouseleave', () => {
-      anime.remove(btn);
-      anime({
-        targets: btn,
-        scale: 1,
-        duration: 600,
-        easing: 'easeOutElastic(1, .6)'
-      });
-    });
-  });
+
 
 
 
@@ -701,9 +681,9 @@ function performMasonryLayout() {
 
     if (!content || rowHeight === 0) return;
 
-    let totalHeight = content.getBoundingClientRect().height;
+    let totalHeight = content.offsetHeight;
     if (caption) {
-      totalHeight += caption.getBoundingClientRect().height;
+      totalHeight += caption.offsetHeight;
     }
 
     const rowSpan = Math.ceil((totalHeight + rowGap) / (rowHeight + rowGap));
