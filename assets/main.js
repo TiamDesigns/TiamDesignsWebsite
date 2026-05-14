@@ -568,6 +568,7 @@ function initLightbox() {
       lightbox.style.display = 'flex';
       lightbox.style.opacity = '1';
       lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
       // Caption logic same as above
       const figcaption = img.closest('figure')?.querySelector('figcaption');
       if (figcaption) {
