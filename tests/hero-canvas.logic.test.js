@@ -1,4 +1,4 @@
-const { _updateParticlesLogic } = require('./hero-canvas.js');
+const { _updateParticlesLogic } = require('../assets/hero-canvas.js');
 
 describe('updateParticlesLogic', () => {
     let particles, config, mouse, width, height;
