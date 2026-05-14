@@ -1,7 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" spellcheck="false" data-gramm="false" data-gramm_editor="false" translate="no">
 
-
+<!-- 
+1. What it is: Site Metadata (Head)
+2. How it works: Contains SEO metadata, font links, and CSS styles.
+3. How to change it: Update title/description strings or add/remove <link> tags for external assets.
+-->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -185,7 +189,7 @@
 
     .nav-links a:hover {
       color: var(--accent);
-      transform: translateY(-1px)
+      transform: translate(2px, -2px)
     }
 
     .nav-toggle {
@@ -914,7 +918,7 @@
     }
 
     .feature-list li::before {
-      content: "•";
+      content: "ΓÇó";
       color: var(--accent);
       position: absolute;
       left: 0;
@@ -1530,7 +1534,11 @@
 </head>
 
 <body>
-  
+  <!-- 
+1. What it is: Site Navigation (Header)
+2. How it works: A fixed position nav bar that blurs the background. Links anchor to IDs on this page.
+3. How to change it: Add new <li> elements inside .nav-links or change the logo text.
+-->
 <header class="site-header">
     <div class="container nav-container">
       <a href="#top" class="logo">Tiam<span>Designs</span></a>
@@ -1553,13 +1561,13 @@
       <canvas id="hero-canvas" class="hero-canvas"></canvas>
       <div class="container hero-grid">
         <div class="hero-text">
-          <p class="hero-kicker">Industrial design · Aspiring engineer · Maker</p>
+          <p class="hero-kicker">Industrial design ┬╖ Aspiring engineer ┬╖ Maker</p>
           <h1 class="hero-sans">Industrial design & hardware engineering.</h1>
           <h2 class="hero-display">Hi, I'm Tiam.</h2>
           <div class="hero-actions">
             <a href="#projects" class="btn primary"><span class="btn-bg"></span><span class="btn-text">View
                 Projects</span></a>
-            <a href="#contact" class="btn ghost"><span class="btn-bg"></span><span class="btn-text">Let’s work
+            <a href="#contact" class="btn ghost"><span class="btn-bg"></span><span class="btn-text">LetΓÇÖs work
                 together</span></a>
           </div>
         </div>
@@ -1674,12 +1682,17 @@
     </section>
 
     <!-- About -->
-    <section id="about" class="section">
+    <!-- 
+1. What it is: About Section
+2. How it works: Split grid design containing a biography paragraph and highlighted skill cards.
+3. How to change it: Modify the text or add new <li> items to the skills list.
+-->
+<section id="about" class="section">
       <div class="container section-grid">
         <div>
           <h2>About</h2>
           <p>
-            I’m an industrial designer transitioning into engineering, based in Ottawa.
+            IΓÇÖm an industrial designer transitioning into engineering, based in Ottawa.
             I bring design thinking, prototyping discipline, and a strong interest in
             hardware to the engineering projects I work on.
           </p>
@@ -1874,7 +1887,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <h3>Project Manager</h3>
-              <span class="experience-company">University of Ottawa MakerLab – Ottawa, ON</span>
+              <span class="experience-company">University of Ottawa MakerLab ΓÇô Ottawa, ON</span>
               <span class="experience-date">Sep 2025 - Present</span>
             </div>
             <ul class="experience-details">
@@ -1889,7 +1902,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <h3>Computer Technician/Sales/Key Holder/Floor Lead</h3>
-              <span class="experience-company">Staples – Cranbrook, BC</span>
+              <span class="experience-company">Staples ΓÇô Cranbrook, BC</span>
               <span class="experience-date">Feb 2023 - July 2024</span>
             </div>
             <ul class="experience-details">
@@ -1908,7 +1921,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <h3>Freelance 3D Designer</h3>
-              <span class="experience-company">Automotive Parts Manufacturer Association – Toronto, ON</span>
+              <span class="experience-company">Automotive Parts Manufacturer Association ΓÇô Toronto, ON</span>
               <span class="experience-date">April 2022 - July 2022</span>
             </div>
             <ul class="experience-details">
@@ -1922,7 +1935,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <h3>Design Researcher</h3>
-              <span class="experience-company">Humber College – Toronto, ON</span>
+              <span class="experience-company">Humber College ΓÇô Toronto, ON</span>
               <span class="experience-date">Nov 2021 - May 2022</span>
             </div>
             <ul class="experience-details">
@@ -1936,7 +1949,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <h3>Co-Founder</h3>
-              <span class="experience-company">Phase Studio – Toronto, Ontario</span>
+              <span class="experience-company">Phase Studio ΓÇô Toronto, Ontario</span>
               <span class="experience-date">Jan 2019 - July 2022</span>
             </div>
             <ul class="experience-details">
@@ -2024,7 +2037,7 @@
           <h2>Contact</h2>
           <p>
             Interested in collaborating, hiring, or bringing a prototype to life?
-            Send me a message and I’ll get back to you.
+            Send me a message and IΓÇÖll get back to you.
           </p>
           <ul class="contact-list">
             <li><strong>Email:</strong> <a href="mailto:tiambennett@gmail.com">tiambennett@gmail.com</a></li>
@@ -2060,7 +2073,12 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <!-- 
+1. What it is: Site Footer
+2. How it works: Contains copyright info, secondary links, and social links.
+3. How to change it: Update the year, add new a href links inside .footer-socials.
+-->
+<footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-info">
         <p>&copy; <span id="year"></span> Tiam Bennett. All rights reserved.</p>
@@ -2093,7 +2111,7 @@
           LinkedIn
         </a>
       </div>
-      <a href="#top" class="back-to-top">Back to top ↑</a>
+      <a href="#top" class="back-to-top">Back to top Γåæ</a>
     </div>
   </footer>
 

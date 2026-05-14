@@ -76,7 +76,7 @@ footer {
   z-index: 1;
 }
 
-/*/* Layout helpers */*/
+/* Layout helpers */
 
 .container {
   width: 100%;
@@ -108,7 +108,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* Header & nav */*/
+/* Header & nav */
 
 .site-header {
   position: fixed;
@@ -199,7 +199,7 @@ footer {
   margin: 0;
 }
 
-/*/* Hero */*/
+/* Hero */
 
 .hero {
   min-height: 100dvh;
@@ -298,7 +298,7 @@ footer {
   flex-wrap: wrap;
 }
 
-/*/* Hero */card */
+/* Hero card */
 
 .hero-card {
   display: none;
@@ -337,7 +337,7 @@ footer {
   margin-bottom: 0.3rem;
 }
 
-/*/* Buttons */*/
+/* Buttons */
 
 .btn {
   display: inline-flex;
@@ -460,7 +460,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* Projects */*/
+/* Projects */
 
 .section-header {
   display: flex;
@@ -797,7 +797,7 @@ footer {
   color: var(--muted);
 }
 
-/*/* Contact */*/
+/* Contact */
 
 .contact-grid {
   display: grid;
