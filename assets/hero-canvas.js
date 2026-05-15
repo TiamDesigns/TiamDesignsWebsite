@@ -215,25 +215,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event Listeners
     window.addEventListener('resize', initParticles);
 
-    document.addEventListener('mousemove', (e) => {
+    let canvasAbsoluteTop = 0;
+    let canvasAbsoluteLeft = 0;
+    let canvasHeight = 0;
+    let isCanvasMetricsValid = false;
+
+    function updateCanvasMetrics() {
+        if (!canvas) return;
         const rect = canvas.getBoundingClientRect();
-        // Check if mouse is over/near the canvas section (hero section)
-        if (e.clientY <= rect.bottom + 100) {
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
+        canvasAbsoluteTop = rect.top + window.scrollY;
+        canvasAbsoluteLeft = rect.left + window.scrollX;
+        canvasHeight = rect.height;
+        isCanvasMetricsValid = true;
+    }
+
+    // Update metrics when window resizes
+    window.addEventListener('resize', updateCanvasMetrics, { passive: true });
+
+    // Defer initial measurement to allow layout to settle
+    setTimeout(updateCanvasMetrics, 0);
+
+    document.addEventListener('mousemove', (e) => {
+        // Fallback for tests or before layout settles
+        if (!isCanvasMetricsValid) {
+            updateCanvasMetrics();
+        }
+
+        // Performance optimization: Avoid getBoundingClientRect() on every mousemove
+        // by caching the absolute position and using pageX/pageY
+        if (e.pageY <= canvasAbsoluteTop + canvasHeight + 100) {
+            mouse.x = e.pageX - canvasAbsoluteLeft;
+            mouse.y = e.pageY - canvasAbsoluteTop;
             mouse.isActive = true;
         } else {
             mouse.isActive = false;
         }
-    });
+    }, { passive: true });
 
     // Touch support
     document.addEventListener('touchmove', (e) => {
+        if (!isCanvasMetricsValid) {
+            updateCanvasMetrics();
+        }
+
         if (e.touches.length > 0) {
-            const rect = canvas.getBoundingClientRect();
-            if (e.touches[0].clientY <= rect.bottom + 100) {
-                mouse.x = e.touches[0].clientX - rect.left;
-                mouse.y = e.touches[0].clientY - rect.top;
+            if (e.touches[0].pageY <= canvasAbsoluteTop + canvasHeight + 100) {
+                mouse.x = e.touches[0].pageX - canvasAbsoluteLeft;
+                mouse.y = e.touches[0].pageY - canvasAbsoluteTop;
                 mouse.isActive = true;
             } else {
                 mouse.isActive = false;
