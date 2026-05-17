@@ -49,14 +49,18 @@ filterButtons.forEach((btn) => {
 
 // Skill toggle on cards
 document.querySelectorAll('.skill-toggle').forEach((button) => {
-  button.addEventListener('click', () => {
+  const toggleSkills = (e) => {
+    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    if (e.type === 'keydown' && e.key === ' ') e.preventDefault();
     const card = button.closest('.project-card');
     if (!card) return;
     const expanded = card.dataset.expanded === 'true';
     card.dataset.expanded = expanded ? 'false' : 'true';
     button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     button.textContent = expanded ? 'Show all skills' : 'Hide skills';
-  });
+  };
+  button.addEventListener('click', toggleSkills);
+  button.addEventListener('keydown', toggleSkills);
 });
 
 // Dynamic year in footer
