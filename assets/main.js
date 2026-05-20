@@ -4,12 +4,14 @@ const navLinks = document.querySelector('.nav-links');
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
   navLinks.addEventListener('click', (e) => {
     if (e.target.tagName === 'A') {
       navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     }
   });
 }
