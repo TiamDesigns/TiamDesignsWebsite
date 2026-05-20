@@ -18,13 +18,23 @@ if (navToggle && navLinks) {
 
 // Header scroll effect
 const header = document.querySelector('.site-header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
+if (header) {
+  let isScrolling = false;
+  window.addEventListener('scroll', () => {
+    // Optimization: Throttle scroll event to next animation frame to avoid main thread blocking and layout thrashing.
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        isScrolling = false;
+      });
+      isScrolling = true;
+    }
+  }, { passive: true });
+}
 
 // Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');
