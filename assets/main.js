@@ -17,12 +17,21 @@ if (navToggle && navLinks) {
 // Smooth scroll for in-page links is handled natively via CSS `scroll-behavior: smooth` and `scroll-padding-top`
 
 // Header scroll effect
+// ⚡ Bolt: Throttled scroll event to prevent main thread blocking during scroll
 const header = document.querySelector('.site-header');
+let isHeaderTicking = false;
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
+  if (!isHeaderTicking) {
+    window.requestAnimationFrame(() => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      isHeaderTicking = false;
+    });
+    isHeaderTicking = true;
   }
 });
 
