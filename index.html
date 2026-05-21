@@ -2049,17 +2049,17 @@
         </div>
         <form class="contact-form" action="https://formspree.io/f/mnnlwndb" method="POST">
           <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off">
-          <label>
+          <label for="name">
             Name
-            <input type="text" name="name" required maxlength="100" />
+            <input type="text" id="name" name="name" required maxlength="100" />
           </label>
-          <label>
+          <label for="email">
             Email
-            <input type="email" name="email" required maxlength="100" />
+            <input type="email" id="email" name="email" required maxlength="100" />
           </label>
-          <label>
+          <label for="message">
             Message
-            <textarea name="message" rows="5" required maxlength="2000"></textarea>
+            <textarea id="message" name="message" rows="5" required maxlength="2000"></textarea>
           </label>
           <button type="submit" class="btn primary full-width"><span class="btn-bg"></span><span class="btn-text">Send
               message</span></button>
