@@ -378,8 +378,22 @@ function initElasticOverscroll() {
 
   let wheelTimeout;
   document.addEventListener('wheel', (e) => {
+    // Fast path: ignore empty events
+    if (e.deltaY === 0) return;
+
     const isAtTop = window.scrollY <= 0;
-    const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+
+    // Fast path: if not at top, scrolling up, and not in overscroll, ignore
+    if (!isAtTop && e.deltaY < 0 && currentY === 0) return;
+
+    // Only calculate expensive document height if scrolling down or already overscrolling
+    let isAtBottom = false;
+    if (e.deltaY > 0 || currentY !== 0) {
+      isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+    }
+
+    // Fast path: if not at boundaries and not overscrolling, ignore
+    if (!isAtTop && !isAtBottom && currentY === 0) return;
 
     // Instant cancel if user scrolls opposite to overscroll
     if (currentY !== 0 && ((currentY > 0 && e.deltaY > 0) || (currentY < 0 && e.deltaY < 0))) {
