@@ -6,3 +6,7 @@
 **Vulnerability:** Missing HTTP Security Headers
 **Learning:** The application was deployed across multiple platforms (Netlify, Vercel) but lacked consistent security headers, increasing vulnerability to clickjacking, MIME sniffing, and MITM attacks.
 **Prevention:** Ensure that standard security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Strict-Transport-Security`) are defined in all deployment configuration files (`netlify.toml`, `vercel.json`, `_headers`) by default.
+## 2026-05-21 - Add Permissions-Policy header
+**Vulnerability:** Weak Permissions Policy
+**Learning:** Adding the Permissions-Policy header strengthens defense-in-depth by explicitly disabling browser features like camera, microphone, and geolocation, even if the application does not actively request them.
+**Prevention:** Always verify standard security headers, including Permissions-Policy, are present in the server/deployment configurations.
