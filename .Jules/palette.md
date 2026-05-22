@@ -4,3 +4,7 @@
 ## 2024-05-21 - Explicit Form Label Binding
 **Learning:** Implicit form labels (`<label><input></label>`) alone may cause issues with some screen readers or specific styling contexts where increasing the click target via explicit `for` and `id` bindings is much more reliable.
 **Action:** Always prefer combining explicit (`for` and `id`) with implicit nesting for maximum accessibility robustness when designing forms.
+
+## 2024-05-22 - Missing aria-expanded on Mobile Nav Toggle
+**Learning:** The custom hamburger menu (`.nav-toggle`) lacked an `aria-expanded` attribute entirely. This meant screen reader users would not know if the navigation menu was open or closed, which is a critical piece of state for a dropdown/flyout menu.
+**Action:** Always ensure that custom toggle buttons controlling visibility of other elements have an `aria-expanded` attribute that reflects the current state (true/false) and updates dynamically via JavaScript.
