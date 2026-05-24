@@ -8,3 +8,6 @@
 ## 2024-05-22 - Missing aria-expanded on Mobile Nav Toggle
 **Learning:** The custom hamburger menu (`.nav-toggle`) lacked an `aria-expanded` attribute entirely. This meant screen reader users would not know if the navigation menu was open or closed, which is a critical piece of state for a dropdown/flyout menu.
 **Action:** Always ensure that custom toggle buttons controlling visibility of other elements have an `aria-expanded` attribute that reflects the current state (true/false) and updates dynamically via JavaScript.
+## 2026-05-24 - Screen Reader Support for Filter Buttons
+**Learning:** Filter buttons that act as a single-select group were missing `role="group"` and `aria-pressed` attributes, making it difficult for screen reader users to understand their relationship and current selection state.
+**Action:** Always wrap filter/toggle button groups in a container with `role="group"` and an `aria-label`, and manage the `aria-pressed` (true/false) state on individual buttons via JavaScript.
