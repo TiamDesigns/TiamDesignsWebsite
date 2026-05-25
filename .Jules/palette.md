@@ -8,3 +8,6 @@
 ## 2024-05-22 - Missing aria-expanded on Mobile Nav Toggle
 **Learning:** The custom hamburger menu (`.nav-toggle`) lacked an `aria-expanded` attribute entirely. This meant screen reader users would not know if the navigation menu was open or closed, which is a critical piece of state for a dropdown/flyout menu.
 **Action:** Always ensure that custom toggle buttons controlling visibility of other elements have an `aria-expanded` attribute that reflects the current state (true/false) and updates dynamically via JavaScript.
+## 2024-05-25 - Active State for Custom Toggle Buttons
+**Learning:** Found an accessibility issue pattern specific to this app's components: custom toggle filter buttons (e.g., `.filter-btn`) used visual cues (`.active` class) to indicate the selected state, but lacked the `aria-pressed` attribute to communicate this state to screen reader users.
+**Action:** Always ensure that custom toggle buttons or tabs have an `aria-pressed` or `aria-selected` attribute that accurately reflects their current active state and updates dynamically via JavaScript.
