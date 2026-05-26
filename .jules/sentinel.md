@@ -10,3 +10,7 @@
 **Vulnerability:** Weak Permissions Policy
 **Learning:** Adding the Permissions-Policy header strengthens defense-in-depth by explicitly disabling browser features like camera, microphone, and geolocation, even if the application does not actively request them.
 **Prevention:** Always verify standard security headers, including Permissions-Policy, are present in the server/deployment configurations.
+## 2024-05-22 - Add Subresource Integrity (SRI) to CDN scripts
+**Vulnerability:** Missing Subresource Integrity (SRI) for external scripts loaded from CDNs.
+**Learning:** Loading external libraries like Three.js from a CDN without SRI attributes leaves the application vulnerable if the CDN is compromised and serves malicious code.
+**Prevention:** Always generate and include `integrity` and `crossorigin="anonymous"` attributes when including `<script>` tags from external domains.
