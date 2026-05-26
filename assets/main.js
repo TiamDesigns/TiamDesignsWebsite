@@ -45,8 +45,12 @@ const projectCards = document.querySelectorAll('.project-card');
 filterButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     const filter = btn.getAttribute('data-filter');
-    filterButtons.forEach((b) => b.classList.remove('active'));
+    filterButtons.forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
 
     projectCards.forEach((card) => {
       const categories = card.getAttribute('data-category').split(' ');
