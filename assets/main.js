@@ -21,21 +21,26 @@ if (navToggle && navLinks) {
 // Header scroll effect
 const header = document.querySelector('.site-header');
 if (header) {
-  let isScrolling = false;
-  window.addEventListener('scroll', () => {
-    // Optimization: Throttle scroll event to next animation frame to avoid main thread blocking and layout thrashing.
-    if (!isScrolling) {
-      window.requestAnimationFrame(() => {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-        isScrolling = false;
-      });
-      isScrolling = true;
+  // Optimization: Use IntersectionObserver instead of a scroll listener to completely
+  // eliminate main thread CPU overhead during scroll. The observer only fires when state changes.
+  const sentinel = document.createElement('div');
+  sentinel.style.position = 'absolute';
+  sentinel.style.top = '50px'; // Toggle threshold
+  sentinel.style.left = '0';
+  sentinel.style.width = '1px';
+  sentinel.style.height = '1px';
+  sentinel.style.pointerEvents = 'none';
+  sentinel.style.visibility = 'hidden';
+  document.body.prepend(sentinel);
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
-  }, { passive: true });
+  });
+  observer.observe(sentinel);
 }
 
 // Project filter
