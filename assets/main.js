@@ -566,8 +566,18 @@ function initLightbox() {
 
   images.forEach(img => {
     img.style.cursor = 'zoom-in';
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+
     img.addEventListener('click', () => {
       openLightbox(img);
+    });
+
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img);
+      }
     });
   });
 
