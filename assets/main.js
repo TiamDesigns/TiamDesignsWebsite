@@ -348,7 +348,9 @@ function initElasticOverscroll() {
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+    // Optimization: Evaluate cheap variable `deltaY < 0` before querying expensive layout properties
+    // `offsetHeight` to leverage short-circuiting and prevent synchronous layout thrashing on upward scroll.
+    else if (deltaY < 0 && Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
