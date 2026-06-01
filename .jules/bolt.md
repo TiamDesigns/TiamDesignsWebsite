@@ -11,3 +11,7 @@
 ## 2024-05-24 - Layout Thrashing in Wheel Event Listener
 **Learning:** High-frequency event listeners like `wheel` that execute without `passive: true` can cause significant layout thrashing if they read layout properties like `document.body.offsetHeight`. In this codebase, the elastic overscroll effect read this value synchronously on every single scroll tick, even when overscroll wasn't applicable, causing a measurable performance bottleneck.
 **Action:** Always implement fast paths/early returns in high-frequency event listeners before querying DOM layout properties. Conditionally read layout-forcing properties only when absolutely necessary (e.g., calculating `offsetHeight` only when the user is scrolling down towards the bottom boundary).
+
+## 2026-06-01 - Short-circuit Evaluation in High-Frequency Events
+**Learning:** In high-frequency event listeners (like `touchmove`), executing expensive DOM layout reads (e.g., `document.body.offsetHeight`) before checking simple conditional constraints (like `deltaY < 0`) forces unnecessary synchronous layout thrashing even when the condition fails.
+**Action:** Always utilize JavaScript's short-circuit evaluation by placing cheap variable checks before expensive layout reads in boolean expressions, preventing execution of the expensive read unless strictly necessary.
