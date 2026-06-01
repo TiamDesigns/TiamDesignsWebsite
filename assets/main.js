@@ -343,12 +343,12 @@ function initElasticOverscroll() {
 
     const deltaY = e.touches[0].clientY - startY;
 
-    if (window.scrollY <= 0 && deltaY > 0) {
+    if (deltaY > 0 && window.scrollY <= 0) {
       currentY = Math.min(deltaY * FRICTION, MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+    else if (deltaY < 0 && Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
