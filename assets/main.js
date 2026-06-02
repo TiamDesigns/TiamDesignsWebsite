@@ -320,6 +320,19 @@ function initElasticOverscroll() {
   const FRICTION = 0.15;
   const SNAP_DURATION = 400;
 
+  // Cache layout properties to prevent synchronous layout thrashing on high-frequency events
+  let cachedBodyHeight = document.body.offsetHeight;
+  let cachedWinHeight = window.innerHeight;
+
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => {
+      cachedBodyHeight = document.body.offsetHeight;
+    }).observe(document.body);
+  }
+  window.addEventListener('resize', () => {
+    cachedWinHeight = window.innerHeight;
+  }, { passive: true });
+
   // Helper to clamp values
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
@@ -331,7 +344,7 @@ function initElasticOverscroll() {
   // Touch Events
   document.addEventListener('touchstart', (e) => {
     // Tighter bottom tolerance (-1px) ensures native scroll reaches the absolute bottom before intercepting
-    if (window.scrollY <= 0 || Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+    if (window.scrollY <= 0 || Math.ceil(cachedWinHeight + window.scrollY) >= cachedBodyHeight - 1) {
       startY = e.touches[0].clientY - (currentY / FRICTION); // Account for existing pull
       isDragging = true;
       stopAnimation();
@@ -348,7 +361,7 @@ function initElasticOverscroll() {
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+    else if (Math.ceil(cachedWinHeight + window.scrollY) >= cachedBodyHeight - 1 && deltaY < 0) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
@@ -395,7 +408,7 @@ function initElasticOverscroll() {
     // Only calculate expensive document height if scrolling down or already overscrolling
     let isAtBottom = false;
     if (e.deltaY > 0 || currentY !== 0) {
-      isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+      isAtBottom = Math.ceil(cachedWinHeight + window.scrollY) >= cachedBodyHeight - 1;
     }
 
     // Fast path: if not at boundaries and not overscrolling, ignore
