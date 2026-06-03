@@ -11,3 +11,7 @@
 ## 2024-05-25 - Active State for Custom Toggle Buttons
 **Learning:** Found an accessibility issue pattern specific to this app's components: custom toggle filter buttons (e.g., `.filter-btn`) used visual cues (`.active` class) to indicate the selected state, but lacked the `aria-pressed` attribute to communicate this state to screen reader users.
 **Action:** Always ensure that custom toggle buttons or tabs have an `aria-pressed` or `aria-selected` attribute that accurately reflects their current active state and updates dynamically via JavaScript.
+
+## 2024-06-03 - Keyboard Accessibility for Clickable Images
+**Learning:** Found a critical UX/accessibility issue where gallery images had a click listener to open a custom lightbox and a `zoom-in` cursor, but lacked keyboard accessibility. Screen reader and keyboard-only users could not interact with them.
+**Action:** Always ensure that non-interactive elements (like `<img>`) that are made clickable via JavaScript also receive `tabindex="0"`, `role="button"`, an appropriate `aria-label`, and `keydown` event listeners for `Enter` and `Space` to guarantee full keyboard accessibility.
