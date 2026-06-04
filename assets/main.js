@@ -315,6 +315,26 @@ function initElasticOverscroll() {
   let isDragging = false;
   const body = document.body;
 
+  // Cache expensive layout properties to prevent thrashing
+  let cachedInnerHeight = window.innerHeight;
+  let cachedOffsetHeight = document.body.offsetHeight;
+
+  window.addEventListener('resize', () => {
+    cachedInnerHeight = window.innerHeight;
+  });
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(() => {
+      cachedOffsetHeight = document.body.offsetHeight;
+    });
+    observer.observe(document.body);
+  } else {
+    // Fallback if ResizeObserver is not supported
+    window.addEventListener('resize', () => {
+      cachedOffsetHeight = document.body.offsetHeight;
+    });
+  }
+
   // Physics constants - softer and less aggressive pull
   const MAX_PULL = 40;
   const FRICTION = 0.15;
@@ -331,7 +351,7 @@ function initElasticOverscroll() {
   // Touch Events
   document.addEventListener('touchstart', (e) => {
     // Tighter bottom tolerance (-1px) ensures native scroll reaches the absolute bottom before intercepting
-    if (window.scrollY <= 0 || Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+    if (window.scrollY <= 0 || Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1) {
       startY = e.touches[0].clientY - (currentY / FRICTION); // Account for existing pull
       isDragging = true;
       stopAnimation();
@@ -348,7 +368,7 @@ function initElasticOverscroll() {
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+    else if (Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1 && deltaY < 0) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
@@ -392,10 +412,10 @@ function initElasticOverscroll() {
     // Fast path: if not at top, scrolling up, and not in overscroll, ignore
     if (!isAtTop && e.deltaY < 0 && currentY === 0) return;
 
-    // Only calculate expensive document height if scrolling down or already overscrolling
+    // Only calculate document height if scrolling down or already overscrolling
     let isAtBottom = false;
     if (e.deltaY > 0 || currentY !== 0) {
-      isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+      isAtBottom = Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1;
     }
 
     // Fast path: if not at boundaries and not overscrolling, ignore
