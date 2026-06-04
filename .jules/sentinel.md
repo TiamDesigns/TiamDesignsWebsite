@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2026-05-24 - Iframe Sandbox Restrictions
+**Vulnerability:** Missing sandbox attribute on iframe embeds.
+**Learning:** Embedding third-party content (like YouTube videos) without the `sandbox` attribute grants the embedded content unnecessary privileges, increasing the risk of frame-busting, malicious script execution (if cross-origin constraints are weak), or unwanted top-level navigation.
+**Prevention:** Always apply the `sandbox` attribute to `<iframe>` elements. Grant only the minimum permissions required for the embed to function (e.g., `sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"` for video players).
