@@ -773,8 +773,15 @@ function resizeGridItem(item) {
   resizeAllGridItems();
 }
 
+// Debounce resize events to prevent layout thrashing
+let resizeTimeout;
+function debounceResizeGrid() {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resizeAllGridItems, 100);
+}
+
 // Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+window.addEventListener("resize", debounceResizeGrid);
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {

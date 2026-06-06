@@ -253,7 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
     canvasObserver.observe(canvas.parentElement);
 
     // Event Listeners
-    window.addEventListener('resize', initParticles);
+    // Debounce initParticles on resize to prevent excessive re-allocations
+    let resizeTimeout;
+    function debounceInitParticles() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(initParticles, 100);
+    }
+    window.addEventListener('resize', debounceInitParticles);
 
     let canvasAbsoluteTop = 0;
     let canvasAbsoluteLeft = 0;
