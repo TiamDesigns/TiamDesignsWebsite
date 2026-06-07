@@ -774,7 +774,11 @@ function resizeGridItem(item) {
 }
 
 // Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resizeAllGridItems, 250);
+});
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
