@@ -319,8 +319,13 @@ function initElasticOverscroll() {
   let cachedInnerHeight = window.innerHeight;
   let cachedOffsetHeight = document.body.offsetHeight;
 
+  let innerHeightResizeTimer;
+
   window.addEventListener('resize', () => {
-    cachedInnerHeight = window.innerHeight;
+    clearTimeout(innerHeightResizeTimer);
+    innerHeightResizeTimer = setTimeout(() => {
+      cachedInnerHeight = window.innerHeight;
+    }, 100);
   });
 
   if (typeof ResizeObserver !== 'undefined') {
@@ -330,8 +335,12 @@ function initElasticOverscroll() {
     observer.observe(document.body);
   } else {
     // Fallback if ResizeObserver is not supported
+    let offsetHeightResizeTimer;
     window.addEventListener('resize', () => {
-      cachedOffsetHeight = document.body.offsetHeight;
+      clearTimeout(offsetHeightResizeTimer);
+      offsetHeightResizeTimer = setTimeout(() => {
+        cachedOffsetHeight = document.body.offsetHeight;
+      }, 100);
     });
   }
 
@@ -774,7 +783,11 @@ function resizeGridItem(item) {
 }
 
 // Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+let masonryResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(masonryResizeTimer);
+  masonryResizeTimer = setTimeout(resizeAllGridItems, 100); // Debounce to prevent thrashing
+});
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
