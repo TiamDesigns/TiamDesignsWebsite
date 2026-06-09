@@ -319,9 +319,19 @@ function initElasticOverscroll() {
   let cachedInnerHeight = window.innerHeight;
   let cachedOffsetHeight = document.body.offsetHeight;
 
-  window.addEventListener('resize', () => {
+  // We need to ensure debounce is defined before using it, but it's defined at the bottom.
+  // We can hoist it or use standard definition. Let's create a local debounce or hoist the global one.
+  function _localDebounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  }
+
+  window.addEventListener('resize', _localDebounce(() => {
     cachedInnerHeight = window.innerHeight;
-  });
+  }, 150));
 
   if (typeof ResizeObserver !== 'undefined') {
     const observer = new ResizeObserver(() => {
@@ -330,9 +340,9 @@ function initElasticOverscroll() {
     observer.observe(document.body);
   } else {
     // Fallback if ResizeObserver is not supported
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', _localDebounce(() => {
       cachedOffsetHeight = document.body.offsetHeight;
-    });
+    }, 150));
   }
 
   // Physics constants - softer and less aggressive pull
@@ -773,8 +783,21 @@ function resizeGridItem(item) {
   resizeAllGridItems();
 }
 
+// Debounce helper for resize events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+window.addEventListener("resize", debounce(resizeAllGridItems, 150));
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
