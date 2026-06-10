@@ -11,3 +11,6 @@
 ## 2024-05-25 - Active State for Custom Toggle Buttons
 **Learning:** Found an accessibility issue pattern specific to this app's components: custom toggle filter buttons (e.g., `.filter-btn`) used visual cues (`.active` class) to indicate the selected state, but lacked the `aria-pressed` attribute to communicate this state to screen reader users.
 **Action:** Always ensure that custom toggle buttons or tabs have an `aria-pressed` or `aria-selected` attribute that accurately reflects their current active state and updates dynamically via JavaScript.
+## $(date +%Y-%m-%d) - Add loading state to form submission
+**Learning:** Adding immediate visual feedback (e.g., text change and cursor update) to form submit buttons significantly improves the perceived responsiveness of static form setups (like Formspree), mitigating user frustration from delayed network requests.
+**Action:** When integrating third-party form handlers that do not provide native loading state UI, proactively implement simple progressive enhancement scripts to manage the submit button state upon form `submit` events.

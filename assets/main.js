@@ -794,11 +794,32 @@ function initMasonryGrid() {
   });
 }
 
+function initContactForms() {
+  const contactForms = document.querySelectorAll('.contact-form');
+  contactForms.forEach(form => {
+    form.addEventListener('submit', () => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const btnText = submitBtn.querySelector('.btn-text');
+        if (btnText) {
+          btnText.textContent = 'Sending...';
+        } else {
+          submitBtn.textContent = 'Sending...';
+        }
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'wait';
+      }
+    });
+  });
+}
+
 // --- Initialize All Features ---
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initElasticOverscroll();
   initLightbox();
   initMasonryGrid();
+  initContactForms();
 });
 
