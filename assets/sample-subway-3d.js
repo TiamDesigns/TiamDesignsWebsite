@@ -162,16 +162,30 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('An error occurred loading the GLTF:', error);
   });
 
+  // Debounce function to prevent thrashing on high-frequency events
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
   // Handle Window Resize
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', debounce(() => {
     if (!container) return;
     const width = container.clientWidth;
     const height = container.clientHeight;
 
     renderer.setSize(width, height);
     camera.aspect = width / height;
+    camera.updateProjectionMatrix();
     controls.handleResize();
-  });
+  }, 100));
 
   // Animation Loop
   let animationId;

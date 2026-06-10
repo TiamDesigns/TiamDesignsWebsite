@@ -308,6 +308,19 @@ function initAnimations() {
 }
 
 
+// Debounce function to prevent thrashing on high-frequency events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // --- NEW: Elastic Overscroll (Stretchy Bounce) ---
 function initElasticOverscroll() {
   let currentY = 0;
@@ -319,20 +332,20 @@ function initElasticOverscroll() {
   let cachedInnerHeight = window.innerHeight;
   let cachedOffsetHeight = document.body.offsetHeight;
 
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', debounce(() => {
     cachedInnerHeight = window.innerHeight;
-  });
+  }, 100));
 
   if (typeof ResizeObserver !== 'undefined') {
-    const observer = new ResizeObserver(() => {
+    const observer = new ResizeObserver(debounce(() => {
       cachedOffsetHeight = document.body.offsetHeight;
-    });
+    }, 100));
     observer.observe(document.body);
   } else {
     // Fallback if ResizeObserver is not supported
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', debounce(() => {
       cachedOffsetHeight = document.body.offsetHeight;
-    });
+    }, 100));
   }
 
   // Physics constants - softer and less aggressive pull
@@ -773,8 +786,8 @@ function resizeGridItem(item) {
   resizeAllGridItems();
 }
 
-// Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+// Recalculate on window resize (debounced)
+window.addEventListener("resize", debounce(resizeAllGridItems, 100));
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
