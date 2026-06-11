@@ -800,5 +800,25 @@ document.addEventListener('DOMContentLoaded', () => {
   initElasticOverscroll();
   initLightbox();
   initMasonryGrid();
+  initContactForm();
 });
 
+
+// --- Contact Form Progressive Enhancement ---
+function initContactForm() {
+  const forms = document.querySelectorAll('.contact-form');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'not-allowed';
+        const btnText = submitBtn.querySelector('.btn-text');
+        if (btnText) {
+          btnText.textContent = 'Sending...';
+        }
+      }
+    });
+  });
+}

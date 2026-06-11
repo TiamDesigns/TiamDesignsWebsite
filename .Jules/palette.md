@@ -11,3 +11,7 @@
 ## 2024-05-25 - Active State for Custom Toggle Buttons
 **Learning:** Found an accessibility issue pattern specific to this app's components: custom toggle filter buttons (e.g., `.filter-btn`) used visual cues (`.active` class) to indicate the selected state, but lacked the `aria-pressed` attribute to communicate this state to screen reader users.
 **Action:** Always ensure that custom toggle buttons or tabs have an `aria-pressed` or `aria-selected` attribute that accurately reflects their current active state and updates dynamically via JavaScript.
+
+## 2026-06-11 - Formspree Loading State
+**Learning:** Forms handled by external services (like Formspree) that trigger page redirects need progressive enhancement on the `submit` event (disabling the button and showing a loading state) to provide immediate visual feedback before the redirect occurs. Otherwise users might click multiple times or think the form is broken.
+**Action:** Always implement a JavaScript `submit` event listener on such forms to disable the submit button and provide clear feedback (e.g., changing text to "Sending...") while the network request and redirect are processed.
