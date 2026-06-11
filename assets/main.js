@@ -315,13 +315,22 @@ function initElasticOverscroll() {
   let isDragging = false;
   const body = document.body;
 
+  // Utility function for debouncing resize events
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
+
   // Cache expensive layout properties to prevent thrashing
   let cachedInnerHeight = window.innerHeight;
   let cachedOffsetHeight = document.body.offsetHeight;
 
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', debounce(() => {
     cachedInnerHeight = window.innerHeight;
-  });
+  }, 150));
 
   if (typeof ResizeObserver !== 'undefined') {
     const observer = new ResizeObserver(() => {
@@ -330,9 +339,9 @@ function initElasticOverscroll() {
     observer.observe(document.body);
   } else {
     // Fallback if ResizeObserver is not supported
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', debounce(() => {
       cachedOffsetHeight = document.body.offsetHeight;
-    });
+    }, 150));
   }
 
   // Physics constants - softer and less aggressive pull
@@ -773,8 +782,17 @@ function resizeGridItem(item) {
   resizeAllGridItems();
 }
 
+// Utility function for debouncing resize events
+const debounceGridResize = (func, delay) => {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
 // Recalculate on window resize
-window.addEventListener("resize", resizeAllGridItems);
+window.addEventListener("resize", debounceGridResize(resizeAllGridItems, 150));
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
