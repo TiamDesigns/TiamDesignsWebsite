@@ -252,8 +252,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvasObserver.observe(canvas.parentElement);
 
-    // Event Listeners
-    window.addEventListener('resize', initParticles);
+    // Utility function for debouncing resize events
+    const debounceCanvasResize = (func, delay) => {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+        };
+    };
 
     let canvasAbsoluteTop = 0;
     let canvasAbsoluteLeft = 0;
@@ -269,8 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
         isCanvasMetricsValid = true;
     }
 
-    // Update metrics when window resizes
-    window.addEventListener('resize', updateCanvasMetrics, { passive: true });
+    // Event Listeners
+    window.addEventListener('resize', debounceCanvasResize(() => {
+        initParticles();
+        updateCanvasMetrics();
+    }, 150), { passive: true });
 
     // Defer initial measurement to allow layout to settle
     setTimeout(updateCanvasMetrics, 0);
