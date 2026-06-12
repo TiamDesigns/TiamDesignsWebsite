@@ -807,5 +807,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initElasticOverscroll();
   initLightbox();
   initMasonryGrid();
-});
 
+  // Progressive enhancement for Formspree contact forms
+  document.querySelectorAll('form[action^="https://formspree.io"]').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'not-allowed';
+        const btnText = submitBtn.querySelector('.btn-text');
+        if (btnText) {
+          btnText.textContent = 'Sending...';
+        } else {
+          submitBtn.textContent = 'Sending...';
+        }
+      }
+    });
+  });
+});
