@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2026-05-24 - CSP Configuration for External Assets
+**Vulnerability:** Restrictive Content-Security-Policy blocking required external assets.
+**Learning:** Hardcoded `connect-src 'self'` inside CSP blocked the application's Three.js DRACOLoader from fetching decoders from Google's CDN (`https://www.gstatic.com/draco/v1/decoders/`). While strict CSP is good, it must be properly configured to allow necessary third-party connections.
+**Prevention:** Always verify that strict CSP headers explicitly whitelist required external domains (like `https://www.gstatic.com`) in the appropriate directives (`connect-src` in this case).
