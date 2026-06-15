@@ -163,14 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  // Optimization: Debounce the window resize event to prevent high-frequency
+  // execution of expensive Three.js recalculations (renderer.setSize) and garbage collection
+  // spikes while the user is actively resizing the browser window.
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix(); // Required when updating camera.aspect
+      controls.handleResize();
+    }, 200);
   });
 
   // Animation Loop
