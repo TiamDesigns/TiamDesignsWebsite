@@ -163,15 +163,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  let resizeTimeout;
   window.addEventListener('resize', () => {
     if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
-  });
+    // Performance optimization: debounce the resize event to prevent
+    // continuous WebGL canvas context re-allocations and garbage collection spikes
+    resizeTimeout = setTimeout(() => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      controls.handleResize();
+    }, 200);
+  }, { passive: true });
 
   // Animation Loop
   let animationId;

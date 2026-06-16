@@ -14,3 +14,6 @@
 ## 2024-05-25 - Layout Thrashing and Memory Allocation in Resize Events
 **Learning:** Binding expensive layout-forcing reads (like computing masonry grid row heights and checking `offsetHeight`) or memory-intensive tasks (like `canvas` re-allocation for particles) directly to the `window.addEventListener('resize')` event causes continuous main thread blocking and garbage collection spikes while the user is resizing the browser.
 **Action:** Always wrap expensive or unoptimized computations bound to the `resize` event in a debounce function (e.g., using `setTimeout(..., 200)`) to ensure the task only runs once the resize action has stopped.
+## 2026-06-16 - WebGL Canvas Resize Debouncing and Camera Updates
+**Learning:** Resizing a WebGL renderer continuously during a window resize triggers expensive canvas buffer re-allocations and GC spikes, causing layout thrashing. Additionally, Three.js cameras require an updated projection matrix to prevent visual distortion after aspect ratio changes.
+**Action:** Always wrap `renderer.setSize` and `camera.aspect` updates inside a debounce (e.g. `setTimeout`) for `resize` listeners, and always pair it with `camera.updateProjectionMatrix()`.
