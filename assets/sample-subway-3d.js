@@ -163,15 +163,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  // Optimization: Debounce the resize event to prevent layout thrashing and continuous
+  // expensive WebGL buffer re-allocations (renderer.setSize) while the user is resizing the browser.
+  // Expecting a reduction from ~100 setSize calls to 1-2 calls during a typical window drag.
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
-  });
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      controls.handleResize();
+    }, 200);
+  }, { passive: true });
 
   // Animation Loop
   let animationId;
