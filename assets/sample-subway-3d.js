@@ -163,14 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      controls.handleResize();
+    }, 200);
   });
 
   // Animation Loop
