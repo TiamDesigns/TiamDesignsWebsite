@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2026-05-24 - Allow Google CDN for DRACOLoader decoders
+**Vulnerability:** Broken CSP for DRACOLoader decoders
+**Learning:** Three.js DRACOLoader dynamically fetches WASM decoders from Google's CDN (`https://www.gstatic.com/draco/v1/decoders/`). If `https://www.gstatic.com` is omitted from the `connect-src` directive in the Content-Security-Policy, the decoders will be blocked by the browser, resulting in a failure to load compressed 3D models.
+**Prevention:** Whenever a library (like Three.js DRACOLoader) dynamically fetches resources from external CDNs, explicitly allow the CDN's origin in the `connect-src` directive of the CSP.
