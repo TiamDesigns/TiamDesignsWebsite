@@ -3,6 +3,10 @@ const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
 if (navToggle && navLinks) {
+  if (!navToggle.hasAttribute('title')) {
+    navToggle.setAttribute('title', 'Toggle navigation');
+  }
+
   navToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', isOpen);
@@ -484,6 +488,7 @@ function initLightbox() {
   const zoomOutBtnElement = document.createElement('button');
   zoomOutBtnElement.id = 'lightbox-zoom-out';
   zoomOutBtnElement.setAttribute('aria-label', 'Zoom Out');
+  zoomOutBtnElement.setAttribute('title', 'Zoom Out');
   const svgZoomOut = document.createElementNS(svgNS, 'svg');
   svgZoomOut.setAttribute('width', '24');
   svgZoomOut.setAttribute('height', '24');
@@ -511,6 +516,7 @@ function initLightbox() {
   const zoomInBtnElement = document.createElement('button');
   zoomInBtnElement.id = 'lightbox-zoom-in';
   zoomInBtnElement.setAttribute('aria-label', 'Zoom In');
+  zoomInBtnElement.setAttribute('title', 'Zoom In');
   const svgZoomIn = document.createElementNS(svgNS, 'svg');
   svgZoomIn.setAttribute('width', '24');
   svgZoomIn.setAttribute('height', '24');
@@ -543,6 +549,7 @@ function initLightbox() {
   const closeBtnElement = document.createElement('button');
   closeBtnElement.id = 'lightbox-close';
   closeBtnElement.setAttribute('aria-label', 'Close');
+  closeBtnElement.setAttribute('title', 'Close');
   const svgClose = document.createElementNS(svgNS, 'svg');
   svgClose.setAttribute('width', '24');
   svgClose.setAttribute('height', '24');
