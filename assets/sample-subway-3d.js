@@ -163,14 +163,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  // Optimization: Debounce the expensive WebGL renderer.setSize() and projection matrix updates
+  // to prevent severe main thread blocking and layout thrashing during continuous window resize events.
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix(); // Required when aspect changes to prevent camera distortion
+      controls.handleResize();
+    }, 50); // Fast 50ms timeout ensures responsiveness while batching frequent resize ticks
   });
 
   // Animation Loop
