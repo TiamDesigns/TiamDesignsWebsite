@@ -163,14 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  let resizeTimeout;
   window.addEventListener('resize', () => {
     if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
+    // ⚡ Bolt: Debounce resize to prevent expensive WebGL reallocation
+    // layout thrashing (renderer.setSize) while resizing the window
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix(); // Required when used with TrackballControls to prevent camera distortion
+      controls.handleResize();
+    }, 200);
   });
 
   // Animation Loop
