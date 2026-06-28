@@ -14,3 +14,8 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+
+## 2024-05-18 - Enforce Secure Connections via CSP Upgrade
+**Vulnerability:** The Content-Security-Policy lacked the `upgrade-insecure-requests` directive, potentially allowing mixed content or downgrading attacks if external resources were fetched over HTTP.
+**Learning:** Adding `upgrade-insecure-requests` is a simple yet powerful defense-in-depth measure that instructs the browser to automatically upgrade all HTTP requests to HTTPS, preventing mixed content vulnerabilities and ensuring secure communication.
+**Prevention:** Include the `upgrade-insecure-requests` directive in all standard CSP configurations for modern web applications.
