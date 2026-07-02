@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2024-05-25 - Enhance Content-Security-Policy
+**Vulnerability:** Weak Content-Security-Policy missing clickjacking and insecure request defenses. Also, Draco decoders loading required an explicit CDN allow.
+**Learning:** Expanding the baseline CSP to include `frame-ancestors 'none'` explicitly prevents clickjacking even where X-Frame-Options is unsupported, and `upgrade-insecure-requests` prevents mixed content issues. Modifying `connect-src` is also required when leveraging tools like Google's Draco decoder for Three.js.
+**Prevention:** Always include `frame-ancestors 'none'` and `upgrade-insecure-requests` in CSP headers by default, and remember to track external connections like `https://www.gstatic.com` when using Three.js loaders.
