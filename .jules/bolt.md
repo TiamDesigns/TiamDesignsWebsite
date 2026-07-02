@@ -14,3 +14,6 @@
 ## 2024-05-25 - Layout Thrashing and Memory Allocation in Resize Events
 **Learning:** Binding expensive layout-forcing reads (like computing masonry grid row heights and checking `offsetHeight`) or memory-intensive tasks (like `canvas` re-allocation for particles) directly to the `window.addEventListener('resize')` event causes continuous main thread blocking and garbage collection spikes while the user is resizing the browser.
 **Action:** Always wrap expensive or unoptimized computations bound to the `resize` event in a debounce function (e.g., using `setTimeout(..., 200)`) to ensure the task only runs once the resize action has stopped.
+## 2024-05-25 - Debounce Window Resize for WebGL Context
+**Learning:** Attaching `window.addEventListener('resize')` to WebGL `renderer.setSize` calls without debouncing causes severe layout thrashing and unnecessary matrix re-calculations since it fires continuously on every resize tick. Also, it's critical to call `camera.updateProjectionMatrix()` when changing the aspect ratio.
+**Action:** Always wrap `renderer.setSize()` in a debouncer (e.g., `setTimeout(..., 200)`) in window resize listeners for Three.js/WebGL applications to prevent rendering freezes.
