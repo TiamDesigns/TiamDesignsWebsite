@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2026-06-15 - Fixed Clickjacking via CSP Frame-Ancestors
+**Vulnerability:** Missing clickjacking protection
+**Learning:** The application lacked the `frame-ancestors 'none'` directive in its Content-Security-Policy (CSP). The `frame-ancestors` directive mitigates clickjacking attacks but must be enforced via HTTP response headers (like `_headers`, `netlify.toml`, `vercel.json`) since browsers ignore it when placed in HTML `<meta>` tags.
+**Prevention:** Always define robust security headers including CSP with `frame-ancestors 'none'` directly in the server or deployment platform's configuration file.
