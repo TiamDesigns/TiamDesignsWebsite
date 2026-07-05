@@ -163,14 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Handle Window Resize
+  // Optimization: Debounce window resize to prevent severe main thread blocking and layout thrashing
+  // caused by expensive WebGL reallocations (renderer.setSize()) during active resizing.
+  // Impact: Reduces WebGL reallocation calls from potentially 60/sec to just 1 after resize finishes.
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (!container) return;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
 
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    controls.handleResize();
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      controls.handleResize();
+    }, 200);
   });
 
   // Animation Loop
