@@ -15,3 +15,6 @@
 ## 2026-05-27 - Immediate Feedback on External Form Submission
 **Learning:** Found an interaction issue where forms handled by external services (like Formspree) triggering page redirects lacked progressive enhancement, leaving users without immediate visual feedback upon submission.
 **Action:** For forms handled by external services that trigger page redirects, UX improvements should include progressive enhancement on the `submit` event (e.g., disabling the submit button, updating text to "Sending...", and changing styles) to provide immediate visual feedback before the redirect.
+## 2026-07-05 - Native Tooltips for Icon-Only Buttons
+**Learning:** Found an accessibility issue pattern specific to this app's components: icon-only buttons (like `.nav-toggle` and lightbox controls) used `aria-label` for screen readers, but lacked native `title` attributes, meaning sighted mouse users would not receive function descriptions when hovering.
+**Action:** Always verify that icon-only buttons (especially programmatic ones) pair `aria-label` attributes with native `title` attributes so both assistive technologies and sighted mouse users receive function descriptions.
