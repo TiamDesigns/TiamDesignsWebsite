@@ -14,3 +14,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2026-05-24 - CSP DRACOLoader connect-src
+**Vulnerability:** `connect-src` blocking WebGL resources
+**Learning:** The application's Three.js DRACOLoader dynamically fetches decoders from Google's CDN (`https://www.gstatic.com/draco/v1/decoders/`), but this domain was missing from the `connect-src` CSP directive, resulting in broken 3D models. Adding external CDNs to `connect-src` relaxes security slightly but is required for core functionality.
+**Prevention:** Verify all dynamic/external resource fetches (especially from 3D loaders like GLTF/DRACO) are explicitly permitted in the CSP `connect-src` to avoid unexpected runtime breakages.
