@@ -14,3 +14,11 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for external scripts
 **Learning:** Loading external scripts from CDNs without SRI attributes exposes the application to risks if the CDN is compromised, allowing malicious code execution.
 **Prevention:** Always use Subresource Integrity (SRI) attributes (`integrity` and `crossorigin="anonymous"`) when including external scripts from CDNs.
+## 2024-05-24 - Relaxed CSP to allow external domains for 3D model decoders
+**Vulnerability:** The `Content-Security-Policy` prevented `https://www.gstatic.com` from being loaded via `connect-src`, causing Draco decoders to fail loading.
+**Learning:** Overly strict Content-Security-Policy blocked core functionality.
+**Prevention:** Ensured the required external domains are specified in the CSP.
+## 2024-05-24 - Relaxed CSP to allow blob: workers and unsafe-eval for 3D model
+**Vulnerability:** The `Content-Security-Policy` prevented `blob:` from being used in `worker-src` (or falling back to `script-src`) and blocked WebAssembly instantiation (`unsafe-eval`), causing Three.js Draco decoders to fail loading.
+**Learning:** Overly strict Content-Security-Policy blocked core functionality for WebGL/WebAssembly decoders.
+**Prevention:** Ensured the required `blob:` and `unsafe-eval` are explicitly allowed for these specialized libraries.

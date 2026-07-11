@@ -722,6 +722,10 @@ function initLightbox() {
 // --- Masonry Grid Logic ---
 let masonryRafId = null;
 
+window.performMasonryLayout = performMasonryLayout;
+window.resizeAllGridItems = resizeAllGridItems;
+window.resizeGridItem = resizeGridItem;
+
 function performMasonryLayout() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
   const updates = [];
@@ -804,7 +808,6 @@ function initMasonryGrid() {
 // --- Initialize All Features ---
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
-  initElasticOverscroll();
   initLightbox();
   initMasonryGrid();
 
