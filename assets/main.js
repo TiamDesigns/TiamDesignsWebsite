@@ -138,13 +138,12 @@ function initAnimations() {
           duration: 1500, // Slowed down from 800
           easing: 'easeOutQuart'
         })
-          // 2. Open the lid naturally (hinge from the bottom-back edge)
+          // 2. Open the lid naturally (hinge flip open from top edge)
           .add({
             targets: '#toolbox-lid',
-            rotate: -105, // Hinge backwards to open upright
-            transformOrigin: '100px 0px', // Hinge point at top-back center of box
-            duration: 1400,
-            easing: 'easeOutBack(1.2)' // Smooth flip open motion with natural snap
+            rotate: -115, // Smooth flip open backwards around top edge hinge
+            duration: 1300,
+            easing: 'easeOutBack(1.3)'
           }, '-=600')
           // 3. Pop out the icons from INSIDE the box
           .add({

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#101214">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Tiam Designs</title>
+  <title>Tiam Designs &mdash; Industrial Design & Hardware Engineering</title>
   <meta name="description"
     content="Tiam Bennett is an industrial designer and hardware engineer based in Ottawa, specializing in embedded systems, prototyping, and consumer product design." />
   <link rel="icon" type="image/png" href="assets/TD Logo Mastercopy.png" />
@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 
-<body>
+<body id="top">
   
 <header class="site-header">
     <div class="container nav-container">
@@ -87,25 +87,37 @@
               <!-- 1. Back Wall / Inside of box -->
               <g id="toolbox-back">
                 <path d="M 20,-10 L 180,-10 L 180,20 L 20,20 Z" fill="#0A0B0E" />
-                <path d="M 20,-10 L 180,-10" fill="none" stroke="#F6F4EF" stroke-width="2" stroke-opacity="0.2" />
+                <path d="M 20,-10 L 180,-10" fill="none" stroke="#F75142" stroke-width="1.5" stroke-opacity="0.4" />
               </g>
 
               <!-- 2. Floating Icons Group -->
               <!-- Icons start at y=10 (inside the box) and move to negative y values -->
               <g id="toolbox-contents" transform="translate(100, 10)">
 
-                <!-- Electronics/PCB Node -->
+                <!-- Electronics/PCB Node (MCU Chip with Coloured Pins) -->
                 <g id="icon-electronics" class="floating-icon">
                   <circle cx="0" cy="0" r="28" fill="#182325" stroke="#C1AB85" stroke-width="1.5" />
-                  <!-- Microchip Body -->
-                  <rect x="-10" y="-10" width="20" height="20" rx="2" fill="none" stroke="#F6F4EF" stroke-width="2" />
-                  <!-- Chip Legs -->
-                  <line x1="-14" y1="-6" x2="-10" y2="-6" stroke="#F75142" stroke-width="2" />
-                  <line x1="-14" y1="0" x2="-10" y2="0" stroke="#F75142" stroke-width="2" />
-                  <line x1="-14" y1="6" x2="-10" y2="6" stroke="#F75142" stroke-width="2" />
-                  <line x1="10" y1="-6" x2="14" y2="-6" stroke="#F75142" stroke-width="2" />
-                  <line x1="10" y1="0" x2="14" y2="0" stroke="#F75142" stroke-width="2" />
-                  <line x1="10" y1="6" x2="14" y2="6" stroke="#F75142" stroke-width="2" />
+                  <!-- MCU Pins - Drawn UNDERNEATH chip body so they never cover the chip face -->
+                  <!-- Left Pins (Ember Accent #F75142) -->
+                  <line x1="-16" y1="-6" x2="-8" y2="-6" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <line x1="-16" y1="0" x2="-8" y2="0" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <line x1="-16" y1="6" x2="-8" y2="6" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <!-- Right Pins (Ember Accent #F75142) -->
+                  <line x1="8" y1="-6" x2="16" y2="-6" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <line x1="8" y1="0" x2="16" y2="0" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <line x1="8" y1="6" x2="16" y2="6" stroke="#F75142" stroke-width="2" stroke-linecap="round" />
+                  <!-- Top Pins (Brass Accent #C1AB85) -->
+                  <line x1="-6" y1="-16" x2="-6" y2="-8" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <line x1="0" y1="-16" x2="0" y2="-8" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <line x1="6" y1="-16" x2="6" y2="-8" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <!-- Bottom Pins (Brass Accent #C1AB85) -->
+                  <line x1="-6" y1="8" x2="-6" y2="16" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <line x1="0" y1="8" x2="0" y2="16" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <line x1="6" y1="8" x2="6" y2="16" stroke="#C1AB85" stroke-width="2" stroke-linecap="round" />
+                  <!-- Microchip Body - Drawn ON TOP of pins -->
+                  <rect x="-10" y="-10" width="20" height="20" rx="2.5" fill="#101214" stroke="#F6F4EF" stroke-width="1.5" />
+                  <!-- Pin 1 Marker Dot -->
+                  <circle cx="-5" cy="-5" r="1.5" fill="#F75142" />
                 </g>
 
                 <!-- Code/Embedded Node -->
@@ -144,24 +156,24 @@
                 <!-- Side panels -->
                 <path d="M 0,0 L 20,-10 L 20,80 L 0,90 Z" fill="#14161A" />
                 <path d="M 200,0 L 180,-10 L 180,80 L 200,90 Z" fill="#0D0E11" />
-                <!-- Tech Lines -->
-                <line x1="20" y1="30" x2="180" y2="30" stroke="#F6F4EF" stroke-width="1" stroke-opacity="0.1" />
-                <line x1="20" y1="60" x2="180" y2="60" stroke="#F6F4EF" stroke-width="1" stroke-opacity="0.1" />
-                <!-- Glowing Indicator -->
-                <circle id="toolbox-led" cx="160" cy="45" r="3" fill="#F75142" filter="url(#glow)" />
+                <!-- Tech Accent Lines (Coloured Ember #F75142 & Brass #C1AB85 with glow) -->
+                <line x1="20" y1="28" x2="180" y2="28" stroke="#F75142" stroke-width="2" stroke-opacity="0.95" filter="url(#glow)" />
+                <line x1="20" y1="62" x2="180" y2="62" stroke="#C1AB85" stroke-width="1.5" stroke-opacity="0.8" />
+                <!-- Glowing Indicator LED -->
+                <circle id="toolbox-led" cx="160" cy="45" r="3.5" fill="#F75142" filter="url(#glow)" />
               </g>
 
-              <!-- 4. Toolbox Lid -->
-              <g id="toolbox-lid" style="transform-box: fill-box; transform-origin: 100px 0px;">
-                <!-- Lid is placed directly aligning with the back wall so it can hinge cleanly -->
-                <rect x="0" y="-30" width="200" height="30" rx="3" fill="url(#toolbox-grad)" stroke="#C1AB85"
-                  stroke-width="1" stroke-opacity="0.5" />
+              <!-- 4. Toolbox Lid (Hinged Cleanly at Top Edge x=100, y=0) -->
+              <g id="toolbox-lid" transform="translate(100, 0)">
+                <!-- Lid cover rect -->
+                <rect x="-100" y="-28" width="200" height="28" rx="3" fill="url(#toolbox-grad)" stroke="#C1AB85"
+                  stroke-width="1.5" stroke-opacity="0.6" />
                 <!-- Handle -->
-                <path d="M 70,-30 L 70,-45 L 130,-45 L 130,-30" fill="none" stroke="#F6F4EF" stroke-width="4"
+                <path d="M -30,-28 L -30,-42 L 30,-42 L 30,-28" fill="none" stroke="#F6F4EF" stroke-width="3.5"
                   stroke-linecap="round" stroke-linejoin="round" />
-                <!-- Machined vents -->
-                <line x1="20" y1="-15" x2="40" y2="-15" stroke="#050608" stroke-width="4" stroke-linecap="round" />
-                <line x1="160" y1="-15" x2="180" y2="-15" stroke="#050608" stroke-width="4" stroke-linecap="round" />
+                <!-- Machined Accent Vents (Coloured Ember #F75142) -->
+                <line x1="-80" y1="-14" x2="-60" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
+                <line x1="60" y1="-14" x2="80" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
               </g>
 
             </g> <!-- End of entire toolbox -->
@@ -212,6 +224,11 @@
       <div class="container">
         <div class="section-header">
           <h2>Projects</h2>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="product">Product Design</button>
+            <button class="filter-btn" data-filter="hardware">Hardware</button>
+          </div>
         </div>
 
         <div class="projects-grid">
@@ -223,11 +240,8 @@
               <div class="project-hero">
                 <picture>
                   <source srcset="assets/BWSampleSubway.webp" type="image/webp">
-                  <picture>
-  <source srcset="assets/BWSampleSubway.webp" type="image/webp">
-  <img src="assets/BWSampleSubway.png" alt="Sample Subway sampling system" loading="lazy" width="600"
+                  <img src="assets/BWSampleSubway.png" alt="Sample Subway sampling system" loading="lazy" width="600"
                     height="400" />
-</picture>
                 </picture>
               </div>
               <h3>Sample Subway - Nuclear Pressure Tube Sampling System</h3>
@@ -248,11 +262,8 @@
               <div class="project-hero">
                 <picture>
                   <source srcset="assets/Keyboard.webp" type="image/webp">
-                  <picture>
-  <source srcset="assets/Keyboard.webp" type="image/webp">
-  <img src="assets/Keyboard.png" alt="Titan65 mechanical keyboard" loading="lazy" width="600"
+                  <img src="assets/Keyboard.png" alt="Titan65 mechanical keyboard" loading="lazy" width="600"
                     height="400" />
-</picture>
                 </picture>
               </div>
               <h3>Titan65</h3>
@@ -274,11 +285,8 @@
                   <source srcset="assets/Thesis Project/images/page_78_X418-mobile.webp" media="(max-width: 768px)"
                     type="image/webp">
                   <source srcset="assets/Thesis Project/images/page_78_X418.webp" type="image/webp">
-                  <picture>
-  <source srcset="assets/Thesis Project/images/page_78_X418.webp" type="image/webp">
-  <img src="assets/Thesis Project/images/page_78_X418.png" alt="Augmented Dance Education Final Design"
+                  <img src="assets/Thesis Project/images/page_78_X418.png" alt="Augmented Dance Education Final Design"
                     loading="lazy" width="600" height="400" />
-</picture>
                 </picture>
               </div>
               <h3>Augmented Dance Education</h3>
