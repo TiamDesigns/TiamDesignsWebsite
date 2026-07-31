@@ -153,6 +153,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  position: relative;
 }
 
 .nav-links {
@@ -1217,21 +1218,35 @@ footer {
 }
 
 @media (max-width: 720px) {
+  .site-header {
+    top: 0.75rem;
+    width: calc(100% - 1.5rem);
+  }
+
+  .nav-container {
+    padding: 0.6rem 1rem;
+  }
+
   .nav-toggle {
     display: inline-flex;
   }
 
   .nav-links {
     position: absolute;
-    right: 1.5rem;
-    top: 3.4rem;
+    right: 0;
+    top: calc(100% + 0.6rem);
     flex-direction: column;
-    background: #050608;
-    padding: 0.9rem 1.1rem;
-    border-radius: 1rem;
+    background: rgba(16, 18, 20, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
     border: 1px solid var(--border-subtle);
     box-shadow: var(--shadow-soft);
+    min-width: 180px;
+    gap: 1rem;
     display: none;
+    z-index: 100;
   }
 
   .nav-links.open {
