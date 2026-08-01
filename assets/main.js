@@ -396,9 +396,8 @@ function initElasticOverscroll() {
   let wheelTimeout;
   document.addEventListener('wheel', (e) => {
     const scrollHeight = getScrollHeight();
-    const isScrollable = scrollHeight > window.innerHeight + 2;
     const isAtTop = window.scrollY <= 0;
-    const isAtBottom = isScrollable && Math.ceil(window.innerHeight + window.scrollY) >= scrollHeight - 2;
+    const isAtBottom = window.scrollY > 100 && Math.ceil(window.innerHeight + window.scrollY) >= scrollHeight - 5;
 
     // Instant cancel if user scrolls opposite to overscroll
     if (currentY !== 0 && ((currentY > 0 && e.deltaY > 0) || (currentY < 0 && e.deltaY < 0))) {
