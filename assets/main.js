@@ -325,10 +325,21 @@ function initElasticOverscroll() {
     if (typeof anime !== 'undefined') anime.remove(body);
   };
 
+  const getScrollHeight = () => Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight
+  );
+
   // Touch Events
   document.addEventListener('touchstart', (e) => {
-    // Tighter bottom tolerance (-1px) ensures native scroll reaches the absolute bottom before intercepting
-    if (window.scrollY <= 0 || Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+    const scrollHeight = getScrollHeight();
+    const isScrollable = scrollHeight > window.innerHeight + 2;
+    const isAtTop = window.scrollY <= 0;
+    const isAtBottom = isScrollable && Math.ceil(window.innerHeight + window.scrollY) >= scrollHeight - 2;
+
+    if (isAtTop || isAtBottom) {
       startY = e.touches[0].clientY - (currentY / FRICTION); // Account for existing pull
       isDragging = true;
       stopAnimation();
@@ -338,6 +349,9 @@ function initElasticOverscroll() {
   document.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
 
+    const scrollHeight = getScrollHeight();
+    const isScrollable = scrollHeight > window.innerHeight + 2;
+    const isAtBottom = isScrollable && Math.ceil(window.innerHeight + window.scrollY) >= scrollHeight - 2;
     const deltaY = e.touches[0].clientY - startY;
 
     if (window.scrollY <= 0 && deltaY > 0) {
@@ -345,7 +359,7 @@ function initElasticOverscroll() {
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
+    else if (isAtBottom && deltaY < 0) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
@@ -381,8 +395,10 @@ function initElasticOverscroll() {
 
   let wheelTimeout;
   document.addEventListener('wheel', (e) => {
+    const scrollHeight = getScrollHeight();
+    const isScrollable = scrollHeight > window.innerHeight + 2;
     const isAtTop = window.scrollY <= 0;
-    const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
+    const isAtBottom = isScrollable && Math.ceil(window.innerHeight + window.scrollY) >= scrollHeight - 2;
 
     // Instant cancel if user scrolls opposite to overscroll
     if (currentY !== 0 && ((currentY > 0 && e.deltaY > 0) || (currentY < 0 && e.deltaY < 0))) {

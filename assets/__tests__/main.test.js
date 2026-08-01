@@ -102,3 +102,63 @@ describe('openLightbox functionality', () => {
     expect(captionText.textContent).toBe('Test Alt Text No Caption'); // Fallback to alt
   });
 });
+
+describe('initElasticOverscroll functionality', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `<div style="height: 2000px;">Content</div>`;
+    Object.defineProperty(window, 'innerHeight', { value: 600, configurable: true });
+    Object.defineProperty(document.body, 'scrollHeight', { value: 2000, configurable: true });
+    Object.defineProperty(document.body, 'offsetHeight', { value: 2000, configurable: true });
+    Object.defineProperty(document.documentElement, 'scrollHeight', { value: 2000, configurable: true });
+    Object.defineProperty(document.documentElement, 'offsetHeight', { value: 2000, configurable: true });
+    window.scrollY = 0;
+
+    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn()
+    }));
+    window.requestAnimationFrame = jest.fn((cb) => cb());
+    window.cancelAnimationFrame = jest.fn();
+
+    jest.resetModules();
+    require('../main.js');
+
+    const event = document.createEvent('Event');
+    event.initEvent('DOMContentLoaded', true, true);
+    document.dispatchEvent(event);
+  });
+
+  it('should not block scrolling down when user is at the top of the page', () => {
+    const wheelEvent = new WheelEvent('wheel', { deltaY: 50, cancelable: true });
+    const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+
+    document.dispatchEvent(wheelEvent);
+
+    expect(preventDefaultSpy).not.toHaveBeenCalled();
+    expect(document.body.style.transform).toBe('');
+  });
+
+  it('should block and bounce when user scrolls up at top of page', () => {
+    const wheelEvent = new WheelEvent('wheel', { deltaY: -50, cancelable: true });
+    const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+
+    document.dispatchEvent(wheelEvent);
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+    expect(document.body.style.transform).not.toBe('');
+  });
+
+  it('should block and bounce when user scrolls down at bottom of page', () => {
+    window.scrollY = 1400; // window.innerHeight (600) + scrollY (1400) = 2000 >= scrollHeight (2000)
+
+    const wheelEvent = new WheelEvent('wheel', { deltaY: 50, cancelable: true });
+    const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
+
+    document.dispatchEvent(wheelEvent);
+
+    expect(preventDefaultSpy).toHaveBeenCalled();
+    expect(document.body.style.transform).not.toBe('');
+  });
+});
+
