@@ -118,11 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Optimization: Batch particle links by opacity to reduce expensive canvas state changes and stroke calls.
-    const NUM_BINS = 10;
-    const bins = Array.from({ length: NUM_BINS }, () => []);
-    const mouseBins = Array.from({ length: NUM_BINS }, () => []);
-
     // Render loop
     function render() {
         // Clear background to be transparent
@@ -135,91 +130,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const linkDistanceInv = 1 / config.linkDistance;
         const mouseLinkDistanceInv = 1 / config.mouseLinkDistance;
 
-        // Clear bins without reallocating arrays (reduces garbage collection pressure)
-        for (let i = 0; i < NUM_BINS; i++) {
-            bins[i].length = 0;
-            mouseBins[i].length = 0;
-        }
-
         // Draw links between particles
         for (let i = 0; i < particles.length; i++) {
             let p1 = particles[i];
-            let p1x = p1.x;
-            let p1y = p1.y;
 
             // Connect to other particles
             for (let j = i + 1; j < particles.length; j++) {
                 let p2 = particles[j];
-                let dx = p1x - p2.x;
-                let dy = p1y - p2.y;
+                let dx = p1.x - p2.x;
+                let dy = p1.y - p2.y;
                 let distSq = dx * dx + dy * dy;
 
                 if (distSq < linkDistanceSq) {
                     let opacity = 1 - (Math.sqrt(distSq) * linkDistanceInv);
-                    let binIndex = Math.floor(opacity * NUM_BINS);
-                    if (binIndex >= NUM_BINS) binIndex = NUM_BINS - 1;
-                    if (binIndex < 0) binIndex = 0;
-                    bins[binIndex].push(p1x, p1y, p2.x, p2.y);
+
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                    ctx.stroke();
                 }
             }
 
             // Connect to mouse
             if (mouse.isActive) {
-                let mdx = p1x - mouse.x;
-                let mdy = p1y - mouse.y;
+                let mdx = p1.x - mouse.x;
+                let mdy = p1.y - mouse.y;
                 let mDistSq = mdx * mdx + mdy * mdy;
 
                 if (mDistSq < mouseLinkDistanceSq) {
                     let opacity = 1 - (Math.sqrt(mDistSq) * mouseLinkDistanceInv);
-                    let binIndex = Math.floor(opacity * NUM_BINS);
-                    if (binIndex >= NUM_BINS) binIndex = NUM_BINS - 1;
-                    if (binIndex < 0) binIndex = 0;
-                    mouseBins[binIndex].push(p1x, p1y, mouse.x, mouse.y);
+
+                    // Use a slightly different color or brightness for mouse connections
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    // Using accent color for mouse connections to make it pop
+                    ctx.strokeStyle = `rgba(56, 80, 66, ${opacity * 0.6})`;
+                    ctx.stroke();
                 }
             }
         }
 
-        // Render batched particle-to-particle links
-        for (let i = 0; i < NUM_BINS; i++) {
-            const bin = bins[i];
-            if (bin.length === 0) continue;
-
-            // Calculate representative opacity for this bin (using the upper bound of the bin)
-            const opacity = (i + 1) / NUM_BINS;
-            ctx.beginPath();
-            for (let j = 0; j < bin.length; j += 4) {
-                ctx.moveTo(bin[j], bin[j+1]);
-                ctx.lineTo(bin[j+2], bin[j+3]);
-            }
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
-            ctx.stroke();
-        }
-
-        // Render batched mouse-to-particle links
-        for (let i = 0; i < NUM_BINS; i++) {
-            const bin = mouseBins[i];
-            if (bin.length === 0) continue;
-
-            const opacity = (i + 1) / NUM_BINS;
-            ctx.beginPath();
-            for (let j = 0; j < bin.length; j += 4) {
-                ctx.moveTo(bin[j], bin[j+1]);
-                ctx.lineTo(bin[j+2], bin[j+3]);
-            }
-            // Using accent color for mouse connections to make it pop
-            ctx.strokeStyle = `rgba(56, 80, 66, ${opacity * 0.6})`;
-            ctx.stroke();
-        }
-
         // Draw particles
-        ctx.fillStyle = config.particleColor;
-        ctx.beginPath();
         for (let i = 0; i < particles.length; i++) {
             let p = particles[i];
-            ctx.moveTo(p.x + p.radius, p.y);
+            ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = config.particleColor;
+            ctx.fill();
         }
-        ctx.fill();
     }
 
     // Animation Loop
@@ -253,61 +213,27 @@ document.addEventListener('DOMContentLoaded', () => {
     canvasObserver.observe(canvas.parentElement);
 
     // Event Listeners
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            initParticles();
-            updateCanvasMetrics();
-        }, 200);
-    }, { passive: true });
-
-    let canvasAbsoluteTop = 0;
-    let canvasAbsoluteLeft = 0;
-    let canvasHeight = 0;
-    let isCanvasMetricsValid = false;
-
-    function updateCanvasMetrics() {
-        if (!canvas) return;
-        const rect = canvas.getBoundingClientRect();
-        canvasAbsoluteTop = rect.top + window.scrollY;
-        canvasAbsoluteLeft = rect.left + window.scrollX;
-        canvasHeight = rect.height;
-        isCanvasMetricsValid = true;
-    }
-
-    // Note: updateCanvasMetrics is now handled in the debounced resize listener above
-
-    // Defer initial measurement to allow layout to settle
-    setTimeout(updateCanvasMetrics, 0);
+    window.addEventListener('resize', initParticles);
 
     document.addEventListener('mousemove', (e) => {
-        // Fallback for tests or before layout settles
-        if (!isCanvasMetricsValid) {
-            updateCanvasMetrics();
-        }
-
-        // Performance optimization: Avoid getBoundingClientRect() on every mousemove
-        // by caching the absolute position and using pageX/pageY
-        if (e.pageY <= canvasAbsoluteTop + canvasHeight + 100) {
-            mouse.x = e.pageX - canvasAbsoluteLeft;
-            mouse.y = e.pageY - canvasAbsoluteTop;
+        const rect = canvas.getBoundingClientRect();
+        // Check if mouse is over/near the canvas section (hero section)
+        if (e.clientY <= rect.bottom + 100) {
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
             mouse.isActive = true;
         } else {
             mouse.isActive = false;
         }
-    }, { passive: true });
+    });
 
     // Touch support
     document.addEventListener('touchmove', (e) => {
-        if (!isCanvasMetricsValid) {
-            updateCanvasMetrics();
-        }
-
         if (e.touches.length > 0) {
-            if (e.touches[0].pageY <= canvasAbsoluteTop + canvasHeight + 100) {
-                mouse.x = e.touches[0].pageX - canvasAbsoluteLeft;
-                mouse.y = e.touches[0].pageY - canvasAbsoluteTop;
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches[0].clientY <= rect.bottom + 100) {
+                mouse.x = e.touches[0].clientX - rect.left;
+                mouse.y = e.touches[0].clientY - rect.top;
                 mouse.isActive = true;
             } else {
                 mouse.isActive = false;

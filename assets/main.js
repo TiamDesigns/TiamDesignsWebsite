@@ -4,14 +4,12 @@ const navLinks = document.querySelector('.nav-links');
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', isOpen);
+    navLinks.classList.toggle('open');
   });
 
   navLinks.addEventListener('click', (e) => {
     if (e.target.tagName === 'A') {
       navLinks.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
     }
   });
 }
@@ -20,23 +18,13 @@ if (navToggle && navLinks) {
 
 // Header scroll effect
 const header = document.querySelector('.site-header');
-if (header) {
-  let isScrolling = false;
-  window.addEventListener('scroll', () => {
-    // Optimization: Throttle scroll event to next animation frame to avoid main thread blocking and layout thrashing.
-    if (!isScrolling) {
-      window.requestAnimationFrame(() => {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-        isScrolling = false;
-      });
-      isScrolling = true;
-    }
-  }, { passive: true });
-}
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
 
 // Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -45,12 +33,8 @@ const projectCards = document.querySelectorAll('.project-card');
 filterButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     const filter = btn.getAttribute('data-filter');
-    filterButtons.forEach((b) => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
-    });
+    filterButtons.forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
 
     projectCards.forEach((card) => {
       const categories = card.getAttribute('data-category').split(' ');
@@ -65,18 +49,14 @@ filterButtons.forEach((btn) => {
 
 // Skill toggle on cards
 document.querySelectorAll('.skill-toggle').forEach((button) => {
-  const toggleSkills = (e) => {
-    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-    if (e.type === 'keydown' && e.key === ' ') e.preventDefault();
+  button.addEventListener('click', () => {
     const card = button.closest('.project-card');
     if (!card) return;
     const expanded = card.dataset.expanded === 'true';
     card.dataset.expanded = expanded ? 'false' : 'true';
     button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     button.textContent = expanded ? 'Show all skills' : 'Hide skills';
-  };
-  button.addEventListener('click', toggleSkills);
-  button.addEventListener('keydown', toggleSkills);
+  });
 });
 
 // Dynamic year in footer
@@ -158,13 +138,12 @@ function initAnimations() {
           duration: 1500, // Slowed down from 800
           easing: 'easeOutQuart'
         })
-          // 2. Open the lid naturally (hinge from the bottom-back edge)
+          // 2. Open the lid naturally (hinge flip open from top edge)
           .add({
             targets: '#toolbox-lid',
-            rotate: -130, // Hinge backwards
-            transformOrigin: '50% 100%', // Bottom center of the lid element
-            duration: 1800, // Slowed down from 1000
-            easing: 'easeOutElastic(1, .8)' // Smoother elasticity
+            rotate: -115, // Smooth flip open backwards around top edge hinge
+            duration: 1300,
+            easing: 'easeOutBack(1.3)'
           }, '-=600')
           // 3. Pop out the icons from INSIDE the box
           .add({
@@ -220,9 +199,27 @@ function initAnimations() {
     duration: 800
   });
 
-
-
-
+  // --- NEW: Elastic Button Hovers ---
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      anime.remove(btn);
+      anime({
+        targets: btn,
+        scale: 1.05,
+        duration: 800,
+        easing: 'easeOutElastic(1, .6)'
+      });
+    });
+    btn.addEventListener('mouseleave', () => {
+      anime.remove(btn);
+      anime({
+        targets: btn,
+        scale: 1,
+        duration: 600,
+        easing: 'easeOutElastic(1, .6)'
+      });
+    });
+  });
 
   // --- NEW: Expanded Project Page Animations ---
 
@@ -315,29 +312,6 @@ function initElasticOverscroll() {
   let isDragging = false;
   const body = document.body;
 
-  // Cache expensive layout properties to prevent thrashing
-  let cachedInnerHeight = window.innerHeight;
-  let cachedOffsetHeight = document.body.offsetHeight;
-
-  let elasticResizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(elasticResizeTimeout);
-    elasticResizeTimeout = setTimeout(() => {
-      cachedInnerHeight = window.innerHeight;
-      if (typeof ResizeObserver === 'undefined') {
-        // Fallback if ResizeObserver is not supported
-        cachedOffsetHeight = document.body.offsetHeight;
-      }
-    }, 200);
-  });
-
-  if (typeof ResizeObserver !== 'undefined') {
-    const observer = new ResizeObserver(() => {
-      cachedOffsetHeight = document.body.offsetHeight;
-    });
-    observer.observe(document.body);
-  }
-
   // Physics constants - softer and less aggressive pull
   const MAX_PULL = 40;
   const FRICTION = 0.15;
@@ -354,7 +328,7 @@ function initElasticOverscroll() {
   // Touch Events
   document.addEventListener('touchstart', (e) => {
     // Tighter bottom tolerance (-1px) ensures native scroll reaches the absolute bottom before intercepting
-    if (window.scrollY <= 0 || Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1) {
+    if (window.scrollY <= 0 || Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
       startY = e.touches[0].clientY - (currentY / FRICTION); // Account for existing pull
       isDragging = true;
       stopAnimation();
@@ -371,7 +345,7 @@ function initElasticOverscroll() {
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
     }
-    else if (Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1 && deltaY < 0) {
+    else if (Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1 && deltaY < 0) {
       currentY = Math.max(deltaY * FRICTION, -MAX_PULL);
       if (e.cancelable) e.preventDefault();
       body.style.transform = `translateY(${currentY}px)`;
@@ -407,22 +381,8 @@ function initElasticOverscroll() {
 
   let wheelTimeout;
   document.addEventListener('wheel', (e) => {
-    // Fast path: ignore empty events
-    if (e.deltaY === 0) return;
-
     const isAtTop = window.scrollY <= 0;
-
-    // Fast path: if not at top, scrolling up, and not in overscroll, ignore
-    if (!isAtTop && e.deltaY < 0 && currentY === 0) return;
-
-    // Only calculate document height if scrolling down or already overscrolling
-    let isAtBottom = false;
-    if (e.deltaY > 0 || currentY !== 0) {
-      isAtBottom = Math.ceil(cachedInnerHeight + window.scrollY) >= cachedOffsetHeight - 1;
-    }
-
-    // Fast path: if not at boundaries and not overscrolling, ignore
-    if (!isAtTop && !isAtBottom && currentY === 0) return;
+    const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1;
 
     // Instant cancel if user scrolls opposite to overscroll
     if (currentY !== 0 && ((currentY > 0 && e.deltaY > 0) || (currentY < 0 && e.deltaY < 0))) {
@@ -589,18 +549,8 @@ function initLightbox() {
 
   images.forEach(img => {
     img.style.cursor = 'zoom-in';
-    img.setAttribute('tabindex', '0');
-    img.setAttribute('role', 'button');
-
     img.addEventListener('click', () => {
       openLightbox(img);
-    });
-
-    img.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox(img);
-      }
     });
   });
 
@@ -722,10 +672,6 @@ function initLightbox() {
 // --- Masonry Grid Logic ---
 let masonryRafId = null;
 
-window.performMasonryLayout = performMasonryLayout;
-window.resizeAllGridItems = resizeAllGridItems;
-window.resizeGridItem = resizeGridItem;
-
 function performMasonryLayout() {
   const allItems = document.querySelectorAll(".gallery-grid figure");
   const updates = [];
@@ -780,12 +726,8 @@ function resizeGridItem(item) {
   resizeAllGridItems();
 }
 
-// Recalculate on window resize (debounced to prevent layout thrashing)
-let resizeTimeout;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(resizeAllGridItems, 200);
-});
+// Recalculate on window resize
+window.addEventListener("resize", resizeAllGridItems);
 
 // Initial calculation and lazy-load handling
 function initMasonryGrid() {
@@ -808,24 +750,8 @@ function initMasonryGrid() {
 // --- Initialize All Features ---
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
+  initElasticOverscroll();
   initLightbox();
   initMasonryGrid();
-
-  // Progressive enhancement for Formspree contact forms
-  document.querySelectorAll('form[action^="https://formspree.io"]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.7';
-        submitBtn.style.cursor = 'not-allowed';
-        const btnText = submitBtn.querySelector('.btn-text');
-        if (btnText) {
-          btnText.textContent = 'Sending...';
-        } else {
-          submitBtn.textContent = 'Sending...';
-        }
-      }
-    });
-  });
 });
+

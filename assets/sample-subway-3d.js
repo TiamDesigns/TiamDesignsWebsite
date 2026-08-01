@@ -174,13 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Animation Loop
-  let animationId;
-  let isVisible = true;
-
   const animate = () => {
-    if (!isVisible) return;
-
-    animationId = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 
     // Slow cinematic pan/rotation
     if (activeModel) {
@@ -190,25 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
     controls.update();
     renderer.render(scene, camera);
   };
-
-  // Setup Intersection Observer to pause when off-screen
-  const containerObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        if (!isVisible) {
-          isVisible = true;
-          animate(); // restart animation loop
-        }
-      } else {
-        isVisible = false;
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      }
-    });
-  }, { rootMargin: '100px' });
-
-  containerObserver.observe(container);
 
   animate();
 });
