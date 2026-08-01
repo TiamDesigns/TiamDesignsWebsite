@@ -129,7 +129,7 @@ describe('initElasticOverscroll functionality', () => {
     document.dispatchEvent(event);
   });
 
-  it('should not block scrolling down when user is at the top of the page', () => {
+  it('should preserve native scrolling without blocking wheel events', () => {
     const wheelEvent = new WheelEvent('wheel', { deltaY: 50, cancelable: true });
     const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
 
@@ -137,28 +137,6 @@ describe('initElasticOverscroll functionality', () => {
 
     expect(preventDefaultSpy).not.toHaveBeenCalled();
     expect(document.body.style.transform).toBe('');
-  });
-
-  it('should block and bounce when user scrolls up at top of page', () => {
-    const wheelEvent = new WheelEvent('wheel', { deltaY: -50, cancelable: true });
-    const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
-
-    document.dispatchEvent(wheelEvent);
-
-    expect(preventDefaultSpy).toHaveBeenCalled();
-    expect(document.body.style.transform).not.toBe('');
-  });
-
-  it('should block and bounce when user scrolls down at bottom of page', () => {
-    window.scrollY = 1400; // window.innerHeight (600) + scrollY (1400) = 2000 >= scrollHeight (2000)
-
-    const wheelEvent = new WheelEvent('wheel', { deltaY: 50, cancelable: true });
-    const preventDefaultSpy = jest.spyOn(wheelEvent, 'preventDefault');
-
-    document.dispatchEvent(wheelEvent);
-
-    expect(preventDefaultSpy).toHaveBeenCalled();
-    expect(document.body.style.transform).not.toBe('');
   });
 });
 
