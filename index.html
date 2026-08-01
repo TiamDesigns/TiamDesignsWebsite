@@ -163,17 +163,19 @@
                 <circle id="toolbox-led" cx="160" cy="45" r="3.5" fill="#F75142" filter="url(#glow)" />
               </g>
 
-              <!-- 4. Toolbox Lid (Hinged Cleanly at Top Edge x=100, y=0) -->
-              <g id="toolbox-lid" transform="translate(100, 0)">
-                <!-- Lid cover rect -->
-                <rect x="-100" y="-28" width="200" height="28" rx="3" fill="url(#toolbox-grad)" stroke="#C1AB85"
+              <!-- 4. Toolbox Lid (Hinged at top-right corner x=200, y=0 of the box) -->
+              <g id="toolbox-lid">
+                <!-- Inner Lid Surface / Underside (visible when flipped open) -->
+                <rect x="0" y="-28" width="200" height="28" rx="3" fill="#0A0B0E" stroke="#F75142" stroke-width="1" stroke-opacity="0.5" />
+                <!-- Outer Lid Shell -->
+                <rect x="0" y="-28" width="200" height="28" rx="3" fill="url(#toolbox-grad)" stroke="#C1AB85"
                   stroke-width="1.5" stroke-opacity="0.6" />
                 <!-- Handle -->
-                <path d="M -30,-28 L -30,-42 L 30,-42 L 30,-28" fill="none" stroke="#F6F4EF" stroke-width="3.5"
+                <path d="M 70,-28 L 70,-42 L 130,-42 L 130,-28" fill="none" stroke="#F6F4EF" stroke-width="3.5"
                   stroke-linecap="round" stroke-linejoin="round" />
                 <!-- Machined Accent Vents (Coloured Ember #F75142) -->
-                <line x1="-80" y1="-14" x2="-60" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
-                <line x1="60" y1="-14" x2="80" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
+                <line x1="20" y1="-14" x2="40" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
+                <line x1="160" y1="-14" x2="180" y2="-14" stroke="#F75142" stroke-width="3" stroke-linecap="round" />
               </g>
 
             </g> <!-- End of entire toolbox -->

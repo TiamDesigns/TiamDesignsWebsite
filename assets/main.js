@@ -138,14 +138,16 @@ function initAnimations() {
           duration: 1500, // Slowed down from 800
           easing: 'easeOutQuart'
         })
-          // 2. Open the lid naturally (hinge flip open from top edge)
+          // 2. Lift lid straight up, move to the right, and place down beside the toolbox
           .add({
             targets: '#toolbox-lid',
-            rotate: -115, // Smooth flip open backwards around top edge hinge
-            duration: 1300,
-            easing: 'easeOutBack(1.3)'
+            keyframes: [
+              { translateY: -65, translateX: 0, rotate: 0, duration: 450, easing: 'easeOutQuad' },
+              { translateY: -45, translateX: 220, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
+              { translateY: 62, translateX: 215, rotate: 0, duration: 500, easing: 'easeOutBounce' }
+            ]
           }, '-=600')
-          // 3. Pop out the icons from INSIDE the box
+          // 3. Pop out the tools-of-trade icons from INSIDE the box
           .add({
             targets: '#toolbox-contents',
             opacity: 1,
@@ -154,30 +156,29 @@ function initAnimations() {
           .add({
             targets: '.floating-icon',
             translateY: function (el, i) {
-              return [0, [-90, -150, -80][i]]; // Rise higher out of the box
+              return [0, [-110, -165, -110][i]]; // Rise higher out of the box
             },
             translateX: function (el, i) {
               return [0, [-100, 0, 100][i]]; // Spread out horizontally wider
             },
             scale: [0, 1],
             opacity: [0, 1],
-            delay: anime.stagger(250), // Stagger slower
-            duration: 1800, // Float up slower
-            easing: 'easeOutElastic(1, .7)',
+            delay: anime.stagger(220),
+            duration: 1600,
+            easing: 'easeOutElastic(1, .75)',
             complete: function () {
               // Add continuous floating animation
               anime({
                 targets: '.floating-icon',
                 translateY: function (el) {
-                  // Get current absolute Y translation
-                  const currentY = parseFloat(el.style.transform.split('translateY(')[1]);
-                  return [currentY, currentY - 20];
+                  const currentY = anime.get(el, 'translateY');
+                  return [currentY, currentY - 18];
                 },
                 direction: 'alternate',
                 loop: true,
-                duration: function () { return anime.random(3000, 4500); }, // Slower infinite loop
+                duration: function () { return anime.random(3000, 4200); },
                 easing: 'easeInOutSine',
-                delay: function () { return anime.random(0, 1000); }
+                delay: function () { return anime.random(0, 800); }
               });
             }
           }, '-=1000');

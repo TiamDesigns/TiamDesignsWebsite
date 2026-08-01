@@ -272,6 +272,11 @@ footer {
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
 }
 
+#toolbox-lid {
+  transform-origin: 100px -14px;
+  transform-box: view-box;
+}
+
 .hero-kicker {
   text-transform: uppercase;
   letter-spacing: 0.1em;
