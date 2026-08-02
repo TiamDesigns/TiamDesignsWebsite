@@ -26,26 +26,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Project filter
-const filterButtons = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-
-filterButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const filter = btn.getAttribute('data-filter');
-    filterButtons.forEach((b) => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    projectCards.forEach((card) => {
-      const categories = card.getAttribute('data-category').split(' ');
-      if (filter === 'all' || categories.includes(filter)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-});
 
 // Skill toggle on cards
 document.querySelectorAll('.skill-toggle').forEach((button) => {

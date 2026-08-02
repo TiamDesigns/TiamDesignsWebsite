@@ -57,15 +57,13 @@
             <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
           </svg>
           <p style="font-size: 0.9rem; letter-spacing: 0.05em; opacity: 0.8;">ASSEMBLING SYSTEM...</p>
-  <link rel="stylesheet" href="assets/styles.css">
         </div>
       </div>
       <div class="container hero-grid" style="pointer-events: none;">
         <div class="hero-content" style="pointer-events: none; z-index: 2; position: relative;">
-          <p class="hero-kicker">Engineering Design Project</p>
+          <p class="hero-kicker">EMBEDDED HARDWARE & ELECTROMECHANICAL DESIGN</p>
           <h1>Sample Subway – Nuclear Pressure Tube Sampling System</h1>
-          <p class="hero-subtitle">A remote-controlled device for retrieving metal samples from nuclear pressure tubes
-            to assess hydrogen embrittlement.</p>
+          <p class="hero-subtitle">An embedded remote-controlled device engineered for Canadian Nuclear Laboratories (CNL) to retrieve and weigh 30–80 mg metal samples within 4-inch internal diameter, 15-foot nuclear pressure tubes.</p>
           <div class="hero-actions" style="pointer-events: auto;">
             <a href="#details" class="btn primary"><span class="btn-bg"></span><span class="btn-text">View Details</span></a>
             <a href="#gallery" class="btn ghost"><span class="btn-bg"></span><span class="btn-text">Gallery</span></a>
@@ -79,164 +77,172 @@
       <div class="container section-grid">
         <div class="content">
           <h2>Overview</h2>
-          <p>The "Sample Subway" is a specialized tool designed to scrape and collect a 30-80mg metal sample from the
-            inside of a nuclear reactor pressure tube. The sample is used to analyze hydrogen levels, a key indicator of
-            structural integrity.</p>
-          <p>Our solution operates remotely to minimize operator exposure to radiation. It features a self-sealing
-            containment system that weighs the sample in real-time, ensuring precise collection without direct human
-            contact.</p>
+          <p>The "Sample Subway" is an embedded electromechanical device engineered for Canadian Nuclear Laboratories (CNL) to scrape and extract 30–80 mg metal samples from the interior of 4-inch diameter, 15-foot nuclear pressure tubes. The collected samples undergo destructive testing to measure hydrogen embrittlement levels—a critical indicator of reactor core structural integrity.</p>
+          <p>The system operates autonomously within radiation zones to eliminate human exposure. It integrates an onboard strain-gauge load cell and 24-bit ADC for real-time sample mass verification during extraction, paired with wireless telemetry and a self-contained battery power supply.</p>
 
-          <h3>Key Features</h3>
-          <ul class="feature-list">
-            <li><strong>Remote Operation:</strong> Reduces radiation exposure for operators.</li>
-            <li><strong>Automated Sampling:</strong> Precise scraping mechanism targets 30-80mg samples.</li>
-            <li><strong>Real-time Feedback:</strong> Integrated load cells and sensors report status to the operator.
-            </li>
-            <li><strong>Fail-Safe Design:</strong> Winch retrieval system ensures the tool can be recovered if power
-              fails.</li>
-            <li><strong>Self-Contained Power:</strong> On-board battery system eliminates trailing cables.</li>
-          </ul>
+          <div class="system-specs-card" style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)); border-radius: 12px;">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-color, #3b82f6); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">System Specifications</h3>
+            <ul class="feature-list" style="list-style: none; padding: 0; margin: 0;">
+              <li style="margin-bottom: 0.75rem;"><strong>Processor:</strong> ESP32-WROOM-C3 (C++ / Arduino Firmware)</li>
+              <li style="margin-bottom: 0.75rem;"><strong>Power Subsystem:</strong> Custom 3S1P Li-ion (Molicel 21700 P42A, 12V nominal), 3S BMS, LM2596 Buck Regulator</li>
+              <li style="margin-bottom: 0.75rem;"><strong>Actuation & Motor Control:</strong> BTS7960 High-Power H-Bridge Driver, JGB37-520 12V High-Torque Motor</li>
+              <li style="margin-bottom: 0.0rem;"><strong>Sensor Integration:</strong> 100g Load Cell with HX711 24-bit ADC module (real-time sample mass feedback)</li>
+            </ul>
+          </div>
         </div>
         <div class="media">
-          <!-- Placeholder for a key diagram or render -->
           <figure>
             <picture>
               <source srcset="assets/SampleSubway/Hero Shot Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/Hero Shot Render.jpg" alt="Sample Subway Final Design Render"
+              <img src="assets/SampleSubway/Hero Shot Render.jpg" alt="Sample Subway CAD Render"
                 class="feature-image">
             </picture>
-            <figcaption>Final rendered design of the Sample Subway.</figcaption>
+            <figcaption>CAD rendering of the complete Sample Subway electromechanical assembly.</figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- Design Process -->
+    <!-- Engineering Methodology -->
     <section class="section section-alt">
       <div class="container">
-        <h2>Design Process</h2>
+        <h2>Engineering Methodology</h2>
 
-        <!-- Empathize & Define -->
-        <div class="two-col-grid">
-          <div>
-            <h3>1. Empathize</h3>
-            <p>Operators in nuclear facilities work under extreme constraints: high radiation levels, limited time
-              windows, and restricted physical access. Understanding the danger and stress of this environment was
-              crucial. The primary user need was <strong>safety</strong>—ensuring no direct contact with the radioactive
-              sample while maintaining operational efficiency.</p>
+        <!-- Section 1: Technical Constraints & Requirements -->
+        <div style="margin-top: 2rem;">
+          <h3>1. Technical Constraints & Requirements</h3>
+          <p>The system was designed around rigid physical, operational, and environmental boundaries specified by CNL:</p>
+          <div class="three-col-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: var(--heading-color, #fff);">Geometry Constraints</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">4-inch internal tube diameter envelope, 15-foot insertion depth limit, and dual-orientation (horizontal/vertical) operational stability.</p>
+            </div>
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: var(--heading-color, #fff);">Target Payload</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">Precise mechanical extraction of 30–80 mg metal samples with real-time mass verification and target measurement accuracy of ±9.5 mg.</p>
+            </div>
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: var(--heading-color, #fff);">Power & Remote Control</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">Self-contained battery power delivery eliminating trailing cables, with wireless serial/Bluetooth status communication for remote operation.</p>
+            </div>
           </div>
-          <div>
-            <h3>2. Define</h3>
-            <p>We defined the core problem: How to remotely extract a specific mass (30-80mg) from a 4-inch diameter
-              tube, 15 feet deep, without manual intervention? The solution required a self-contained, wireless robot
-              capable of:</p>
-            <ul style="color: var(--muted); margin-top: 0.5rem; padding-left: 1.2rem;">
-              <li>Traversing the tube horizontally.</li>
-              <li>Scraping a precise sample.</li>
-              <li>Weighing it in real-time.</li>
-              <li>Returning safely, even in power failure.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Ideate -->
-        <div style="margin-top: 3rem;">
-          <h3>3. Ideate & Concept</h3>
-          <p>We explored multiple scraping mechanisms, from rotary cutters to linear scrapers. Hand-drawn sketches
-            helped visualize the "Subway" form factor—a cylindrical carriage that could ride inside the tube.</p>
-          <div class="gallery-grid concept-gallery">
+          <div class="gallery-grid concept-gallery" style="margin-top: 2rem;">
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Concept Drawing.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Concept Drawing.png" alt="Initial Concept Sketch"
-                  loading="lazy">
+                <img src="assets/SampleSubway/web_images/Concept Drawing.png" alt="Scraping Mechanism Clearance Trade-offs" loading="lazy">
               </picture>
-              <figcaption>Concept 1</figcaption>
+              <figcaption>Chassis envelope & scraper clearance analysis.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Concept Drawing 2.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Concept Drawing 2.png" alt="Chassis Ideation" loading="lazy">
+                <img src="assets/SampleSubway/web_images/Concept Drawing 2.png" alt="Chassis Structural Architecture" loading="lazy">
               </picture>
-              <figcaption>Concept 2</figcaption>
+              <figcaption>Cylindrical chassis structural layout for 4" ID constraint.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Concept Drawing 3.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Concept Drawing 3.png" alt="Containment Concept"
-                  loading="lazy">
+                <img src="assets/SampleSubway/web_images/Concept Drawing 3.png" alt="Containment Mechanism Trade-offs" loading="lazy">
               </picture>
-              <figcaption>Concept 3</figcaption>
+              <figcaption>Mass-sensing sample collection chamber isolation.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Concept 4.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Concept 4.png" alt="Alternative Mechanism" loading="lazy">
+                <img src="assets/SampleSubway/web_images/Concept 4.png" alt="Actuation Kinematics" loading="lazy">
               </picture>
-              <figcaption>Concept 4</figcaption>
+              <figcaption>Actuation kinematics and arm leverage trade-offs.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/Sample Container Diagram.webp" type="image/webp">
-                <img src="assets/SampleSubway/Sample Container Diagram.png" alt="Sample Container Diagram"
-                  loading="lazy">
+                <img src="assets/SampleSubway/Sample Container Diagram.png" alt="Sample Container Diagram" loading="lazy">
               </picture>
-              <figcaption>Diagram showing the sample containment mechanism.</figcaption>
+              <figcaption>Kinematic diagram of spring-loaded sample containment.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/Side View Cartoon Render.webp" type="image/webp">
                 <img src="assets/SampleSubway/Side View Cartoon Render.jpg" alt="Side View Diagram" loading="lazy">
               </picture>
-              <figcaption>Side view diagram of the proposed form factor.</figcaption>
+              <figcaption>Component packaging & axial mass distribution render.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/Top View Cartoon Render.webp" type="image/webp">
                 <img src="assets/SampleSubway/Top View Cartoon Render.jpg" alt="Top View Diagram" loading="lazy">
               </picture>
-              <figcaption>Top view diagram showing component layout.</figcaption>
+              <figcaption>Internal electromechanical routing & motor driver placement.</figcaption>
             </figure>
           </div>
         </div>
 
-        <!-- Prototype -->
+        <!-- Section 2: Electronics & Power Architecture -->
         <div style="margin-top: 3rem;">
-          <h3>4. Prototype & Test</h3>
-          <p>We moved to CAD and 3D printing to test fit and function. The "Sample Subway" prototype integrated a
-            high-torque DC motor for the scraper and a load cell for real-time weighing. Testing verified that our
-            scraping mechanism could consistently achieve the <strong>+/- 9.5mg</strong> accuracy required.</p>
-          <div class="gallery-grid">
+          <h3>2. Electronics & Power Architecture</h3>
+          <p>The electrical system architecture balances high peak current motor loads with sensitive low-voltage analog mass measurement:</p>
+          <ul style="color: var(--muted); margin-top: 0.75rem; padding-left: 1.2rem; line-height: 1.6;">
+            <li style="margin-bottom: 0.5rem;"><strong>Power Distribution Tree:</strong> Unregulated 12V battery bus driving the BTS7960 motor driver for high-torque scraping, stepped down via LM2596 buck converter to 5V/3.3V for logic rails.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Analog Signal Chain:</strong> Strain gauge Wheatstone bridge paired with HX711 differential 24-bit ADC for low-mass measurement.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Fail-Safe & Recovery:</strong> Integrated winch mechanical tether and firmware stop/return routines for loss-of-power recovery.</li>
+          </ul>
+        </div>
+
+        <!-- Section 3: Hardware Integration & Prototyping -->
+        <div style="margin-top: 3rem;">
+          <h3>3. Hardware Integration & Prototyping</h3>
+          <p>Physical hardware assembly focused on point-to-point wiring validation, motor torque testing, load cell calibration routines, and assembly of high-discharge 21700 battery cells with integrated BMS protection.</p>
+          <div class="gallery-grid" style="margin-top: 1.5rem;">
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/Load Cell Testing Setup.webp" type="image/webp">
-                <img src="assets/SampleSubway/Load Cell Testing Setup.jpg" alt="Load Cell Testing" loading="lazy">
+                <img src="assets/SampleSubway/Load Cell Testing Setup.jpg" alt="Load Cell Calibration Setup" loading="lazy">
               </picture>
-              <figcaption>Testing setup for the load cell calibration.</figcaption>
+              <figcaption>100g Load Cell calibration & HX711 24-bit ADC signal validation setup.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/Motor Mounting Plate Prototypes.webp" type="image/webp">
-                <img src="assets/SampleSubway/Motor Mounting Plate Prototypes.jpg" alt="Motor Mounting" loading="lazy">
+                <img src="assets/SampleSubway/Motor Mounting Plate Prototypes.jpg" alt="Motor Mounting Plates" loading="lazy">
               </picture>
-              <figcaption>3D printed prototypes for the motor mounting plates.</figcaption>
+              <figcaption>Motor mounting plate prototypes for high-torque JGB37-520 motor fitment.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Final Design_p1_X42.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Early Load Cell Test"
-                  loading="lazy">
+                <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Strain Gauge Integration" loading="lazy">
               </picture>
-              <figcaption>Early load cell body implementation test.</figcaption>
+              <figcaption>Physical strain gauge load cell body installation & flexure test.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="assets/SampleSubway/web_images/Battery Pack Assembly.webp" type="image/webp">
-                <img src="assets/SampleSubway/web_images/Battery Pack Assembly.png" alt="Battery Pack Assembly"
-                  loading="lazy">
+                <img src="assets/SampleSubway/web_images/Battery Pack Assembly.png" alt="Battery Pack Assembly" loading="lazy">
               </picture>
-              <figcaption>Custom 12V battery pack assembly.</figcaption>
+              <figcaption>Assembly of high-discharge 3S1P Molicel 21700 Li-ion battery pack with integrated BMS protection.</figcaption>
             </figure>
+          </div>
+        </div>
+
+        <!-- Section 4: Testing, Failure Analysis & PCB Design Roadmap -->
+        <div style="margin-top: 3rem;">
+          <h3>4. Testing, Failure Analysis & PCB Design Roadmap</h3>
+          <p>System testing and post-mortem evaluation identified key hardware failure modes and formed a revision engineering roadmap:</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: #f87171;">Root Cause Failure Analysis</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">Load cell calibration verified target mass detection, but high-torque motor stalls during pipe engagement caused current spikes that tripped the BMS protection circuit.</p>
+            </div>
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: #60a5fa;">Hardware Improvement Roadmap</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">Transition from discrete breakout modules and point-to-point wiring to a single integrated 2-layer custom PCB.</p>
+            </div>
+            <div style="padding: 1.25rem; background: var(--card-bg, rgba(255, 255, 255, 0.02)); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: #34d399;">Mechanical Safety Integration</h4>
+              <p style="color: var(--muted); font-size: 0.95rem;">Add a mechanical break-line to the lathe bit holder to prevent destructive motor stalls in pipe bound conditions.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -436,15 +442,15 @@
               <img src="assets/SampleSubway/Perspective Exploded View Render.jpg" alt="Exploded View Render"
                 loading="lazy">
             </picture>
-            <figcaption>Exploded view showing internal components and chassis layers.</figcaption>
+            <figcaption>Exploded view showing internal electromechanical component layout and chassis layering.</figcaption>
           </figure>
           <figure>
             <picture>
               <source srcset="assets/SampleSubway/UpClose Perspective Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Hero shot render of the underside"
+              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Drivetrain Render"
                 loading="lazy">
             </picture>
-            <figcaption>Hero shot render of the underside of the Sample Subway.</figcaption>
+            <figcaption>Underside view showcasing motor drivetrain and structural mounting chassis.</figcaption>
           </figure>
           <figure>
             <picture>
@@ -453,25 +459,25 @@
               <img src="assets/SampleSubway/web_images/Springloaded Container and Load Cell.png" alt="Mechanism Detail"
                 loading="lazy">
             </picture>
-            <figcaption>Spring-loaded containment system with load cell integration.</figcaption>
+            <figcaption>Spring-loaded containment mechanism with integrated 100g load cell and flexure body.</figcaption>
           </figure>
           <figure>
             <picture>
               <source srcset="assets/SampleSubway/Team Photo.webp" type="image/webp">
-              <img src="assets/SampleSubway/Team Photo.jpg" alt="The Design Team" loading="lazy">
+              <img src="assets/SampleSubway/Team Photo.jpg" alt="The Engineering Team" loading="lazy">
             </picture>
-            <figcaption>The Sample Snatchers Design Team.</figcaption>
+            <figcaption>The Sample Snatchers Engineering Team.</figcaption>
           </figure>
           <figure>
             <picture>
               <source srcset="assets/SampleSubway/web_images/Final Design_p1_X42.webp" type="image/webp">
-              <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Early Load Cell Test"
+              <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Load Cell Test"
                 loading="lazy">
             </picture>
-            <figcaption>Early load cell body implementation test.</figcaption>
+            <figcaption>Strain gauge load cell body installation & flexure test.</figcaption>
           </figure>
         </div>
-        <p class="gallery-note">Renderings and photos from the design and testing phases.</p>
+        <p class="gallery-note">CAD renderings, schematic prototypes, and physical assembly hardware.</p>
       </div>
     </section>
 
