@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.setPixelRatio(window.devicePixelRatio);
   // Render over the existing background
   renderer.setClearColor(0x000000, 0);
+  renderer.domElement.style.touchAction = 'pan-y';
   container.appendChild(renderer.domElement);
 
   // Neutral lighting
@@ -162,7 +163,39 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('An error occurred loading the GLTF:', error);
   });
 
-  // Handle Window Resize
+  // Handle Window Resize & Mobile Touch Control State
+  const toggleBtn = document.getElementById('toggle-3d-controls');
+
+  const updateMobileTouchState = () => {
+    if (!container) return;
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      if (!container.classList.contains('interactive')) {
+        container.style.pointerEvents = 'none';
+      }
+    } else {
+      container.style.pointerEvents = 'auto';
+    }
+  };
+
+  if (toggleBtn && container) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isNowInteractive = container.classList.toggle('interactive');
+      if (isNowInteractive) {
+        container.style.pointerEvents = 'auto';
+        toggleBtn.classList.add('active');
+        const btnText = toggleBtn.querySelector('.btn-text');
+        if (btnText) btnText.textContent = 'Exit 3D View (Scroll Mode)';
+      } else {
+        container.style.pointerEvents = 'none';
+        toggleBtn.classList.remove('active');
+        const btnText = toggleBtn.querySelector('.btn-text');
+        if (btnText) btnText.textContent = 'Tap to Interact with 3D Model';
+      }
+    });
+  }
+
   window.addEventListener('resize', () => {
     if (!container) return;
     const width = container.clientWidth;
@@ -171,7 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setSize(width, height);
     camera.aspect = width / height;
     controls.handleResize();
+    updateMobileTouchState();
   });
+
+  updateMobileTouchState();
 
   // Animation Loop
   const animate = () => {

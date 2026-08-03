@@ -229,7 +229,9 @@ footer {
   z-index: 0;
 }
 
-.hero-canvas {
+.hero-canvas,
+#3d-container,
+#3d-container canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -239,15 +241,27 @@ footer {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  touch-action: pan-y;
+}
+
+#3d-container {
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  #3d-container {
+    transform: translateX(20vw);
+  }
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
   width: 100%;
-  max-width: var(--max-width);
-  margin: auto;
-  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
   z-index: 1;
   position: relative;
@@ -1259,13 +1273,18 @@ footer {
 
 /* Responsive */
 
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
 
   .hero-grid,
   .section-grid,
   .skills-grid,
   .contact-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  #3d-container {
+    transform: none !important;
   }
 
   .hero-card {
@@ -1274,6 +1293,71 @@ footer {
 
   .skills-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 3D Model Mobile Interaction Overlay */
+.3d-controls-overlay {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 20;
+  pointer-events: auto;
+  display: none;
+}
+
+.toggle-3d-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(16, 18, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(247, 81, 66, 0.4);
+  border-radius: 999px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all var(--transition);
+}
+
+.toggle-3d-btn:hover,
+.toggle-3d-btn.active {
+  background: rgba(247, 81, 66, 0.9);
+  border-color: var(--accent);
+  color: #050608;
+  box-shadow: 0 12px 30px rgba(247, 81, 66, 0.35);
+}
+
+.toggle-3d-btn .touch-icon {
+  transition: stroke var(--transition);
+}
+
+.toggle-3d-btn.active .touch-icon {
+  stroke: #050608;
+}
+
+@media (max-width: 767px) {
+  .3d-controls-overlay {
+    display: flex;
+    bottom: 1.5rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 90vw;
+  }
+
+  #3d-container {
+    pointer-events: none !important;
+  }
+
+  #3d-container.interactive {
+    pointer-events: auto !important;
   }
 }
 
