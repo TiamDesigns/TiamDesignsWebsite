@@ -1,6 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init3dViewer() {
   const container = document.getElementById('3d-container');
   if (!container) return;
+
+  if (typeof THREE === 'undefined' || typeof THREE.TrackballControls === 'undefined' || typeof THREE.GLTFLoader === 'undefined') {
+    setTimeout(init3dViewer, 100);
+    return;
+  }
 
   // Setup Scene, Camera, Renderer
   const scene = new THREE.Scene();
@@ -22,21 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.domElement.style.touchAction = 'pan-y';
   container.appendChild(renderer.domElement);
 
-  // Neutral lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); // Neutral white
+  // Bright clear lighting setup for CAD model rendering
+  const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
   scene.add(ambientLight);
 
-  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5); // Neutral main light
-  directionalLight1.position.set(100, 200, 100);
+  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444455, 1.8);
+  hemiLight.position.set(0, 500, 0);
+  scene.add(hemiLight);
+
+  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+  directionalLight1.position.set(1000, 2000, 1000);
   scene.add(directionalLight1);
 
-  const directionalLight2 = new THREE.DirectionalLight(0xeeeeee, 0.5); // Neutral backlight
-  directionalLight2.position.set(-100, -50, -100);
+  const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+  directionalLight2.position.set(-1000, -500, -1000);
   scene.add(directionalLight2);
-
-  const directionalLight3 = new THREE.DirectionalLight(0xf5f5f5, 0.3); // Neutral fill light
-  directionalLight3.position.set(100, 0, -100);
-  scene.add(directionalLight3);
 
   // Trackball Controls for unconstrained tumble rotation around all axes
   const controls = new THREE.TrackballControls(camera, renderer.domElement);
@@ -57,45 +62,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeModel = null; // Store reference to apply rotation
 
-  loader.load('assets/SampleSubway/SampleSubwayExtremeCompress.glb', (gltf) => {
+  const setupModel = (gltf) => {
     const model = gltf.scene;
 
     // Apply materials based on component name
     model.traverse((child) => {
       if (child.isMesh) {
-        // Meshes often get named generic "mesh0_mesh", and actual labels belong to the parent.
-        // Also CAD exports often have underscores instead of spaces. 
         const parentName = child.parent ? child.parent.name : "";
         const combinedName = (child.name + " " + parentName).replace(/_/g, ' ');
 
-        // Default to the main body color (white/very light grey)
         let matColor = 0xf0f0f0;
-        let matMetalness = 0.2; // Slightly more metallic
-        let matRoughness = 0.5; // Smoother surface for more gloss
+        let matMetalness = 0.2;
+        let matRoughness = 0.5;
         let matTransparent = false;
         let matOpacity = 1.0;
 
-        // Custom material overrides matching combinedName
         if (combinedName.includes('608 Bearing') || combinedName.includes('Nickel Strip') || combinedName.includes('Hex socket') || combinedName.includes('SHAFT') || combinedName.includes('CONNECTION')) {
-          matColor = 0xb0b5ba; // Bright shiny silver color
-          matMetalness = 0.5; // Lowered from 1.0 to prevent rendering solid black without an environment map
-          matRoughness = 0.2; // Keep it smooth so it has specular highlights
+          matColor = 0xb0b5ba;
+          matMetalness = 0.5;
+          matRoughness = 0.2;
         } else if (combinedName.includes('Part 16') || combinedName.includes('Part 14') || combinedName.includes('Part 18') || combinedName.includes('Part 21') || combinedName.includes('COVER')) {
-          matColor = 0xcc6611; // Slightly cooler/desaturated orange so it doesn't reflect warm light
+          matColor = 0xcc6611;
           matMetalness = 0.2;
-          matRoughness = 0.4; // Slightly tighter gloss
+          matRoughness = 0.4;
         } else if (combinedName.includes('Panel Cover') || combinedName.includes('Lid')) {
-          matColor = 0x88929b; // Keep a soft color but 70% transparent (30% opaque)
+          matColor = 0x88929b;
           matTransparent = true;
           matOpacity = 0.4;
           matMetalness = 0.4;
-          matRoughness = 0.1; // Glassy feel
+          matRoughness = 0.1;
         } else if (combinedName.includes('Molicel') || combinedName.includes('Cell')) {
-          matColor = 0xa39d96; // Warm grey for the 21700 batteries
+          matColor = 0xa39d96;
           matMetalness = 0.3;
           matRoughness = 0.6;
         } else if (combinedName.includes('ContainerInterior') || combinedName.includes('ContainerBody') || combinedName.includes('Frame') || combinedName.includes('load_cell')) {
-          matColor = 0xe0e0e0; // Light grey for the main chassis/frame
+          matColor = 0xe0e0e0;
           matMetalness = 0.2;
           matRoughness = 0.5;
         }
@@ -110,57 +111,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Center the geometry using a Pivot group
     const box = new THREE.Box3().setFromObject(model);
     const center = box.getCenter(new THREE.Vector3());
 
-    // Offset the model so its visual center is exactly at 0, 0, 0
     model.position.set(-center.x, -center.y, -center.z);
 
-    // Create a pivot object at the origin to hold the model
     const pivot = new THREE.Group();
     pivot.add(model);
 
-    // Calculate bounding sphere to adjust camera
     const sphere = box.getBoundingSphere(new THREE.Sphere());
     const radius = sphere.radius;
 
-    // Start the model from a 3/4 perspective pointing down to the left
-    // Pitching the front down (X) and yawing it to the left (Y)
     pivot.rotation.set(-Math.PI / 6, -Math.PI / 4, 0);
 
     scene.add(pivot);
-    activeModel = pivot; // Store for animation loop
+    activeModel = pivot;
 
-    // Dynamic adjustment of camera near/far to thoroughly prevent clipping issues
     camera.far = Math.max(camera.far, radius * 20);
     camera.near = Math.max(0.1, radius * 0.01);
     camera.updateProjectionMatrix();
 
-    // Adjust camera distance based on object size to prevent vertical cropping
-    const distance = radius * 2.5; // Increased scale to fit the whole model in view
+    const distance = radius * 2.5;
     camera.position.set(distance, distance * 0.8, distance);
     camera.lookAt(0, 0, 0);
 
-    // Fade out and remove the loading overlay now that the model is ready
     const loaderElement = document.getElementById('model-loader');
     if (loaderElement) {
-      // Force a reflow before applying the transition to guarantee the browser sees it
       void loaderElement.offsetWidth;
       loaderElement.style.opacity = '0';
-      loaderElement.style.pointerEvents = 'none'; // Ensure it doesn't block interactions while fading
+      loaderElement.style.pointerEvents = 'none';
       setTimeout(() => {
         if (loaderElement && loaderElement.parentNode) {
           loaderElement.parentNode.removeChild(loaderElement);
         }
-      }, 600); // Wait slightly longer than the 0.5s CSS transition
+      }, 600);
     }
 
-    // Adjust controls settings
     controls.maxDistance = radius * 3;
     controls.minDistance = radius * 0.3;
+  };
+
+  const loadFallbackModel = () => {
+    const plainLoader = new THREE.GLTFLoader();
+    plainLoader.load('assets/SampleSubway/SampleSubway.glb', (gltf) => {
+      setupModel(gltf);
+    }, undefined, (error) => {
+      console.error('Fallback GLTF load failed:', error);
+      const loaderElement = document.getElementById('model-loader');
+      if (loaderElement && loaderElement.parentNode) {
+        loaderElement.parentNode.removeChild(loaderElement);
+      }
+    });
+  };
+
+  loader.load('assets/SampleSubway/SampleSubwayExtremeCompress.glb', (gltf) => {
+    setupModel(gltf);
   }, undefined, (error) => {
-    console.error('An error occurred loading the GLTF:', error);
+    console.warn('Draco GLTF load failed, trying uncompressed fallback:', error);
+    loadFallbackModel();
   });
 
   // Handle Window Resize & Mobile Touch Control State
@@ -223,4 +231,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   animate();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init3dViewer);
+} else {
+  init3dViewer();
+}

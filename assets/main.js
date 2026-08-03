@@ -71,7 +71,7 @@ if (yearSpan) {
 // Animations
 function initAnimations() {
   // Hero Animation Setup
-  const heroElements = document.querySelectorAll('.hero h1, .hero-subtitle, .hero-actions .btn');
+  const heroElements = document.querySelectorAll('.hero h1, .hero h2, .hero-kicker, .hero-sans, .hero-display, .hero-subtitle, .hero-actions .btn');
   heroElements.forEach(el => el.classList.add('has-animation'));
 
   // Project Cards Setup
