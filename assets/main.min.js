@@ -90,6 +90,8 @@ function initAnimations() {
       el.style.transform = 'none';
       el.classList.remove('has-animation');
     });
+    const tb = document.getElementById('toolbox-entire');
+    if (tb) tb.setAttribute('opacity', '1');
     return;
   }
 
@@ -98,9 +100,9 @@ function initAnimations() {
     targets: '.hero .has-animation',
     opacity: [0, 1],
     translateY: [20, 0],
-    delay: anime.stagger(100, { start: 300 }),
+    delay: anime.stagger(100, { start: 200 }),
     easing: 'easeOutQuad',
-    duration: 800,
+    duration: 700,
     complete: function (anim) {
       heroElements.forEach(el => el.classList.remove('has-animation'));
 
@@ -114,8 +116,8 @@ function initAnimations() {
         tl.add({
           targets: '#toolbox-entire',
           opacity: [0, 1],
-          translateY: [40, 0], // Larger initial slide
-          duration: 1500, // Slowed down from 800
+          translateY: [40, 0],
+          duration: 1200,
           easing: 'easeOutQuart'
         })
           // 2. Lift lid straight up, move to the right, and place down beside the toolbox

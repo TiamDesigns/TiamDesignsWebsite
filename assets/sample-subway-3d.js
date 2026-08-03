@@ -204,16 +204,23 @@ function init3dViewer() {
     });
   }
 
-  window.addEventListener('resize', () => {
+  const onResize = () => {
     if (!container) return;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || 400;
+    const height = container.clientHeight || 400;
 
     renderer.setSize(width, height);
     camera.aspect = width / height;
-    controls.handleResize();
+    camera.updateProjectionMatrix();
+    if (controls && controls.handleResize) {
+      controls.handleResize();
+    }
     updateMobileTouchState();
-  });
+  };
+
+  window.addEventListener('resize', onResize);
+  setTimeout(onResize, 100);
+  setTimeout(onResize, 500);
 
   updateMobileTouchState();
 
@@ -223,7 +230,7 @@ function init3dViewer() {
 
     // Slow cinematic pan/rotation
     if (activeModel) {
-      activeModel.rotation.y += 0.005; // Increased speed
+      activeModel.rotation.y += 0.005;
     }
 
     controls.update();
