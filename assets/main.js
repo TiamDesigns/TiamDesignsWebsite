@@ -122,7 +122,7 @@ function initAnimations() {
           .add({
             targets: '.floating-icon',
             translateY: function (el, i) {
-              return [0, [-110, -165, -110][i]]; // Rise higher out of the box
+              return [0, [-80, -120, -80][i]];
             },
             translateX: function (el, i) {
               return [0, [-100, 0, 100][i]]; // Spread out horizontally wider

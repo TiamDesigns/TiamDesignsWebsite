@@ -207,7 +207,7 @@ footer {
   min-height: clamp(520px, 75vh, 720px);
   display: flex;
   align-items: center;
-  padding: 100px 0 3rem 0;
+  padding: 130px 0 3.5rem 0;
   background: transparent;
   overflow: hidden;
   max-width: 100vw;
@@ -224,7 +224,16 @@ footer {
   z-index: 0;
 }
 
-.hero-canvas,
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
 #3d-container,
 #3d-container canvas {
   width: 100%;
@@ -344,7 +353,7 @@ footer {
 .hero-toolbox-svg {
   width: 100%;
   height: auto;
-  transform: scale(1.05);
+  transform: scale(1.0) translateY(25px);
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
 }
 
@@ -486,22 +495,26 @@ footer {
 }
 
 .btn.ghost {
-  background: transparent;
-  border: 2px solid rgba(193, 171, 133, 0.96);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(193, 171, 133, 0.55);
+  color: #F6F4EF;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .btn.ghost .btn-bg {
-  background: var(--text);
-}
-
-.btn.ghost:hover .btn-text {
-  color: #050608;
+  background: rgba(247, 81, 66, 0.95);
 }
 
 .btn.ghost:hover {
-  border-color: rgba(193, 171, 133, 1);
+  border-color: rgba(247, 81, 66, 0.9);
   transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(247, 81, 66, 0.3);
+}
+
+.btn.ghost:hover .btn-text {
+  color: #ffffff;
 }
 
 .btn.full-width {
