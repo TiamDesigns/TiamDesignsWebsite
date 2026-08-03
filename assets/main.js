@@ -70,47 +70,31 @@ if (yearSpan) {
 })();
 // Animations
 function initAnimations() {
-  // Hero Animation Setup
   const heroElements = document.querySelectorAll('.hero h1, .hero h2, .hero-kicker, .hero-sans, .hero-display, .hero-subtitle, .hero-actions .btn');
-  heroElements.forEach(el => el.classList.add('has-animation'));
-
-  // Project Cards Setup
   const projectCards = document.querySelectorAll('.project-card');
-  projectCards.forEach(el => el.classList.add('has-animation'));
-
-  // Section Headers Setup
   const sectionHeaders = document.querySelectorAll('.section h2');
-  sectionHeaders.forEach(el => el.classList.add('has-animation'));
 
   // Check if anime is loaded
   if (typeof anime === 'undefined') {
     console.warn('Anime.js not loaded. Skipping animations.');
-    document.querySelectorAll('.has-animation').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.classList.remove('has-animation');
-    });
-    const tb = document.getElementById('toolbox-entire');
-    if (tb) tb.setAttribute('opacity', '1');
     return;
   }
 
   // Initial Hero Animation
   anime({
-    targets: '.hero .has-animation',
+    targets: heroElements,
     opacity: [0, 1],
     translateY: [20, 0],
-    delay: anime.stagger(100, { start: 200 }),
+    delay: anime.stagger(80, { start: 150 }),
     easing: 'easeOutQuad',
-    duration: 700,
-    complete: function (anim) {
-      heroElements.forEach(el => el.classList.remove('has-animation'));
+    duration: 700
+  });
 
-      // Trigger SVG Toolbox Animation AFTER text finishes
-      if (document.querySelector('.hero-toolbox-svg')) {
-        const tl = anime.timeline({
-          easing: 'easeOutExpo',
-        });
+  // SVG Toolbox Animation
+  if (document.querySelector('.hero-toolbox-svg')) {
+    const tl = anime.timeline({
+      easing: 'easeOutExpo',
+    });
 
         // 1. Fade in and slide up the ENTIRE toolbox
         tl.add({
@@ -165,8 +149,6 @@ function initAnimations() {
             }
           }, '-=1000');
       }
-    }
-  });
 
   // --- NEW: Navigation Stagger ---
   const navItems = document.querySelectorAll('.nav-links li');
@@ -203,10 +185,15 @@ function initAnimations() {
       });
     });
   });
+}
 
-  // --- NEW: Expanded Project Page Animations ---
+// --- NEW: Expanded Project Page Animations ---
+function initScrollAnimations() {
+  if (typeof anime === 'undefined') return;
 
-  // 1. Identification: Add `.has-animation` to key elements
+  const projectCards = document.querySelectorAll('.project-card');
+  const sectionHeaders = document.querySelectorAll('.section h2');
+
   const scrollTargets = [
     '.feature-item',          // Icon grids
     '.gallery-grid img',      // Gallery images
@@ -621,6 +608,7 @@ function initMasonryGrid() {
 // --- Initialize All Features ---
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
+  initScrollAnimations();
   initElasticOverscroll();
   initLightbox();
   initMasonryGrid();

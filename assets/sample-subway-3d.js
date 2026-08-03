@@ -27,20 +27,20 @@ function init3dViewer() {
   renderer.domElement.style.touchAction = 'pan-y';
   container.appendChild(renderer.domElement);
 
-  // Bright clear lighting setup for CAD model rendering
-  const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
+  // Crisp, neutral studio lighting setup for industrial CAD rendering
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
   scene.add(ambientLight);
 
-  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444455, 1.8);
+  const hemiLight = new THREE.HemisphereLight(0xdce6f2, 0x1a1c20, 0.65);
   hemiLight.position.set(0, 500, 0);
   scene.add(hemiLight);
 
-  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
-  directionalLight1.position.set(1000, 2000, 1000);
+  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.95);
+  directionalLight1.position.set(1000, 1500, 1000);
   scene.add(directionalLight1);
 
-  const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-  directionalLight2.position.set(-1000, -500, -1000);
+  const directionalLight2 = new THREE.DirectionalLight(0x8fa8c0, 0.45);
+  directionalLight2.position.set(-1000, -500, -800);
   scene.add(directionalLight2);
 
   // Trackball Controls for unconstrained tumble rotation around all axes
@@ -71,32 +71,32 @@ function init3dViewer() {
         const parentName = child.parent ? child.parent.name : "";
         const combinedName = (child.name + " " + parentName).replace(/_/g, ' ');
 
-        let matColor = 0xf0f0f0;
-        let matMetalness = 0.2;
-        let matRoughness = 0.5;
+        let matColor = 0xe6e8eb;
+        let matMetalness = 0.25;
+        let matRoughness = 0.45;
         let matTransparent = false;
         let matOpacity = 1.0;
 
         if (combinedName.includes('608 Bearing') || combinedName.includes('Nickel Strip') || combinedName.includes('Hex socket') || combinedName.includes('SHAFT') || combinedName.includes('CONNECTION')) {
-          matColor = 0xb0b5ba;
-          matMetalness = 0.5;
-          matRoughness = 0.2;
+          matColor = 0xb8bece;
+          matMetalness = 0.6;
+          matRoughness = 0.25;
         } else if (combinedName.includes('Part 16') || combinedName.includes('Part 14') || combinedName.includes('Part 18') || combinedName.includes('Part 21') || combinedName.includes('COVER')) {
-          matColor = 0xcc6611;
-          matMetalness = 0.2;
+          matColor = 0xd85e28; // Industrial anodized orange accent
+          matMetalness = 0.15;
           matRoughness = 0.4;
         } else if (combinedName.includes('Panel Cover') || combinedName.includes('Lid')) {
-          matColor = 0x88929b;
+          matColor = 0x9099a3;
           matTransparent = true;
-          matOpacity = 0.4;
-          matMetalness = 0.4;
-          matRoughness = 0.1;
-        } else if (combinedName.includes('Molicel') || combinedName.includes('Cell')) {
-          matColor = 0xa39d96;
+          matOpacity = 0.45;
           matMetalness = 0.3;
-          matRoughness = 0.6;
+          matRoughness = 0.15;
+        } else if (combinedName.includes('Molicel') || combinedName.includes('Cell')) {
+          matColor = 0x9e9891;
+          matMetalness = 0.3;
+          matRoughness = 0.55;
         } else if (combinedName.includes('ContainerInterior') || combinedName.includes('ContainerBody') || combinedName.includes('Frame') || combinedName.includes('load_cell')) {
-          matColor = 0xe0e0e0;
+          matColor = 0xdcdfe3;
           matMetalness = 0.2;
           matRoughness = 0.5;
         }
