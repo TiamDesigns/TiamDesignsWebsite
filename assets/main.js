@@ -16,15 +16,47 @@ if (navToggle && navLinks) {
 
 // Smooth scroll for in-page links is handled natively via CSS `scroll-behavior: smooth` and `scroll-padding-top`
 
-// Header scroll effect
+// Header scroll effect & active section indicator
 const header = document.querySelector('.site-header');
+const navLinkElements = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id], div[id="about"], div[id="projects"], div[id="skills"], div[id="contact"], header[id]');
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
+  if (window.scrollY > 30) {
     header.classList.add('scrolled');
   } else {
     header.classList.remove('scrolled');
   }
 });
+
+// Active section observer
+if ('IntersectionObserver' in window && navLinkElements.length > 0) {
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinkElements.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href === `#${id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section[id], [id="about"], [id="projects"], [id="skills"], [id="contact"]').forEach((sec) => {
+    observer.observe(sec);
+  });
+}
 
 
 // Skill toggle on cards
