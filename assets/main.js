@@ -1,6 +1,9 @@
-// Mobile nav toggle
+// Mobile nav toggle & smooth scroll lock
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
+
+let isManualScrolling = false;
+let manualScrollTimer = null;
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
@@ -10,37 +13,102 @@ if (navToggle && navLinks) {
   navLinks.addEventListener('click', (e) => {
     if (e.target.tagName === 'A') {
       navLinks.classList.remove('open');
+      const href = e.target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const id = href.substring(1);
+        
+        // Immediately set active link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === href);
+        });
+
+        // Set manual scrolling lock
+        isManualScrolling = true;
+        if (manualScrollTimer) clearTimeout(manualScrollTimer);
+
+        const unlock = () => {
+          isManualScrolling = false;
+          window.removeEventListener('scrollend', unlock);
+        };
+
+        if ('onscrollend' in window) {
+          window.addEventListener('scrollend', unlock, { once: true });
+        }
+        manualScrollTimer = setTimeout(unlock, 800);
+      }
     }
   });
 }
 
-// Smooth scroll for in-page links is handled natively via CSS `scroll-behavior: smooth` and `scroll-padding-top`
-
 // Header scroll effect & active section indicator
 const header = document.querySelector('.site-header');
 const navLinkElements = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('section[id], div[id="about"], div[id="projects"], div[id="skills"], div[id="contact"], header[id]');
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 30) {
-    header.classList.add('scrolled');
+const handleScrollEffect = () => {
+  if (window.scrollY > 50) {
+    header?.classList.add('scrolled');
   } else {
-    header.classList.remove('scrolled');
+    header?.classList.remove('scrolled');
   }
-});
+
+  if (isManualScrolling) return;
+
+  // Top of page / Hero section check (< 150px)
+  if (window.scrollY < 150) {
+    navLinkElements.forEach((link) => link.classList.remove('active'));
+    return;
+  }
+
+  // Contact Section Fallback Calculation
+  const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+  if (isAtBottom && navLinkElements.length > 0) {
+    navLinkElements.forEach((link) => {
+      if (link.getAttribute('href') === '#contact') {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+};
+
+window.addEventListener('scroll', handleScrollEffect, { passive: true });
+handleScrollEffect();
 
 // Active section observer
 if ('IntersectionObserver' in window && navLinkElements.length > 0) {
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -60% 0px',
-    threshold: 0
+    rootMargin: '-30% 0px -50% 0px',
+    threshold: [0.1, 0.25, 0.5, 0.75]
   };
 
+  const visibleSectionsMap = {};
+
   const observer = new IntersectionObserver((entries) => {
+    if (isManualScrolling) return;
+
+    if (window.scrollY < 150) {
+      navLinkElements.forEach((link) => link.classList.remove('active'));
+      return;
+    }
+
+    const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+    if (isAtBottom) return;
+
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
+      visibleSectionsMap[entry.target.id] = entry;
+    });
+
+    const activeEntries = Object.values(visibleSectionsMap).filter(entry => entry.isIntersecting);
+
+    if (activeEntries.length > 0) {
+      const mostVisible = activeEntries.reduce((prev, current) =>
+        current.intersectionRatio > prev.intersectionRatio ? current : prev
+      );
+
+      if (mostVisible && mostVisible.target) {
+        const id = mostVisible.target.getAttribute('id');
         navLinkElements.forEach((link) => {
           const href = link.getAttribute('href');
           if (href === `#${id}`) {
@@ -50,10 +118,10 @@ if ('IntersectionObserver' in window && navLinkElements.length > 0) {
           }
         });
       }
-    });
+    }
   }, observerOptions);
 
-  document.querySelectorAll('section[id], [id="about"], [id="projects"], [id="skills"], [id="contact"]').forEach((sec) => {
+  document.querySelectorAll('section[id]').forEach((sec) => {
     observer.observe(sec);
   });
 }
