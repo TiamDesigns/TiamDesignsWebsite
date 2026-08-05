@@ -47,7 +47,7 @@ describe('Sample Subway 3D Mobile Touch Interaction', () => {
             if (isNowInteractive) {
                 container.style.pointerEvents = 'auto';
                 toggleBtn.classList.add('active');
-                btnText.textContent = 'Exit 3D View (Scroll Mode)';
+                btnText.textContent = 'Lock Model (Enable Page Scroll)';
             } else {
                 container.style.pointerEvents = 'none';
                 toggleBtn.classList.remove('active');
@@ -60,7 +60,7 @@ describe('Sample Subway 3D Mobile Touch Interaction', () => {
         expect(container.classList.contains('interactive')).toBe(true);
         expect(container.style.pointerEvents).toBe('auto');
         expect(toggleBtn.classList.contains('active')).toBe(true);
-        expect(btnText.textContent).toBe('Exit 3D View (Scroll Mode)');
+        expect(btnText.textContent).toBe('Lock Model (Enable Page Scroll)');
 
         // Second tap: exit 3D view and restore scrolling
         toggleBtn.click();

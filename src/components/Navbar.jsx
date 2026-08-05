@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
- * Navigation items configuration matching actual page section IDs
+ * Single global source of truth for navigation links across all pages and sub-pages
  */
-const NAV_ITEMS = [
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'contact', label: 'Contact' },
+export const NAV_LINKS = [
+  { id: 'about', label: 'About', href: '/#about' },
+  { id: 'projects', label: 'Projects', href: '/#projects' },
+  { id: 'experience', label: 'Experience', href: '/#experience' },
+  { id: 'skills', label: 'Skills', href: '/#skills' },
+  { id: 'contact', label: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(null); // Default to null for Hero area
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isProjectPage, setIsProjectPage] = useState(false);
   
   // Manual Scroll Lock Flag & Timer Ref
   const isManualScrolling = useRef(false);
@@ -34,9 +35,41 @@ export default function Navbar() {
   const navItemRefs = useRef({});
   const navContainerRef = useRef(null);
 
+  // Route Detection (Main Portfolio Page vs Project Detail Page)
+  useEffect(() => {
+    const checkRoute = () => {
+      if (typeof window !== 'undefined') {
+        const path = window.location.pathname.toLowerCase();
+        
+        // Detect explicit project detail sub-page routes
+        const isProjectRoute =
+          path.includes('/projects/') ||
+          path.includes('titan65') ||
+          path.includes('sample-subway') ||
+          path.includes('thesis-project') ||
+          path.includes('augmented-dance-education');
+
+        // Detect main portfolio home root
+        const isHomeRoot =
+          path === '/' ||
+          path === '' ||
+          path.endsWith('/index.html') ||
+          path.endsWith('/tiamdesignswebsite/') ||
+          path.endsWith('/tiamdesignswebsite/index.html');
+
+        const projectMode = isProjectRoute || (!isHomeRoot && path.length > 1);
+        setIsProjectPage(projectMode);
+      }
+    };
+
+    checkRoute();
+    window.addEventListener('popstate', checkRoute);
+    return () => window.removeEventListener('popstate', checkRoute);
+  }, []);
+
   // Update active indicator position over the active nav link (or fade out if activeSection is null)
   const updateIndicatorPosition = useCallback(() => {
-    if (!activeSection) {
+    if (!activeSection || isProjectPage) {
       setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
       return;
     }
@@ -56,7 +89,7 @@ export default function Navbar() {
     } else {
       setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
     }
-  }, [activeSection]);
+  }, [activeSection, isProjectPage]);
 
   // Handle window scroll state, top-of-page Hero check (< 50px), and bottom fallback
   useEffect(() => {
@@ -66,8 +99,8 @@ export default function Navbar() {
       // Update background prominence state (scrollY >= 50px)
       setIsScrolled(scrollY >= 50);
 
-      // Guard: Do not override active section while smooth manual scrolling is active
-      if (isManualScrolling.current) return;
+      // Guard: Do not override active section while smooth manual scrolling is active or on project pages
+      if (isManualScrolling.current || isProjectPage) return;
 
       // 1. Top of page / Hero section check (< 50px)
       if (scrollY < 50) {
@@ -93,10 +126,12 @@ export default function Navbar() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateIndicatorPosition);
     };
-  }, [updateIndicatorPosition]);
+  }, [updateIndicatorPosition, isProjectPage]);
 
   // Stabilized IntersectionObserver Scroll-Spy logic with Hero top-of-page check (< 50px)
   useEffect(() => {
+    if (isProjectPage) return;
+
     const observerOptions = {
       root: null,
       rootMargin: '-30% 0px -50% 0px',
@@ -146,7 +181,7 @@ export default function Navbar() {
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
-    NAV_ITEMS.forEach((item) => {
+    NAV_LINKS.forEach((item) => {
       const el = document.getElementById(item.id);
       if (el) observer.observe(el);
     });
@@ -155,7 +190,7 @@ export default function Navbar() {
       observer.disconnect();
       visibleSections.current = {};
     };
-  }, []);
+  }, [isProjectPage]);
 
   // Recalculate indicator position whenever active section changes
   useEffect(() => {
@@ -171,46 +206,53 @@ export default function Navbar() {
     };
   }, []);
 
-  // OnClick Handler (scrollToSection) with smooth scroll synchronization lock
-  const scrollToSection = (e, id) => {
-    e.preventDefault();
-
-    // Immediately update active tab state (null for top/hero, id for sections)
-    const targetSection = id === 'top' ? null : id;
-    setActiveSection(targetSection);
+  // Navigation Click Handler (Route-aware smooth scroll vs external home redirect)
+  const handleNavClick = (e, id, targetHref) => {
     setMobileMenuOpen(false);
 
-    // Set manual scrolling lock flag
-    isManualScrolling.current = true;
+    if (!isProjectPage) {
+      e.preventDefault();
+      // Immediately update active tab state
+      const targetSection = id === 'top' ? null : id;
+      setActiveSection(targetSection);
 
-    if (manualScrollTimer.current) {
-      clearTimeout(manualScrollTimer.current);
-    }
+      // Set manual scrolling lock flag
+      isManualScrolling.current = true;
 
-    const unlockScroll = () => {
-      isManualScrolling.current = false;
-      window.removeEventListener('scrollend', unlockScroll);
-    };
+      if (manualScrollTimer.current) {
+        clearTimeout(manualScrollTimer.current);
+      }
 
-    if ('onscrollend' in window) {
-      window.addEventListener('scrollend', unlockScroll, { once: true });
-    }
-    manualScrollTimer.current = setTimeout(unlockScroll, 800);
+      const unlockScroll = () => {
+        isManualScrolling.current = false;
+        window.removeEventListener('scrollend', unlockScroll);
+      };
 
-    // Trigger smooth scroll to target section
-    if (id === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', unlockScroll, { once: true });
+      }
+      manualScrollTimer.current = setTimeout(unlockScroll, 800);
+
+      // Trigger smooth scroll to target section
+      if (id === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const targetEl = document.getElementById(id);
+        if (targetEl) {
+          const navOffset = 90;
+          const elementPosition = targetEl.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }
     } else {
-      const targetEl = document.getElementById(id);
-      if (targetEl) {
-        const navOffset = 90;
-        const elementPosition = targetEl.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
+      // On project detail sub-pages: Redirect to main landing page target section
+      if (typeof window !== 'undefined') {
+        window.location.href = targetHref || `/#${id}`;
       }
     }
   };
@@ -226,10 +268,10 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between">
           
-          {/* Brand Logo */}
+          {/* Brand Logo - Always returns to main portfolio home '/' */}
           <a
-            href="#top"
-            onClick={(e) => scrollToSection(e, 'top')}
+            href={!isProjectPage ? '#top' : '/'}
+            onClick={(e) => handleNavClick(e, 'top', '/')}
             className="group flex items-center space-x-1.5 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
           >
             <span className="font-mono text-[#F75142] group-hover:rotate-12 transition-transform duration-300">
@@ -242,56 +284,71 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav
-            ref={navContainerRef}
-            className="hidden md:flex items-center relative rounded-xl bg-zinc-900/60 p-1.5 border border-white/10 backdrop-blur-md shadow-inner"
-          >
-            {/* Active Indicator Squircle */}
-            <div
-              className={`absolute top-1.5 bottom-1.5 rounded-lg bg-gradient-to-r from-[#F75142]/20 to-[#F75142]/10 border border-[#F75142]/40 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] pointer-events-none ${
-                indicatorStyle.opacity === 0 ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
-              }`}
-              style={{
-                left: `${indicatorStyle.left}px`,
-                width: `${indicatorStyle.width}px`,
-              }}
+          {/* Middle Navigation - Conditional based on Main Page vs Project Detail Page */}
+          {!isProjectPage ? (
+            /* Main Landing Page: Anchor Section Links mapped over NAV_LINKS */
+            <nav
+              ref={navContainerRef}
+              className="hidden md:flex items-center relative rounded-xl bg-zinc-900/60 p-1.5 border border-white/10 backdrop-blur-md shadow-inner"
             >
-              {/* Glowing Indicator Dot */}
-              <span className="absolute -top-0.5 right-2 w-1 h-1 rounded-full bg-[#F75142] shadow-[0_0_6px_#F75142]" />
-            </div>
+              {/* Active Indicator Squircle */}
+              <div
+                className={`absolute top-1.5 bottom-1.5 rounded-lg bg-gradient-to-r from-[#F75142]/20 to-[#F75142]/10 border border-[#F75142]/40 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] pointer-events-none ${
+                  indicatorStyle.opacity === 0 ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
+                }`}
+                style={{
+                  left: `${indicatorStyle.left}px`,
+                  width: `${indicatorStyle.width}px`,
+                }}
+              >
+                {/* Glowing Indicator Dot */}
+                <span className="absolute -top-0.5 right-2 w-1 h-1 rounded-full bg-[#F75142] shadow-[0_0_6px_#F75142]" />
+              </div>
 
-            {/* Nav Links */}
-            {NAV_ITEMS.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  ref={(el) => (navItemRefs.current[item.id] = el)}
-                  href={`#${item.id}`}
-                  onClick={(e) => scrollToSection(e, item.id)}
-                  className={`relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 rounded-lg flex items-center gap-1.5 ${
-                    isActive
-                      ? 'text-white font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <span className={`font-mono text-xs transition-colors ${
-                    isActive ? 'text-[#F75142]' : 'text-zinc-600'
-                  }`}>
-                    #
-                  </span>
-                  {item.label}
-                </a>
-              );
-            })}
-          </nav>
+              {/* Nav Links mapped dynamically from global NAV_LINKS */}
+              {NAV_LINKS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={item.id}
+                    ref={(el) => (navItemRefs.current[item.id] = el)}
+                    href={`#${item.id}`}
+                    onClick={(e) => handleNavClick(e, item.id, item.href)}
+                    className={`relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 rounded-lg flex items-center gap-1.5 ${
+                      isActive
+                        ? 'text-white font-semibold'
+                        : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
+                  >
+                    <span className={`font-mono text-xs transition-colors ${
+                      isActive ? 'text-[#F75142]' : 'text-zinc-600'
+                    }`}>
+                      #
+                    </span>
+                    {item.label}
+                  </a>
+                );
+              })}
+            </nav>
+          ) : (
+            /* Project Detail Pages: Single High-Clarity "Back to Projects" Button */
+            <a
+              href="/#projects"
+              onClick={(e) => handleNavClick(e, 'projects', '/#projects')}
+              className="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-mono tracking-wider font-semibold text-zinc-300 hover:text-white bg-zinc-900/80 border border-white/10 hover:border-[#F75142] rounded-xl shadow-inner transition-all duration-300 hover:shadow-[0_0_15px_rgba(247,81,66,0.25)] group"
+            >
+              <span className="text-[#F75142] group-hover:-translate-x-1 transition-transform duration-200">
+                &larr;
+              </span>
+              <span>Back to Projects</span>
+            </a>
+          )}
 
-          {/* Action / Contact CTA Button */}
+          {/* Action / Contact CTA Button (Right) */}
           <div className="hidden md:flex items-center">
             <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, 'contact')}
+              href={!isProjectPage ? '#contact' : '/#contact'}
+              onClick={(e) => handleNavClick(e, 'contact', '/#contact')}
               className="relative group inline-flex items-center justify-center px-4 py-2 text-xs font-mono tracking-wider text-white uppercase bg-zinc-900 border border-zinc-700/80 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#F75142] hover:shadow-[0_0_15px_rgba(247,81,66,0.3)] active:scale-95"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#F75142] to-[#cc4235] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-0" />
@@ -329,35 +386,46 @@ export default function Navbar() {
         {/* Mobile Drawer Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-3 pt-3 pb-2 border-t border-zinc-800/80 bg-zinc-950/95 backdrop-blur-xl rounded-xl transition-all duration-300">
-            <div className="flex flex-col space-y-1">
-              {NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={(e) => scrollToSection(e, item.id)}
-                    className={`px-4 py-2.5 rounded-lg text-base font-medium flex items-center justify-between transition-colors ${
-                      isActive
-                        ? 'bg-[#F75142]/10 text-white border border-[#F75142]/30 font-semibold'
-                        : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="font-mono text-xs text-[#F75142]">&gt;</span>
-                      {item.label}
-                    </span>
-                    {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-[#F75142] shadow-[0_0_8px_#F75142]" />
-                    )}
-                  </a>
-                );
-              })}
-
-              <div className="pt-3">
+            <div className="flex flex-col space-y-1.5">
+              {!isProjectPage ? (
+                NAV_LINKS.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={(e) => handleNavClick(e, item.id, item.href)}
+                      className={`px-4 py-2.5 rounded-lg text-base font-medium flex items-center justify-between transition-colors ${
+                        isActive
+                          ? 'bg-[#F75142]/10 text-white border border-[#F75142]/30 font-semibold'
+                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="font-mono text-xs text-[#F75142]">&gt;</span>
+                        {item.label}
+                      </span>
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-[#F75142] shadow-[0_0_8px_#F75142]" />
+                      )}
+                    </a>
+                  );
+                })
+              ) : (
                 <a
-                  href="#contact"
-                  onClick={(e) => scrollToSection(e, 'contact')}
+                  href="/#projects"
+                  onClick={(e) => handleNavClick(e, 'projects', '/#projects')}
+                  className="px-4 py-3 rounded-lg text-base font-mono font-medium flex items-center gap-2 text-zinc-200 bg-zinc-900/60 border border-white/10 hover:border-[#F75142] transition-colors"
+                >
+                  <span className="text-[#F75142]">&larr;</span>
+                  <span>Back to Projects</span>
+                </a>
+              )}
+
+              <div className="pt-2">
+                <a
+                  href={!isProjectPage ? '#contact' : '/#contact'}
+                  onClick={(e) => handleNavClick(e, 'contact', '/#contact')}
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono uppercase tracking-wider text-white bg-[#F75142] rounded-xl font-semibold shadow-lg shadow-[#F75142]/20"
                 >
                   Let's Talk
@@ -370,4 +438,5 @@ export default function Navbar() {
     </header>
   );
 }
+
 
