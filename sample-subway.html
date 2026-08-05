@@ -33,15 +33,15 @@
 
   <style>
     /* Custom Engineering Styles for Sample Subway */
-    .section-kicker {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent, #f75142);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+    .section-title {
+      font-size: 2rem;
       font-weight: 700;
-      text-transform: uppercase;
+      color: var(--text, #f6f4ef);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
     }
 
     .math-tag {
@@ -55,9 +55,10 @@
       color: #a5f3fc;
     }
 
+    /* Cards & Spec Grids */
     .spec-card {
       padding: 1.5rem;
-      background: rgba(23, 25, 28, 0.7);
+      background: rgba(23, 25, 28, 0.75);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -85,8 +86,16 @@
       font-weight: 600;
     }
 
-    .spec-icon {
-      font-size: 1.3rem;
+    .spec-icon-svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(247, 81, 66, 0.12);
+      border: 1px solid rgba(247, 81, 66, 0.3);
+      flex-shrink: 0;
     }
 
     .spec-detail {
@@ -94,6 +103,46 @@
       font-size: 0.95rem;
       color: var(--muted, #c1ab85);
       line-height: 1.6;
+    }
+
+    /* Dynamic Aspect Ratio Figures (No Cropping) */
+    .tech-figure {
+      margin: 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: zoom-in;
+    }
+
+    .tech-figure:hover {
+      border-color: rgba(247, 81, 66, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .tech-figure img,
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .tech-figure:hover img,
+    .gallery-grid figure:hover img {
+      transform: scale(1.02);
+    }
+
+    .tech-figure figcaption,
+    .gallery-grid figcaption {
+      padding: 0.85rem 1.1rem;
+      font-size: 0.85rem;
+      color: var(--muted, #c1ab85);
+      line-height: 1.5;
+      background: rgba(16, 18, 20, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .engineering-card {
@@ -249,49 +298,119 @@
       flex-shrink: 0;
     }
 
-    .tech-figure {
-      margin: 0;
-      border-radius: 1rem;
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .tech-figure:hover {
-      border-color: rgba(247, 81, 66, 0.4);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .tech-figure img {
+    /* Restructured BOM Table (No Category Column) */
+    .bom-table-styled {
       width: 100%;
-      height: 230px;
-      object-fit: cover;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
     }
 
-    .tech-figure:hover img {
-      transform: scale(1.04);
-    }
-
-    .tech-figure figcaption {
-      padding: 0.85rem 1.1rem;
-      font-size: 0.85rem;
-      color: var(--muted, #c1ab85);
-      line-height: 1.5;
-      background: rgba(16, 18, 20, 0.95);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    /* Styled BOM Table */
     .bom-table-styled th,
     .bom-table-styled td {
-      padding: 0.85rem 1.1rem;
+      padding: 0.85rem 1.25rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .bom-table-styled tr:hover td {
       background: rgba(255, 255, 255, 0.02);
+    }
+
+    .bom-group-header td {
+      background: rgba(247, 81, 66, 0.1) !important;
+      color: var(--accent, #f75142) !important;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(247, 81, 66, 0.25) !important;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 6, 8, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .lightbox-content {
+      position: relative;
+      z-index: 10001;
+      max-width: 92vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-content img {
+      max-width: 90vw;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .lightbox-caption {
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text, #f6f4ef);
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.8rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      background: var(--accent, #f75142);
+      transform: scale(1.1);
+    }
+
+    /* Documents Grid */
+    .docs-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
     }
   </style>
 </head>
@@ -351,13 +470,10 @@
       </div>
     </section>
 
-    <!-- SECTION 1: OVERVIEW & SYSTEM SPECIFICATIONS -->
+    <!-- SECTION 01: SYSTEM OVERVIEW & SPECS -->
     <section class="section" id="details">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">01 / SYSTEM OVERVIEW & SPECS</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Overview & System Specifications</h2>
-        </div>
+        <h2 class="section-title">01 / SYSTEM OVERVIEW & SPECS</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start; margin-bottom: 2.5rem;">
           <div class="overview-text">
@@ -368,7 +484,7 @@
             
             <h3 style="color: var(--accent, #f75142); margin-bottom: 0.75rem; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em;">Design Constraints</h3>
             <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text, #f6f4ef);">
-              Dual-orientation operation (horizontal/vertical), complete removability, zero operator exposure, self-contained power, and wireless stage reporting within a 10-minute operational window.
+              Dual-orientation operation (horizontal/vertical), complete retrievability, zero operator exposure, self-contained power, and wireless telemetry within a 10-minute operational window.
             </p>
           </div>
           
@@ -383,50 +499,83 @@
           </div>
         </div>
 
-        <!-- System Specifications Card Grid -->
+        <!-- System Specifications Architecture Grid with SVGs -->
         <h3 style="margin-bottom: 1.25rem; font-size: 1.25rem; color: var(--text, #f6f4ef); font-family: 'JetBrains Mono', monospace;">System Specifications Architecture</h3>
         <div class="specs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
           
-          <!-- Card 1 -->
+          <!-- Card 1: Processing & Logic -->
           <div class="spec-card">
             <div class="spec-card-header">
-              <span class="spec-icon">🧠</span>
+              <div class="spec-icon-svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f75142)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                  <rect x="9" y="9" width="6" height="6"></rect>
+                  <line x1="9" y1="1" x2="9" y2="4"></line>
+                  <line x1="15" y1="1" x2="15" y2="4"></line>
+                  <line x1="9" y1="20" x2="9" y2="23"></line>
+                  <line x1="15" y1="20" x2="15" y2="23"></line>
+                  <line x1="20" y1="9" x2="23" y2="9"></line>
+                  <line x1="20" y1="15" x2="23" y2="15"></line>
+                  <line x1="1" y1="9" x2="4" y2="9"></line>
+                  <line x1="1" y1="15" x2="4" y2="15"></line>
+                </svg>
+              </div>
               <h4>Processing & Logic</h4>
             </div>
             <p class="spec-detail">ESP32-WROOM-C3 Microcontroller (C++ / Arduino IDE Firmware)</p>
           </div>
 
-          <!-- Card 2 -->
+          <!-- Card 2: Movement & Recovery -->
           <div class="spec-card">
             <div class="spec-card-header">
-              <span class="spec-icon">⚙️</span>
-              <h4>Locomotion & Recovery</h4>
+              <div class="spec-icon-svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f75142)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <h4>Movement & Recovery</h4>
             </div>
             <p class="spec-detail">Dual 12V N20 200 RPM Gearmotors (Horizontal Drivetrain) + Custom Winch Spool & Paracord Tether (Vertical / Emergency Failsafe)</p>
           </div>
 
-          <!-- Card 3 -->
+          <!-- Card 3: Actuation & Scraping -->
           <div class="spec-card">
             <div class="spec-card-header">
-              <span class="spec-icon">🔧</span>
+              <div class="spec-icon-svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f75142)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
               <h4>Actuation & Scraping</h4>
             </div>
             <p class="spec-detail">JGB37-520 12V 7RPM High-Torque Gearmotor + BTS7960 43A High-Power H-Bridge Driver + MGEHR1212 Lathe Tooling</p>
           </div>
 
-          <!-- Card 4 -->
+          <!-- Card 4: Analog Signal Chain -->
           <div class="spec-card">
             <div class="spec-card-header">
-              <span class="spec-icon">📡</span>
+              <div class="spec-icon-svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f75142)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 8.82a15 15 0 0 1 20 0"></path>
+                  <path d="M5 12.85a10 10 0 0 1 14 0"></path>
+                  <path d="M8.5 16.88a5 5 0 0 1 7 0"></path>
+                  <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+              </div>
               <h4>Analog Signal Chain</h4>
             </div>
             <p class="spec-detail">100g Strain-Gauge Load Cell + HX711 24-bit Differential ADC Module</p>
           </div>
 
-          <!-- Card 5 -->
+          <!-- Card 5: Power Architecture -->
           <div class="spec-card">
             <div class="spec-card-header">
-              <span class="spec-icon">⚡</span>
+              <div class="spec-icon-svg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f75142)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
               <h4>Power Architecture</h4>
             </div>
             <p class="spec-detail">Custom 3S1P Li-Ion Battery Pack (3x Molicel 21700 P42A Cells, 11.1V Nominal, 4500mAh) + 3S 40A BMS Protection Board + LM2596 Buck Regulator (5V/3.3V Logic)</p>
@@ -436,13 +585,72 @@
       </div>
     </section>
 
-    <!-- SECTION 2: MECHANICAL & KINEMATIC ENGINEERING -->
-    <section class="section section-alt" id="mechanical">
+    <!-- SECTION 02: ENGINEERING METHODOLOGY & TARGET SPECS -->
+    <section class="section section-alt" id="methodology">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">02 / KINEMATICS & MECHANICS</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Mechanical & Kinematic Engineering</h2>
+        <h2 class="section-title">02 / ENGINEERING METHODOLOGY & TARGET SPECS</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          
+          <!-- Needs Analysis & Hierarchy -->
+          <div class="engineering-card">
+            <div class="eng-card-badge">CLIENT NEEDS HIERARCHY</div>
+            <h3>Needs Analysis & Prioritization</h3>
+            <p style="margin-bottom: 1rem;">Transformed CNL client statements into prioritized engineering design criteria:</p>
+            <ol style="color: var(--text, #f6f4ef); padding-left: 1.25rem; margin: 0; line-height: 1.7; font-size: 0.95rem;">
+              <li><strong>Safety & Exposure Limitation:</strong> Self-sealing sample containment.</li>
+              <li><strong>Complete Removability:</strong> Winch tether emergency recovery failsafe.</li>
+              <li><strong>Payload Precision:</strong> Target sample extraction of <span class="math-tag">\(\text{30--80 mg}\)</span>.</li>
+              <li><strong>Telemetry & Stage Reporting:</strong> Real-time Bluetooth mass feedback.</li>
+              <li><strong>Modularity & Weight:</strong> Footprint <span class="math-tag">\(&lt; 4\text{ ft}\)</span> length, <span class="math-tag">\(&lt; 4\text{ in}\)</span> diameter.</li>
+              <li><strong>Self-Contained Power:</strong> Onboard high-current Li-ion battery pack.</li>
+              <li><strong>Operational Speed:</strong> Cycle completion within <span class="math-tag">\(&lt; 10\text{ minutes}\)</span>.</li>
+            </ol>
+          </div>
+
+          <!-- EDS Matrix Summary -->
+          <div class="engineering-card">
+            <div class="eng-card-badge">EDS MATRIX</div>
+            <h3>Engineering Design Specifications</h3>
+            <div style="font-size: 0.95rem; color: var(--muted, #c1ab85); line-height: 1.6;">
+              <h4 style="color: var(--text, #f6f4ef); font-size: 1rem; margin-top: 0; margin-bottom: 0.5rem;">Functional Requirements</h4>
+              <ul style="margin: 0 0 1rem 0; padding-left: 1.25rem;">
+                <li>Mass collection: <span class="math-tag">\(\text{30--80 mg}\)</span> (verified via scale feedback)</li>
+                <li>Complete removability: Yes (100% retrieval guarantee)</li>
+                <li>Enclosed sample: Yes (Self-sealing spring lid)</li>
+                <li>Distance traveled: <span class="math-tag">\(15\text{ ft}\)</span> inside pressure tube</li>
+                <li>Cycle time: <span class="math-tag">\(&lt; 10\text{ minutes}\)</span> total deployment</li>
+              </ul>
+              <h4 style="color: var(--text, #f6f4ef); font-size: 1rem; margin-bottom: 0.5rem;">Physical & Safety Constraints</h4>
+              <ul style="margin: 0; padding-left: 1.25rem;">
+                <li>Outer diameter: <span class="math-tag">\(&lt; 4.0\text{ inches}\)</span> envelope</li>
+                <li>Total tool length: <span class="math-tag">\(&lt; 4.0\text{ feet}\)</span></li>
+                <li>Total tool mass: <span class="math-tag">\(&lt; 5.0\text{ kg}\)</span> man-portable</li>
+                <li>Operator contact: Zero manual touch on radiation tooling</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
+
+        <!-- Concept Selection & Evaluation -->
+        <div class="engineering-card" style="margin-top: 1.5rem;">
+          <div class="eng-card-badge">CONCEPT SELECTION MATRIX</div>
+          <h3>Concept Evaluation & Trade-off Justification</h3>
+          <p style="margin-bottom: 1rem;">
+            Evaluated 4 global architectural concepts (<em>Sample Subway</em>, <em>Pipe Worm</em>, <em>Pneumatically Deployable Tool</em>, and <em>Flywheel Flinger</em>) against weighted client design criteria.
+          </p>
+          <div style="padding: 1rem; background: rgba(10, 12, 14, 0.9); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.95rem; color: var(--text, #f6f4ef); line-height: 1.6;">
+            <strong>Selection Justification:</strong> The <em>Sample Subway</em> scored highest in the decision matrix due to superior traction control in dual orientations (horizontal & vertical), a simplified winch recovery failsafe, and predictable mechanical scraping kinematics compared to pneumatic or inflatable tube crawlers.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: KINEMATICS & MECHANICS -->
+    <section class="section" id="mechanical">
+      <div class="container">
+        <h2 class="section-title">03 / KINEMATICS & MECHANICS</h2>
 
         <div class="tech-cards-stack" style="display: flex; flex-direction: column; gap: 1.25rem;">
           
@@ -469,7 +677,7 @@
 
         </div>
 
-        <!-- Diagrams & Drawings Grid -->
+        <!-- Diagrams & Drawings Grid (Dynamic Aspect Ratios) -->
         <div class="concept-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2.5rem;">
           <figure class="tech-figure">
             <picture>
@@ -503,13 +711,10 @@
       </div>
     </section>
 
-    <!-- SECTION 3: ELECTRONICS ARCHITECTURE & ANALOG SIGNAL CHAIN -->
-    <section class="section" id="electronics">
+    <!-- SECTION 04: HARDWARE & SIGNAL CHAIN -->
+    <section class="section section-alt" id="electronics">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">03 / HARDWARE & SIGNAL CHAIN</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Electronics Architecture & Analog Signal Chain</h2>
-        </div>
+        <h2 class="section-title">04 / HARDWARE & SIGNAL CHAIN</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
           
@@ -545,13 +750,10 @@
       </div>
     </section>
 
-    <!-- SECTION 4: EMBEDDED FIRMWARE & SIGNAL PROCESSING ALGORITHMS -->
-    <section class="section section-alt" id="firmware">
+    <!-- SECTION 05: EMBEDDED C++ FIRMWARE -->
+    <section class="section" id="firmware">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 1.5rem;">
-          <span class="section-kicker">04 / EMBEDDED C++ FIRMWARE</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Embedded Firmware & Signal Processing Algorithms</h2>
-        </div>
+        <h2 class="section-title">05 / EMBEDDED C++ FIRMWARE</h2>
         <p style="max-width: 800px; margin-bottom: 2rem; color: var(--muted, #c1ab85);">Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller delivering real-time noise suppression, thermal drift compensation, and Bluetooth serial data telemetry.</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
@@ -579,7 +781,7 @@
             <div>
               <div class="firmware-badge">DRIFT COMPENSATION</div>
               <h3>Time-Based Creep Drift Compensation</h3>
-              <p>Firmware monitors weight drift at 30-second intervals. If measured drift is below <span class="math-tag">\(10\text{ mg}\)</span>, the system automatically executes a recalibration/tare routine to offset mechanical creep and thermal variance.</p>
+              <p>Firmware routine executing every 30 seconds. If measured drift is below <span class="math-tag">\(10\text{ mg}\)</span>, the system automatically re-tares the scale to offset mechanical creep and thermal variance.</p>
             </div>
             <div style="margin-top: 1.25rem; background: #090a0c; padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #93c5fd; line-height: 1.5;">
               <span style="color: #f472b6;">if</span> (millis() - lastCheckTime >= 30000) {<br>
@@ -596,10 +798,10 @@
             <div>
               <div class="firmware-badge">TELEMETRY PROTOCOL</div>
               <h3>Telemetry Protocol</h3>
-              <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV data packets (<code>Timestamp</code>, <code>Raw Weight</code>, <code>Filtered Weight</code>, <code>Creep State</code>) to remote monitors.</p>
+              <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>, <code>Creep State</code>) to remote monitors.</p>
             </div>
             <div style="margin-top: 1.25rem; background: #090a0c; padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #fde047; line-height: 1.5;">
-              <span style="color: #6b7280;">// CSV Stream format:</span><br>
+              <span style="color: #6b7280;">// CSV RFCOMM Output Stream:</span><br>
               SerialBT.printf(<span style="color: #a5f3fc;">"%lu,%.2f,%.2f,%d\n"</span>,<br>
               &nbsp;&nbsp;timestamp, rawMg, filteredMg, creepState);
             </div>
@@ -609,27 +811,24 @@
       </div>
     </section>
 
-    <!-- SECTION 5: OPERATOR INTERFACE & SYSTEMS INTEGRATION (UI/UX) -->
-    <section class="section" id="uiux">
+    <!-- SECTION 06: UI/UX & SYSTEM INTEGRATION -->
+    <section class="section section-alt" id="uiux">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">05 / UI/UX & SYSTEM INTEGRATION</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Operator Interface & Systems Integration</h2>
-        </div>
+        <h2 class="section-title">06 / UI/UX & SYSTEM INTEGRATION</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center;">
           <div class="uiux-info">
-            <h3 style="color: var(--accent, #f75142); font-size: 1.2rem; margin-bottom: 0.75rem;">Mobile Operator Application</h3>
-            <p style="margin-bottom: 1.5rem; color: var(--text, #f6f4ef); line-height: 1.6;">Figma-designed user experience interface for remote operational safety, allowing technicians to safely monitor and control reactor sampling from outside radiation zones.</p>
+            <h3 style="color: var(--accent, #f75142); font-size: 1.2rem; margin-bottom: 0.75rem;">Mobile Operator Interface</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text, #f6f4ef); line-height: 1.6;">Figma-prototyped mobile interface enabling safe remote operation outside vault radiation zones.</p>
             
             <h4 style="font-size: 0.95rem; margin-bottom: 0.85rem; color: var(--muted, #c1ab85); text-transform: uppercase; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace;">Interface Features</h4>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Secure Technician Login:</strong> Role-based authentication for CNL operators.</div></div>
+              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Technician Authentication:</strong> Secure role-based login protocol for operators.</div></div>
               <div class="check-item"><span class="check-icon">✓</span> <div><strong>Fuel Channel Grid Selection:</strong> Spatial reactor core fuel tube channel map.</div></div>
-              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Orientation Toggling:</strong> Seamless switching between horizontal and vertical operational profiles.</div></div>
-              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Target Mass Configuration:</strong> Configurable mass setpoints (<span class="math-tag">\(\text{65 mg}\)</span> target within <span class="math-tag">\(\text{30--80 mg}\)</span> spec).</div></div>
-              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Real-Time Stage Tracking:</strong> Live machine state progression (Deployment ➔ Sampling ➔ Contained ➔ Retracted).</div></div>
-              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Post-Test Data Logging:</strong> Automated CSV telemetry export for destructive testing records.</div></div>
+              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Dual-Orientation Switching:</strong> Instant switching between horizontal and vertical operational profiles.</div></div>
+              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Target Mass Configuration:</strong> Configurable setpoint (<span class="math-tag">\(\text{65 mg}\)</span> target within <span class="math-tag">\(\text{30--80 mg}\)</span> spec).</div></div>
+              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Live 4-Stage Lifecycle Tracking:</strong> Stage state machine (<code style="color: var(--accent);">Deployment</code> ➔ <code style="color: #60a5fa;">Sampling</code> ➔ <code style="color: #fde047;">Contained</code> ➔ <code style="color: #34d399;">Retracted</code>).</div></div>
+              <div class="check-item"><span class="check-icon">✓</span> <div><strong>Automated CSV Data Logging:</strong> Automatic telemetry export for destructive testing records.</div></div>
             </div>
           </div>
 
@@ -658,13 +857,10 @@
       </div>
     </section>
 
-    <!-- SECTION 6: TESTING, FAILURE ANALYSIS & ENGINEERING ROADMAP -->
-    <section class="section section-alt" id="roadmap">
+    <!-- SECTION 07: POST-MORTEM & FUTURE ROADMAP -->
+    <section class="section" id="roadmap">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">06 / POST-MORTEM & FUTURE ROADMAP</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Testing, Failure Analysis & Engineering Roadmap</h2>
-        </div>
+        <h2 class="section-title">07 / POST-MORTEM & FUTURE ROADMAP</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
@@ -672,82 +868,84 @@
           <div class="pm-card" style="border-top: 3px solid #f87171;">
             <div class="pm-number" style="color: #f87171;">01</div>
             <h3>Root Cause Failure Analysis</h3>
-            <p>During high-torque pipe engagement, lathe bit binding caused JGB37-520 motor stalls. The resulting peak stall current spike exceeded the 3S BMS current threshold, tripping overcurrent protection and cutting system power.</p>
+            <p>High scraping torque during pipe engagement induced JGB37-520 motor stalls. Peak stall current spikes exceeded the 3S BMS threshold, tripping overcurrent protection and cutting system power.</p>
           </div>
 
           <!-- Column 2 -->
           <div class="pm-card" style="border-top: 3px solid #60a5fa;">
             <div class="pm-number" style="color: #60a5fa;">02</div>
             <h3>Custom PCB Design Roadmap</h3>
-            <p>Transition from discrete breakout modules and point-to-point jumper wiring to an integrated 2-layer custom PCB with dedicated power planes, optimized thermal relief, and onboard motor driving.</p>
+            <p>Transitioning from discrete breakout modules and point-to-point breadboard wiring to a unified 2-layer custom PCB with dedicated power planes and high-current traces.</p>
           </div>
 
           <!-- Column 3 -->
           <div class="pm-card" style="border-top: 3px solid #34d399;">
             <div class="pm-number" style="color: #34d399;">03</div>
             <h3>Mechanical Safety Integration</h3>
-            <p>Engineer a calibrated mechanical shear pin / break-line on the lathe bit holder. Under excessive binding torque, the bit holder snaps safely, preventing motor stall current spikes and ensuring smooth tether recovery via the winch failsafe.</p>
+            <p>Engineering a calibrated shear notch on the lathe bit holder. Under binding torque, the bit holder snaps safely, preventing motor stall current spikes and ensuring smooth tether recovery via the winch failsafe.</p>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- SECTION 7: COMPLETE BILL OF MATERIALS (BOM TABLE) -->
-    <section class="section" id="bom">
+    <!-- SECTION 08: COMPLETE BILL OF MATERIALS (RESTRUCTURED) -->
+    <section class="section section-alt" id="bom">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 1.5rem;">
-          <span class="section-kicker">07 / HARDWARE COST ANALYSIS</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Complete Bill of Materials (BOM Table)</h2>
-        </div>
-        <p style="margin-bottom: 1.75rem; color: var(--muted, #c1ab85);">Full CAD CAD $96.19 prototype bill of materials breakdown.</p>
+        <h2 class="section-title">08 / COMPLETE BILL OF MATERIALS</h2>
+        <p style="margin-bottom: 1.75rem; color: var(--muted, #c1ab85);">Full prototype component bill of materials breakdown totaling CAD $96.19.</p>
 
         <div style="overflow-x: auto; background: var(--card, #17191c); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 1rem; box-shadow: var(--shadow-soft);">
-          <table class="bom-table-styled" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem;">
+          <table class="bom-table-styled">
             <thead>
               <tr style="background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: var(--accent, #f75142);">
-                <th style="padding: 1rem 1.25rem;">Category</th>
-                <th style="padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace;">Item Code</th>
-                <th style="padding: 1rem 1.25rem;">Part Description</th>
-                <th style="padding: 1rem 1.25rem;">Vendor</th>
-                <th style="padding: 1rem 1.25rem; text-align: center;">Qty</th>
-                <th style="padding: 1rem 1.25rem; text-align: right;">Cost (CAD)</th>
+                <th style="font-family: 'JetBrains Mono', monospace;">Item Code</th>
+                <th>Part Description</th>
+                <th>Vendor</th>
+                <th style="text-align: center;">Qty</th>
+                <th style="text-align: right;">Cost (CAD)</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Power & Delivery -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD01</td><td>22 AWG Hookup Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD02</td><td>XT60 Battery Connectors</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.60</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD03</td><td>16 AWG Power Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD04</td><td>Molicel 21700 P42A Li-Ion Cells</td><td>18650 Battery</td><td style="text-align: center;">3</td><td style="text-align: right;">$15.00</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD05</td><td>3S 40A BMS Board</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$2.94</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Power & Delivery</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD07</td><td>LM2596 DC-DC Buck Converter</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.45</td></tr>
+              <!-- Group 1: Power Delivery -->
+              <tr class="bom-group-header"><td colspan="5">Power Delivery</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD01</td><td>22 AWG Hookup Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD02</td><td>XT60 Battery Connectors</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.60</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD03</td><td>16 AWG Power Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD04</td><td>Molicel 21700 P42A Li-Ion Cells</td><td>18650 Battery</td><td style="text-align: center;">3</td><td style="text-align: right;">$15.00</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD05</td><td>3S 40A BMS Board</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$2.94</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">PD07</td><td>LM2596 DC-DC Buck Converter</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.45</td></tr>
 
-              <!-- Control & Logic -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Control & Logic</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL01</td><td>ESP32-WROOM-C3 Board</td><td>Elegoo</td><td style="text-align: center;">1</td><td style="text-align: right;">$9.99</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Control & Logic</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL02</td><td>BTS7960 43A Motor Driver</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$7.41</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Control & Logic</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL03</td><td>HX711 24-Bit ADC Module</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.80</td></tr>
+              <!-- Group 2: Control Logic -->
+              <tr class="bom-group-header"><td colspan="5">Control Logic</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL01</td><td>ESP32-WROOM-C3 Board</td><td>Elegoo</td><td style="text-align: center;">1</td><td style="text-align: right;">$9.99</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL02</td><td>BTS7960 43A Motor Driver</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$7.41</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">CL03</td><td>HX711 24-Bit ADC Module</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.80</td></tr>
 
-              <!-- Measurement -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Measurement</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">M01</td><td>100g Micro Load Cell</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$4.93</td></tr>
+              <!-- Group 3: Measurement -->
+              <tr class="bom-group-header"><td colspan="5">Measurement</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">M01</td><td>100g Micro Load Cell</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$4.93</td></tr>
 
-              <!-- Structural -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Structural</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC01</td><td>PETG / PLA Filament (~0.7kg)</td><td>Bambu Lab</td><td style="text-align: center;">1</td><td style="text-align: right;">$16.99</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Structural</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC02</td><td>M3 Brass Threaded Inserts</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Structural</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC03</td><td>M3/M4 Fasteners Assortment</td><td>AliExpress</td><td style="text-align: center;">24</td><td style="text-align: right;">$1.00</td></tr>
+              <!-- Group 4: Structural -->
+              <tr class="bom-group-header"><td colspan="5">Structural</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC01</td><td>PETG / PLA Filament (~0.7kg)</td><td>Bambu Lab</td><td style="text-align: center;">1</td><td style="text-align: right;">$16.99</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC02</td><td>M3 Brass Threaded Inserts</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">SC03</td><td>M3/M4 Fasteners Assortment</td><td>AliExpress</td><td style="text-align: center;">24</td><td style="text-align: right;">$1.00</td></tr>
 
-              <!-- Tooling -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Tooling</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">ST01</td><td>MGEHR1212 Lathe Bit & Holder</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$3.25</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Tooling</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">ST02</td><td>JGB37-520 12V 7RPM Motor</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$11.28</td></tr>
+              <!-- Group 5: Tooling -->
+              <tr class="bom-group-header"><td colspan="5">Tooling</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">ST01</td><td>MGEHR1212 Lathe Bit & Holder</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$3.25</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">ST02</td><td>JGB37-520 12V 7RPM Motor</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$11.28</td></tr>
 
-              <!-- Locomotion -->
-              <tr><td style="padding: 0.85rem 1.25rem;">Locomotion</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV01</td><td>608ZZ Ball Bearings</td><td>AliExpress</td><td style="text-align: center;">8</td><td style="text-align: right;">$4.69</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Locomotion</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV02</td><td>N20 12V 200RPM Drive Motors</td><td>AliExpress</td><td style="text-align: center;">2</td><td style="text-align: right;">$10.78</td></tr>
-              <tr><td style="padding: 0.85rem 1.25rem;">Locomotion</td><td style="padding: 0.85rem 1.25rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV03</td><td>High-Friction Rubber Bands</td><td>Amazon</td><td style="text-align: center;">8</td><td style="text-align: right;">$1.68</td></tr>
+              <!-- Group 6: Movement -->
+              <tr class="bom-group-header"><td colspan="5">Movement</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV01</td><td>608ZZ Ball Bearings</td><td>AliExpress</td><td style="text-align: center;">8</td><td style="text-align: right;">$4.69</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV02</td><td>N20 12V 200RPM Drive Motors</td><td>AliExpress</td><td style="text-align: center;">2</td><td style="text-align: right;">$10.78</td></tr>
+              <tr><td style="font-family: 'JetBrains Mono', monospace; color: var(--accent-alt, #c1ab85);">MV03</td><td>High-Friction Rubber Bands</td><td>Amazon</td><td style="text-align: center;">8</td><td style="text-align: right;">$1.68</td></tr>
             </tbody>
             <tfoot>
               <tr style="background: rgba(247, 81, 66, 0.15); border-top: 2px solid var(--accent, #f75142); font-weight: bold; font-size: 1.05rem;">
-                <td colspan="5" style="padding: 1rem 1.25rem; text-align: right; color: var(--text, #f6f4ef);">Total Cost:</td>
+                <td colspan="4" style="padding: 1rem 1.25rem; text-align: right; color: var(--text, #f6f4ef);">Total Cost:</td>
                 <td style="padding: 1rem 1.25rem; text-align: right; color: var(--accent, #f75142); font-family: 'JetBrains Mono', monospace;">$96.19</td>
               </tr>
             </tfoot>
@@ -756,22 +954,19 @@
       </div>
     </section>
 
-    <!-- SECTION 8: TECHNICAL GALLERY & COMPONENT BREAKDOWN -->
-    <section class="section section-alt" id="gallery">
+    <!-- SECTION 09: TECHNICAL HARDWARE GALLERY -->
+    <section class="section" id="gallery">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 2rem;">
-          <span class="section-kicker">08 / TECHNICAL HARDWARE GALLERY</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Technical Gallery & Component Breakdown</h2>
-        </div>
-        <p style="margin-bottom: 2rem; color: var(--muted, #c1ab85);">High-resolution CAD renderings, strain-gauge test setups, and battery pack integration.</p>
+        <h2 class="section-title">09 / TECHNICAL HARDWARE GALLERY</h2>
+        <p style="margin-bottom: 2rem; color: var(--muted, #c1ab85);">High-resolution CAD renderings, strain-gauge test setups, and battery pack integration. Click any image to launch the uncropped lightbox modal preview.</p>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
           <!-- Image 1 -->
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/Perspective Exploded View Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/Perspective Exploded View Render.jpg" alt="Exploded assembly view showing internal layout" loading="lazy">
+              <img src="assets/SampleSubway/Perspective Exploded View Render.jpg" alt="Exploded assembly view showing internal electromechanical layout" loading="lazy">
             </picture>
             <figcaption>Exploded assembly view showing internal electromechanical layout and chassis layering.</figcaption>
           </figure>
@@ -780,7 +975,7 @@
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/UpClose Perspective Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Underside view showcasing drivetrain" loading="lazy">
+              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Underside view showcasing motor drivetrain" loading="lazy">
             </picture>
             <figcaption>Underside view showcasing motor drivetrain and structural mounting chassis.</figcaption>
           </figure>
@@ -798,7 +993,7 @@
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/web_images/Final Design_p1_X42.webp" type="image/webp">
-              <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Strain gauge load cell installation test" loading="lazy">
+              <img src="assets/SampleSubway/web_images/Final Design_p1_X42.png" alt="Physical strain gauge load cell installation test" loading="lazy">
             </picture>
             <figcaption>Physical strain gauge load cell installation & flexure test setup.</figcaption>
           </figure>
@@ -807,7 +1002,7 @@
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/web_images/Battery Pack Assembly.webp" type="image/webp">
-              <img src="assets/SampleSubway/web_images/Battery Pack Assembly.png" alt="High-discharge 3S1P battery pack assembly" loading="lazy">
+              <img src="assets/SampleSubway/web_images/Battery Pack Assembly.png" alt="Assembly of high-discharge 3S1P battery pack" loading="lazy">
             </picture>
             <figcaption>Assembly of high-discharge 3S1P Molicel 21700 battery pack with integrated BMS.</figcaption>
           </figure>
@@ -816,35 +1011,78 @@
       </div>
     </section>
 
-    <!-- PROJECT DOCUMENTS -->
-    <section class="section" id="documents">
+    <!-- SECTION 10: PROJECT DOCUMENTS (EXPANDED) -->
+    <section class="section section-alt" id="documents">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 1.5rem;">
-          <span class="section-kicker">TECHNICAL DOCUMENTATION</span>
-          <h2 style="font-size: 2rem; margin-top: 0.25rem;">Project Documents</h2>
-        </div>
-        <div class="downloads-grid">
-          <a href="assets/SampleSubway/Final Design.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+        <h2 class="section-title">10 / PROJECT DOCUMENTS</h2>
+        <p style="margin-bottom: 2rem; color: var(--muted, #c1ab85);">Complete technical deliverables, design specifications, test plans, client presentation deck, and operating manuals.</p>
+
+        <div class="docs-card-grid">
+          
+          <a href="assets/SampleSubway/GNG1103 - Deliverable C - Design Criteria and Target Specifications.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
             <span class="icon">📄</span>
             <div class="meta">
-              <h3>Final Design Report</h3>
-              <p>Comprehensive technical documentation (PDF)</p>
+              <h3>Deliverable C: Design Criteria</h3>
+              <p>Target specifications & client needs matrix (PDF)</p>
             </div>
           </a>
+
+          <a href="assets/SampleSubway/GNG1103 Project Deliverable D_ Conceptual Development.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">📐</span>
+            <div class="meta">
+              <h3>Deliverable D: Conceptual Design</h3>
+              <p>Subsystem concept generation & trade-offs (PDF)</p>
+            </div>
+          </a>
+
+          <a href="assets/SampleSubway/GNG1103 - Deliverable E_ Project Plan and Cost Estimate .pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">📊</span>
+            <div class="meta">
+              <h3>Deliverable E: Project Plan</h3>
+              <p>Cost estimate & prototyping schedule (PDF)</p>
+            </div>
+          </a>
+
+          <a href="assets/SampleSubway/GNG1103 - Deliverable F_ Prototype I and Customer Feedback.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">🔧</span>
+            <div class="meta">
+              <h3>Deliverable F: Prototype I</h3>
+              <p>Initial prototype iteration & measurement feedback (PDF)</p>
+            </div>
+          </a>
+
+          <a href="assets/SampleSubway/GNG1103 - Deliverable G_ Prototype II and Customer Feedback-compressed.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">🧪</span>
+            <div class="meta">
+              <h3>Deliverable G: Prototype II</h3>
+              <p>Containment validation & system refinements (PDF)</p>
+            </div>
+          </a>
+
+          <a href="assets/SampleSubway/Deliverable H_ Protoype III & Customer Feedback.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">🏆</span>
+            <div class="meta">
+              <h3>Deliverable H: Prototype III</h3>
+              <p>Full system integration & final feedback (PDF)</p>
+            </div>
+          </a>
+
+          <a href="assets/SampleSubway/GNG1103 Deliverable J - Presentation.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
+            <span class="icon">📊</span>
+            <div class="meta">
+              <h3>Final Design Presentation</h3>
+              <p>Client pitch & demonstration deck (PDF)</p>
+            </div>
+          </a>
+
           <a href="assets/SampleSubway/GNG1103 - User Manual.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
             <span class="icon">📘</span>
             <div class="meta">
-              <h3>User Manual</h3>
-              <p>Operating instructions and safety procedures (PDF)</p>
+              <h3>User & Product Manual (UPM)</h3>
+              <p>Comprehensive operating & safety guide (PDF)</p>
             </div>
           </a>
-          <a href="assets/SampleSubway/GNG1103 - Project - Bill of Materials.pdf" class="download-card" target="_blank" rel="noopener noreferrer">
-            <span class="icon">📊</span>
-            <div class="meta">
-              <h3>Bill of Materials</h3>
-              <p>Detailed component list and costing (PDF)</p>
-            </div>
-          </a>
+
         </div>
       </div>
     </section>
@@ -887,9 +1125,59 @@
     </div>
   </footer>
 
+  <!-- LIGHTBOX MODAL OVERLAY -->
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="assets/anime.min.js?v=1.0.1" defer></script>
   <script src="assets/main.js?v=1.0.1" defer></script>
+
+  <!-- Lightbox Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('lightbox-modal');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const closeBtn = document.getElementById('lightbox-close');
+      const backdrop = modal.querySelector('.lightbox-backdrop');
+
+      function openLightbox(src, captionText) {
+        lightboxImg.src = src;
+        lightboxCaption.textContent = captionText || '';
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.tech-figure img, figure img').forEach((img) => {
+        img.addEventListener('click', () => {
+          const caption = img.closest('figure')?.querySelector('figcaption')?.textContent || img.alt;
+          openLightbox(img.src, caption);
+        });
+      });
+
+      closeBtn?.addEventListener('click', closeLightbox);
+      backdrop?.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
 
   <!-- Three.js and dependencies for 3D Viewer -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
