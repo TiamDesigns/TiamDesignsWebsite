@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "echo 'Static site - no build required'",
     "test": "jest"
   },
   "repository": {
