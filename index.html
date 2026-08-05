@@ -190,34 +190,65 @@
     <!-- About -->
     <section id="about" class="section">
       <div class="container section-grid">
-        <div>
-          <h2>About</h2>
-          <p>
-            I’m an industrial designer transitioning into engineering, based in Ottawa.
-            I bring design thinking, prototyping discipline, and a strong interest in
-            hardware to the engineering projects I work on.
+        <div class="about-bio">
+          <span class="section-badge">// HARDWARE &amp; EMBEDDED SYSTEMS</span>
+          <h2 class="about-heading">Building embedded hardware from circuit schematics to physical enclosures.</h2>
+          <p class="about-p">
+            I am an Electrical Engineering student at the University of Ottawa with a background in Industrial Design. I build practical embedded hardware, custom microcontroller boards, and prototype electronics. Combining board design with physical enclosure layout allows me to take projects smoothly from initial schematics to finished physical devices.
           </p>
-          <p>
-            I enjoy building tools and products that help create distinct lifestyle products
-            and move from idea to working prototype as smoothly as possible.
+          <p class="about-p">
+            My experience focuses on C/C++ firmware development, multi-layer PCB design, and hands-on hardware debugging. I'm also actively building my digital logic depth—moving from basic CPU architectures up to custom RISC-V design on FPGAs.
           </p>
         </div>
         <div class="about-highlights">
-          <div class="highlight">
-            <h3>What I do</h3>
-            <ul>
-              <li>Prototyping for product design</li>
-              <li>CAD & design for manufacturing</li>
-              <li>Embedded systems & robotics projects</li>
-              <li>Consumer product design</li>
+          <div class="highlight-card">
+            <div class="card-header">
+              <span class="card-tag">TECHNICAL CAPABILITIES</span>
+              <h3>Hardware &amp; Software Skills</h3>
+            </div>
+            <ul class="tech-list">
+              <li>
+                <strong class="tech-title">Embedded Systems &amp; Firmware</strong>
+                <span class="tech-desc">Microcontroller programming (C/C++), MCU platforms (STM32, ESP32, ARM Cortex-M), and hardware protocols (SPI, I2C, UART).</span>
+              </li>
+              <li>
+                <strong class="tech-title">PCB Design &amp; Hardware Prototyping</strong>
+                <span class="tech-desc">Schematic capture, board layout, component selection, thermal management, and 3D enclosure integration (DFM).</span>
+              </li>
+              <li>
+                <strong class="tech-title">Digital Logic &amp; FPGA (Learning Focus)</strong>
+                <span class="tech-desc">Verilog, digital design fundamentals (Mano architecture), RTL simulation, and building custom RISC-V cores.</span>
+              </li>
             </ul>
           </div>
-          <div class="highlight">
-            <h3>Currently</h3>
-            <ul>
-              <li>Studying Electrical Engineering in Canada</li>
-              <li>Exploring robot dogs & cycloidal drives</li>
-              <li>Designing for everyday living</li>
+
+          <div class="highlight-card">
+            <div class="card-header">
+              <span class="card-tag">ACTIVE FOCUS</span>
+              <h3>Education &amp; Active Focus</h3>
+            </div>
+            <ul class="focus-list">
+              <li>
+                <span class="status-indicator"></span>
+                <div>
+                  <strong class="focus-title">University of Ottawa</strong>
+                  <p class="focus-desc">B.A.Sc. Candidate in Electrical Engineering (Industrial Design Degree Background)</p>
+                </div>
+              </li>
+              <li>
+                <span class="status-indicator"></span>
+                <div>
+                  <strong class="focus-title">RISC-V &amp; Digital Logic Design</strong>
+                  <p class="focus-desc">Implementing custom RISC-V processor cores on FPGAs using Verilog and open-source tooling.</p>
+                </div>
+              </li>
+              <li>
+                <span class="status-indicator"></span>
+                <div>
+                  <strong class="focus-title">Embedded Hardware &amp; Smart Gadgets</strong>
+                  <p class="focus-desc">Designing custom MCU boards, low-power controllers, and integrated electronic prototypes.</p>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -397,59 +428,111 @@
       <div class="container">
         <h2>Skills</h2>
         <div class="skills-grid">
+
+          <!-- Card 1: Embedded & Hardware Engineering -->
           <div class="skill-group">
-            <h3>Engineering & Hardware</h3>
-            <ul>
-              <li>Embedded systems (ESP32, Atmega32U4, Arduino ecosystem)</li>
-              <li>Motor control (DC, stepper TMC2209, BLDC theory)</li>
-              <li>Sensor integration (HX711, VL53L1X, IMU GY-521, Hall encoders)</li>
-              <li>Power systems (Li-ion BMS, battery pack design)</li>
-              <li>Oscilloscope, multimeter, circuit debugging</li>
-              <li>Mechanical systems (cycloidal drives, linkage design)</li>
+            <h3>Embedded &amp; Hardware Engineering</h3>
+            <ul class="skill-list">
+              <li>
+                <span class="skill-cat">Microcontrollers &amp; MCUs:</span>
+                <span class="skill-val">ESP32, ATmega32U4, STM32, Arduino ecosystem</span>
+              </li>
+              <li>
+                <span class="skill-cat">Digital Logic &amp; FPGA</span> <span class="skill-badge">(Learning Focus):</span>
+                <span class="skill-val">Verilog, RTL synthesis, basic CPU architectures, custom RISC-V design</span>
+              </li>
+              <li>
+                <span class="skill-cat">Hardware Protocols:</span>
+                <span class="skill-val">SPI, I2C, UART, CAN, USB</span>
+              </li>
+              <li>
+                <span class="skill-cat">Sensors &amp; Peripherals:</span>
+                <span class="skill-val">IMUs (GY-521), Time-of-Flight (VL53L1X), ADCs (HX711), Encoders</span>
+              </li>
+              <li>
+                <span class="skill-cat">Power &amp; Actuators:</span>
+                <span class="skill-val">Li-ion BMS, battery pack design, stepper drivers (TMC2209), BLDC theory</span>
+              </li>
             </ul>
           </div>
+
+          <!-- Card 2: Software & Developer Tools -->
           <div class="skill-group">
-            <h3>Software & Programming</h3>
-            <ul>
-              <li>Embedded C / Arduino C++</li>
-              <li>Python (prototyping, control scripts)</li>
-              <li>MATLAB (differential equations, plotting)</li>
-              <li>Java & Kotlin (mobile app foundations)</li>
-              <li>HTML, CSS, JavaScript</li>
-              <li>Git & GitHub workflow, Linux basics</li>
+            <h3>Software &amp; Developer Tools</h3>
+            <ul class="skill-list">
+              <li>
+                <span class="skill-cat">Embedded Languages:</span>
+                <span class="skill-val">Embedded C, C++</span>
+              </li>
+              <li>
+                <span class="skill-cat">Scripting &amp; Data:</span>
+                <span class="skill-val">Python (automation, control scripts, data processing), MATLAB</span>
+              </li>
+              <li>
+                <span class="skill-cat">RTL &amp; Simulation:</span>
+                <span class="skill-val">Verilog, ModelSim / Vivado basics</span>
+              </li>
+              <li>
+                <span class="skill-cat">Developer Workflow:</span>
+                <span class="skill-val">Git, GitHub, Linux CLI, Bash</span>
+              </li>
             </ul>
           </div>
+
+          <!-- Card 3: Mechanical Design & DFM -->
           <div class="skill-group">
-            <h3>Design & CAD</h3>
-            <ul>
-              <li>CAD: Onshape (primary), Fusion 360, SolidWorks</li>
-              <li>3D printing (FDM tuning, PETG/ABS/PLA/HTPLA)</li>
-              <li>Laser cutting & CNC routing</li>
-              <li>Rendering (KeyShot, Blender cycles)</li>
-              <li>DFX (Manufacture, Assembly, Usability)</li>
-              <li>Tolerance & fitment design</li>
+            <h3>Mechanical Design &amp; DFM</h3>
+            <ul class="skill-list">
+              <li>
+                <span class="skill-cat">3D CAD Software:</span>
+                <span class="skill-val">Onshape (primary), Fusion 360, SolidWorks</span>
+              </li>
+              <li>
+                <span class="skill-cat">Design for Excellence (DFX):</span>
+                <span class="skill-val">DFM, DFA, tolerance stack-up analysis, fitment design</span>
+              </li>
+              <li>
+                <span class="skill-cat">Prototyping &amp; Fabrication:</span>
+                <span class="skill-val">FDM 3D printing (slicing &amp; tuning), Laser cutting, CNC routing</span>
+              </li>
+              <li>
+                <span class="skill-cat">Visualization &amp; Rendering:</span>
+                <span class="skill-val">KeyShot, Blender Cycles</span>
+              </li>
+              <li>
+                <span class="skill-cat">Mechanical Systems:</span>
+                <span class="skill-val">Cycloidal drives, custom mechanisms, linkages</span>
+              </li>
             </ul>
           </div>
+
+          <!-- Card 4: Hardware Lab & Prototyping -->
           <div class="skill-group">
-            <h3>Product Design & UX</h3>
-            <ul>
-              <li>User-centered design research</li>
-              <li>Wireframing & prototyping workflows</li>
-              <li>Technical writing & documentation</li>
-              <li>Visual communication & visual design</li>
-              <li>Portfolio & presentation design</li>
+            <h3>Hardware Lab &amp; Prototyping</h3>
+            <ul class="skill-list">
+              <li>
+                <span class="skill-cat">PCB &amp; Soldering:</span>
+                <span class="skill-val">Through-hole, SMD soldering, harness assembly</span>
+              </li>
+              <li>
+                <span class="skill-cat">Lab Equipment:</span>
+                <span class="skill-val">Digital Oscilloscope, Multimeter, DC Bench Power Supply, Logic Analyzer</span>
+              </li>
+              <li>
+                <span class="skill-cat">Hardware Debugging:</span>
+                <span class="skill-val">Signal tracing, circuit troubleshooting, power rail verification</span>
+              </li>
+              <li>
+                <span class="skill-cat">Fabrication:</span>
+                <span class="skill-val">Battery pack spot welding, rapid enclosure integration</span>
+              </li>
+              <li>
+                <span class="skill-cat">Technical Documentation:</span>
+                <span class="skill-val">Schematic entry, Bill of Materials (BOM), technical specs</span>
+              </li>
             </ul>
           </div>
-          <div class="skill-group">
-            <h3>Tools & Fabrication</h3>
-            <ul>
-              <li>Soldering (through-hole & basic SMD)</li>
-              <li>Battery pack fabrication (spot welding)</li>
-              <li>3D printer calibration & maintenance</li>
-              <li>Hand tools & shop safety</li>
-              <li>Bench equipment (power supply, oscilloscope)</li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </section>

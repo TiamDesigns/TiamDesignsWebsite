@@ -961,16 +961,27 @@ footer {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
   margin-top: 1.5rem;
+  align-items: stretch;
 }
 
 .skill-group {
   background: var(--card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
-  padding: 1.4rem 1.5rem;
+  padding: 1.6rem 1.8rem;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.skill-group:hover {
+  border-color: rgba(247, 81, 66, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
 .skill-group h3 {
