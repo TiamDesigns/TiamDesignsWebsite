@@ -24,7 +24,7 @@ export default function Navbar() {
   // Map ref to store observed section entries for single winner calculation
   const visibleSections = useRef({});
 
-  // Indicator pill positioning state
+  // Indicator positioning state
   const [indicatorStyle, setIndicatorStyle] = useState({
     left: 0,
     width: 0,
@@ -260,11 +260,14 @@ export default function Navbar() {
   return (
     <header className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none">
       <div
-        className={`max-w-7xl mx-auto px-6 py-2.5 rounded-2xl pointer-events-auto transition-all duration-500 ease-in-out ${
+        className={`max-w-7xl mx-auto px-6 py-2.5 pointer-events-auto transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'opacity-100 bg-zinc-950/85 backdrop-blur-md border border-zinc-800/80 shadow-xl shadow-black/60'
-            : 'opacity-40 hover:opacity-100 bg-transparent border-transparent shadow-none'
+            ? 'opacity-100 bg-[#141615]/90 backdrop-blur-md border border-[#2E3330]'
+            : 'opacity-60 hover:opacity-100 bg-transparent border-transparent'
         }`}
+        style={{
+          clipPath: 'polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px)'
+        }}
       >
         <div className="flex items-center justify-between">
           
@@ -272,14 +275,14 @@ export default function Navbar() {
           <a
             href={!isProjectPage ? '#top' : '/'}
             onClick={(e) => handleNavClick(e, 'top', '/')}
-            className="group flex items-center space-x-1.5 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90"
+            className="group flex items-center space-x-1.5 text-lg font-bold tracking-tight text-[#EDEAE1] transition-opacity hover:opacity-90 font-mono"
           >
-            <span className="font-mono text-[#F75142] group-hover:rotate-12 transition-transform duration-300">
+            <span className="text-[#E07A48] group-hover:rotate-12 transition-transform duration-300">
               &lt;
             </span>
             <span>Tiam</span>
-            <span className="text-[#C1AB85] font-light">Designs</span>
-            <span className="font-mono text-[#F75142] group-hover:-rotate-12 transition-transform duration-300">
+            <span className="text-[#D4C3A3] font-light">Designs</span>
+            <span className="text-[#E07A48] group-hover:-rotate-12 transition-transform duration-300">
               /&gt;
             </span>
           </a>
@@ -289,20 +292,24 @@ export default function Navbar() {
             /* Main Landing Page: Anchor Section Links mapped over NAV_LINKS */
             <nav
               ref={navContainerRef}
-              className="hidden md:flex items-center relative rounded-xl bg-zinc-900/60 p-1.5 border border-white/10 backdrop-blur-md shadow-inner"
+              className="hidden md:flex items-center relative bg-[#1B1E1C] p-1 border border-[#2E3330]"
+              style={{
+                clipPath: 'polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)'
+              }}
             >
-              {/* Active Indicator Squircle */}
+              {/* Active Indicator Chamfer */}
               <div
-                className={`absolute top-1.5 bottom-1.5 rounded-lg bg-gradient-to-r from-[#F75142]/20 to-[#F75142]/10 border border-[#F75142]/40 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] pointer-events-none ${
-                  indicatorStyle.opacity === 0 ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
+                className={`absolute top-1 bottom-1 bg-[#2E3330] border border-[#D4C3A3]/40 transition-all duration-300 pointer-events-none ${
+                  indicatorStyle.opacity === 0 ? 'opacity-0' : 'opacity-100'
                 }`}
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
+                  clipPath: 'polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 0 calc(100% - 3px), 0 3px)'
                 }}
               >
-                {/* Glowing Indicator Dot */}
-                <span className="absolute -top-0.5 right-2 w-1 h-1 rounded-full bg-[#F75142] shadow-[0_0_6px_#F75142]" />
+                {/* Active Indicator Pip */}
+                <span className="absolute -top-0.5 right-1.5 w-1 h-1 bg-[#E07A48]" />
               </div>
 
               {/* Nav Links mapped dynamically from global NAV_LINKS */}
@@ -314,16 +321,16 @@ export default function Navbar() {
                     ref={(el) => (navItemRefs.current[item.id] = el)}
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id, item.href)}
-                    className={`relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 rounded-lg flex items-center gap-1.5 ${
+                    className={`relative z-10 px-3.5 py-1 text-xs font-mono tracking-wider transition-colors duration-200 flex items-center gap-1.5 ${
                       isActive
-                        ? 'text-white font-semibold'
-                        : 'text-zinc-400 hover:text-zinc-200'
+                        ? 'text-[#EDEAE1] font-semibold'
+                        : 'text-[#9E9D95] hover:text-[#EDEAE1]'
                     }`}
                   >
-                    <span className={`font-mono text-xs transition-colors ${
-                      isActive ? 'text-[#F75142]' : 'text-zinc-600'
+                    <span className={`text-[10px] transition-colors ${
+                      isActive ? 'text-[#E07A48]' : 'text-[#9E9D95]/60'
                     }`}>
-                      #
+                      //
                     </span>
                     {item.label}
                   </a>
@@ -335,9 +342,12 @@ export default function Navbar() {
             <a
               href="/#projects"
               onClick={(e) => handleNavClick(e, 'projects', '/#projects')}
-              className="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-mono tracking-wider font-semibold text-zinc-300 hover:text-white bg-zinc-900/80 border border-white/10 hover:border-[#F75142] rounded-xl shadow-inner transition-all duration-300 hover:shadow-[0_0_15px_rgba(247,81,66,0.25)] group"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-mono tracking-wider font-semibold text-[#EDEAE1] hover:text-white bg-[#1B1E1C] border border-[#2E3330] hover:border-[#D4C3A3] transition-colors group"
+              style={{
+                clipPath: 'polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)'
+              }}
             >
-              <span className="text-[#F75142] group-hover:-translate-x-1 transition-transform duration-200">
+              <span className="text-[#E07A48] group-hover:-translate-x-0.5 transition-transform duration-200">
                 &larr;
               </span>
               <span>Back to Projects</span>
@@ -349,13 +359,12 @@ export default function Navbar() {
             <a
               href={!isProjectPage ? '#contact' : '/#contact'}
               onClick={(e) => handleNavClick(e, 'contact', '/#contact')}
-              className="relative group inline-flex items-center justify-center px-4 py-2 text-xs font-mono tracking-wider text-white uppercase bg-zinc-900 border border-zinc-700/80 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#F75142] hover:shadow-[0_0_15px_rgba(247,81,66,0.3)] active:scale-95"
+              className="relative inline-flex items-center justify-center px-4 py-1.5 text-xs font-mono uppercase tracking-wider text-[#EDEAE1] bg-[#E07A48] font-bold transition-all duration-200 hover:brightness-110 active:scale-95"
+              style={{
+                clipPath: 'polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)'
+              }}
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#F75142] to-[#cc4235] opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-0" />
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-white font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F75142] group-hover:bg-white animate-pulse" />
-                Let's Talk
-              </span>
+              Let's Talk
             </a>
           </div>
 
@@ -363,12 +372,15 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-zinc-900/80 border border-zinc-800 text-zinc-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#F75142]"
+            className="md:hidden p-2 bg-[#1B1E1C] border border-[#2E3330] text-[#EDEAE1]"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
+            style={{
+              clipPath: 'polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 0 calc(100% - 3px), 0 3px)'
+            }}
           >
             <svg
-              className="w-6 h-6 transition-transform duration-200"
+              className="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -385,8 +397,8 @@ export default function Navbar() {
 
         {/* Mobile Drawer Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 pt-3 pb-2 border-t border-zinc-800/80 bg-zinc-950/95 backdrop-blur-xl rounded-xl transition-all duration-300">
-            <div className="flex flex-col space-y-1.5">
+          <div className="md:hidden mt-3 pt-3 pb-2 border-t border-[#2E3330] bg-[#141615]">
+            <div className="flex flex-col space-y-1">
               {!isProjectPage ? (
                 NAV_LINKS.map((item) => {
                   const isActive = activeSection === item.id;
@@ -395,19 +407,16 @@ export default function Navbar() {
                       key={item.id}
                       href={`#${item.id}`}
                       onClick={(e) => handleNavClick(e, item.id, item.href)}
-                      className={`px-4 py-2.5 rounded-lg text-base font-medium flex items-center justify-between transition-colors ${
+                      className={`px-3 py-2 text-xs font-mono tracking-wider flex items-center justify-between transition-colors ${
                         isActive
-                          ? 'bg-[#F75142]/10 text-white border border-[#F75142]/30 font-semibold'
-                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+                          ? 'bg-[#1B1E1C] text-[#EDEAE1] border-l-2 border-[#E07A48] font-bold'
+                          : 'text-[#9E9D95] hover:text-[#EDEAE1]'
                       }`}
                     >
                       <span className="flex items-center gap-2">
-                        <span className="font-mono text-xs text-[#F75142]">&gt;</span>
+                        <span className="text-[#E07A48]">//</span>
                         {item.label}
                       </span>
-                      {isActive && (
-                        <span className="w-2 h-2 rounded-full bg-[#F75142] shadow-[0_0_8px_#F75142]" />
-                      )}
                     </a>
                   );
                 })
@@ -415,9 +424,9 @@ export default function Navbar() {
                 <a
                   href="/#projects"
                   onClick={(e) => handleNavClick(e, 'projects', '/#projects')}
-                  className="px-4 py-3 rounded-lg text-base font-mono font-medium flex items-center gap-2 text-zinc-200 bg-zinc-900/60 border border-white/10 hover:border-[#F75142] transition-colors"
+                  className="px-3 py-2 text-xs font-mono font-medium flex items-center gap-2 text-[#EDEAE1] bg-[#1B1E1C] border border-[#2E3330]"
                 >
-                  <span className="text-[#F75142]">&larr;</span>
+                  <span className="text-[#E07A48]">&larr;</span>
                   <span>Back to Projects</span>
                 </a>
               )}
@@ -426,7 +435,10 @@ export default function Navbar() {
                 <a
                   href={!isProjectPage ? '#contact' : '/#contact'}
                   onClick={(e) => handleNavClick(e, 'contact', '/#contact')}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-mono uppercase tracking-wider text-white bg-[#F75142] rounded-xl font-semibold shadow-lg shadow-[#F75142]/20"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 text-xs font-mono uppercase tracking-wider text-[#EDEAE1] bg-[#E07A48] font-bold"
+                  style={{
+                    clipPath: 'polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px)'
+                  }}
                 >
                   Let's Talk
                 </a>
@@ -438,5 +450,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-

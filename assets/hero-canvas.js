@@ -62,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ctx = canvas.getContext('2d', { alpha: true });
 
-    // Config
+    // Config - Calibrated Matte Earth Tone Palette
     const config = {
         particleCount: 150, // Number of particles
         particleRadius: 1.5,
-        particleColor: 'rgba(255, 255, 255, 0.4)',
-        linkColor: 'rgba(255, 255, 255, 0.15)',
-        accentColor: 'rgba(56, 80, 66, 0.8)', // The brand's green tint
-        backgroundColor: '#0a0d12',
+        particleColor: 'rgba(237, 234, 225, 0.4)', // Warm bone white
+        linkColor: 'rgba(212, 195, 163, 0.12)', // Subtle sand
+        accentColor: 'rgba(140, 166, 122, 0.7)', // Muted sage/olive
+        backgroundColor: '#141615',
         linkDistance: 120, // Max distance to draw a line between particles
         mouseLinkDistance: 150, // Max distance to draw a line to the mouse
         mouseRepelDistance: 100, // Distance mouse repels particles
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                    ctx.strokeStyle = `rgba(212, 195, 163, ${opacity * 0.12})`;
                     ctx.stroke();
                 }
             }
@@ -161,12 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (mDistSq < mouseLinkDistanceSq) {
                     let opacity = 1 - (Math.sqrt(mDistSq) * mouseLinkDistanceInv);
 
-                    // Use a slightly different color or brightness for mouse connections
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(mouse.x, mouse.y);
-                    // Using accent color for mouse connections to make it pop
-                    ctx.strokeStyle = `rgba(56, 80, 66, ${opacity * 0.6})`;
+                    ctx.strokeStyle = `rgba(140, 166, 122, ${opacity * 0.55})`;
                     ctx.stroke();
                 }
             }
@@ -199,53 +197,41 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 if (!isVisible) {
                     isVisible = true;
-                    animate(); // restart animation loop
+                    animate();
                 }
             } else {
                 isVisible = false;
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                }
+                cancelAnimationFrame(animationId);
             }
         });
-    }, { rootMargin: '100px' });
+    }, { threshold: 0 });
 
-    canvasObserver.observe(canvas.parentElement);
+    canvasObserver.observe(canvas);
 
-    // Event Listeners
-    window.addEventListener('resize', initParticles);
+    // Resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            initParticles();
+        }, 200);
+    });
 
-    document.addEventListener('mousemove', (e) => {
+    // Mouse Tracking
+    window.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
-        // Check if mouse is over/near the canvas section (hero section)
-        if (e.clientY <= rect.bottom + 100) {
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-            mouse.isActive = true;
-        } else {
-            mouse.isActive = false;
-        }
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.isActive = true;
     });
 
-    // Touch support
-    document.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-            const rect = canvas.getBoundingClientRect();
-            if (e.touches[0].clientY <= rect.bottom + 100) {
-                mouse.x = e.touches[0].clientX - rect.left;
-                mouse.y = e.touches[0].clientY - rect.top;
-                mouse.isActive = true;
-            } else {
-                mouse.isActive = false;
-            }
-        }
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => {
+    window.addEventListener('mouseleave', () => {
         mouse.isActive = false;
+        mouse.x = -1000;
+        mouse.y = -1000;
     });
 
-    // Start
+    // Initialize
     initParticles();
     animate();
 });
