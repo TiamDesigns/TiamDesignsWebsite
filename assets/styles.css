@@ -47,11 +47,11 @@
   --shadow-sage: 4px 4px 0px var(--accent-lime);
   --shadow-orange: 4px 4px 0px var(--accent-orange);
 
-  /* Tactical Chamfer Polygons (45-degree Precision Cuts) */
-  --chamfer-sm: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
-  --chamfer-md: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  --chamfer-lg: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  --chamfer-card: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  /* Tactical Chamfer Polygons (45-degree Precision Cuts - All 4 Corners Symmetrical) */
+  --chamfer-sm: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+  --chamfer-md: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  --chamfer-lg: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  --chamfer-card: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
 
   /* Typography Stacks */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -1439,7 +1439,7 @@ code, pre, .font-mono {
   cursor: pointer;
   z-index: 3;
   transition: all var(--transition);
-  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+  clip-path: var(--chamfer-sm);
 }
 
 .skill-toggle:hover {
@@ -1957,7 +1957,7 @@ figcaption,
   border: none;
   background: var(--border-bold);
   display: block;
-  clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  clip-path: var(--chamfer-card);
   box-shadow: var(--shadow-hard);
 }
 
@@ -1966,7 +1966,7 @@ figcaption,
   position: absolute;
   inset: 1.5px;
   background: var(--surface);
-  clip-path: polygon(13.4px 0, calc(100% - 13.4px) 0, 100% 13.4px, 100% calc(100% - 13.4px), calc(100% - 13.4px) 100%, 13.4px 100%, 0 calc(100% - 13.4px), 0 13.4px);
+  clip-path: var(--chamfer-card);
   z-index: 0;
   pointer-events: none;
 }
