@@ -47,11 +47,18 @@
   --shadow-sage: 4px 4px 0px var(--accent-lime);
   --shadow-orange: 4px 4px 0px var(--accent-orange);
 
-  /* Tactical Chamfer Polygons (45-degree Precision Cuts - All 4 Corners Symmetrical) */
+  /* Tactical Chamfer Polygons (Precision 2px Uniform Outlines) */
   --chamfer-sm: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+  --chamfer-sm-inner: polygon(5.17px 0, calc(100% - 5.17px) 0, 100% 5.17px, 100% calc(100% - 5.17px), calc(100% - 5.17px) 100%, 5.17px 100%, 0 calc(100% - 5.17px), 0 5.17px);
+
   --chamfer-md: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  --chamfer-md-inner: polygon(9.17px 0, calc(100% - 9.17px) 0, 100% 9.17px, 100% calc(100% - 9.17px), calc(100% - 9.17px) 100%, 9.17px 100%, 0 calc(100% - 9.17px), 0 9.17px);
+
   --chamfer-lg: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
-  --chamfer-card: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  --chamfer-lg-inner: polygon(13.17px 0, calc(100% - 13.17px) 0, 100% 13.17px, 100% calc(100% - 13.17px), calc(100% - 13.17px) 100%, 13.17px 100%, 0 calc(100% - 13.17px), 0 13.17px);
+
+  --chamfer-card: var(--chamfer-lg);
+  --chamfer-card-inner: var(--chamfer-lg-inner);
 
   /* Typography Stacks */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -167,7 +174,7 @@ code, pre, .font-mono {
   z-index: 50;
   background: var(--border-bold);
   clip-path: var(--chamfer-sm);
-  transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  transition: box-shadow var(--transition);
   width: calc(100% - 2rem);
   max-width: 960px;
   box-shadow: 0 4px 16px rgba(18, 22, 31, 0.12);
@@ -176,17 +183,16 @@ code, pre, .font-mono {
 .site-header::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
-  background: rgba(255, 255, 255, 0.94);
+  inset: 2px;
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   z-index: 0;
   pointer-events: none;
 }
 
 .site-header.scrolled {
-  background: var(--accent-lime);
   box-shadow: 0 6px 24px rgba(18, 22, 31, 0.2);
 }
 
@@ -578,7 +584,7 @@ code, pre, .font-mono {
   background-color: #31491e;
 }
 
-/* Secondary / Ghost Button (Complete 1.5px Chamfer Outline + Orange Inversion) */
+/* Secondary / Ghost Button (Complete 2px Chamfer Outline + Orange Inversion) */
 .btn.ghost {
   position: relative;
   background-color: var(--border-bold);
@@ -591,9 +597,9 @@ code, pre, .font-mono {
 .btn.ghost::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background-color: var(--surface);
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   z-index: 1;
   pointer-events: none;
   transition: background-color var(--transition-fast);
@@ -640,7 +646,7 @@ code, pre, .font-mono {
   height: 440px;
   min-height: 400px;
   background: var(--border-bold);
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card);
   box-shadow: 0 16px 36px rgba(18, 22, 31, 0.15), var(--shadow-hard);
   overflow: hidden;
   display: flex;
@@ -652,9 +658,9 @@ code, pre, .font-mono {
 .hero-3d-visual::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: radial-gradient(circle at center, #ffffff 0%, #e2e6eb 100%);
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card-inner);
   z-index: 1;
   pointer-events: none;
 }
@@ -865,7 +871,7 @@ code, pre, .font-mono {
   background: var(--border-bold);
   border: none;
   padding: 1.75rem;
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card);
   box-shadow: var(--shadow-hard);
   transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -881,9 +887,9 @@ code, pre, .font-mono {
 .hero-card-inner::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
   transition: background-color var(--transition);
@@ -1216,9 +1222,9 @@ code, pre, .font-mono {
 .filter-btn::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   z-index: 1;
   pointer-events: none;
   transition: background-color var(--transition-fast);
@@ -1271,9 +1277,9 @@ code, pre, .font-mono {
 .project-card::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface-card);
-  clip-path: var(--chamfer-card);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
   transition: background-color var(--transition);
@@ -1311,11 +1317,25 @@ code, pre, .font-mono {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #ffffff;
-  border: 1.5px solid var(--border-bold);
+  background: var(--border-bold);
   clip-path: var(--chamfer-sm);
+  padding: 2px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color var(--transition-fast);
+}
+
+.project-hero::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .project-hero picture,
@@ -1325,8 +1345,14 @@ code, pre, .font-mono {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
   transition: transform 0.4s cubic-bezier(0.05, 0.9, 0.2, 1);
+}
+
+.project-card:hover .project-hero {
+  background: var(--accent-lime);
 }
 
 .project-card:hover .project-hero img {
@@ -1604,7 +1630,7 @@ code, pre, .font-mono {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border-bold);
   font-size: 0.82rem;
   color: var(--accent-lime);
   font-family: var(--font-mono);
@@ -1625,7 +1651,7 @@ code, pre, .font-mono {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card);
   box-shadow: var(--shadow-hard);
   transition: background-color var(--transition);
 }
@@ -1633,9 +1659,9 @@ code, pre, .font-mono {
 .contact-form::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface-card);
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
 }
@@ -1673,7 +1699,7 @@ code, pre, .font-mono {
   margin-top: 0.35rem;
   margin-bottom: 0.1rem;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border-bold);
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
@@ -1720,16 +1746,16 @@ code, pre, .font-mono {
   border: none;
   background: var(--border-bold);
   margin-top: 1.5rem;
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card);
   box-shadow: var(--shadow-hard);
 }
 
 .table-container::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-lg);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
 }
@@ -1839,9 +1865,9 @@ code, pre, .font-mono {
 .two-col-grid figure::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-card);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
   transition: background-color var(--transition);
@@ -1964,9 +1990,9 @@ figcaption,
 .pdf-slideshow::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-card);
+  clip-path: var(--chamfer-card-inner);
   z-index: 0;
   pointer-events: none;
 }
