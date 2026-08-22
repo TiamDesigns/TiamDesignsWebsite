@@ -1,66 +1,46 @@
 /* ==========================================================================
    Tiam Designs - Industrial Design & Hardware Engineering
-   Design System: Neo-Street Tactical & Cyber-Telemetry (ZZZ & 2XKO Aesthetic)
-   Version: 3.0.0
+   Design System: Industrial Cyberpunk / Military Tech (Matte Earth-Tone)
+   Version: 2.3.0
    ========================================================================== */
 
 /* Design Tokens & CSS Custom Properties */
 :root {
-  /* High-Contrast Void & Surface Palette */
-  --bg: #090a0d;                 /* Deep matte carbon/void base */
-  --bg-subtle: #0f1218;          /* Sub-base background fill */
-  --surface: #141822;             /* Primary tactical container fill */
-  --surface-alt: #0a0d13;         /* Deep recessed container fill */
-  --surface-card: #181d28;        /* Elevated card surface */
-  --border: rgba(255, 255, 255, 0.18); /* High-contrast crisp tactical frame */
-  --border-subtle: rgba(255, 255, 255, 0.1); /* Faint dividing rule */
-  --border-focus: #b4f326;        /* Focused boundary frame (High-Voltage Neon Green) */
-  --border-bold: rgba(255, 255, 255, 0.85);
+  /* Matte Earth-Tone Color Palette */
+  --bg: #141615;                 /* Deep matte slate/carbon base */
+  --bg-subtle: #161817;          /* Sub-base background fill */
+  --surface: #1B1E1C;             /* Matte dark olive-grey surface */
+  --surface-alt: #161817;         /* Alternate deep container fill */
+  --border: #2E3330;              /* Tactile 1px structural frame lines */
+  --border-subtle: #242926;       /* Faint dividing rule */
+  --border-focus: #444C47;        /* Focused boundary frame */
 
   /* High Legibility Typography Colors */
-  --text: #ffffff;                /* Pure stark white for headings/body */
-  --text-bright: #ffffff;         /* Ultra-high contrast display text */
-  --muted: #9aa3b5;               /* Neutral tactical slate grey */
-  --muted-dark: #636d80;          /* Darker telemetry micro-text */
-  --text-dark: #090a0d;           /* Jet black for high-contrast on neon */
+  --text: #EDEAE1;                /* Warm bone white for headings/body */
+  --text-bright: #F5F3ED;         /* Ultra-high contrast display text */
+  --muted: #9E9D95;               /* Neutral warm stone grey for secondary text */
+  --muted-dark: #6E706B;          /* Darker secondary text / placeholders */
 
-  /* High-Voltage Neon Accents (ZZZ & 2XKO Acid Lime & Safety Hazard Orange) */
-  --accent-lime: #b4f326;         /* Primary High-Voltage Neon Green */
-  --accent-orange: #ff5500;       /* Industrial Safety Hazard Orange */
-  --accent-crimson: #e62e2d;      /* Action Crimson */
-  --accent-cyan: #00f0ff;         /* Telemetry Cyan */
-  --accent-sage: var(--accent-lime);
-  --accent-ochre: var(--accent-orange);
-  --accent-sand: var(--accent-lime);
-  --accent-olive: var(--accent-lime);
+  /* Functional Accents */
+  --accent-sand: #D4C3A3;         /* Accent 1: Sand/Beige (metadata, coords, tags) */
+  --accent-olive: #8CA67A;        /* Accent 2: Muted Sage/Olive (active status, logic) */
+  --accent-ochre: #E07A48;        /* Accent 3: Tactical Ochre (primary CTA, alerts) */
 
   /* Aliases for legacy component compatibility */
-  --accent: var(--accent-lime);
-  --accent-alt: var(--accent-orange);
-  --accent-glow: transparent;
+  --accent: var(--accent-ochre);
+  --accent-alt: var(--accent-sand);
+  --accent-glow: transparent;     /* Purged glow blurs */
   --bg-surface: var(--surface);
-  --bg-card: var(--surface-card);
-
-  /* Hard Solid Drop Shadows (Tactical Screenprint/Action-Game Feel) */
-  --shadow-hard: 4px 4px 0px #000000;
-  --shadow-lime: 4px 4px 0px var(--accent-lime);
-  --shadow-sage: 4px 4px 0px var(--accent-lime);
-  --shadow-orange: 4px 4px 0px var(--accent-orange);
-
-  /* Tactical Chamfer Polygons (45-degree Precision Cuts) */
-  --chamfer-sm: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
-  --chamfer-md: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  --chamfer-lg: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  --chamfer-card: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  --bg-card: var(--surface);
 
   /* Typography Stacks */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Transitions & Motion (Snappy Action-Game Curves) */
-  --transition-fast: 120ms cubic-bezier(0.05, 0.9, 0.2, 1);
-  --transition: 180ms cubic-bezier(0.05, 0.9, 0.2, 1);
-  --transition-slow: 300ms cubic-bezier(0.05, 0.9, 0.2, 1);
+  /* Transitions & Motion */
+  --transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
+  --transition: 200ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-slow: 350ms cubic-bezier(0.2, 0, 0, 1);
 
   /* Sizing */
   --container-max: 1200px;
@@ -93,20 +73,18 @@ body {
   position: relative;
 }
 
-/* Global Typography & Strict Anti-Orphan Formatting */
+/* Global Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text);
   font-weight: 700;
   margin-top: 0;
   letter-spacing: -0.01em;
-  text-wrap: balance;
 }
 
 p {
   color: var(--muted);
   line-height: 1.6;
   margin-top: 0;
-  text-wrap: pretty;
 }
 
 a {
@@ -158,7 +136,7 @@ code, pre, .font-mono {
   gap: 0.75rem;
 }
 
-/* Header & HUD Navigation (Tactical 8px Chamfered HUD) */
+/* Header & HUD Navigation (Continuous Sleek 6px Chamfered Frame) */
 .site-header {
   position: fixed;
   top: 1rem;
@@ -166,27 +144,44 @@ code, pre, .font-mono {
   transform: translateX(-50%);
   z-index: 50;
   background: var(--border);
-  clip-path: var(--chamfer-sm);
-  transition: background-color var(--transition), border-color var(--transition);
+  clip-path: polygon(
+    6px 0%,
+    calc(100% - 6px) 0%,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    0% calc(100% - 6px),
+    0% 6px
+  );
+  transition: background-color var(--transition);
   width: calc(100% - 2rem);
-  max-width: 960px;
+  max-width: 900px;
 }
 
 .site-header::before {
   content: '';
   position: absolute;
   inset: 1px;
-  background: rgba(9, 10, 13, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  clip-path: var(--chamfer-sm);
+  background: rgba(20, 22, 21, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  clip-path: polygon(
+    5.4px 0%,
+    calc(100% - 5.4px) 0%,
+    100% 5.4px,
+    100% calc(100% - 5.4px),
+    calc(100% - 5.4px) 100%,
+    5.4px 100%,
+    0% calc(100% - 5.4px),
+    0% 5.4px
+  );
   z-index: 0;
   pointer-events: none;
 }
 
 .site-header.scrolled {
-  background: var(--accent-lime);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  background: var(--accent-sand);
 }
 
 .site-header > * {
@@ -203,8 +198,8 @@ code, pre, .font-mono {
 
 .logo {
   font-family: var(--font-mono);
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-decoration: none;
   color: var(--text);
   font-size: 0.95rem;
@@ -215,7 +210,7 @@ code, pre, .font-mono {
 }
 
 .logo span {
-  color: var(--accent-lime);
+  color: var(--accent-ochre);
 }
 
 .nav {
@@ -234,16 +229,16 @@ code, pre, .font-mono {
   margin: 0;
 }
 
-/* Nav Link Items - Tactical Chamfer & Neon Hover */
+/* Nav Link Items - Complete Continuous 1px Frame on Active & Hover */
 .nav-links a {
   position: relative;
   text-decoration: none;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   padding: 0.35rem 0.75rem;
   display: inline-flex;
   align-items: center;
@@ -251,7 +246,16 @@ code, pre, .font-mono {
   background: transparent;
   border: none;
   isolation: isolate;
-  clip-path: var(--chamfer-sm);
+  clip-path: polygon(
+    5px 0%,
+    calc(100% - 5px) 0%,
+    100% 5px,
+    100% calc(100% - 5px),
+    calc(100% - 5px) 100%,
+    5px 100%,
+    0% calc(100% - 5px),
+    0% 5px
+  );
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -260,36 +264,46 @@ code, pre, .font-mono {
   position: absolute;
   inset: 1px;
   background: transparent;
-  clip-path: var(--chamfer-sm);
+  clip-path: polygon(
+    4.4px 0%,
+    calc(100% - 4.4px) 0%,
+    100% 4.4px,
+    100% calc(100% - 4.4px),
+    calc(100% - 4.4px) 100%,
+    4.4px 100%,
+    0% calc(100% - 4.4px),
+    0% 4.4px
+  );
   z-index: -1;
   pointer-events: none;
   transition: background-color var(--transition);
 }
 
 .nav-links a:hover {
-  color: var(--text-dark);
-  background-color: var(--accent-lime);
+  color: var(--text);
+  background-color: var(--border);
 }
 
 .nav-links a:hover::before {
-  background-color: var(--accent-lime);
+  background-color: #1e2220;
 }
 
 .nav-links a.active {
-  color: var(--text-dark);
-  background-color: var(--accent-lime);
-  font-weight: 800;
+  color: var(--text);
+  background-color: var(--accent-olive);
+  font-weight: 700;
 }
 
 .nav-links a.active::before {
-  background-color: var(--accent-lime);
+  background-color: #18221b;
 }
 
 .nav-links a.active::after {
-  content: "■";
+  content: "";
   display: inline-block;
-  font-size: 0.55rem;
-  color: var(--text-dark);
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-olive);
   position: relative;
   z-index: 1;
 }
@@ -309,28 +323,25 @@ code, pre, .font-mono {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  clip-path: var(--chamfer-sm);
+  clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
 }
 
 .nav-toggle span {
   display: block;
   width: 18px;
   height: 2px;
-  background: var(--accent-lime);
+  background: var(--text);
   margin: 0;
 }
 
-/* ==========================================================================
-   Hero Section - Cyber-Telemetry & Action-Game Split
-   ========================================================================== */
+/* Hero Section */
 .hero {
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 120px 0 0 0;
+  align-items: center;
+  padding: 110px 0 4rem 0;
   background: transparent;
   overflow: hidden;
   max-width: 100vw;
@@ -353,9 +364,9 @@ code, pre, .font-mono {
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   width: 100%;
   max-width: 1200px;
-  margin: auto auto;
-  padding: 1.5rem 2rem;
-  gap: 3.5rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  gap: 3rem;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -369,58 +380,37 @@ code, pre, .font-mono {
 
 .hero-kicker {
   font-family: var(--font-mono);
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent-orange);
+  letter-spacing: 0.1em;
+  color: var(--accent-sand);
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-wrap: balance;
-}
-
-.hero-kicker::before {
-  content: '////';
-  color: var(--accent-lime);
-  letter-spacing: -0.05em;
 }
 
 .hero-sans {
-  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin: 0;
-  text-wrap: balance;
 }
 
 .hero-display {
   font-family: var(--font-mono);
   font-size: clamp(1.2rem, 2.2vw, 1.75rem);
-  font-weight: 700;
-  color: var(--accent-lime);
+  font-weight: 600;
+  color: var(--muted);
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-wrap: balance;
-}
-
-.hero-display span {
-  color: var(--text);
 }
 
 .hero-subtitle {
-  font-size: 1.02rem;
+  font-size: 1rem;
   color: var(--muted);
   line-height: 1.6;
   margin: 0;
   max-width: 520px;
-  text-wrap: pretty;
 }
 
 .hero-actions {
@@ -443,60 +433,87 @@ code, pre, .font-mono {
   max-width: 480px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
 }
 
-/* ==========================================================================
-   Tactical Hazard Ribbon Banner (Docked in Viewport Frame)
-   ========================================================================== */
-.hazard-ribbon {
-  width: 100%;
+/* 3D Visual Container in Hero (Continuous 14px Chamfered Frame) */
+.hero-3d-visual {
   position: relative;
-  background: var(--accent-lime);
-  color: var(--text-dark);
+  width: 100%;
+  height: 480px;
+  min-height: 400px;
   overflow: hidden;
-  padding: 0.6rem 0;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.4), 0 4px 0px #000000;
-  z-index: 10;
-  margin-top: auto;
-  flex-shrink: 0;
+  z-index: 2;
+  background: var(--border);
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
 }
 
-.hazard-ribbon-content {
-  display: inline-flex;
+.hero-3d-visual::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--surface-alt);
+  clip-path: polygon(
+    13.4px 0%,
+    calc(100% - 13.4px) 0%,
+    100% 13.4px,
+    100% calc(100% - 13.4px),
+    calc(100% - 13.4px) 100%,
+    13.4px 100%,
+    0% calc(100% - 13.4px),
+    0% 13.4px
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+#3d-container,
+#3d-container canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  touch-action: pan-y;
+}
+
+#3d-container {
+  pointer-events: auto;
+}
+
+.hero-3d-visual .model-loader-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  animation: hazardScroll 28s linear infinite;
+  justify-content: center;
+  color: var(--text);
+  font-family: var(--font-mono);
+  z-index: 10;
+  pointer-events: none;
+  background: rgba(20, 22, 21, 0.85);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.5s ease-out;
 }
 
-@keyframes hazardScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.hazard-ribbon .sep {
-  color: var(--accent-orange);
-  font-weight: 900;
-}
-
-/* ==========================================================================
-   Tactical Chamfered Action Buttons (2XKO & ZZZ Tactile Hard Shadow)
-   ========================================================================== */
+/* Tactical Chamfered Buttons (8px Chamfer) */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.6rem;
+  padding: 0.7rem 1.45rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   appearance: none;
   cursor: pointer;
@@ -504,52 +521,75 @@ code, pre, .font-mono {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  clip-path: var(--chamfer-sm);
-  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background-color var(--transition), color var(--transition), transform 100ms ease;
+  clip-path: polygon(
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% calc(100% - 8px),
+    0% 8px
+  );
 }
 
 .btn .btn-text {
   position: relative;
   z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
 }
 
 .btn .btn-bg {
   display: none;
 }
 
-/* Primary CTA Button (High-Voltage Acid Lime + Hard Shadow) */
+/* Primary CTA Button (Tactical Ochre) */
 .btn.primary {
-  background-color: var(--accent-lime);
-  color: var(--text-dark);
+  background-color: var(--accent-ochre);
+  color: #141615;
   border: none;
-  box-shadow: var(--shadow-hard);
 }
 
 .btn.primary .btn-text {
-  color: var(--text-dark);
+  color: #141615;
 }
 
 .btn.primary:hover {
-  background-color: #c7ff38;
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  background-color: #f08957;
+  transform: translateY(-1px);
 }
 
 .btn.primary:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #000000;
-  background-color: #a0dd1d;
+  transform: translateY(1px);
+  background-color: #cc6b3c;
 }
 
-/* Secondary / Ghost Button (Tactical Border + Orange Inversion) */
+/* Secondary / Ghost Button (Continuous 8px Chamfered Frame) */
 .btn.ghost {
-  background-color: var(--surface);
-  border: 1px solid var(--border-bold);
+  background-color: var(--border);
+  border: none;
   color: var(--text);
-  box-shadow: var(--shadow-hard);
+  isolation: isolate;
+}
+
+.btn.ghost::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background-color: var(--surface);
+  clip-path: polygon(
+    7.4px 0%,
+    calc(100% - 7.4px) 0%,
+    100% 7.4px,
+    100% calc(100% - 7.4px),
+    calc(100% - 7.4px) 100%,
+    7.4px 100%,
+    0% calc(100% - 7.4px),
+    0% 7.4px
+  );
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color var(--transition);
 }
 
 .btn.ghost .btn-text {
@@ -557,20 +597,18 @@ code, pre, .font-mono {
 }
 
 .btn.ghost:hover {
-  background-color: var(--accent-orange);
-  border-color: var(--accent-orange);
-  color: #ffffff;
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  background-color: var(--accent-sand);
+  color: var(--accent-sand);
+  transform: translateY(-1px);
 }
 
-.btn.ghost:hover .btn-text {
-  color: #ffffff;
+.btn.ghost:hover::before {
+  background-color: #252a27;
 }
 
 .btn.ghost:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #000000;
+  transform: translateY(1px);
+  background-color: var(--surface-alt);
 }
 
 .btn.full-width {
@@ -712,7 +750,7 @@ code, pre, .font-mono {
 }
 
 /* ==========================================================================
-   Continuous Angled Chamfered Containers (ZZZ Tactical HUD Panels)
+   Continuous Angled Chamfered Containers (Bold 14px Cutout Frame)
    ========================================================================== */
 .highlight-card,
 .skill-group,
@@ -726,10 +764,18 @@ code, pre, .font-mono {
   position: relative;
   background: var(--border);
   border: none;
-  padding: 1.75rem;
-  clip-path: var(--chamfer-lg);
-  box-shadow: var(--shadow-hard);
-  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  padding: 1.65rem;
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
+  transition: background-color var(--transition), transform var(--transition);
 }
 
 .highlight-card::before,
@@ -743,9 +789,18 @@ code, pre, .font-mono {
 .hero-card-inner::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 1px;
   background: var(--surface);
-  clip-path: var(--chamfer-lg);
+  clip-path: polygon(
+    13.4px 0%,
+    calc(100% - 13.4px) 0%,
+    100% 13.4px,
+    100% calc(100% - 13.4px),
+    calc(100% - 13.4px) 100%,
+    13.4px 100%,
+    0% calc(100% - 13.4px),
+    0% 13.4px
+  );
   z-index: 0;
   pointer-events: none;
   transition: background-color var(--transition);
@@ -759,9 +814,8 @@ code, pre, .font-mono {
 .firmware-card:hover,
 .pm-card:hover,
 .download-card:hover {
-  background: var(--accent-lime);
-  transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0px #000000;
+  background: var(--accent-sand);
+  transform: translateY(-2px);
 }
 
 .highlight-card:hover::before,
@@ -772,7 +826,43 @@ code, pre, .font-mono {
 .firmware-card:hover::before,
 .pm-card:hover::before,
 .download-card:hover::before {
-  background: #181e2b;
+  background: #1e2220;
+}
+
+/* Larger, Tactile Technical Corner Markings (+ Crosshairs) */
+.highlight-card::after,
+.skill-group::after,
+.spec-card::after,
+.engineering-card::after,
+.arch-card::after,
+.firmware-card::after,
+.pm-card::after,
+.download-card::after {
+  content: '+';
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.highlight-card:hover::after,
+.skill-group:hover::after,
+.spec-card:hover::after,
+.engineering-card:hover::after,
+.arch-card:hover::after,
+.firmware-card:hover::after,
+.pm-card:hover::after,
+.download-card:hover::after {
+  color: var(--accent-sand);
+  opacity: 1;
 }
 
 .highlight-card > *,
@@ -800,10 +890,10 @@ code, pre, .font-mono {
 .firmware-card h3,
 .pm-card h3 {
   font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--text);
   margin: 0;
 }
@@ -813,13 +903,13 @@ code, pre, .font-mono {
 .firmware-badge,
 .eng-card-badge {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: var(--accent-lime);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-sand);
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.35rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Tech List & Focus List */
@@ -847,15 +937,15 @@ code, pre, .font-mono {
 
 .tech-title {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--accent-sand);
 }
 
 .tech-desc {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .focus-list {
@@ -874,28 +964,27 @@ code, pre, .font-mono {
 }
 
 .status-indicator {
-  width: 8px;
-  height: 8px;
-  background: var(--accent-lime);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-olive);
   margin-top: 0.45rem;
   flex-shrink: 0;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  box-shadow: 0 0 8px var(--accent-lime);
 }
 
 .focus-title {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  font-weight: 800;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--text);
   display: block;
   margin-bottom: 0.15rem;
 }
 
 .focus-desc {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   color: var(--muted);
-  line-height: 1.45;
+  line-height: 1.4;
   margin: 0;
 }
 
@@ -905,7 +994,7 @@ code, pre, .font-mono {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
@@ -917,43 +1006,62 @@ code, pre, .font-mono {
 
 .filter-btn {
   position: relative;
-  padding: 0.4rem 0.95rem;
-  background: var(--surface);
+  padding: 0.35rem 0.85rem;
+  background: var(--border);
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  border: 1px solid var(--border);
-  clip-path: var(--chamfer-sm);
-  transition: all var(--transition-fast);
+  border: none;
+  isolation: isolate;
+  transition: background-color var(--transition), color var(--transition);
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--surface);
+  clip-path: polygon(4.4px 0, calc(100% - 4.4px) 0, 100% 4.4px, 100% calc(100% - 4.4px), calc(100% - 4.4px) 100%, 4.4px 100%, 0 calc(100% - 4.4px), 0 4.4px);
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color var(--transition);
+}
+
+.filter-btn > * {
+  position: relative;
+  z-index: 1;
 }
 
 .filter-btn:hover {
-  color: var(--text-dark);
-  background: var(--accent-lime);
-  border-color: var(--accent-lime);
+  color: var(--text);
+  background: var(--accent-sand);
+}
+
+.filter-btn:hover::before {
+  background: #252a27;
 }
 
 .filter-btn.active {
-  background: var(--accent-lime);
-  border-color: var(--accent-lime);
-  color: var(--text-dark);
-  font-weight: 800;
-  box-shadow: var(--shadow-hard);
+  background: var(--accent-ochre);
+  color: #141615;
+  font-weight: 700;
+}
+
+.filter-btn.active::before {
+  background: var(--accent-ochre);
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
 }
 
-/* ==========================================================================
-   Tactical Collectible Project Card (ZZZ & 2XKO Cassette Frame)
-   ========================================================================== */
+/* Project Card - 100% Contiguous 14px Chamfered Frame */
 .project-card {
   position: relative;
   background: var(--border);
@@ -961,38 +1069,75 @@ code, pre, .font-mono {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.95rem;
   width: 100%;
-  clip-path: var(--chamfer-card);
-  box-shadow: var(--shadow-hard);
-  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
+  transition: background-color var(--transition), transform var(--transition);
 }
 
 .project-card::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
-  background: var(--surface-card);
-  clip-path: var(--chamfer-card);
+  inset: 1px;
+  background: var(--surface);
+  clip-path: polygon(
+    13.4px 0%,
+    calc(100% - 13.4px) 0%,
+    100% 13.4px,
+    100% calc(100% - 13.4px),
+    calc(100% - 13.4px) 100%,
+    13.4px 100%,
+    0% calc(100% - 13.4px),
+    0% 13.4px
+  );
   z-index: 0;
   pointer-events: none;
   transition: background-color var(--transition);
 }
 
 .project-card:hover {
-  background: var(--accent-lime);
-  transform: translate(-4px, -4px);
-  box-shadow: 6px 6px 0px var(--accent-lime);
+  background: var(--accent-ochre);
+  transform: translateY(-2px);
   cursor: pointer;
 }
 
 .project-card:hover::before {
-  background: #1c2230;
+  background: #1e2220;
 }
 
 .project-card:active {
-  transform: translate(0, 0);
-  box-shadow: 2px 2px 0px #000000;
+  transform: translateY(0);
+}
+
+/* Larger Corner Technical Markings (+) on Project Cards */
+.project-card::after {
+  content: '+';
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.project-card:hover::after {
+  color: var(--accent-ochre);
+  opacity: 1;
 }
 
 .card-link-wrapper {
@@ -1000,7 +1145,7 @@ code, pre, .font-mono {
   color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.95rem;
   flex: 1;
   width: 100%;
   position: relative;
@@ -1012,9 +1157,19 @@ code, pre, .font-mono {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #000000;
-  border: 1px solid var(--border);
-  clip-path: var(--chamfer-sm);
+  background: var(--border);
+  border: none;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+}
+
+.project-hero::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--surface-alt);
+  clip-path: polygon(9.4px 0, calc(100% - 9.4px) 0, 100% 9.4px, 100% calc(100% - 9.4px), calc(100% - 9.4px) 100%, 9.4px 100%, 0 calc(100% - 9.4px), 0 9.4px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .project-hero picture,
@@ -1025,66 +1180,91 @@ code, pre, .font-mono {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s cubic-bezier(0.05, 0.9, 0.2, 1);
+  clip-path: polygon(9.4px 0, calc(100% - 9.4px) 0, 100% 9.4px, 100% calc(100% - 9.4px), calc(100% - 9.4px) 100%, 9.4px 100%, 0 calc(100% - 9.4px), 0 9.4px);
 }
 
-.project-card:hover .project-hero img {
-  transform: scale(1.04);
-}
-
-/* High-Contrast Visible Monospace Project Tags (Die-Cut Sticker Style) */
+/* High-Contrast Visible Monospace Project Tags (Continuous 1px Chamfered Frame) */
 .project-tag {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 800;
-  color: var(--text-dark);
-  background: var(--accent-lime);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--accent-sand);
+  background: var(--border);
   border: none;
-  padding: 0.3rem 0.75rem;
+  padding: 0.25rem 0.7rem;
   width: fit-content;
   z-index: 2;
-  box-shadow: 2px 2px 0px #000000;
-  clip-path: var(--chamfer-sm);
-  transition: background-color var(--transition), transform var(--transition);
+  isolation: isolate;
+  clip-path: polygon(
+    6px 0%,
+    calc(100% - 6px) 0%,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    0% calc(100% - 6px),
+    0% 6px
+  );
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.project-tag::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--surface-alt);
+  clip-path: polygon(
+    5.4px 0%,
+    calc(100% - 5.4px) 0%,
+    100% 5.4px,
+    100% calc(100% - 5.4px),
+    calc(100% - 5.4px) 100%,
+    5.4px 100%,
+    0% calc(100% - 5.4px),
+    0% 5.4px
+  );
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color var(--transition);
 }
 
 .project-tag > *,
 .project-tag .tag-text {
   position: relative;
   z-index: 1;
-  color: var(--text-dark);
+  color: var(--accent-sand);
+  transition: color var(--transition);
 }
 
 .project-card:hover .project-tag {
-  background: var(--accent-orange);
-  color: #ffffff;
+  background: var(--accent-ochre);
 }
 
+.project-card:hover .project-tag > *,
 .project-card:hover .project-tag .tag-text {
-  color: #ffffff;
+  color: var(--accent-ochre);
 }
 
 .project-card h3 {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--text);
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .project-card p {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--muted);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .project-meta {
@@ -1280,7 +1460,7 @@ code, pre, .font-mono {
   margin-right: 0.35rem;
 }
 
-/* Contact Section & Form (Tactical Transmission Terminal) */
+/* Contact Section & Form (Continuous 14px Chamfered Frame) */
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
@@ -1289,30 +1469,29 @@ code, pre, .font-mono {
 }
 
 .contact-subtext {
-  font-size: 1.02rem;
-  line-height: 1.65;
+  font-size: 0.98rem;
+  line-height: 1.6;
   color: var(--muted);
   margin-top: 0.75rem;
   margin-bottom: 1.75rem;
-  max-width: 480px;
+  max-width: 460px;
 }
 
 .contact-meta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.85rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  font-size: 0.82rem;
-  color: var(--accent-lime);
+  font-size: 0.8rem;
+  color: var(--accent-sand);
   font-family: var(--font-mono);
-  font-weight: 700;
-  clip-path: var(--chamfer-sm);
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
 }
 
 .contact-meta .meta-icon {
-  color: var(--accent-orange);
+  color: var(--accent-ochre);
   flex-shrink: 0;
 }
 
@@ -1320,27 +1499,44 @@ code, pre, .font-mono {
   position: relative;
   background: var(--border);
   border: none;
-  padding: 2rem;
+  padding: 1.8rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  clip-path: var(--chamfer-lg);
-  box-shadow: var(--shadow-hard);
+  gap: 1.15rem;
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
   transition: background-color var(--transition);
 }
 
 .contact-form::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
-  background: var(--surface-card);
-  clip-path: var(--chamfer-lg);
+  inset: 1px;
+  background: var(--surface);
+  clip-path: polygon(
+    13.4px 0%,
+    calc(100% - 13.4px) 0%,
+    100% 13.4px,
+    100% calc(100% - 13.4px),
+    calc(100% - 13.4px) 100%,
+    13.4px 100%,
+    0% calc(100% - 13.4px),
+    0% 13.4px
+  );
   z-index: 0;
   pointer-events: none;
 }
 
 .contact-form:focus-within {
-  background: var(--accent-lime);
+  background: var(--accent-ochre);
 }
 
 .contact-form > * {
@@ -1351,12 +1547,12 @@ code, pre, .font-mono {
 .contact-form label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text);
-  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-sand);
+  margin-bottom: 0.85rem;
 }
 
 .contact-form .optional-tag {
@@ -1371,41 +1567,40 @@ code, pre, .font-mono {
   width: 100%;
   margin-top: 0.35rem;
   margin-bottom: 0.1rem;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.85rem;
   border: 1px solid var(--border);
   background: var(--surface-alt);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   border-radius: 0;
-  clip-path: var(--chamfer-sm);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition: border-color var(--transition);
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #4a5468;
+  color: #5c635f;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: var(--accent-lime);
-  box-shadow: 0 0 0 1px var(--accent-lime);
+  border-color: var(--accent-sand);
 }
 
 .form-note {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--muted);
   margin-top: 1rem;
   text-align: center;
 }
 
 .form-note a {
-  color: var(--accent-lime);
+  color: var(--accent-ochre);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .form-note a:hover {
@@ -1419,15 +1614,33 @@ code, pre, .font-mono {
   border: none;
   background: var(--border);
   margin-top: 1.5rem;
-  clip-path: var(--chamfer-lg);
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
 }
 
 .table-container::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 1px;
   background: var(--surface);
-  clip-path: var(--chamfer-lg);
+  clip-path: polygon(
+    13.4px 0%,
+    calc(100% - 13.4px) 0%,
+    100% 13.4px,
+    100% calc(100% - 13.4px),
+    calc(100% - 13.4px) 100%,
+    13.4px 100%,
+    0% calc(100% - 13.4px),
+    0% 13.4px
+  );
   z-index: 0;
   pointer-events: none;
 }

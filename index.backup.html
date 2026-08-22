@@ -54,147 +54,124 @@
       <div class="container hero-grid">
         <div class="hero-text">
           <p class="hero-kicker">INDUSTRIAL DESIGN · EMBEDDED SYSTEMS · HARDWARE ARCHITECTURE</p>
-          <h1 class="hero-sans">Industrial Design &amp; Embedded&nbsp;Development.</h1>
-          <h2 class="hero-display"><span>OPERATOR //</span> TIAM&nbsp;BENNETT</h2>
+          <h1 class="hero-sans">Industrial Design &amp; Embedded Development.</h1>
+          <h2 class="hero-display">Hi, I'm Tiam.</h2>
           <div class="hero-actions">
-            <a href="#projects" class="btn primary"><span class="btn-text">View Projects &gt;&gt;&gt;</span></a>
+            <a href="#projects" class="btn primary"><span class="btn-text">View Projects</span></a>
             <a href="#contact" class="btn ghost"><span class="btn-text">Let’s work together</span></a>
           </div>
         </div>
         <div class="hero-visual">
-          <svg class="hero-toolbox-svg" viewBox="-60 -240 560 560" style="overflow: visible;"
+          <svg class="hero-toolbox-svg" viewBox="-50 -240 500 600" style="overflow: visible;"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="toolbox-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#181d28" />
-                <stop offset="100%" stop-color="#090a0d" />
+                <stop offset="0%" stop-color="#1B1E1C" />
+                <stop offset="100%" stop-color="#141615" />
               </linearGradient>
               <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#b4f326" />
-                <stop offset="100%" stop-color="#ff5500" />
+                <stop offset="0%" stop-color="#E07A48" />
+                <stop offset="100%" stop-color="#cc6b3c" />
               </linearGradient>
             </defs>
 
             <!-- Entire Toolbox Group for Entrance Animation -->
             <g id="toolbox-entire" transform="translate(100, 240)">
 
-              <!-- 1. Back Wall & Interior Cavity (Rendered behind floating icons) -->
+              <!-- 1. Back Wall / Inside of box -->
               <g id="toolbox-back">
-                <!-- Back inner wall -->
-                <polygon points="16,-14 184,-14 184,25 16,25" fill="#090a0d" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" />
-                <!-- Left inner perspective wall -->
-                <polygon points="0,0 16,-14 16,25 0,35" fill="#0f131a" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
-                <!-- Right inner perspective wall -->
-                <polygon points="200,0 184,-14 184,25 200,35" fill="#0f131a" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
-                <!-- Interior top rim highlight line -->
-                <line x1="16" y1="-14" x2="184" y2="-14" stroke="#b4f326" stroke-width="1.5" stroke-opacity="0.9" />
+                <path d="M 20,-10 L 180,-10 L 180,20 L 20,20 Z" fill="#141615" />
+                <path d="M 20,-10 L 180,-10" fill="none" stroke="#E07A48" stroke-width="1.5" stroke-opacity="0.6" />
               </g>
 
               <!-- 2. Floating Icons Group -->
               <g id="toolbox-contents" transform="translate(100, 10)">
 
-                <!-- Electronics/PCB Node (MCU Chip with Neon Green Accent) -->
+                <!-- Electronics/PCB Node (MCU Chip with Coloured Pins) -->
                 <g id="icon-electronics" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#141822" stroke="#b4f326" stroke-width="1.5" />
-                  <!-- Pins (Neon Green #B4F326) -->
-                  <line x1="-16" y1="-6" x2="-8" y2="-6" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-16" y1="0" x2="-8" y2="0" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-16" y1="6" x2="-8" y2="6" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="-6" x2="16" y2="-6" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="0" x2="16" y2="0" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="6" x2="16" y2="6" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-6" y1="-16" x2="-6" y2="-8" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="0" y1="-16" x2="0" y2="-8" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="6" y1="-16" x2="6" y2="-8" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-6" y1="8" x2="-6" y2="16" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="0" y1="8" x2="0" y2="16" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                  <line x1="6" y1="8" x2="6" y2="16" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
+                  <circle cx="0" cy="0" r="28" fill="#1B1E1C" stroke="#D4C3A3" stroke-width="1.5" />
+                  <!-- Left Pins (Ochre Accent #E07A48) -->
+                  <line x1="-16" y1="-6" x2="-8" y2="-6" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <line x1="-16" y1="0" x2="-8" y2="0" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <line x1="-16" y1="6" x2="-8" y2="6" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <!-- Right Pins (Ochre Accent #E07A48) -->
+                  <line x1="8" y1="-6" x2="16" y2="-6" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <line x1="8" y1="0" x2="16" y2="0" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <line x1="8" y1="6" x2="16" y2="6" stroke="#E07A48" stroke-width="2" stroke-linecap="round" />
+                  <!-- Top Pins (Sage Accent #8CA67A) -->
+                  <line x1="-6" y1="-16" x2="-6" y2="-8" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
+                  <line x1="0" y1="-16" x2="0" y2="-8" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
+                  <line x1="6" y1="-16" x2="6" y2="-8" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
+                  <!-- Bottom Pins (Sage Accent #8CA67A) -->
+                  <line x1="-6" y1="8" x2="-6" y2="16" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
+                  <line x1="0" y1="8" x2="0" y2="16" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
+                  <line x1="6" y1="8" x2="6" y2="16" stroke="#8CA67A" stroke-width="2" stroke-linecap="round" />
                   <!-- Microchip Body -->
-                  <rect x="-10" y="-10" width="20" height="20" rx="1" fill="#090a0d" stroke="#ffffff" stroke-width="1.5" />
+                  <rect x="-10" y="-10" width="20" height="20" rx="1" fill="#141615" stroke="#EDEAE1" stroke-width="1.5" />
                   <!-- Pin 1 Marker Dot -->
-                  <circle cx="-5" cy="-5" r="1.8" fill="#ff5500" />
+                  <circle cx="-5" cy="-5" r="1.8" fill="#E07A48" />
                 </g>
 
-                <!-- Code/Embedded Node (Safety Orange #FF5500) -->
+                <!-- Code/Embedded Node -->
                 <g id="icon-code" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#141822" stroke="#ff5500" stroke-width="1.5" />
-                  <polyline points="-8,-6 -14,0 -8,6" fill="none" stroke="#ff5500" stroke-width="2"
+                  <circle cx="0" cy="0" r="28" fill="#1B1E1C" stroke="#D4C3A3" stroke-width="1.5" />
+                  <polyline points="-8,-6 -14,0 -8,6" fill="none" stroke="#E07A48" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" />
-                  <polyline points="8,-6 14,0 8,6" fill="none" stroke="#ff5500" stroke-width="2" stroke-linecap="round"
+                  <polyline points="8,-6 14,0 8,6" fill="none" stroke="#E07A48" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
-                  <line x1="-2" y1="10" x2="2" y2="-10" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                  <line x1="-2" y1="10" x2="2" y2="-10" stroke="#EDEAE1" stroke-width="2" stroke-linecap="round" />
                 </g>
 
-                <!-- Prototyping/Hardware Node (CAD Isometric Cube) -->
+                <!-- Prototyping/Hardware Node (CAD Cube) -->
                 <g id="icon-hw" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#141822" stroke="#b4f326" stroke-width="1.5" />
+                  <circle cx="0" cy="0" r="28" fill="#1B1E1C" stroke="#D4C3A3" stroke-width="1.5" />
+                  <!-- Isometric Cube representing CAD -->
                   <!-- Top Face -->
-                  <polygon points="0,-16 14,-8 0,0 -14,-8" fill="none" stroke="#ffffff" stroke-width="1.5"
+                  <polygon points="0,-16 14,-8 0,0 -14,-8" fill="none" stroke="#EDEAE1" stroke-width="1.5"
                     stroke-linejoin="round" />
                   <!-- Left Face -->
-                  <polygon points="-14,-8 0,0 0,16 -14,8" fill="none" stroke="#ffffff" stroke-width="1.5"
+                  <polygon points="-14,-8 0,0 0,16 -14,8" fill="none" stroke="#EDEAE1" stroke-width="1.5"
                     stroke-linejoin="round" />
                   <!-- Right Face -->
-                  <polygon points="0,0 14,-8 14,8 0,16" fill="none" stroke="#b4f326" stroke-width="1.5"
+                  <polygon points="0,0 14,-8 14,8 0,16" fill="none" stroke="#E07A48" stroke-width="1.5"
                     stroke-linejoin="round" />
                   <!-- Center Y-axis line -->
-                  <line x1="0" y1="0" x2="0" y2="16" stroke="#b4f326" stroke-width="1.5" />
+                  <line x1="0" y1="0" x2="0" y2="16" stroke="#E07A48" stroke-width="1.5" />
                 </g>
               </g>
 
-              <!-- 3. Front Wall / Outer Body (Solid structural front in front of icons) -->
+              <!-- 3. Front Wall / Base Body -->
               <g id="toolbox-front">
-                <!-- Main body: crisp solid rectangular front face -->
-                <rect x="0" y="0" width="200" height="90" rx="3" fill="url(#toolbox-grad)" stroke="rgba(255,255,255,0.18)"
+                <!-- Main body -->
+                <rect x="0" y="0" width="200" height="90" rx="2" fill="url(#toolbox-grad)" stroke="#2E3330"
                   stroke-width="1.5" />
-                <!-- Structural top lip line -->
-                <line x1="0" y1="0" x2="200" y2="0" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
-                <!-- Accent Stripes across front -->
-                <line x1="16" y1="26" x2="184" y2="26" stroke="#b4f326" stroke-width="1.5" stroke-opacity="0.9" />
-                <line x1="16" y1="64" x2="184" y2="64" stroke="#ff5500" stroke-width="1.5" stroke-opacity="0.85" />
+                <!-- Side panels -->
+                <path d="M 0,0 L 20,-10 L 20,80 L 0,90 Z" fill="#161817" stroke="#2E3330" stroke-width="1" />
+                <path d="M 200,0 L 180,-10 L 180,80 L 200,90 Z" fill="#141615" stroke="#2E3330" stroke-width="1" />
+                <!-- Tech Accent Lines -->
+                <line x1="20" y1="28" x2="180" y2="28" stroke="#E07A48" stroke-width="1.5" stroke-opacity="0.85" />
+                <line x1="20" y1="62" x2="180" y2="62" stroke="#D4C3A3" stroke-width="1" stroke-opacity="0.75" />
                 <!-- Status LED -->
-                <circle id="toolbox-led" cx="165" cy="45" r="3.2" fill="#b4f326" />
+                <circle id="toolbox-led" cx="160" cy="45" r="3" fill="#8CA67A" />
               </g>
 
               <!-- 4. Toolbox Lid -->
               <g id="toolbox-lid">
                 <!-- Inner Lid Surface -->
-                <rect x="0" y="-26" width="200" height="26" rx="2" fill="#090a0d" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+                <rect x="0" y="-28" width="200" height="28" rx="2" fill="#141615" stroke="#E07A48" stroke-width="1" stroke-opacity="0.6" />
                 <!-- Outer Lid Shell -->
-                <rect x="0" y="-26" width="200" height="26" rx="2" fill="url(#toolbox-grad)" stroke="rgba(255,255,255,0.18)"
+                <rect x="0" y="-28" width="200" height="28" rx="2" fill="url(#toolbox-grad)" stroke="#2E3330"
                   stroke-width="1.5" />
                 <!-- Handle -->
-                <path d="M 72,-26 L 72,-40 L 128,-40 L 128,-26" fill="none" stroke="#ffffff" stroke-width="2.5"
+                <path d="M 70,-28 L 70,-42 L 130,-42 L 130,-28" fill="none" stroke="#EDEAE1" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round" />
                 <!-- Machined Accent Vents -->
-                <line x1="20" y1="-13" x2="42" y2="-13" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
-                <line x1="158" y1="-13" x2="180" y2="-13" stroke="#b4f326" stroke-width="2" stroke-linecap="round" />
+                <line x1="20" y1="-14" x2="40" y2="-14" stroke="#E07A48" stroke-width="2.5" stroke-linecap="round" />
+                <line x1="160" y1="-14" x2="180" y2="-14" stroke="#E07A48" stroke-width="2.5" stroke-linecap="round" />
               </g>
 
             </g>
           </svg>
-        </div>
-      </div>
-
-      <!-- Hazard Tape Scrolling Ribbon (Docked inside Hero initial viewport) -->
-      <div class="hazard-ribbon" aria-hidden="true">
-        <div class="hazard-ribbon-content">
-          <span>TIAM DESIGNS</span> <span class="sep">////</span>
-          <span>HARDWARE ARCHITECTURE</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>EMBEDDED C/C++ FIRMWARE</span> <span class="sep">////</span>
-          <span>MULTI-LAYER PCB DESIGN</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>DIGITAL LOGIC &amp; FPGA</span> <span class="sep">////</span>
-          <span>SENSORS &amp; ACTUATORS</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>UOTTAWA ELECTRICAL ENG</span> <span class="sep">////</span>
-          <span>RAPID PROTOTYPING &amp; DFM</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>TIAM DESIGNS</span> <span class="sep">////</span>
-          <span>HARDWARE ARCHITECTURE</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>EMBEDDED C/C++ FIRMWARE</span> <span class="sep">////</span>
-          <span>MULTI-LAYER PCB DESIGN</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>DIGITAL LOGIC &amp; FPGA</span> <span class="sep">////</span>
-          <span>SENSORS &amp; ACTUATORS</span> <span class="sep">&gt;&gt;&gt;</span>
-          <span>UOTTAWA ELECTRICAL ENG</span> <span class="sep">////</span>
-          <span>RAPID PROTOTYPING &amp; DFM</span> <span class="sep">&gt;&gt;&gt;</span>
         </div>
       </div>
     </section>
@@ -203,12 +180,12 @@
     <section id="about" class="section">
       <div class="container section-grid">
         <div class="about-bio">
-          <h2 class="about-heading">01 // SYSTEM OVERVIEW &amp;&nbsp;BACKGROUND</h2>
+          <h2 class="about-heading">01 // SYSTEM OVERVIEW &amp; BACKGROUND</h2>
           <p class="about-p">
-            I am an Electrical Engineering student at the University of Ottawa with a background in Industrial Design. I build practical embedded hardware, custom microcontroller boards, and prototype electronics. Combining board design with physical enclosure layout allows me to take projects smoothly from initial schematics to finished physical&nbsp;devices.
+            I am an Electrical Engineering student at the University of Ottawa with a background in Industrial Design. I build practical embedded hardware, custom microcontroller boards, and prototype electronics. Combining board design with physical enclosure layout allows me to take projects smoothly from initial schematics to finished physical devices.
           </p>
           <p class="about-p">
-            My experience focuses on C/C++ firmware development, multi-layer PCB design, and hands-on hardware debugging. I'm also actively building my digital logic depth—moving from basic CPU architectures up to custom RISC-V design on&nbsp;FPGAs.
+            My experience focuses on C/C++ firmware development, multi-layer PCB design, and hands-on hardware debugging. I'm also actively building my digital logic depth—moving from basic CPU architectures up to custom RISC-V design on FPGAs.
           </p>
         </div>
         <div class="about-highlights">
@@ -220,15 +197,15 @@
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">Embedded Systems &amp; Firmware</strong>
-                <span class="tech-desc">Microcontroller programming (C/C++), MCU platforms (STM32, ESP32, ARM Cortex-M), and hardware protocols (SPI, I2C,&nbsp;UART).</span>
+                <span class="tech-desc">Microcontroller programming (C/C++), MCU platforms (STM32, ESP32, ARM Cortex-M), and hardware protocols (SPI, I2C, UART).</span>
               </li>
               <li>
                 <strong class="tech-title">PCB Design &amp; Hardware Prototyping</strong>
-                <span class="tech-desc">Schematic capture, board layout, component selection, thermal management, and 3D enclosure integration&nbsp;(DFM).</span>
+                <span class="tech-desc">Schematic capture, board layout, component selection, thermal management, and 3D enclosure integration (DFM).</span>
               </li>
               <li>
-                <strong class="tech-title">Digital Logic &amp; FPGA <span style="color: var(--accent-sage);">[LEARNING FOCUS]</span></strong>
-                <span class="tech-desc">Verilog, digital design fundamentals (Mano architecture), RTL simulation, and building custom RISC-V&nbsp;cores.</span>
+                <strong class="tech-title">Digital Logic &amp; FPGA <span style="color: var(--accent-olive);">[LEARNING FOCUS]</span></strong>
+                <span class="tech-desc">Verilog, digital design fundamentals (Mano architecture), RTL simulation, and building custom RISC-V cores.</span>
               </li>
             </ul>
           </div>
@@ -250,14 +227,14 @@
                 <span class="status-indicator"></span>
                 <div>
                   <strong class="focus-title">RISC-V &amp; Digital Logic Design</strong>
-                  <p class="focus-desc">Implementing custom RISC-V processor cores on FPGAs using Verilog and open-source&nbsp;tooling.</p>
+                  <p class="focus-desc">Implementing custom RISC-V processor cores on FPGAs using Verilog and open-source tooling.</p>
                 </div>
               </li>
               <li>
                 <span class="status-indicator"></span>
                 <div>
                   <strong class="focus-title">Embedded Hardware &amp; Smart Gadgets</strong>
-                  <p class="focus-desc">Designing custom MCU boards, low-power controllers, and integrated electronic&nbsp;prototypes.</p>
+                  <p class="focus-desc">Designing custom MCU boards, low-power controllers, and integrated electronic prototypes.</p>
                 </div>
               </li>
             </ul>
@@ -270,7 +247,7 @@
     <section id="projects" class="section section-alt">
       <div class="container">
         <div class="section-header">
-          <h2>02 // SELECTED ENGINEERING&nbsp;PROJECTS</h2>
+          <h2>02 // SELECTED ENGINEERING PROJECTS</h2>
         </div>
 
         <div class="projects-grid">
@@ -286,11 +263,11 @@
                     height="400" />
                 </picture>
               </div>
-              <h3>Sample Subway &ndash; Nuclear Pressure Tube Sampling&nbsp;System</h3>
+              <h3>Sample Subway - Nuclear Pressure Tube Sampling System</h3>
               <p>
                 An electromechanical tool designed to extract 30–80 mg material samples from CANDU
                 reactor pressure tubes remotely. Integrates DC motors, load cells, and
-                a custom spring-loaded container for automated material&nbsp;extraction.
+                a custom spring-loaded container for automated material extraction.
               </p>
             </a>
           </article>
@@ -307,10 +284,10 @@
                     height="400" />
                 </picture>
               </div>
-              <h3>Titan65 Custom Keyboard</h3>
+              <h3>Titan65</h3>
               <p>
                 A custom mechanical keyboard with hot-swap PCB, brass plates,
-                and DfX-driven decisions for assembly, acoustic tuning, and volume&nbsp;manufacturing.
+                and DfX-driven decisions for assembly, acoustic tuning, and volume manufacturing.
               </p>
             </a>
           </article>
@@ -331,7 +308,7 @@
               </div>
               <h3>Augmented Dance Education</h3>
               <p>
-                A biofeedback system combining wearables and smart surfaces to deter dancer injury through real-time kinematics&nbsp;telemetry.
+                A biofeedback system combining wearables and smart surfaces to deter dancer injury through real-time kinematics telemetry.
               </p>
             </a>
           </article>
@@ -342,7 +319,7 @@
     <!-- Work Experience -->
     <section id="experience" class="section">
       <div class="container">
-        <h2>03 // WORK EXPERIENCE &amp;&nbsp;CHRONOLOGY</h2>
+        <h2>03 // WORK EXPERIENCE &amp; CHRONOLOGY</h2>
         <div class="experience-list">
           <div class="experience-item">
             <div class="experience-header">
@@ -351,8 +328,8 @@
               <span class="experience-date">Sept 2025 &ndash; June 2026</span>
             </div>
             <ul class="experience-details">
-              <li><strong>Technical Mentorship:</strong> Mentored 40+ students across two engineering labs in embedded programming (Arduino), hardware testing, and CAD modeling to elevate fabrication&nbsp;quality.</li>
-              <li><strong>Hardware Evaluation:</strong> Conducted weekly evaluations of student software and hardware concepts to ensure functional execution, testability, and lab&nbsp;safety.</li>
+              <li><strong>Technical Mentorship:</strong> Mentored 40+ students across two engineering labs in embedded programming (Arduino), hardware testing, and CAD modeling to elevate fabrication quality.</li>
+              <li><strong>Hardware Evaluation:</strong> Conducted weekly evaluations of student software and hardware concepts to ensure functional execution, testability, and lab safety.</li>
             </ul>
           </div>
 
@@ -363,8 +340,8 @@
               <span class="experience-date">Feb 2023 &ndash; July 2024</span>
             </div>
             <ul class="experience-details">
-              <li><strong>Hardware Repair &amp; Diagnostics:</strong> Performed hands-on component troubleshooting, system diagnostics, hardware upgrades, and repairs on consumer desktop and laptop&nbsp;systems.</li>
-              <li><strong>Technical Communication:</strong> Translated complex hardware issues and repair options into clear, actionable advice for non-technical&nbsp;clients.</li>
+              <li><strong>Hardware Repair &amp; Diagnostics:</strong> Performed hands-on component troubleshooting, system diagnostics, hardware upgrades, and repairs on consumer desktop and laptop systems.</li>
+              <li><strong>Technical Communication:</strong> Translated complex hardware issues and repair options into clear, actionable advice for non-technical clients.</li>
             </ul>
           </div>
 
@@ -375,8 +352,8 @@
               <span class="experience-date">Jan 2019 &ndash; July 2022</span>
             </div>
             <ul class="experience-details">
-              <li><strong>Hardware &amp; Firmware QA:</strong> Debugged firmware and board-level defects using C, KiCad, and SolidWorks across 400+ deployed&nbsp;units.</li>
-              <li><strong>Overseas DFM &amp; Manufacturing:</strong> Managed end-to-end hardware development and manufacturing (DFM/DFA) in China, establishing PCB quality testing standards to drive $225k+ in single-month&nbsp;revenue.</li>
+              <li><strong>Hardware &amp; Firmware QA:</strong> Debugged firmware and board-level defects using C, KiCad, and SolidWorks across 400+ deployed units.</li>
+              <li><strong>Overseas DFM &amp; Manufacturing:</strong> Managed end-to-end hardware development and manufacturing (DFM/DFA) in China, establishing PCB quality testing standards to drive $225k+ in single-month revenue.</li>
             </ul>
           </div>
 
@@ -387,8 +364,8 @@
               <span class="experience-date">Apr 2022 &ndash; July 2022</span>
             </div>
             <ul class="experience-details">
-              <li><strong>3D CAD &amp; Visualization:</strong> Modeled high-fidelity 3D assets in SolidWorks and Fusion 360 to accelerate technical visualization for CES 2023 product&nbsp;demos.</li>
-              <li><strong>Engineering Coordination:</strong> Bridge technical specifications between international engineering teams and executive leadership to hit tight exhibition&nbsp;deadlines.</li>
+              <li><strong>3D CAD &amp; Visualization:</strong> Modeled high-fidelity 3D assets in SolidWorks and Fusion 360 to accelerate technical visualization for CES 2023 product demos.</li>
+              <li><strong>Engineering Coordination:</strong> Bridge technical specifications between international engineering teams and executive leadership to hit tight exhibition deadlines.</li>
             </ul>
           </div>
 
@@ -399,8 +376,8 @@
               <span class="experience-date">Nov 2021 &ndash; May 2022</span>
             </div>
             <ul class="experience-details">
-              <li><strong>DFM &amp; Prototyping:</strong> Evaluated manufacturing feasibility and mechanical integrity for physical concepts using 3D CAD modeling and rapid functional&nbsp;prototypes.</li>
-              <li><strong>Cross-Faculty Leadership:</strong> Coordinated project deliverables by leading technical design workshops and physical prototyping&nbsp;workflows.</li>
+              <li><strong>DFM &amp; Prototyping:</strong> Evaluated manufacturing feasibility and mechanical integrity for physical concepts using 3D CAD modeling and rapid functional prototypes.</li>
+              <li><strong>Cross-Faculty Leadership:</strong> Coordinated project deliverables by leading technical design workshops and physical prototyping workflows.</li>
             </ul>
           </div>
         </div>
@@ -410,7 +387,7 @@
     <!-- Skills -->
     <section id="skills" class="section">
       <div class="container">
-        <h2>04 // HARDWARE &amp; SOFTWARE&nbsp;SPECIFICATIONS</h2>
+        <h2>04 // HARDWARE &amp; SOFTWARE SPECIFICATIONS</h2>
         <div class="skills-grid">
 
           <!-- Card 1: Embedded & Hardware Engineering -->
@@ -525,9 +502,9 @@
     <section id="contact" class="section">
       <div class="container contact-grid">
         <div class="contact-info">
-          <h2>05 // TRANSMIT MESSAGE /&nbsp;CONTACT</h2>
+          <h2>05 // TRANSMIT MESSAGE / CONTACT</h2>
           <p class="contact-subtext">
-            I'm currently open to embedded hardware, firmware, and PCB design opportunities. Whether you have an engineering role to discuss or a project in mind, let's&nbsp;talk.
+            I'm currently open to embedded hardware, firmware, and PCB design opportunities. Whether you have an engineering role to discuss or a project in mind, let's talk.
           </p>
           <div class="contact-meta">
             <svg class="meta-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
