@@ -6,20 +6,33 @@ let isManualScrolling = false;
 let manualScrollTimer = null;
 
 if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navLinks.classList.toggle('open');
+    navLinks.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close when clicking outside the navigation menu
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('open', 'active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
   });
 
   navLinks.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') {
-      navLinks.classList.remove('open');
-      const href = e.target.getAttribute('href');
+    const link = e.target.closest('a');
+    if (link) {
+      navLinks.classList.remove('open', 'active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      const href = link.getAttribute('href');
       if (href && href.startsWith('#')) {
         const id = href.substring(1);
         
         // Immediately set active link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === href);
+        document.querySelectorAll('.nav-links a').forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === href);
         });
 
         // Set manual scrolling lock

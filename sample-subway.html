@@ -104,7 +104,55 @@
   
   <header class="site-header">
     <div class="container nav-container">
-      <a href="index.html" class="logo">Tiam<span>Designs</span></a>
+      <a href="index.html" class="logo" aria-label="Tiam Designs">
+        <svg class="logo-wordmark-svg" viewBox="0 0 420 70" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>TIAM DESIGNS</title>
+          <defs>
+            <filter id="td-nav-shadow-subway" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
+            </filter>
+            <linearGradient id="td-accent-grad-subway" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#94cb45"/>
+              <stop offset="100%" stop-color="#5c8238"/>
+            </linearGradient>
+            <linearGradient id="td-orange-grad-subway" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff7a00"/>
+              <stop offset="100%" stop-color="#c44d18"/>
+            </linearGradient>
+          </defs>
+          <g transform="skewX(-9) translate(14, 4)" filter="url(#td-nav-shadow-subway)">
+            <!-- 2XKO Heavy Outer Contour (Black Casing) -->
+            <g stroke="#050608" stroke-width="12" stroke-linejoin="round" stroke-miterlimit="2" fill="#050608">
+              <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
+              <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
+              <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" />
+              <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
+              <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" />
+            </g>
+            <!-- 2XKO Accent Sub-Outline -->
+            <g stroke="url(#td-accent-grad-subway)" stroke-width="3.5" stroke-linejoin="round" stroke-miterlimit="2" fill="none">
+              <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
+              <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
+              <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" />
+              <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
+              <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" stroke-width="2.5" />
+            </g>
+            <!-- Foreground Letterforms -->
+            <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" fill="#ffffff" />
+            <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" fill="#ffffff" />
+            <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" fill="#ffffff" fill-rule="evenodd" />
+            <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" fill="#ffffff" />
+            <!-- DESIGNS Prominent Block -->
+            <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" fill="#141822" />
+            <g fill="url(#td-orange-grad-subway)">
+              <polygon points="202,14 208,14 201,50 195,50" />
+              <polygon points="213,14 219,14 212,50 206,50" />
+            </g>
+            <text x="228" y="39.5" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="22" letter-spacing="2.5" fill="#ffffff" text-anchor="start">DESIGNS</text>
+            <circle cx="372" cy="20" r="3" fill="url(#td-accent-grad-subway)" />
+          </g>
+        </svg>
+      </a>
       <nav class="nav">
         <button class="nav-toggle" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
@@ -150,16 +198,16 @@
               <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
               <path d="M18 8a2 2 0 0 1 2 2v4a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
             </svg>
-            <span class="btn-text">Interact 3D Model</span>
+            <span class="btn-text">Tap to Interact with 3D Model</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 01: SYSTEM OVERVIEW & SPECS -->
+    <!-- SECTION 01: SYSTEM OVERVIEW & SPECIFICATIONS -->
     <section class="section" id="details">
       <div class="container">
-        <h2 class="section-title">01 // SYSTEM OVERVIEW &amp; SPECS</h2>
+        <h2 class="section-title">01 // SYSTEM OVERVIEW &amp; SPECIFICATIONS</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start; margin-bottom: 2.5rem;">
           <div class="overview-text">
@@ -170,7 +218,7 @@
             
             <h3 style="color: var(--accent-ochre); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">// DESIGN CONSTRAINTS</h3>
             <p style="font-size: 0.98rem; line-height: 1.65; color: var(--text);">
-              Dual-orientation operation (horizontal/vertical), complete retrievability, zero operator exposure, self-contained power, and wireless telemetry within a 10-minute operational window.
+              Dual-orientation operation (horizontal/vertical), complete retrievability, zero operator exposure, self-contained power, and wireless data feedback within a 10-minute operational window.
             </p>
           </div>
           
@@ -222,7 +270,7 @@
               </div>
               <h4>Movement &amp; Recovery</h4>
             </div>
-            <p class="spec-detail">Dual 12V N20 200 RPM Gearmotors (Horizontal Drivetrain) + Custom Winch Spool &amp; Paracord Tether (Vertical / Emergency Failsafe)</p>
+            <p class="spec-detail">Dual 12V N20 200 RPM Gearmotors (Drive Motors) + Custom Winch Spool &amp; Paracord Tether (Vertical Recovery)</p>
           </div>
 
           <!-- Card 3: Actuation & Scraping -->
@@ -238,7 +286,7 @@
             <p class="spec-detail">JGB37-520 12V 7RPM High-Torque Gearmotor + BTS7960 43A High-Power H-Bridge Driver + MGEHR1212 Lathe Tooling</p>
           </div>
 
-          <!-- Card 4: Analog Signal Chain -->
+          <!-- Card 4: Sensor & ADC Circuitry -->
           <div class="spec-card">
             <div class="spec-card-header">
               <div class="spec-icon-svg">
@@ -249,7 +297,7 @@
                   <line x1="12" y1="20" x2="12.01" y2="20"></line>
                 </svg>
               </div>
-              <h4>Analog Signal Chain</h4>
+              <h4>Sensor &amp; ADC Circuitry</h4>
             </div>
             <p class="spec-detail">100g Strain-Gauge Load Cell + HX711 24-bit Differential ADC Module</p>
           </div>
@@ -262,7 +310,7 @@
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
-              <h4>Power Architecture</h4>
+              <h4>Power System &amp; Regulators</h4>
             </div>
             <p class="spec-detail">Custom 3S1P Li-Ion Battery Pack (3x Molicel 21700 P42A Cells, 11.1V Nominal, 4500mAh) + 3S 40A BMS Board + LM2596 Buck Regulator (5V/3.3V Logic)</p>
           </div>
@@ -271,10 +319,10 @@
       </div>
     </section>
 
-    <!-- SECTION 02: ENGINEERING METHODOLOGY & TARGET SPECS -->
+    <!-- SECTION 02: ENGINEERING METHODOLOGY & TARGET SPECIFICATIONS -->
     <section class="section section-alt" id="methodology">
       <div class="container">
-        <h2 class="section-title">02 // ENGINEERING METHODOLOGY &amp; TARGET SPECS</h2>
+        <h2 class="section-title">02 // ENGINEERING METHODOLOGY &amp; TARGET SPECIFICATIONS</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
           
@@ -282,15 +330,15 @@
           <div class="engineering-card">
             <span class="eng-card-badge">CLIENT REQUIREMENTS MATRIX</span>
             <h3>Needs Analysis &amp; Prioritization</h3>
-            <p style="margin-bottom: 1rem;">Transformed CNL client statements into prioritized engineering design criteria:</p>
-            <ol style="color: var(--text); padding-left: 1.25rem; margin: 0; line-height: 1.7; font-size: 0.9rem;">
-              <li><strong>Safety &amp; Exposure Limitation:</strong> Self-sealing sample containment.</li>
-              <li><strong>Complete Removability:</strong> Winch tether emergency recovery failsafe.</li>
-              <li><strong>Payload Precision:</strong> Target sample extraction of <span class="tech-metric">[ 30–80 mg ]</span>.</li>
-              <li><strong>Telemetry &amp; Stage Reporting:</strong> Real-time Bluetooth mass feedback.</li>
-              <li><strong>Modularity &amp; Envelope:</strong> Length &lt; 4 ft, diameter &lt; 4 in.</li>
-              <li><strong>Self-Contained Power:</strong> Onboard high-current Li-ion battery pack.</li>
-              <li><strong>Operational Speed:</strong> Cycle completion within &lt; 10 minutes.</li>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">Transformed CNL client statements into prioritized engineering design criteria:</p>
+            <ol style="padding-left: 1.25rem; margin: 0; line-height: 1.7; font-size: 0.9rem;">
+              <li><strong style="color: var(--text);">Safety &amp; Exposure Limitation:</strong> <span style="color: var(--muted);">Self-sealing sample containment.</span></li>
+              <li><strong style="color: var(--text);">Complete Removability:</strong> <span style="color: var(--muted);">Winch tether emergency recovery failsafe.</span></li>
+              <li><strong style="color: var(--text);">Payload Precision:</strong> <span style="color: var(--muted);">Target sample extraction of <span class="tech-metric">[ 30–80 mg ]</span>.</span></li>
+              <li><strong style="color: var(--text);">Data Feedback:</strong> <span style="color: var(--muted);">Real-time Bluetooth weight readings.</span></li>
+              <li><strong style="color: var(--text);">Modularity &amp; Envelope:</strong> <span style="color: var(--muted);">Length &lt; 4 ft, diameter &lt; 4 in.</span></li>
+              <li><strong style="color: var(--text);">Self-Contained Power:</strong> <span style="color: var(--muted);">Onboard high-current Li-ion battery pack.</span></li>
+              <li><strong style="color: var(--text);">Operational Speed:</strong> <span style="color: var(--muted);">Cycle completion within &lt; 10 minutes.</span></li>
             </ol>
           </div>
 
@@ -298,23 +346,24 @@
           <div class="engineering-card">
             <span class="eng-card-badge">EDS MATRIX</span>
             <h3>Engineering Design Specifications</h3>
-            <div style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
-              <h4 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; margin-top: 0; margin-bottom: 0.4rem;">Functional Requirements</h4>
-              <ul style="margin: 0 0 1rem 0; padding-left: 1.25rem;">
-                <li>Mass collection: <span class="tech-metric">[ 30–80 mg ]</span> (verified via scale feedback)</li>
-                <li>Complete removability: Yes (100% retrieval guarantee)</li>
-                <li>Enclosed sample: Yes (Self-sealing spring lid)</li>
-                <li>Distance traveled: <span class="tech-metric">[ 15 ft ]</span> inside pressure tube</li>
-                <li>Cycle time: <span class="tech-metric">[ &lt; 10 min ]</span> total deployment</li>
-              </ul>
-              <h4 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.4rem;">Physical &amp; Safety Constraints</h4>
-              <ul style="margin: 0; padding-left: 1.25rem;">
-                <li>Outer diameter: <span class="tech-metric">[ &lt; 4.0 in ]</span> envelope</li>
-                <li>Total tool length: <span class="tech-metric">[ &lt; 4.0 ft ]</span></li>
-                <li>Total tool mass: <span class="tech-metric">[ &lt; 5.0 kg ]</span> man-portable</li>
-                <li>Operator contact: Zero manual touch on radiation tooling</li>
-              </ul>
-            </div>
+            <p style="margin-bottom: 0.75rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">Target engineering performance envelope and mechanical boundary constraints:</p>
+            
+            <h4 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0; margin-bottom: 0.4rem;">Functional Requirements</h4>
+            <ul style="margin: 0 0 1rem 0; padding-left: 1.25rem; line-height: 1.7; font-size: 0.9rem;">
+              <li><strong style="color: var(--text);">Mass Collection:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ 30–80 mg ]</span> (verified via scale feedback)</span></li>
+              <li><strong style="color: var(--text);">Complete Removability:</strong> <span style="color: var(--muted);">100% retrieval guarantee with tether backup</span></li>
+              <li><strong style="color: var(--text);">Enclosed Sample:</strong> <span style="color: var(--muted);">Self-sealing spring-loaded lid</span></li>
+              <li><strong style="color: var(--text);">Distance Traveled:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ 15 ft ]</span> inside pressure tube</span></li>
+              <li><strong style="color: var(--text);">Cycle Time:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 10 min ]</span> total deployment</span></li>
+            </ul>
+            
+            <h4 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">Physical &amp; Safety Constraints</h4>
+            <ul style="margin: 0; padding-left: 1.25rem; line-height: 1.7; font-size: 0.9rem;">
+              <li><strong style="color: var(--text);">Outer Diameter:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 4.0 in ]</span> envelope</span></li>
+              <li><strong style="color: var(--text);">Total Tool Length:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 4.0 ft ]</span></span></li>
+              <li><strong style="color: var(--text);">Total Tool Mass:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 5.0 kg ]</span> man-portable</span></li>
+              <li><strong style="color: var(--text);">Operator Contact:</strong> <span style="color: var(--muted);">Zero manual touch on radiation tooling</span></li>
+            </ul>
           </div>
 
         </div>
@@ -323,11 +372,11 @@
         <div class="engineering-card" style="margin-top: 1.5rem;">
           <span class="eng-card-badge">DECISION MATRIX</span>
           <h3>Concept Evaluation &amp; Trade-off Justification</h3>
-          <p style="margin-bottom: 1rem;">
-            Evaluated 4 global architectural concepts (<em>Sample Subway</em>, <em>Pipe Worm</em>, <em>Pneumatically Deployable Tool</em>, and <em>Flywheel Flinger</em>) against weighted client design criteria.
+          <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">
+            Evaluated 4 global concepts (<em>Sample Subway</em>, <em>Pipe Worm</em>, <em>Pneumatically Deployable Tool</em>, and <em>Flywheel Flinger</em>) against weighted client design criteria.
           </p>
-          <div style="padding: 1rem; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text); line-height: 1.6;">
-            <strong>Selection Justification:</strong> The <em>Sample Subway</em> scored highest in the decision matrix due to superior traction control in dual orientations (horizontal &amp; vertical), a simplified winch recovery failsafe, and predictable mechanical scraping kinematics compared to pneumatic or inflatable tube crawlers.
+          <div style="padding: 1rem 1.25rem; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.9rem; line-height: 1.6; clip-path: var(--chamfer-sm);">
+            <strong style="color: var(--text);">Selection Justification:</strong> <span style="color: var(--muted);">The <em>Sample Subway</em> scored highest in the decision matrix due to superior traction control in dual orientations (horizontal &amp; vertical), a simplified winch recovery failsafe, and predictable mechanical scraping kinematics compared to pneumatic or inflatable tube crawlers.</span>
           </div>
         </div>
       </div>
@@ -356,9 +405,9 @@
 
           <!-- Feature 3 -->
           <div class="engineering-card">
-            <span class="eng-card-badge">DRIVETRAIN ITERATIONS</span>
-            <h3>Drivetrain Traction Iterations</h3>
-            <p>Modular wheel mounting evolution—progressing from raw 608 steel bearings (high slip) to 3D-printed TPU sleeves, and finally compressible rubber traction bands to maintain high normal force against internal tube walls under high scraping torque.</p>
+            <span class="eng-card-badge">WHEEL TRACTION TESTING</span>
+            <h3>Motor &amp; Wheel Traction Testing</h3>
+            <p>Modular wheel mounting testing—progressing from raw 608 steel bearings (high slip) to 3D-printed TPU sleeves, and finally compressible rubber traction bands to maintain high friction against internal tube walls under scraping torque.</p>
           </div>
 
         </div>
@@ -397,23 +446,23 @@
       </div>
     </section>
 
-    <!-- SECTION 04: HARDWARE & SIGNAL CHAIN -->
+    <!-- SECTION 04: HARDWARE & SENSOR CIRCUITRY -->
     <section class="section section-alt" id="electronics">
       <div class="container">
-        <h2 class="section-title">04 // HARDWARE &amp; SIGNAL CHAIN</h2>
+        <h2 class="section-title">04 // HARDWARE &amp; SENSOR CIRCUITRY</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
           
           <!-- Power Tree -->
           <div class="arch-card">
             <div class="arch-card-header">
-              <span class="arch-tag">POWER ARCHITECTURE</span>
-              <h3>Power Tree Topology</h3>
+              <span class="arch-tag">POWER DISTRIBUTION</span>
+              <h3>Power Distribution</h3>
             </div>
-            <p>Unregulated 12V high-current bus powering the BTS7960 and N20 motor drivers. Down-regulated via LM2596 buck converter to 5V VIN for the ESP32, which supplies 3.3V logic rails.</p>
+            <p>Unregulated 12V bus powering the BTS7960 and N20 motor drivers. Stepped down via LM2596 buck converter to 5V VIN for the ESP32, which supplies 3.3V logic rails.</p>
             <div style="margin-top: 1.25rem; padding: 1.1rem; background: var(--surface-alt); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8;">
               <div style="color: var(--accent-ochre); font-weight: bold;">[ 3S1P Li-Ion Pack: 11.1V / 4500mAh ]</div>
-              <div style="color: var(--muted); margin-left: 0.75rem;">├── Unregulated 12V High-Current Bus ➔ BTS7960 &amp; N20 Motors</div>
+              <div style="color: var(--muted); margin-left: 0.75rem;">├── Unregulated 12V Bus ➔ BTS7960 &amp; N20 Motors</div>
               <div style="color: var(--muted); margin-left: 0.75rem;">└── LM2596 Buck Regulator ➔ 5V VIN ➔ ESP32 ➔ 3.3V Logic Rails</div>
             </div>
           </div>
@@ -421,14 +470,14 @@
           <!-- Analog Instrumentation -->
           <div class="arch-card">
             <div class="arch-card-header">
-              <span class="arch-tag">ANALOG INSTRUMENTATION</span>
-              <h3>Analog Signal Chain</h3>
+              <span class="arch-tag">LOAD CELL &amp; ADC</span>
+              <h3>Sensor &amp; ADC Circuitry</h3>
             </div>
-            <p>Wheatstone bridge load cell interfaced with the HX711 24-bit ADC. Implemented twisted-pair differential wiring to reject electromagnetic interference (EMI) generated by adjacent DC motors inside the chassis.</p>
+            <p>Wheatstone bridge load cell interfaced with the HX711 24-bit ADC. Implemented twisted-pair wiring to reduce electrical noise from adjacent DC motors inside the chassis.</p>
             <div style="margin-top: 1.25rem; padding: 1.1rem; background: var(--surface-alt); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8;">
               <div style="color: var(--accent-sand); font-weight: bold;">[ 100g Strain Gauge Wheatstone Bridge ]</div>
-              <div style="color: var(--muted); margin-left: 0.75rem;">└── Twisted-Pair Differential Wiring (EMI Noise Rejection)</div>
-              <div style="color: var(--muted); margin-left: 1.5rem;">└── HX711 24-bit Differential ADC ➔ ESP32 SPI/GPIO</div>
+              <div style="color: var(--muted); margin-left: 0.75rem;">└── Twisted-Pair Differential Wiring (Noise Rejection)</div>
+              <div style="color: var(--muted); margin-left: 1.5rem;">└── HX711 24-bit ADC Module ➔ ESP32 GPIO</div>
             </div>
           </div>
 
@@ -440,26 +489,24 @@
     <section class="section" id="firmware">
       <div class="container">
         <h2 class="section-title">05 // EMBEDDED C++ FIRMWARE</h2>
-        <p style="max-width: 800px; margin-bottom: 2rem; color: var(--muted);">Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller delivering real-time noise suppression, thermal drift compensation, and Bluetooth serial data telemetry.</p>
+        <p style="max-width: 800px; margin-bottom: 2rem; color: var(--muted);">Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller for load cell reading, noise filtering, and Bluetooth data logging.</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
           
           <!-- Algorithm 1 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">NOISE SUPPRESSION</span>
+              <span class="firmware-badge">NOISE FILTERING</span>
               <h3>100-Sample Moving Average Filter</h3>
               <p>Reduces raw sensor fluctuation from <span class="tech-metric">[ ±100 mg ]</span> down to an acceptable noise floor of <span class="tech-metric">[ ±9.5 mg ]</span>.</p>
             </div>
-            <div style="margin-top: 1.25rem; background: var(--surface-alt); padding: 0.9rem; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-olive); line-height: 1.5;">
-              <span style="color: var(--accent-ochre);">float</span> applyMovingAverage(<span style="color: var(--accent-ochre);">float</span> newSample) {<br>
-              &nbsp;&nbsp;sum -= samples[index];<br>
-              &nbsp;&nbsp;samples[index] = newSample;<br>
-              &nbsp;&nbsp;sum += newSample;<br>
-              &nbsp;&nbsp;index = (index + 1) % 100;<br>
-              &nbsp;&nbsp;<span style="color: var(--accent-ochre);">return</span> sum / 100.0f; <span style="color: var(--muted);">// Noise floor ±9.5 mg</span><br>
-              }
-            </div>
+            <pre class="ide-code-block"><code><span class="syn-keyword">float</span> <span class="syn-fn">applyMovingAverage</span>(<span class="syn-keyword">float</span> <span class="syn-var">sample</span>) {
+  <span class="syn-var">sum</span> -= <span class="syn-var">samples</span>[<span class="syn-var">index</span>];
+  <span class="syn-var">samples</span>[<span class="syn-var">index</span>] = <span class="syn-var">sample</span>;
+  <span class="syn-var">sum</span> += <span class="syn-var">sample</span>;
+  <span class="syn-var">index</span> = (<span class="syn-var">index</span> + <span class="syn-num">1</span>) % <span class="syn-num">100</span>;
+  <span class="syn-keyword">return</span> <span class="syn-var">sum</span> / <span class="syn-num">100.0f</span>; <span class="syn-comment">// ±9.5mg noise</span>
+}</code></pre>
           </div>
 
           <!-- Algorithm 2 -->
@@ -469,28 +516,25 @@
               <h3>Time-Based Creep Drift Compensation</h3>
               <p>Firmware routine executing every 30 seconds. If measured drift is below <span class="tech-metric">[ 10 mg ]</span>, the system automatically re-tares the scale to offset mechanical creep and thermal variance.</p>
             </div>
-            <div style="margin-top: 1.25rem; background: var(--surface-alt); padding: 0.9rem; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-sand); line-height: 1.5;">
-              <span style="color: var(--accent-ochre);">if</span> (millis() - lastCheckTime &gt;= 30000) {<br>
-              &nbsp;&nbsp;<span style="color: var(--accent-ochre);">float</span> drift = fabs(currentWeight - baselineWeight);<br>
-              &nbsp;&nbsp;<span style="color: var(--accent-ochre);">if</span> (drift &lt; 10.0f) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;autoTareSystem(); <span style="color: var(--muted);">// Auto-tare thermal creep</span><br>
-              &nbsp;&nbsp;}<br>
-              }
-            </div>
+            <pre class="ide-code-block"><code><span class="syn-keyword">if</span> (<span class="syn-fn">millis</span>() - <span class="syn-var">lastCheck</span> &gt;= <span class="syn-num">30000</span>) {
+  <span class="syn-keyword">float</span> <span class="syn-var">drift</span> = <span class="syn-fn">fabs</span>(<span class="syn-var">currWt</span> - <span class="syn-var">baseWt</span>);
+  <span class="syn-keyword">if</span> (<span class="syn-var">drift</span> &lt; <span class="syn-num">10.0f</span>) {
+    <span class="syn-fn">autoTareSystem</span>(); <span class="syn-comment">// Auto-tare creep</span>
+  }
+}</code></pre>
           </div>
 
           <!-- Algorithm 3 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">TELEMETRY PROTOCOL</span>
-              <h3>Telemetry Protocol</h3>
+              <span class="firmware-badge">BLUETOOTH LOGGING</span>
+              <h3>Bluetooth Data Logging</h3>
               <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>, <code>Creep State</code>) to remote monitors.</p>
             </div>
-            <div style="margin-top: 1.25rem; background: var(--surface-alt); padding: 0.9rem; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.78rem; color: var(--text); line-height: 1.5;">
-              <span style="color: var(--muted);">// CSV RFCOMM Output Stream:</span><br>
-              SerialBT.printf(<span style="color: var(--accent-sand);">"%lu,%.2f,%.2f,%d\n"</span>,<br>
-              &nbsp;&nbsp;timestamp, rawMg, filteredMg, creepState);
-            </div>
+            <pre class="ide-code-block"><code><span class="syn-comment">// CSV RFCOMM Output Stream:</span>
+<span class="syn-fn">SerialBT.printf</span>(<span class="syn-str">"%lu,%.2f,%.2f,%d\n"</span>,
+  <span class="syn-var">timestamp</span>, <span class="syn-var">rawMg</span>, <span class="syn-var">filteredMg</span>,
+  <span class="syn-var">creepState</span>);</code></pre>
           </div>
 
         </div>
@@ -505,7 +549,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center;">
           <div class="uiux-info">
             <h3 style="color: var(--accent-ochre); font-size: 1.1rem; margin-bottom: 0.75rem; font-family: var(--font-mono); text-transform: uppercase;">Mobile Operator Interface</h3>
-            <p style="margin-bottom: 1.5rem; color: var(--text); line-height: 1.6;">Mobile telemetry interface enabling safe remote operation outside vault radiation zones.</p>
+            <p style="margin-bottom: 1.5rem; color: var(--text); line-height: 1.6;">Mobile app interface enabling safe remote operation outside vault radiation zones.</p>
             
             <h4 style="font-size: 0.85rem; margin-bottom: 0.85rem; color: var(--accent-sand); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-mono);">Interface Features</h4>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -514,28 +558,28 @@
               <div class="check-item"><span class="check-icon">[✓]</span> <div><strong>Dual-Orientation Switching:</strong> Instant switching between horizontal and vertical profiles.</div></div>
               <div class="check-item"><span class="check-icon">[✓]</span> <div><strong>Target Mass Configuration:</strong> Configurable setpoint (<span class="tech-metric">[ 65 mg ]</span> target within <span class="tech-metric">[ 30–80 mg ]</span> spec).</div></div>
               <div class="check-item"><span class="check-icon">[✓]</span> <div><strong>Live 4-Stage Lifecycle Tracking:</strong> Stage state machine (<code>Deployment</code> ➔ <code>Sampling</code> ➔ <code>Contained</code> ➔ <code>Retracted</code>).</div></div>
-              <div class="check-item"><span class="check-icon">[✓]</span> <div><strong>Automated CSV Data Logging:</strong> Automatic telemetry export for destructive testing records.</div></div>
+              <div class="check-item"><span class="check-icon">[✓]</span> <div><strong>Automated CSV Data Logging:</strong> Automatic CSV export for lab testing records.</div></div>
             </div>
           </div>
 
           <div class="highlight-card">
             <h4 style="margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-sand); text-transform: uppercase; letter-spacing: 0.08em;">// STAGE TRACKING LIFECYCLE</h4>
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <div style="display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--accent-sand);">
-                <span style="font-family: var(--font-mono); font-weight: bold; color: var(--accent-sand); font-size: 0.95rem;">01</span>
-                <div style="font-size: 0.85rem;"><strong style="color: var(--accent-sand);">Deployment:</strong> Drivetrain / winch navigates tool to target pressure tube zone.</div>
+              <div class="lifecycle-step step-deploy">
+                <span class="step-num">01</span>
+                <div class="step-text"><strong class="step-label">Deployment:</strong> Drive motors / winch navigate tool to target pressure tube zone.</div>
               </div>
-              <div style="display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--accent-ochre);">
-                <span style="font-family: var(--font-mono); font-weight: bold; color: var(--accent-ochre); font-size: 0.95rem;">02</span>
-                <div style="font-size: 0.85rem;"><strong style="color: var(--accent-ochre);">Sampling:</strong> JGB37-520 actuates lathe bit; HX711 measures mass accumulation.</div>
+              <div class="lifecycle-step step-sample">
+                <span class="step-num">02</span>
+                <div class="step-text"><strong class="step-label">Sampling:</strong> JGB37-520 actuates lathe bit; HX711 measures mass accumulation.</div>
               </div>
-              <div style="display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--accent-sand);">
-                <span style="font-family: var(--font-mono); font-weight: bold; color: var(--accent-sand); font-size: 0.95rem;">03</span>
-                <div style="font-size: 0.85rem;"><strong style="color: var(--accent-sand);">Contained:</strong> Tool head catch pins release; internal springs seal <span class="tech-metric">[ 65 mg ]</span> sample container.</div>
+              <div class="lifecycle-step step-contain">
+                <span class="step-num">03</span>
+                <div class="step-text"><strong class="step-label">Contained:</strong> Tool head catch pins release; internal springs seal <span class="tech-metric">[ 65 mg ]</span> sample container.</div>
               </div>
-              <div style="display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 0.9rem; background: var(--surface-alt); border-left: 3px solid var(--accent-olive);">
-                <span style="font-family: var(--font-mono); font-weight: bold; color: var(--accent-olive); font-size: 0.95rem;">04</span>
-                <div style="font-size: 0.85rem;"><strong style="color: var(--accent-olive);">Retracted:</strong> Winch/tether extracts tool back to channel access breach safely.</div>
+              <div class="lifecycle-step step-retract">
+                <span class="step-num">04</span>
+                <div class="step-text"><strong class="step-label">Retracted:</strong> Winch/tether extracts tool back to channel access breach safely.</div>
               </div>
             </div>
           </div>
@@ -551,22 +595,22 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
           <!-- Column 1 -->
-          <div class="pm-card" style="border-top: 3px solid var(--accent-ochre);">
-            <div class="pm-number" style="color: var(--accent-ochre);">01</div>
+          <div class="pm-card pm-orange">
+            <div class="pm-number">01</div>
             <h3>Root Cause Failure Analysis</h3>
             <p>High scraping torque during pipe engagement induced motor stalls. Peak stall current spikes exceeded the 3S BMS threshold, tripping overcurrent protection and cutting system power.</p>
           </div>
 
           <!-- Column 2 -->
-          <div class="pm-card" style="border-top: 3px solid var(--accent-sand);">
-            <div class="pm-number" style="color: var(--accent-sand);">02</div>
+          <div class="pm-card pm-cyan">
+            <div class="pm-number">02</div>
             <h3>Custom PCB Design Roadmap</h3>
             <p>Transitioning from discrete breakout modules and point-to-point breadboard wiring to a unified 2-layer custom PCB with dedicated power planes and high-current traces.</p>
           </div>
 
           <!-- Column 3 -->
-          <div class="pm-card" style="border-top: 3px solid var(--accent-olive);">
-            <div class="pm-number" style="color: var(--accent-olive);">03</div>
+          <div class="pm-card pm-sage">
+            <div class="pm-number">03</div>
             <h3>Mechanical Safety Integration</h3>
             <p>Engineering a calibrated shear notch on the lathe bit holder. Under binding torque, the bit holder snaps safely, preventing motor stall current spikes and ensuring smooth recovery via winch failsafe.</p>
           </div>
@@ -661,9 +705,9 @@
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/UpClose Perspective Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Underside view showcasing motor drivetrain" loading="lazy">
+              <img src="assets/SampleSubway/UpClose Perspective Render.jpg" alt="Underside view showcasing drive motors" loading="lazy">
             </picture>
-            <figcaption>Underside view showcasing motor drivetrain and structural mounting chassis.</figcaption>
+            <figcaption>Underside view showcasing drive motors and structural mounting chassis.</figcaption>
           </figure>
 
           <!-- Image 3 -->

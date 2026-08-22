@@ -62,14 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ctx = canvas.getContext('2d', { alpha: true });
 
-    // Config - Calibrated Matte Earth Tone Palette
+    // Config - Calibrated Tactical Light Theme Palette
     const config = {
         particleCount: 150, // Number of particles
         particleRadius: 1.5,
-        particleColor: 'rgba(237, 234, 225, 0.4)', // Warm bone white
-        linkColor: 'rgba(212, 195, 163, 0.12)', // Subtle sand
-        accentColor: 'rgba(140, 166, 122, 0.7)', // Muted sage/olive
-        backgroundColor: '#141615',
+        particleColor: 'rgba(20, 25, 35, 0.45)', // Deep slate nodes
+        linkColor: 'rgba(40, 50, 65, 0.14)', // Subtle dark link
+        accentColor: 'rgba(77, 112, 48, 0.65)', // Tactical sage green accent
+        backgroundColor: 'transparent',
         linkDistance: 120, // Max distance to draw a line between particles
         mouseLinkDistance: 150, // Max distance to draw a line to the mouse
         mouseRepelDistance: 100, // Distance mouse repels particles
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(212, 195, 163, ${opacity * 0.12})`;
+                    ctx.strokeStyle = `rgba(40, 50, 65, ${opacity * 0.14})`;
                     ctx.stroke();
                 }
             }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(140, 166, 122, ${opacity * 0.55})`;
+                    ctx.strokeStyle = `rgba(77, 112, 48, ${opacity * 0.65})`;
                     ctx.stroke();
                 }
             }

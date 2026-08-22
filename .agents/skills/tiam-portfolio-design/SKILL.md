@@ -14,7 +14,7 @@ Use this workspace skill when adding new project showcases, updating project cas
 4. **Engineering Details & Specifications**: Telemetry spec tables (`[STR: 99%]`, `TOLERANCE ±0.02mm`), exploded assembly diagrams, Bill of Materials (BOM), CMF (Color, Material, Finish).
 5. **Interactive Media**: Chamfered media cards with hover inversions, tactile buttons, modal lightboxes, and smooth interactive carousels.
 
-## ⚡ Neo-Street & Tactical Telemetry (ZZZ & 2XKO Aesthetic - High-Voltage Edition)
+## ⚡ Neo-Street & Tactical Telemetry (Matte Sage & Muted Industrial Edition)
 
 ### 1. Color Tokens
 - **Background & Surfaces**:
@@ -22,22 +22,22 @@ Use this workspace skill when adding new project showcases, updating project cas
   - `Tactical Surface`: `#141822` (Recessed & container fill)
   - `Elevated Card Surface`: `#181d28` (Tactical card body)
   - `Structural Border Frame`: `rgba(255, 255, 255, 0.18)` (Crisp high-contrast chamfer outline)
-- **Primary Accents (High-Voltage Tactical)**:
-  - `High-Voltage Neon Green / Acid Lime`: `#b4f326` (Signature active state, primary buttons, and telemetry highlights)
-  - `Safety Hazard Orange`: `#ff5500` (Hazard delimiters, warning badges, and secondary highlights)
-  - `Bone White / Pure White`: `#ffffff` (High-contrast typography)
+- **Primary Accents (Matte Tactical)**:
+  - `Matte Sage / Olive Green`: `#8fa876` (Primary active state, tactical buttons, and hardware highlights)
+  - `Muted Industrial Orange`: `#d96b34` (Warm terracotta hazard delimiters, warning badges, and secondary highlights)
+  - `Pure White`: `#ffffff` (High-contrast typography)
   - `Tactical Slate`: `#9aa3b5` (Readable secondary metadata and body copy)
-- **Text on Accents**: Jet black `#090a0d` on neon badges.
+- **Text on Accents**: Jet black `#090a0d` on sage/orange badges.
 
 ### 2. Graphic Motifs & Geometry
 - **Chamfered 45° Corners**: Use `clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))` on cards and buttons with crisp `1.5px` inner inset borders.
-- **Directional & Telemetry Markers**: Chevrons (`>>>`), slashes (`////`), and status indicators (`● DEPLOYED`).
+- **Directional & Category Markers**: Chevrons (`>>>`), slashes (`////`), and status indicators (`● COMPLETED`).
 - **Clean Containers**: Avoid repeating redundant `XXXX` corner decals to keep card content clean and focused.
 - **Hard Offsets**: 2px–4px hard solid drop shadows (`box-shadow: 4px 4px 0px #000000` or `4px 4px 0px var(--accent-lime)`).
 
-### 3. Typography & Typesetting (Anti-Orphan Rules)
+### 3. Typography & Terminology Rules
+- **No Over-Abbreviation**: Spell out words fully and clearly (e.g. `LOCATION` instead of `LOC`, `ENGINEERING` instead of `ENG`, `SPECIFICATIONS` instead of `SPECS`, `PRODUCT DESIGN` instead of `PROD`).
+- **Grounded Student Experience**: Accurately reflect hands-on student engineering projects, lab coursework, and prototyping experience without inflating roles or using buzzword bloat (e.g. avoid "Bare-metal", "Analog Signal Chain", "Embedded Telemetry").
 - **Display**: Ultra-bold geometric / distressed gothic sans in UPPERCASE (`text-wrap: balance`).
-- **Banners & Marquees**: 15° slanted/italic bold sans with authentic EE student technical terms.
-- **Telemetry**: Wide-tracked monospace (`JetBrains Mono` / `Share Tech Mono`).
+- **Banners & Marquees**: 15° slanted/italic bold sans with authentic student technical terms.
 - **Body & Descriptions**: Clean grotesque sans (`Plus Jakarta Sans` / `Inter`) with `text-wrap: pretty;` and `&nbsp;` to strictly avoid lonely single-word orphan lines.
-- **Avoid Single-Word Wrap**: Always ensure headlines, project cards, and bio paragraphs have balanced line lengths without dangling single words.

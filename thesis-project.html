@@ -29,7 +29,55 @@
   
   <header class="site-header">
     <div class="container nav-container">
-      <a href="index.html" class="logo">Tiam<span>Designs</span></a>
+      <a href="index.html" class="logo" aria-label="Tiam Designs">
+        <svg class="logo-wordmark-svg" viewBox="0 0 420 70" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>TIAM DESIGNS</title>
+          <defs>
+            <filter id="td-nav-shadow-thesis" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
+            </filter>
+            <linearGradient id="td-accent-grad-thesis" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#94cb45"/>
+              <stop offset="100%" stop-color="#5c8238"/>
+            </linearGradient>
+            <linearGradient id="td-orange-grad-thesis" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff7a00"/>
+              <stop offset="100%" stop-color="#c44d18"/>
+            </linearGradient>
+          </defs>
+          <g transform="skewX(-9) translate(14, 4)" filter="url(#td-nav-shadow-thesis)">
+            <!-- 2XKO Heavy Outer Contour (Black Casing) -->
+            <g stroke="#050608" stroke-width="12" stroke-linejoin="round" stroke-miterlimit="2" fill="#050608">
+              <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
+              <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
+              <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" />
+              <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
+              <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" />
+            </g>
+            <!-- 2XKO Accent Sub-Outline -->
+            <g stroke="url(#td-accent-grad-thesis)" stroke-width="3.5" stroke-linejoin="round" stroke-miterlimit="2" fill="none">
+              <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
+              <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
+              <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" />
+              <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
+              <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" stroke-width="2.5" />
+            </g>
+            <!-- Foreground Letterforms -->
+            <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" fill="#ffffff" />
+            <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" fill="#ffffff" />
+            <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 42 L 91 42 L 88 54 Z M 89 32 L 103 32 L 98 21 L 94 21 Z" fill="#ffffff" fill-rule="evenodd" />
+            <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" fill="#ffffff" />
+            <!-- DESIGNS Prominent Block -->
+            <path d="M 182 8 L 382 8 L 392 18 L 392 46 L 382 56 L 182 56 L 172 46 L 172 18 Z" fill="#141822" />
+            <g fill="url(#td-orange-grad-thesis)">
+              <polygon points="202,14 208,14 201,50 195,50" />
+              <polygon points="213,14 219,14 212,50 206,50" />
+            </g>
+            <text x="228" y="39.5" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="22" letter-spacing="2.5" fill="#ffffff" text-anchor="start">DESIGNS</text>
+            <circle cx="372" cy="20" r="3" fill="url(#td-accent-grad-thesis)" />
+          </g>
+        </svg>
+      </a>
       <nav class="nav">
         <button class="nav-toggle" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
@@ -52,7 +100,7 @@
         <div class="hero-content hero-text">
           <p class="hero-kicker">INDUSTRIAL DESIGN THESIS · BIOFEEDBACK · WEARABLES</p>
           <h1>Augmented Dance Education</h1>
-          <p class="hero-subtitle">A system combining wearable technology and a smart environment to deter injury in young professional dancers through real-time kinematics telemetry.</p>
+          <p class="hero-subtitle">A system combining wearable technology and a smart environment to help prevent injury in young professional dancers through real-time motion tracking and sensor feedback.</p>
           <div class="hero-actions">
             <a href="assets/Thesis%20Project/4502_W22_THESIS-REPORT_Morrow-Rogers_Tiam-compressed.pdf"
               target="_blank" rel="noopener noreferrer" class="btn primary"><span class="btn-text">Read Full Thesis (PDF)</span></a>
@@ -98,7 +146,7 @@
           <ul class="feature-list">
             <li><strong>Wearable Haptic Feedback:</strong> Real-time alignment sensing embedded in compression garments.</li>
             <li><strong>Spatial Ground Sensing:</strong> Modular floor grid measuring weight distribution and impact force.</li>
-            <li><strong>Kinematic App Telemetry:</strong> Dashboard for students, teachers, and physiotherapists.</li>
+            <li><strong>Live Motion Dashboard:</strong> App interface for students, teachers, and physiotherapists.</li>
           </ul>
         </div>
         <div class="media">
@@ -115,60 +163,18 @@
     <section class="section section-alt">
       <div class="container">
         <h2>02 // RESEARCH &amp; PROBLEM DEFINITION</h2>
-        <div class="two-col-grid">
-          <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">The Problem</h3>
-            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
-              The risk of dance injuries for learning students is extremely high. Knee, back, and ankle-related injuries can severely impact an individual's career trajectory.
-            </p>
-            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
-              Dance injuries are often overlooked compared to other athletics. Although rehabilitation therapy exists, <strong>prevention is frequently neglected</strong>.
-            </p>
-            <p style="color: var(--text); font-size: 0.92rem;">
-              <strong>Key Insight:</strong> Dancers often lack real-time feedback on their bio-mechanics during repetitive practice, reinforcing poor form habits that lead to chronic strain.
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>Injury Prevalence in Dance</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">
+              Repetitive impact, extreme joint articulation, and early career specialization cause overuse injuries to account for over 60% of all dance medical absences.
             </p>
           </div>
-          <div class="media">
-            <figure>
-              <picture>
-                <source srcset="assets/Thesis Project/Injury Analysis.webp" type="image/webp">
-                <img src="assets/Thesis Project/Injury Analysis.png" alt="Injury Analysis Statistics"
-                  class="feature-image" loading="lazy">
-              </picture>
-              <figcaption>Dance Injury Type Breakdown</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div style="margin-top: 2.5rem;">
-          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 1rem;">Categorization of Needs</h3>
-          <div class="table-container">
-            <table class="analysis-table">
-              <thead>
-                <tr>
-                  <th>Wants &amp; Wishes</th>
-                  <th>Latent Needs</th>
-                  <th>Immediate Needs</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Parental Support</td>
-                  <td>Better indicators of movement</td>
-                  <td>Consistency in practice</td>
-                </tr>
-                <tr>
-                  <td>Fun Activity Potential</td>
-                  <td>Communication between teacher &amp; therapist</td>
-                  <td>Real-time feedback from teacher</td>
-                </tr>
-                <tr>
-                  <td>Access to Spatial Environment</td>
-                  <td>Longitudinal injury deterrence tracking</td>
-                  <td>Attentiveness to all students</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="skill-group">
+            <h3>Feedback Deficit in Solo Practice</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">
+              Students spend hours training outside supervised studio hours without direct postural feedback, inadvertently reinforcing improper biomechanics and alignment flaws.
+            </p>
           </div>
         </div>
       </div>
@@ -177,36 +183,7 @@
     <!-- User Research -->
     <section class="section">
       <div class="container">
-        <h2>03 // USER RESEARCH &amp; FIELD STUDIES</h2>
-        <p style="margin-bottom: 2rem; color: var(--muted);">
-          Interviews and anthropometric analysis were conducted to build a comprehensive understanding of the user.
-        </p>
-
-        <div style="margin-bottom: 2.5rem;">
-          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">User Demographics &amp; Percentiles</h3>
-          <p style="margin-bottom: 1.5rem; color: var(--muted); font-size: 0.92rem;">
-            Anthropometric data for female dancers aged 15–18 informed the sizing and sensor array layout strategy.
-          </p>
-          <div class="two-col-grid">
-            <figure>
-              <picture>
-                <source srcset="assets/Thesis Project/UserPercentileDiagram.webp" type="image/webp">
-                <img src="assets/Thesis Project/UserPercentileDiagram.png"
-                  alt="User Percentile Diagram" class="feature-image" loading="lazy">
-              </picture>
-              <figcaption>Anthropometric data for female dancers aged 15-18.</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source srcset="assets/Thesis Project/UserPercentiles.webp" type="image/webp">
-                <img src="assets/Thesis Project/UserPercentiles.png" alt="User Percentile Data"
-                  class="feature-image" loading="lazy">
-              </picture>
-              <figcaption>Sizing strategy based on user demographics.</figcaption>
-            </figure>
-          </div>
-        </div>
-
+        <h2>03 // USER ECOSYSTEM &amp; CONSTRAINTS</h2>
         <div class="skills-grid" style="margin-top: 2rem;">
           <div class="skill-group">
             <h3>Primary User: The Student</h3>
@@ -214,7 +191,7 @@
           </div>
           <div class="skill-group">
             <h3>Secondary User: The Teacher</h3>
-            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Instructors requiring extended telemetry capabilities to monitor multi-student alignment simultaneously in large group classes.</p>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Instructors requiring multi-student tracking to monitor alignment simultaneously in large group classes.</p>
           </div>
         </div>
 
@@ -336,7 +313,7 @@
         </div>
 
         <div style="margin-top: 2.5rem;">
-          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Telemetry Application Interface</h3>
+          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Mobile Application Interface</h3>
           <div class="two-col-grid">
             <figure>
               <picture>
