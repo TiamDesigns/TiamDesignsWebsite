@@ -659,10 +659,169 @@
       </div>
     </section>
 
-    <!-- SECTION 04: HARDWARE & SENSOR CIRCUITRY -->
-    <section class="section section-alt" id="electronics">
+    <!-- SECTION 04: PROJECT EXECUTION & PROTOTYPING TEST PLAN -->
+    <section class="section section-alt" id="project-plan">
       <div class="container">
-        <h2 class="section-title">04 // HARDWARE &amp; SENSOR CIRCUITRY</h2>
+        <h2 class="section-title">04 // PROJECT EXECUTION &amp; PROTOTYPING TEST PLAN</h2>
+        <p style="max-width: 880px; margin-bottom: 2rem; color: var(--muted); line-height: 1.65;">
+          Structured engineering development framework tracking progressive milestone tasks, risk mitigation, and staged subsystem prototyping plans from initial concept validation through final client delivery for Canadian Nuclear Laboratories.
+        </p>
+
+        <!-- Task Plan / Milestone Schedule Table -->
+        <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">// 01. PROJECT SCHEDULE &amp; MILESTONE TASK PLAN</h3>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6;">
+          Phased development plan executed across the 13-week engineering lifecycle, tracking critical deliverables, software modeling, and hardware fabrication tasks managed via Trello and Gantt scheduling:
+        </p>
+
+        <div class="table-frame" style="margin-bottom: 2.5rem;">
+          <div class="table-container">
+            <table class="decision-table">
+              <thead>
+                <tr>
+                  <th style="width: 22%;">Phase / Milestone</th>
+                  <th style="width: 12%; text-align: center;">Timeline</th>
+                  <th style="width: 40%;">Key Objectives &amp; Engineering Deliverables</th>
+                  <th style="width: 16%;">Tooling &amp; Platform</th>
+                  <th style="width: 10%; text-align: center;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Phase 01: Needs &amp; Requirements</strong></td>
+                  <td style="text-align: center; font-family: var(--font-mono); font-size: 0.82rem;">Weeks 1–3</td>
+                  <td>Client interviews, interpreted needs hierarchy, target specification definitions (30–80 mg payload window, &lt;$100 budget ceiling), and technical benchmarking.</td>
+                  <td>Google Docs, Sheets</td>
+                  <td style="text-align: center;"><span class="tag-selected">DONE</span></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Phase 02: Conceptual Ideation</strong></td>
+                  <td style="text-align: center; font-family: var(--font-mono); font-size: 0.82rem;">Weeks 4–6</td>
+                  <td>Developed 4 global architectures across 4 subsystems (Movement, Sampling, Containment, Failsafe); evaluated trade-offs via quantitative decision matrix and feasibility weighting.</td>
+                  <td>OnShape, Miro</td>
+                  <td style="text-align: center;"><span class="tag-selected">DONE</span></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Phase 03: CAD &amp; Schematic Design</strong></td>
+                  <td style="text-align: center; font-family: var(--font-mono); font-size: 0.82rem;">Weeks 7–8</td>
+                  <td>Parametric 3D chassis modeling, lathe bit cross-sectional geometric scraping analysis, circuit schematic capture, and dual-voltage power tree routing.</td>
+                  <td>OnShape, KiCad</td>
+                  <td style="text-align: center;"><span class="tag-selected">DONE</span></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Phase 04: Progressive Subsystem Builds</strong></td>
+                  <td style="text-align: center; font-family: var(--font-mono); font-size: 0.82rem;">Weeks 9–11</td>
+                  <td>Iterative fabrication of 5 focused Lo-Fi/Hi-Fi prototypes: load cell flexure &amp; DSP filtering, lathe bit cutting armature, spring-loaded containment, and drive locomotion.</td>
+                  <td>Bambu A1, Arduino IDE</td>
+                  <td style="text-align: center;"><span class="tag-selected">DONE</span></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Phase 05: Integration &amp; Validation</strong></td>
+                  <td style="text-align: center; font-family: var(--font-mono); font-size: 0.82rem;">Weeks 12–13</td>
+                  <td>Comprehensive electromechanical integration, 15 ft pipe run testing, Bluetooth telemetry data logging, Figma tablet operator UI, and final CNL client design day presentation.</td>
+                  <td>Keyshot, Figma, Serial API</td>
+                  <td style="text-align: center;"><span class="tag-selected">DONE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Prototyping Test Plan Table -->
+        <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">// 02. STAGED PROTOTYPE TEST PLAN &amp; STOPPING CRITERIA</h3>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6;">
+          Iterative test matrix guiding subsystem validation, quantitative metrics, and stopping criteria across 5 staged prototypes:
+        </p>
+
+        <div class="table-frame" style="margin-bottom: 2.5rem;">
+          <div class="table-container">
+            <table class="decision-table">
+              <thead>
+                <tr>
+                  <th style="width: 14%;">Prototype Stage</th>
+                  <th style="width: 18%;">Target Subsystem</th>
+                  <th style="width: 16%;">Fidelity &amp; Scope</th>
+                  <th style="width: 24%;">Evaluation Metrics &amp; Stopping Criteria</th>
+                  <th style="width: 28%;">Test Results &amp; Key Design Iterations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Prototype I</strong></td>
+                  <td><strong>Instrumentation &amp; Measurement</strong></td>
+                  <td>Focused Hi-Fi<br><span style="color: var(--muted); font-size: 0.78rem;">100g Load Cell + HX711 ADC</span></td>
+                  <td>Stable mass detection with ±1 mg resolution; noise floor &lt;10 mg over 5 consecutive test runs.</td>
+                  <td>Raw noise (±100 mg) was stabilized down to ±9.5 mg via recursive moving average and dynamic zero-tracking creep compensation.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Prototype II</strong></td>
+                  <td><strong>Sampling &amp; Tooling</strong></td>
+                  <td>Focused Hi-Fi<br><span style="color: var(--muted); font-size: 0.78rem;">JGB37 Motor + MGEHR1212 Lathe Bit</span></td>
+                  <td>Successful material extraction yielding 30–80 mg shavings without stalling motor or binding in tube.</td>
+                  <td>Validated OnShape geometric cutting arc. Scraping rotation extracted ~65 mg target yield while maintaining safe motor current limits.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Prototype III</strong></td>
+                  <td><strong>Sample Containment</strong></td>
+                  <td>Focused Hi-Fi<br><span style="color: var(--muted); font-size: 0.78rem;">Spring-Loaded Sliding Vessel</span></td>
+                  <td>Zero manual touch on radiation payload; 100% automated lid closure upon chassis extraction over 5 cycles.</td>
+                  <td>Eliminated magnetic latching due to ADC interference; engineered 3-spring dual rail mechanism for positive mechanical closure.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Prototype IV</strong></td>
+                  <td><strong>Locomotion &amp; Traction</strong></td>
+                  <td>Focused Lo-Fi<br><span style="color: var(--muted); font-size: 0.78rem;">Dual N20 Motors + Wheel Mounts</span></td>
+                  <td>Traverse 15 ft pipe in &lt;2 min; maintain traction under scraping counter-torque across horizontal/vertical runs.</td>
+                  <td>Tested progression: 608 steel bearings (slipped) ➔ TPU printed sleeves (insufficient grip) ➔ high-friction compressible rubber tires (passed).</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Prototype V</strong></td>
+                  <td><strong>Comprehensive System &amp; UX</strong></td>
+                  <td>Comprehensive System<br><span style="color: var(--muted); font-size: 0.78rem;">Chassis + Electronics + Figma UI</span></td>
+                  <td>Full mission cycle &lt;10 min; live Bluetooth wireless telemetry; successful tether recovery failsafe.</td>
+                  <td>Integrated complete electromechanical package under $100 budget ($96.19 actual); verified live mass telemetry and operator workflow.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Equipment & Software Matrix -->
+        <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem;">// 03. PROTOTYPING EQUIPMENT &amp; SOFTWARE STACK</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
+          
+          <!-- Hardware Tools Card -->
+          <div class="engineering-card">
+            <span class="eng-card-badge">HARDWARE TOOLCHAIN</span>
+            <h3>Fabrication &amp; Assembly Equipment</h3>
+            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem; line-height: 1.7; font-size: 0.88rem; color: var(--muted);">
+              <li><strong style="color: var(--text);">Bambu Lab A1 3D Printer:</strong> Additive rapid prototyping of PETG/PLA chassis, wheel mounts, and containment slider.</li>
+              <li><strong style="color: var(--text);">Soldering &amp; Fume Station:</strong> High-current wiring harness, BTS7960 motor driver, and ESP32 power rails.</li>
+              <li><strong style="color: var(--text);">Spot Welder &amp; Heat Gun:</strong> Custom 3S1P Molicel 21700 cell pack spot-welding and insulated conduit heat shrinking.</li>
+              <li><strong style="color: var(--text);">Digital Multimeter:</strong> Voltage drop profiling, load-cell excitation calibration, and current draw analysis.</li>
+            </ul>
+          </div>
+
+          <!-- Software Tools Card -->
+          <div class="engineering-card">
+            <span class="eng-card-badge">SOFTWARE TOOLCHAIN</span>
+            <h3>CAD, Firmware &amp; UI Platforms</h3>
+            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem; line-height: 1.7; font-size: 0.88rem; color: var(--muted);">
+              <li><strong style="color: var(--text);">Onshape (Parametric CAD):</strong> 3D geometry modeling, chassis assembly fit, and cross-sectional cutting arc simulation.</li>
+              <li><strong style="color: var(--text);">KiCad (Electronic EDA):</strong> Power delivery tree schematic capture, buck converter routing, and noise rejection layout.</li>
+              <li><strong style="color: var(--text);">Arduino IDE (Embedded C++):</strong> Real-time ESP32 firmware, moving-average DSP filtering, and Bluetooth telemetry streaming.</li>
+              <li><strong style="color: var(--text);">Figma &amp; Keyshot:</strong> Interactive mobile operator UI/UX wireframing and high-fidelity photorealistic CAD rendering.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 05: HARDWARE & SENSOR CIRCUITRY -->
+    <section class="section" id="electronics">
+      <div class="container">
+        <h2 class="section-title">05 // HARDWARE &amp; SENSOR CIRCUITRY</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
           
@@ -698,10 +857,10 @@
       </div>
     </section>
 
-    <!-- SECTION 05: EMBEDDED C++ FIRMWARE -->
-    <section class="section" id="firmware">
+    <!-- SECTION 06: EMBEDDED C++ FIRMWARE -->
+    <section class="section section-alt" id="firmware">
       <div class="container">
-        <h2 class="section-title">05 // EMBEDDED C++ FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
+        <h2 class="section-title">06 // EMBEDDED C++ FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
         <p style="max-width: 860px; margin-bottom: 2rem; color: var(--muted); line-height: 1.65;">
           Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller for load cell acquisition, digital filtering, and Bluetooth + WiFi data logging. Bluetooth + WiFi communication was not a client constraint or core mandate, but an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board already featured integrated Bluetooth + WiFi hardware, it drastically reduced project spending. While Bluetooth + WiFi propagation faces limitations inside shielded production tubes, it served as a practical, cost-effective alternative for the test environment and tight budget, allowing the team to concentrate resources and engineering effort on the primary mechanical scraping, traction, and containment subsystems.
         </p>
@@ -756,10 +915,10 @@
       </div>
     </section>
 
-    <!-- SECTION 06: UI/UX & SYSTEM INTEGRATION -->
-    <section class="section section-alt" id="uiux">
+    <!-- SECTION 07: UI/UX & SYSTEM INTEGRATION -->
+    <section class="section" id="uiux">
       <div class="container">
-        <h2 class="section-title">06 // UI/UX &amp; SYSTEM INTEGRATION</h2>
+        <h2 class="section-title">07 // UI/UX &amp; SYSTEM INTEGRATION</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: center;">
           <div class="uiux-info">
@@ -802,10 +961,10 @@
       </div>
     </section>
 
-    <!-- SECTION 07: POST-MORTEM & FUTURE ROADMAP -->
-    <section class="section" id="roadmap">
+    <!-- SECTION 08: POST-MORTEM & FUTURE ROADMAP -->
+    <section class="section section-alt" id="roadmap">
       <div class="container">
-        <h2 class="section-title">07 // POST-MORTEM &amp; FUTURE ROADMAP</h2>
+        <h2 class="section-title">08 // POST-MORTEM &amp; FUTURE ROADMAP</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
           
@@ -834,10 +993,10 @@
       </div>
     </section>
 
-    <!-- SECTION 08: COMPLETE BILL OF MATERIALS -->
-    <section class="section section-alt" id="bom">
+    <!-- SECTION 09: COMPLETE BILL OF MATERIALS -->
+    <section class="section" id="bom">
       <div class="container">
-        <h2 class="section-title">08 // COMPLETE BILL OF MATERIALS &amp; HARDWARE STANDARDIZATION</h2>
+        <h2 class="section-title">09 // COMPLETE BILL OF MATERIALS &amp; HARDWARE STANDARDIZATION</h2>
         <div class="bom-intro" style="margin-bottom: 1.75rem;">
           <p style="font-size: 0.98rem; line-height: 1.65; color: var(--text); margin-bottom: 1rem;">
             Full prototype component bill of materials breakdown totaling <strong>CAD $96.19</strong>. We developed this structured naming scheme (e.g., <code>PD</code> for Power Delivery, <code>CL</code> for Control Logic, <code>SC</code> for Structural Components) so the multidisciplinary group could more easily compartmentalize the workload. This allowed team members to clearly describe and reference the specific subsystem they were working on without confusing others with changing model numbers, manufacturer brand names, or vendor codes.
@@ -908,10 +1067,10 @@
       </div>
     </section>
 
-    <!-- SECTION 09: TECHNICAL HARDWARE GALLERY -->
-    <section class="section" id="gallery">
+    <!-- SECTION 10: TECHNICAL HARDWARE GALLERY -->
+    <section class="section section-alt" id="gallery">
       <div class="container">
-        <h2 class="section-title">09 // TECHNICAL HARDWARE GALLERY</h2>
+        <h2 class="section-title">10 // TECHNICAL HARDWARE GALLERY</h2>
         <p style="margin-bottom: 2rem; color: var(--muted);">High-resolution CAD renderings, strain-gauge test setups, and battery pack integration. Click any image to launch the uncropped lightbox modal preview.</p>
 
         <div class="gallery-grid">
@@ -965,10 +1124,10 @@
       </div>
     </section>
 
-    <!-- SECTION 10: PROJECT DOCUMENTS & SCHEMATICS -->
-    <section class="section section-alt" id="documents">
+    <!-- SECTION 11: PROJECT DOCUMENTS & SCHEMATICS -->
+    <section class="section" id="documents">
       <div class="container">
-        <h2 class="section-title">10 // PROJECT DOCUMENTS &amp; SCHEMATICS</h2>
+        <h2 class="section-title">11 // PROJECT DOCUMENTS &amp; SCHEMATICS</h2>
         <p style="margin-bottom: 2rem; color: var(--muted);">Complete technical deliverables, design specifications, test plans, client presentation deck, and operating manuals.</p>
 
         <div class="docs-card-grid">

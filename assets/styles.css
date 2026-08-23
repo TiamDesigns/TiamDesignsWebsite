@@ -80,6 +80,73 @@
   box-sizing: border-box;
 }
 
+/* Tactical Industrial Scrollbar System (Standard & WebKit) */
+html,
+body,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #828a99 var(--surface-alt);
+}
+
+/* WebKit / Blink Custom Scrollbars (Chrome, Edge, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #828a99;
+  border: 2px solid var(--surface-alt);
+  border-radius: 0px;
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-bold);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--accent-lime);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+}
+
+/* Refined Sub-container Scrollbars (Tables, Code blocks) */
+.table-container::-webkit-scrollbar,
+.ide-code-block::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.ide-code-block::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.ide-code-block::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+  background: #828a99;
+  border: 1px solid var(--surface-alt);
+}
+
+.table-container::-webkit-scrollbar-thumb:hover,
+.ide-code-block::-webkit-scrollbar-thumb:hover,
+pre::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-lime);
+}
+
 html {
   font-family: var(--font-sans);
   background-color: var(--bg);
