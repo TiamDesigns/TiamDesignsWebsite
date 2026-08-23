@@ -1817,25 +1817,45 @@ code, pre, .font-mono {
   text-decoration: underline;
 }
 
-/* Schematic & Manifest Tables (BOM / Analysis) - Continuous 14px Frame */
+/* Schematic & Manifest Tables (BOM / Analysis) - Full 2-Layer Chamfer Frame */
+.table-frame {
+  position: relative;
+  background: var(--border-bold);
+  clip-path: var(--chamfer-card);
+  padding: 2px;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-hard);
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color var(--transition-fast);
+}
+
+.table-frame:hover {
+  background: var(--accent-lime);
+}
+
 .table-container {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
-  border: none;
+  background: var(--surface);
+  clip-path: var(--chamfer-card-inner);
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Fallback if table-container is used without .table-frame */
+.table-container:not(.table-frame .table-container) {
   background: var(--border-bold);
-  margin-top: 1.5rem;
   clip-path: var(--chamfer-card);
+  padding: 2px;
   box-shadow: var(--shadow-hard);
+  margin-top: 1.5rem;
 }
 
 .table-container::before {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  background: var(--surface);
-  clip-path: var(--chamfer-card-inner);
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .table-container > * {
@@ -1845,11 +1865,18 @@ code, pre, .font-mono {
 
 .bom-table,
 .bom-table-styled,
-.analysis-table {
+.analysis-table,
+.decision-table {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   font-size: 0.88rem;
   text-align: left;
+  background: var(--surface);
+}
+
+.decision-table {
+  min-width: 720px;
 }
 
 .bom-table th,
@@ -1857,15 +1884,48 @@ code, pre, .font-mono {
 .bom-table-styled th,
 .bom-table-styled td,
 .analysis-table th,
-.analysis-table td {
-  padding: 0.75rem 1rem;
+.analysis-table td,
+.decision-table th,
+.decision-table td {
+  padding: 0.8rem 1rem;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
+.decision-table td {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.decision-table tr.selected-concept {
+  background: rgba(148, 203, 69, 0.09);
+}
+
+.decision-table tr.selected-concept td:first-child {
+  border-left: 3px solid var(--accent-lime);
+}
+
+.selected-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 2px 7px;
+  background: var(--accent-lime);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  clip-path: var(--chamfer-sm);
+  line-height: 1.2;
+}
+
 .bom-table th,
 .bom-table-styled th,
-.analysis-table th {
+.analysis-table th,
+.decision-table th,
+.matrix-table th {
   background: var(--surface-alt);
   font-family: var(--font-mono);
   font-weight: 700;
@@ -1874,6 +1934,118 @@ code, pre, .font-mono {
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   white-space: nowrap;
+}
+
+.matrix-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+  background: var(--surface);
+}
+
+.matrix-table th,
+.matrix-table td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.matrix-table th:nth-child(1),
+.matrix-table td:nth-child(1) {
+  width: 36%;
+}
+
+.matrix-table th:nth-child(n+2),
+.matrix-table td:nth-child(n+2) {
+  width: 16%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.matrix-table td {
+  font-size: 0.86rem;
+  color: var(--text);
+}
+
+.matrix-table tr.total-row {
+  background: var(--surface-alt);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  border-top: 2px solid var(--border-bold);
+}
+
+.matrix-table tr.total-row td {
+  color: var(--text-bright);
+}
+
+.matrix-table tr.weighted-row {
+  background: rgba(148, 203, 69, 0.1);
+  font-weight: 800;
+  font-family: var(--font-mono);
+  border-top: 2px solid var(--accent-lime);
+}
+
+.matrix-table tr.weighted-row td {
+  color: var(--text-bright);
+}
+
+.tag-selected,
+.tag-risk {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  clip-path: var(--chamfer-sm);
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.tag-selected {
+  background: var(--accent-lime);
+  color: var(--bg);
+}
+
+.tag-risk {
+  background: var(--accent-orange);
+  color: var(--bg);
+}
+
+.bom-table-styled th:nth-child(1),
+.bom-table-styled td:nth-child(1) {
+  white-space: nowrap;
+  width: 14%;
+}
+
+.bom-table-styled th:nth-child(2),
+.bom-table-styled td:nth-child(2) {
+  min-width: 180px;
+  width: 42%;
+}
+
+.bom-table-styled th:nth-child(3),
+.bom-table-styled td:nth-child(3) {
+  white-space: nowrap;
+  width: 18%;
+}
+
+.bom-table-styled th:nth-child(4),
+.bom-table-styled td:nth-child(4) {
+  text-align: center;
+  white-space: nowrap;
+  width: 10%;
+}
+
+.bom-table-styled th:nth-child(5),
+.bom-table-styled td:nth-child(5) {
+  text-align: right;
+  white-space: nowrap;
+  width: 16%;
 }
 
 .bom-table td,
@@ -1912,13 +2084,24 @@ code, pre, .font-mono {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: 1.5rem;
-  grid-auto-rows: 10px;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
-  align-items: start;
+  align-items: stretch;
 }
 
+.concept-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+figure,
 .gallery-grid figure,
+.concept-gallery figure,
 .tech-figure,
 .overview-media figure,
 .two-col-grid figure {
@@ -1933,11 +2116,16 @@ code, pre, .font-mono {
   transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 0.65rem;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
+figure::before,
 .gallery-grid figure::before,
+.concept-gallery figure::before,
 .tech-figure::before,
 .overview-media figure::before,
 .two-col-grid figure::before {
@@ -1951,7 +2139,9 @@ code, pre, .font-mono {
   transition: background-color var(--transition);
 }
 
+figure:hover,
 .gallery-grid figure:hover,
+.concept-gallery figure:hover,
 .tech-figure:hover,
 .overview-media figure:hover,
 .two-col-grid figure:hover {
@@ -1960,14 +2150,18 @@ code, pre, .font-mono {
   box-shadow: 6px 6px 0px var(--border-bold);
 }
 
+figure:hover::before,
 .gallery-grid figure:hover::before,
+.concept-gallery figure:hover::before,
 .tech-figure:hover::before,
 .overview-media figure:hover::before,
 .two-col-grid figure:hover::before {
   background: #f8fafc;
 }
 
+figure > *,
 .gallery-grid figure > *,
+.concept-gallery figure > *,
 .tech-figure > *,
 .overview-media figure > *,
 .two-col-grid figure > * {
@@ -1975,25 +2169,45 @@ code, pre, .font-mono {
   z-index: 1;
 }
 
+figure picture,
+.tech-figure picture,
+.gallery-grid picture,
+.concept-gallery picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 190px;
+  max-height: 230px;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+figure img,
 .gallery-grid img,
+.concept-gallery img,
 .tech-figure img,
 .overview-media img,
 .two-col-grid img,
 .feature-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: 230px;
   object-fit: contain;
-  border: 1px solid var(--border);
+  border: none;
   background: #ffffff;
   display: block;
   cursor: pointer;
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   box-sizing: border-box;
-}
-
-figure {
-  margin: 0;
-  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 0.25rem;
 }
 
 figcaption,
@@ -2003,10 +2217,11 @@ figcaption,
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--muted);
-  margin-top: 0.35rem;
+  margin-top: auto;
   text-align: center;
   line-height: 1.45;
-  padding: 0 0.25rem;
+  padding: 0.25rem 0.25rem 0 0.25rem;
+  flex-shrink: 0;
 }
 
 /* Feature List */
@@ -2203,10 +2418,9 @@ figcaption,
   width: auto;
   height: auto;
   object-fit: contain;
-  border: 2px solid var(--border-bold);
+  border: none;
   background: #ffffff;
-  clip-path: var(--chamfer-card);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-caption,

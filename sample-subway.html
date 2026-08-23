@@ -56,10 +56,35 @@
       justify-content: center;
       width: 34px;
       height: 34px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
+      position: relative;
+      background: var(--border-bold);
+      border: none;
       flex-shrink: 0;
+      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+    }
+
+    .spec-icon-svg::before {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      background: var(--surface-alt);
       clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
+      z-index: 0;
+      pointer-events: none;
+      transition: background-color var(--transition-fast);
+    }
+
+    .spec-card:hover .spec-icon-svg {
+      background: var(--accent-lime);
+    }
+
+    .spec-card:hover .spec-icon-svg::before {
+      background: #ffffff;
+    }
+
+    .spec-icon-svg svg {
+      position: relative;
+      z-index: 1;
     }
 
     .spec-detail {
@@ -218,14 +243,14 @@
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start; margin-bottom: 2.5rem;">
           <div class="overview-text">
-            <h3 style="color: var(--accent-ochre); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">// PROJECT SCOPE</h3>
+            <h3 style="color: var(--accent-ochre); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">// PROJECT SCOPE &amp; CLIENT VISION</h3>
             <p style="font-size: 0.98rem; line-height: 1.65; margin-bottom: 1.5rem; color: var(--text);">
-              Electromechanical remote sampling tool engineered for <strong>Canadian Nuclear Laboratories (CNL)</strong> to collect <span class="tech-metric">[ 30–80 mg ]</span> metal samples from 4-inch ID, 15-foot nuclear pressure tubes for hydrogen embrittlement destructive testing.
+              Electromechanical remote sampling tool engineered for <strong>Canadian Nuclear Laboratories (CNL)</strong> to collect <span class="tech-metric">[ 30–80 mg ]</span> metal samples from 4-inch ID, 15-foot nuclear pressure tubes for hydrogen embrittlement destructive testing. The lead engineer from Canadian Nuclear Laboratories emphasized a strong interest in seeing unique, innovative, and fully developed solutions rather than standard off-the-shelf concepts.
             </p>
             
-            <h3 style="color: var(--accent-ochre); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">// DESIGN CONSTRAINTS</h3>
+            <h3 style="color: var(--accent-ochre); margin-bottom: 0.5rem; font-size: 0.95rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;">// DESIGN CONSTRAINTS &amp; BOUNDARIES</h3>
             <p style="font-size: 0.98rem; line-height: 1.65; color: var(--text);">
-              Dual-orientation operation (horizontal/vertical), complete retrievability, zero operator exposure, self-contained power, and wireless data feedback within a 10-minute operational window.
+              Strict <strong>$100 CAD total project budget</strong>, complete setup and handling by a <strong>single operator</strong> with zero radiation exposure, dual-orientation travel (horizontal/vertical), 100% failsafe retrievability, self-contained onboard power, and cycle completion within a 10-minute operational window.
             </p>
           </div>
           
@@ -272,7 +297,7 @@
               <div class="spec-icon-svg">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-ochre)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                 </svg>
               </div>
               <h4>Movement &amp; Recovery</h4>
@@ -298,10 +323,7 @@
             <div class="spec-card-header">
               <div class="spec-icon-svg">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-ochre)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 8.82a15 15 0 0 1 20 0"></path>
-                  <path d="M5 12.85a10 10 0 0 1 14 0"></path>
-                  <path d="M8.5 16.88a5 5 0 0 1 7 0"></path>
-                  <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                 </svg>
               </div>
               <h4>Sensor &amp; ADC Circuitry</h4>
@@ -322,6 +344,22 @@
             <p class="spec-detail">Custom 3S1P Li-Ion Battery Pack (3x Molicel 21700 P42A Cells, 11.1V Nominal, 4500mAh) + 3S 40A BMS Board + LM2596 Buck Regulator (5V/3.3V Logic)</p>
           </div>
 
+          <!-- Card 6: Communications -->
+          <div class="spec-card">
+            <div class="spec-card-header">
+              <div class="spec-icon-svg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-ochre)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 8.82a15 15 0 0 1 20 0"></path>
+                  <path d="M5 12.85a10 10 0 0 1 14 0"></path>
+                  <path d="M8.5 16.88a5 5 0 0 1 7 0"></path>
+                  <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+              </div>
+              <h4>Communications</h4>
+            </div>
+            <p class="spec-detail">ESP32 Bluetooth + WiFi Telemetry + Mobile Operator UI/UX Tablet Application</p>
+          </div>
+
         </div>
       </div>
     </section>
@@ -335,14 +373,17 @@
           
           <!-- Needs Analysis & Hierarchy -->
           <div class="engineering-card">
-            <span class="eng-card-badge">CLIENT REQUIREMENTS MATRIX</span>
+            <span class="eng-card-badge">USER REQUIREMENTS</span>
             <h3>Needs Analysis &amp; Prioritization</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">Transformed CNL client statements into prioritized engineering design criteria:</p>
             <ol style="padding-left: 1.25rem; margin: 0; line-height: 1.7; font-size: 0.9rem;">
-              <li><strong style="color: var(--text);">Safety &amp; Exposure Limitation:</strong> <span style="color: var(--muted);">Self-sealing sample containment.</span></li>
-              <li><strong style="color: var(--text);">Complete Removability:</strong> <span style="color: var(--muted);">Winch tether emergency recovery failsafe.</span></li>
+              <li><strong style="color: var(--text);">Safety &amp; Exposure Limitation:</strong> <span style="color: var(--muted);">Self-sealing sample containment &amp; zero direct radioactive contact.</span></li>
+              <li><strong style="color: var(--text);">Single-Operator Handling:</strong> <span style="color: var(--muted);">Fully deployable, operable, and retrievable by 1 technician without secondary assistance.</span></li>
+              <li><strong style="color: var(--text);">Budgetary Ceiling ($100):</strong> <span style="color: var(--muted);">Total prototype procurement and BOM strictly capped under <span class="tech-metric">[ $100 CAD ]</span>.</span></li>
+              <li><strong style="color: var(--text);">Unique &amp; Fully Developed Solution:</strong> <span style="color: var(--muted);">Novel electromechanical architecture fulfilling CNL lead engineer's mandate for distinctive solutions.</span></li>
+              <li><strong style="color: var(--text);">Complete Removability:</strong> <span style="color: var(--muted);">Winch tether emergency recovery failsafe for 100% retrieval guarantee.</span></li>
               <li><strong style="color: var(--text);">Payload Precision:</strong> <span style="color: var(--muted);">Target sample extraction of <span class="tech-metric">[ 30–80 mg ]</span>.</span></li>
-              <li><strong style="color: var(--text);">Data Feedback:</strong> <span style="color: var(--muted);">Real-time Bluetooth weight readings.</span></li>
+              <li><strong style="color: var(--text);">Data Feedback:</strong> <span style="color: var(--muted);">Prototype mass verification via onboard ESP32 Bluetooth + WiFi to avoid umbilical cable complexity.</span></li>
               <li><strong style="color: var(--text);">Modularity &amp; Envelope:</strong> <span style="color: var(--muted);">Length &lt; 4 ft, diameter &lt; 4 in.</span></li>
               <li><strong style="color: var(--text);">Self-Contained Power:</strong> <span style="color: var(--muted);">Onboard high-current Li-ion battery pack.</span></li>
               <li><strong style="color: var(--text);">Operational Speed:</strong> <span style="color: var(--muted);">Cycle completion within &lt; 10 minutes.</span></li>
@@ -351,12 +392,13 @@
 
           <!-- EDS Matrix Summary -->
           <div class="engineering-card">
-            <span class="eng-card-badge">EDS MATRIX</span>
-            <h3>Engineering Design Specifications</h3>
-            <p style="margin-bottom: 0.75rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">Target engineering performance envelope and mechanical boundary constraints:</p>
+            <span class="eng-card-badge">DESIGN ENVELOPE &amp; BOUNDARIES</span>
+            <h3>Functional Limits &amp; Constraints</h3>
+            <p style="margin-bottom: 0.75rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">Target engineering performance envelope, cost ceiling, and boundary constraints:</p>
             
             <h4 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0; margin-bottom: 0.4rem;">Functional Requirements</h4>
             <ul style="margin: 0 0 1rem 0; padding-left: 1.25rem; line-height: 1.7; font-size: 0.9rem;">
+              <li><strong style="color: var(--text);">Single-Operator Usability:</strong> <span style="color: var(--muted);">Solo deployment, guidance, and recovery</span></li>
               <li><strong style="color: var(--text);">Mass Collection:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ 30–80 mg ]</span> (verified via scale feedback)</span></li>
               <li><strong style="color: var(--text);">Complete Removability:</strong> <span style="color: var(--muted);">100% retrieval guarantee with tether backup</span></li>
               <li><strong style="color: var(--text);">Enclosed Sample:</strong> <span style="color: var(--muted);">Self-sealing spring-loaded lid</span></li>
@@ -364,8 +406,10 @@
               <li><strong style="color: var(--text);">Cycle Time:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 10 min ]</span> total deployment</span></li>
             </ul>
             
-            <h4 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">Physical &amp; Safety Constraints</h4>
+            <h4 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">Physical &amp; Budgetary Constraints</h4>
             <ul style="margin: 0; padding-left: 1.25rem; line-height: 1.7; font-size: 0.9rem;">
+              <li><strong style="color: var(--text);">Total Project Budget:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ $100 CAD ]</span> strict financial limit</span></li>
+              <li><strong style="color: var(--text);">Operator Footprint:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ 1 Operator ]</span> single-person handling</span></li>
               <li><strong style="color: var(--text);">Outer Diameter:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 4.0 in ]</span> envelope</span></li>
               <li><strong style="color: var(--text);">Total Tool Length:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 4.0 ft ]</span></span></li>
               <li><strong style="color: var(--text);">Total Tool Mass:</strong> <span style="color: var(--muted);"><span class="tech-metric">[ &lt; 5.0 kg ]</span> man-portable</span></li>
@@ -377,77 +421,239 @@
 
         <!-- Concept Selection & Evaluation -->
         <div class="engineering-card" style="margin-top: 1.5rem;">
-          <span class="eng-card-badge">DECISION MATRIX</span>
-          <h3>Concept Evaluation &amp; Trade-off Justification</h3>
-          <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">
-            Evaluated 4 global concepts (<em>Sample Subway</em>, <em>Pipe Worm</em>, <em>Pneumatically Deployable Tool</em>, and <em>Flywheel Flinger</em>) against weighted client design criteria.
+          <span class="eng-card-badge">CONCEPT COMPARISON</span>
+          <h3>Trade-off Analysis &amp; Architecture Selection</h3>
+          <p style="margin-bottom: 1.25rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">
+            Evaluated 4 global concepts (<em>Sample Subway</em>, <em>Pipe Worm</em>, <em>Pneumatically Deployable Tool</em>, and <em>Flywheel Flinger</em>) against weighted client criteria, target engineering specifications, and manufacturing feasibility.
           </p>
-          <div style="padding: 1rem 1.25rem; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.9rem; line-height: 1.6; clip-path: var(--chamfer-sm);">
-            <strong style="color: var(--text);">Selection Justification:</strong> <span style="color: var(--muted);">The <em>Sample Subway</em> scored highest in the decision matrix due to superior traction control in dual orientations (horizontal &amp; vertical), a simplified winch recovery failsafe, and predictable mechanical scraping kinematics compared to pneumatic or inflatable tube crawlers.</span>
+
+          <!-- Table 01: Concept Architecture Matrix -->
+          <h4 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 1rem 0 0.5rem 0;">// TABLE 01: CONCEPT SUBSYSTEM ARCHITECTURE</h4>
+          <div class="table-frame" style="margin: 0.5rem 0 1.75rem 0;">
+            <div class="table-container">
+              <table class="decision-table">
+                <thead>
+                  <tr>
+                    <th>Concept</th>
+                    <th>Movement</th>
+                    <th>Sampling Tool</th>
+                    <th>Containment</th>
+                    <th>Emergency Failsafe</th>
+                    <th>Evaluation &amp; Trade-offs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="selected-concept">
+                    <td>
+                      <strong style="color: var(--text-bright);">Sample Subway</strong><br>
+                      <span class="selected-badge">SELECTED</span>
+                    </td>
+                    <td>Modular Drive Wheels (Dual 12V N20 Motors)</td>
+                    <td>Lathe Tool Bit Scraping Profile</td>
+                    <td>Spring-Loaded Sliding Lid / Retention Lip</td>
+                    <td>Paracord Tether &amp; Winch Spool</td>
+                    <td>Superior traction in dual orientations; predictable cutting depth without stalling; failsafe mechanical tether ensures 100% recovery.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color: var(--text-bright);">The Pipe Worm</strong></td>
+                    <td>Pneumatic Inchworm (Inflatable Caps + Actuator)</td>
+                    <td>Abrasive Rotary Sanding Pad</td>
+                    <td>Suction Vacuum Chamber</td>
+                    <td>Negative Pressure Vacuum Pull</td>
+                    <td>Slow multi-step peristaltic movement; abrasive sanding dust created high residue contamination risks in tube.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color: var(--text-bright);">Pneumatic Tool</strong></td>
+                    <td>Telescoping Inflatable Segmented Tube</td>
+                    <td>Articulated Arm / Multi-Tool Head</td>
+                    <td>Pneumatic Clamshell Vessel</td>
+                    <td>Deflate &amp; Reverse Tension Pull</td>
+                    <td>Compact storage, but managing external high-pressure pneumatic lines added operational complexity and puncture risk.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color: var(--text-bright);">Flywheel Flinger</strong></td>
+                    <td>High-Speed Dual Flywheel Launcher</td>
+                    <td>Dynamic Flap Friction Scraper</td>
+                    <td>Spring-Loaded Flap Closure</td>
+                    <td>Tensioned Recovery Line &amp; Spool</td>
+                    <td>High initial velocity, but uncontrolled ballistic impacts risked tube wall damage and loss of sample capture.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 02: Quantitative Decision & Feasibility Matrix -->
+          <h4 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin: 1.5rem 0 0.5rem 0;">// TABLE 02: CONCEPT EVALUATION &amp; FEASIBILITY WEIGHTING</h4>
+          <p style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.75rem; font-family: var(--font-mono);">Scoring Scale: 1 = Poor / High Risk · 2 = Moderate / Acceptable · 3 = Superior / Optimal</p>
+          <div class="table-frame" style="margin: 0.5rem 0 1.5rem 0;">
+            <div class="table-container">
+              <table class="matrix-table">
+                <thead>
+                  <tr>
+                    <th style="text-align: left;">Evaluation Criteria</th>
+                    <th>Sample Subway (C1)</th>
+                    <th>The Pipe Worm (C2)</th>
+                    <th>Pneumatic Tool (C3)</th>
+                    <th>Flywheel Flinger (C4)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Radiation Containment &amp; Operator Safety</strong></td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>100% Removability &amp; Emergency Tether</strong></td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Modular &amp; Lightweight Packaging</strong></td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Novelty &amp; Creative Solution</strong></td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Operational Speed &amp; Cycle Time</strong></td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Packaging &amp; 4.05" Pipe Bore Clearance</strong></td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Mechanical Complexity &amp; Execution</strong></td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>2</td>
+                  </tr>
+                  <tr class="total-row">
+                    <td><strong>Raw Concept Score (out of 21)</strong></td>
+                    <td><strong>16 / 21</strong></td>
+                    <td><strong>11 / 21</strong></td>
+                    <td><strong>19 / 21</strong></td>
+                    <td><strong>15 / 21</strong></td>
+                  </tr>
+                  <tr class="total-row" style="background: rgba(225, 229, 235, 0.4);">
+                    <td><strong>Overall Feasibility Weighting Factor</strong></td>
+                    <td><strong>1.00x</strong></td>
+                    <td><strong>0.65x</strong></td>
+                    <td><strong>0.60x</strong></td>
+                    <td><strong>0.75x</strong></td>
+                  </tr>
+                  <tr class="weighted-row">
+                    <td><strong>Final Feasibility-Adjusted Score</strong></td>
+                    <td>16.0 <span class="tag-selected">SELECTED</span></td>
+                    <td>7.2</td>
+                    <td>11.4 <span class="tag-risk">HIGH RISK</span></td>
+                    <td>11.3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="padding: 1.1rem 1.25rem; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.9rem; line-height: 1.65; clip-path: var(--chamfer-sm);">
+            <strong style="color: var(--text-bright); font-family: var(--font-mono); font-size: 0.88rem; text-transform: uppercase; display: block; margin-bottom: 0.4rem;">// Selection Justification &amp; Feasibility Trade-offs:</strong>
+            <span style="color: var(--muted);">
+              In the initial unweighted concept evaluation, the <em>Pneumatically Deployable Tool (Concept 3)</em> scored the highest raw score (<strong>19 / 21</strong>) due to its high architectural novelty, compact storage, and rapid theoretical inflation. However, due to its low rating for manufacturing feasibility (requiring custom airtight segmented bladders, multi-port pneumatic valves, and complex micro-rotary joints), the team could not envision fabricating and delivering this design within the strict <strong>$100 CAD budget ceiling</strong> and semester deadline.
+            </span>
+            <span style="color: var(--muted); display: block; margin-top: 0.6rem;">
+              Applying an overall feasibility weight factor to account for timeline and budgetary constraints, the <strong>Sample Subway (Concept 1)</strong> emerged as the winning design with an adjusted score of <strong>16.0</strong>. It achieved a 1.00x feasibility rating, reliable traction in dual orientations, a foolproof mechanical tether failsafe, and predictable lathe-bit cutting geometry, allowing the group to successfully build, test, and validate a physical prototype under budget ($96.19 actual BOM).
+            </span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 03: KINEMATICS & MECHANICS -->
+    <!-- SECTION 03: SAMPLE SUBWAY SUBSYSTEM BREAKDOWN -->
     <section class="section" id="mechanical">
       <div class="container">
-        <h2 class="section-title">03 // KINEMATICS &amp; MECHANICS</h2>
+        <h2 class="section-title">03 // SAMPLE SUBWAY SUBSYSTEM BREAKDOWN</h2>
 
         <div class="tech-cards-stack" style="display: flex; flex-direction: column; gap: 1.25rem;">
           
-          <!-- Feature 1 -->
+          <!-- Subsystem 1: Tooling -->
           <div class="engineering-card">
-            <span class="eng-card-badge">KINEMATIC PROFILING</span>
-            <h3>Kinematic Extraction Profiling</h3>
-            <p>Detailed cross-sectional geometric overlap analysis in OnShape between the motor armature path and the 4.05-inch pipe wall, designing a precise cut path to extract a target mass of <span class="tech-metric">[ 65 mg ]</span> (within the <span class="tech-metric">[ 30–80 mg ]</span> spec window).</p>
+            <span class="eng-card-badge">SUBSYSTEM 01 // SAMPLING &amp; SCRAPING TOOLING</span>
+            <h3>Lathe Tool Bit &amp; Scraping Profile</h3>
+            <p>Integrates a high-torque JGB37-520 12V 7 RPM DC gearmotor driving an industrial MGEHR1212 lathe tool bit through a high-power BTS7960 H-bridge driver. We performed geometric cross-sectional modeling in OnShape of the 4.05-inch pipe wall and crawler chassis radius to calculate the cutting trajectory. By optimizing motor placement and cutting radius, the tool extracts an estimated target mass of <span class="tech-metric">[ 65 mg ]</span> (within the client's <span class="tech-metric">[ 30–80 mg ]</span> spec window) without cutting too deep, preventing motor stalls or excessive tube wall damage.</p>
           </div>
 
-          <!-- Feature 2 -->
+          <!-- Subsystem 2: Containment -->
           <div class="engineering-card">
-            <span class="eng-card-badge">CONTAINMENT MECHANISM</span>
-            <h3>Self-Sealing Containment Mechanism</h3>
-            <p>Spring-loaded sliding lid container. Upon insertion into the tool head, catch pins hold the lid open; upon removal, internal compression springs force the lid shut, isolating the sample and eliminating human contamination.</p>
+            <span class="eng-card-badge">SUBSYSTEM 02 // SAMPLE CONTAINMENT</span>
+            <h3>Spring-Loaded Self-Sealing Vessel</h3>
+            <p>Custom 3D-printed containment container featuring an automated spring-loaded sliding lid. Upon insertion into the Subway's tool head, a mechanical retention lip catches the container's edge to hold the sliding door open directly beneath the cutting bit during active scraping; upon removal, dual internal compression springs automatically force the lid shut, securely isolating the sample so the operator is shielded from radioactive exposure.</p>
           </div>
 
-          <!-- Feature 3 -->
+          <!-- Subsystem 3: Locomotion -->
           <div class="engineering-card">
-            <span class="eng-card-badge">WHEEL TRACTION TESTING</span>
-            <h3>Motor &amp; Wheel Traction Testing</h3>
-            <p>Modular wheel mounting testing—progressing from raw 608 steel bearings (high slip) to 3D-printed TPU sleeves, and finally compressible rubber traction bands to maintain high friction against internal tube walls under scraping torque.</p>
+            <span class="eng-card-badge">SUBSYSTEM 03 // LOCOMOTION &amp; TRACTION</span>
+            <h3>Bi-Directional Drive &amp; Friction Interface</h3>
+            <p>Driven by dual 12V N20 200 RPM micro-metal gearmotors powering modular drive wheel assemblies. Tested multiple wheel surface interfaces—progressing from raw 608 steel bearings (high slip) to 3D-printed TPU sleeves, and finally compressible rubber traction bands to maintain necessary normal wall force and prevent chassis rotation under scraping counter-torque across both horizontal and vertical pipe runs.</p>
+          </div>
+
+          <!-- Subsystem 4: Failsafe -->
+          <div class="engineering-card">
+            <span class="eng-card-badge">SUBSYSTEM 04 // EMERGENCY FAILSAFE &amp; RECOVERY</span>
+            <h3>High-Tensile Tether &amp; Winch Recovery</h3>
+            <p>Independent mechanical recovery failsafe featuring a 550 Paracord tether line anchored to a reinforced structural chassis tow-eyelet and spooled onto a manual/motorized retrieval winch. Guarantees 100% physical retrieval of the crawler and contained sample in the event of battery exhaustion, motor stall, or signal loss inside the 15-foot pressure tube.</p>
           </div>
 
         </div>
 
         <!-- Diagrams & Drawings Grid -->
-        <div class="concept-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2rem;">
+        <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2.75rem; margin-bottom: 1.25rem;">// DESIGN CONCEPTS &amp; CAD SCHEMATICS</h3>
+        <div class="concept-gallery">
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/web_images/Concept Drawing.webp" type="image/webp">
-              <img src="assets/SampleSubway/web_images/Concept Drawing.png" alt="Clearance Analysis" loading="lazy">
+              <img src="assets/SampleSubway/web_images/Concept Drawing.png" alt="Inflatable Pipe Crawler Concept" loading="lazy">
             </picture>
-            <figcaption>Scraping mechanism clearance trade-offs &amp; armature sweep.</figcaption>
+            <figcaption>Inflatable Pipe Crawler Concept</figcaption>
           </figure>
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/web_images/Concept Drawing 2.webp" type="image/webp">
-              <img src="assets/SampleSubway/web_images/Concept Drawing 2.png" alt="Chassis Architecture" loading="lazy">
+              <img src="assets/SampleSubway/web_images/Concept Drawing 2.png" alt="Flywheel Launcher Concept" loading="lazy">
             </picture>
-            <figcaption>Cylindrical chassis layout for 4.05" pipe wall clearance.</figcaption>
+            <figcaption>Flywheel Launcher Concept</figcaption>
           </figure>
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/Sample Container Diagram.webp" type="image/webp">
-              <img src="assets/SampleSubway/Sample Container Diagram.png" alt="Sample Container Kinematic Diagram" loading="lazy">
+              <img src="assets/SampleSubway/Sample Container Diagram.png" alt="Spring Loaded Container CAD" loading="lazy">
             </picture>
-            <figcaption>Kinematic diagram of spring-loaded self-sealing container.</figcaption>
+            <figcaption>Spring Loaded Container CAD</figcaption>
           </figure>
           <figure class="tech-figure">
             <picture>
               <source srcset="assets/SampleSubway/Side View Cartoon Render.webp" type="image/webp">
-              <img src="assets/SampleSubway/Side View Cartoon Render.jpg" alt="Axial Mass Distribution" loading="lazy">
+              <img src="assets/SampleSubway/Side View Cartoon Render.jpg" alt="Side View of Sample Subway CAD" loading="lazy">
             </picture>
-            <figcaption>Side elevation &amp; axial mass balance distribution.</figcaption>
+            <figcaption>Side View of Sample Subway CAD</figcaption>
           </figure>
         </div>
       </div>
@@ -463,8 +669,8 @@
           <!-- Power Tree -->
           <div class="arch-card">
             <div class="arch-card-header">
-              <span class="arch-tag">POWER DISTRIBUTION</span>
-              <h3>Power Distribution</h3>
+              <span class="arch-tag">VOLTAGE REGULATION</span>
+              <h3>Dual-Voltage Power Tree</h3>
             </div>
             <p>Unregulated 12V bus powering the BTS7960 and N20 motor drivers. Stepped down via LM2596 buck converter to 5V VIN for the ESP32, which supplies 3.3V logic rails.</p>
             <div style="margin-top: 1.25rem; padding: 1.1rem; background: var(--surface-alt); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8;">
@@ -477,8 +683,8 @@
           <!-- Analog Instrumentation -->
           <div class="arch-card">
             <div class="arch-card-header">
-              <span class="arch-tag">LOAD CELL &amp; ADC</span>
-              <h3>Sensor &amp; ADC Circuitry</h3>
+              <span class="arch-tag">ANALOG INSTRUMENTATION</span>
+              <h3>Strain-Gauge Flexure &amp; 24-Bit ADC</h3>
             </div>
             <p>Wheatstone bridge load cell interfaced with the HX711 24-bit ADC. Implemented twisted-pair wiring to reduce electrical noise from adjacent DC motors inside the chassis.</p>
             <div style="margin-top: 1.25rem; padding: 1.1rem; background: var(--surface-alt); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8;">
@@ -495,15 +701,17 @@
     <!-- SECTION 05: EMBEDDED C++ FIRMWARE -->
     <section class="section" id="firmware">
       <div class="container">
-        <h2 class="section-title">05 // EMBEDDED C++ FIRMWARE</h2>
-        <p style="max-width: 800px; margin-bottom: 2rem; color: var(--muted);">Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller for load cell reading, noise filtering, and Bluetooth data logging.</p>
+        <h2 class="section-title">05 // EMBEDDED C++ FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
+        <p style="max-width: 860px; margin-bottom: 2rem; color: var(--muted); line-height: 1.65;">
+          Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller for load cell acquisition, digital filtering, and Bluetooth + WiFi data logging. Bluetooth + WiFi communication was not a client constraint or core mandate, but an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board already featured integrated Bluetooth + WiFi hardware, it drastically reduced project spending. While Bluetooth + WiFi propagation faces limitations inside shielded production tubes, it served as a practical, cost-effective alternative for the test environment and tight budget, allowing the team to concentrate resources and engineering effort on the primary mechanical scraping, traction, and containment subsystems.
+        </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
           
           <!-- Algorithm 1 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">NOISE FILTERING</span>
+              <span class="firmware-badge">MODULE 01 // DSP FILTER</span>
               <h3>100-Sample Moving Average Filter</h3>
               <p>Reduces raw sensor fluctuation from <span class="tech-metric">[ ±100 mg ]</span> down to an acceptable noise floor of <span class="tech-metric">[ ±9.5 mg ]</span>.</p>
             </div>
@@ -519,7 +727,7 @@
           <!-- Algorithm 2 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">DRIFT COMPENSATION</span>
+              <span class="firmware-badge">MODULE 02 // CALIBRATION</span>
               <h3>Time-Based Creep Drift Compensation</h3>
               <p>Firmware routine executing every 30 seconds. If measured drift is below <span class="tech-metric">[ 10 mg ]</span>, the system automatically re-tares the scale to offset mechanical creep and thermal variance.</p>
             </div>
@@ -534,9 +742,9 @@
           <!-- Algorithm 3 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">BLUETOOTH LOGGING</span>
-              <h3>Bluetooth Data Logging</h3>
-              <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>, <code>Creep State</code>) to remote monitors.</p>
+              <span class="firmware-badge">MODULE 03 // TELEMETRY</span>
+              <h3>Cost-Optimized Bluetooth + WiFi Logging</h3>
+              <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV data packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>, <code>Creep State</code>) to ground monitoring software without requiring expensive external transceivers.</p>
             </div>
             <pre class="ide-code-block"><code><span class="syn-comment">// CSV RFCOMM Output Stream:</span>
 <span class="syn-fn">SerialBT.printf</span>(<span class="syn-str">"%lu,%.2f,%.2f,%d\n"</span>,
@@ -582,7 +790,7 @@
               </div>
               <div class="lifecycle-step step-contain">
                 <span class="step-num">03</span>
-                <div class="step-text"><strong class="step-label">Contained:</strong> Tool head catch pins release; internal springs seal <span class="tech-metric">[ 65 mg ]</span> sample container.</div>
+                <div class="step-text"><strong class="step-label">Contained:</strong> Container disengages retention lip; internal compression springs automatically seal <span class="tech-metric">[ 65 mg ]</span> radioactive sample vessel.</div>
               </div>
               <div class="lifecycle-step step-retract">
                 <span class="step-num">04</span>
@@ -629,64 +837,73 @@
     <!-- SECTION 08: COMPLETE BILL OF MATERIALS -->
     <section class="section section-alt" id="bom">
       <div class="container">
-        <h2 class="section-title">08 // COMPLETE BILL OF MATERIALS</h2>
-        <p style="margin-bottom: 1.75rem; color: var(--muted);">Full prototype component bill of materials breakdown totaling CAD $96.19.</p>
+        <h2 class="section-title">08 // COMPLETE BILL OF MATERIALS &amp; HARDWARE STANDARDIZATION</h2>
+        <div class="bom-intro" style="margin-bottom: 1.75rem;">
+          <p style="font-size: 0.98rem; line-height: 1.65; color: var(--text); margin-bottom: 1rem;">
+            Full prototype component bill of materials breakdown totaling <strong>CAD $96.19</strong>. We developed this structured naming scheme (e.g., <code>PD</code> for Power Delivery, <code>CL</code> for Control Logic, <code>SC</code> for Structural Components) so the multidisciplinary group could more easily compartmentalize the workload. This allowed team members to clearly describe and reference the specific subsystem they were working on without confusing others with changing model numbers, manufacturer brand names, or vendor codes.
+          </p>
+          <p style="font-size: 0.98rem; line-height: 1.65; color: var(--text); margin-bottom: 0.5rem;">
+            To streamline assembly and rapid prototyping, we actively standardized components wherever possible, utilizing <strong>M3 and M4 nuts and bolts exclusively</strong> alongside heat-set brass threaded inserts. Through strategic vendor selection and precise sizing, we were able to deliver a fully functional, fully integrated prototype for <strong>$96.19</strong>—staying under the client's <strong>$100 CAD project budget</strong> with materials to spare.
+          </p>
+        </div>
 
-        <div class="table-container">
-          <table class="bom-table-styled">
-            <thead>
-              <tr>
-                <th>Item Code</th>
-                <th>Part Description</th>
-                <th>Vendor</th>
-                <th style="text-align: center;">Qty</th>
-                <th style="text-align: right;">Cost (CAD)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Group 1: Power Delivery -->
-              <tr class="bom-group-header"><td colspan="5">// POWER DELIVERY</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD01</td><td>22 AWG Hookup Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD02</td><td>XT60 Battery Connectors</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.60</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD03</td><td>16 AWG Power Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD04</td><td>Molicel 21700 P42A Li-Ion Cells</td><td>18650 Battery</td><td style="text-align: center;">3</td><td style="text-align: right;">$15.00</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD05</td><td>3S 40A BMS Board</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$2.94</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD07</td><td>LM2596 DC-DC Buck Converter</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.45</td></tr>
+        <div class="table-frame">
+          <div class="table-container">
+            <table class="bom-table-styled">
+              <thead>
+                <tr>
+                  <th>Item Code</th>
+                  <th>Part Description</th>
+                  <th>Vendor</th>
+                  <th style="text-align: center;">Qty</th>
+                  <th style="text-align: right;">Cost (CAD)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Group 1: Power Delivery -->
+                <tr class="bom-group-header"><td colspan="5">// POWER DELIVERY</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD01</td><td>22 AWG Hookup Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD02</td><td>XT60 Battery Connectors</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.60</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD03</td><td>16 AWG Power Wire</td><td>Amazon</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD04</td><td>Molicel 21700 P42A Li-Ion Cells</td><td>18650 Battery</td><td style="text-align: center;">3</td><td style="text-align: right;">$15.00</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD05</td><td>3S 40A BMS Board</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$2.94</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">PD07</td><td>LM2596 DC-DC Buck Converter</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.45</td></tr>
 
-              <!-- Group 2: Control Logic -->
-              <tr class="bom-group-header"><td colspan="5">// CONTROL LOGIC</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL01</td><td>ESP32-WROOM-C3 Board</td><td>Elegoo</td><td style="text-align: center;">1</td><td style="text-align: right;">$9.99</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL02</td><td>BTS7960 43A Motor Driver</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$7.41</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL03</td><td>HX711 24-Bit ADC Module</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.80</td></tr>
+                <!-- Group 2: Control Logic -->
+                <tr class="bom-group-header"><td colspan="5">// CONTROL LOGIC</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL01</td><td>ESP32-WROOM-C3 Board</td><td>Elegoo</td><td style="text-align: center;">1</td><td style="text-align: right;">$9.99</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL02</td><td>BTS7960 43A Motor Driver</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$7.41</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">CL03</td><td>HX711 24-Bit ADC Module</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$1.80</td></tr>
 
-              <!-- Group 3: Measurement -->
-              <tr class="bom-group-header"><td colspan="5">// MEASUREMENT</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">M01</td><td>100g Micro Load Cell</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$4.93</td></tr>
+                <!-- Group 3: Measurement -->
+                <tr class="bom-group-header"><td colspan="5">// MEASUREMENT</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">M01</td><td>100g Micro Load Cell</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$4.93</td></tr>
 
-              <!-- Group 4: Structural -->
-              <tr class="bom-group-header"><td colspan="5">// STRUCTURAL</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC01</td><td>PETG / PLA Filament (~0.7kg)</td><td>Bambu Lab</td><td style="text-align: center;">1</td><td style="text-align: right;">$16.99</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC02</td><td>M3 Brass Threaded Inserts</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC03</td><td>M3/M4 Fasteners Assortment</td><td>AliExpress</td><td style="text-align: center;">24</td><td style="text-align: right;">$1.00</td></tr>
+                <!-- Group 4: Structural -->
+                <tr class="bom-group-header"><td colspan="5">// STRUCTURAL</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC01</td><td>PETG / PLA Filament (~0.7kg)</td><td>Bambu Lab</td><td style="text-align: center;">1</td><td style="text-align: right;">$16.99</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC02</td><td>M3 Brass Threaded Inserts</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$0.80</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">SC03</td><td>M3/M4 Fasteners Assortment</td><td>AliExpress</td><td style="text-align: center;">24</td><td style="text-align: right;">$1.00</td></tr>
 
-              <!-- Group 5: Tooling -->
-              <tr class="bom-group-header"><td colspan="5">// TOOLING</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">ST01</td><td>MGEHR1212 Lathe Bit &amp; Holder</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$3.25</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">ST02</td><td>JGB37-520 12V 7RPM Motor</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$11.28</td></tr>
+                <!-- Group 5: Tooling -->
+                <tr class="bom-group-header"><td colspan="5">// TOOLING</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">ST01</td><td>MGEHR1212 Lathe Bit &amp; Holder</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$3.25</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">ST02</td><td>JGB37-520 12V 7RPM Motor</td><td>AliExpress</td><td style="text-align: center;">1</td><td style="text-align: right;">$11.28</td></tr>
 
-              <!-- Group 6: Movement -->
-              <tr class="bom-group-header"><td colspan="5">// MOVEMENT</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV01</td><td>608ZZ Ball Bearings</td><td>AliExpress</td><td style="text-align: center;">8</td><td style="text-align: right;">$4.69</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV02</td><td>N20 12V 200RPM Drive Motors</td><td>AliExpress</td><td style="text-align: center;">2</td><td style="text-align: right;">$10.78</td></tr>
-              <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV03</td><td>High-Friction Rubber Bands</td><td>Amazon</td><td style="text-align: center;">8</td><td style="text-align: right;">$1.68</td></tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="4" style="padding: 0.9rem 1rem; text-align: right; color: var(--text);">TOTAL COST:</td>
-                <td style="padding: 0.9rem 1rem; text-align: right; color: var(--accent-ochre); font-family: var(--font-mono);">$96.19</td>
-              </tr>
-            </tfoot>
-          </table>
+                <!-- Group 6: Movement -->
+                <tr class="bom-group-header"><td colspan="5">// MOVEMENT</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV01</td><td>608ZZ Ball Bearings</td><td>AliExpress</td><td style="text-align: center;">8</td><td style="text-align: right;">$4.69</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV02</td><td>N20 12V 200RPM Drive Motors</td><td>AliExpress</td><td style="text-align: center;">2</td><td style="text-align: right;">$10.78</td></tr>
+                <tr><td style="font-family: var(--font-mono); color: var(--accent-sand);">MV03</td><td>High-Friction Rubber Bands</td><td>Amazon</td><td style="text-align: center;">8</td><td style="text-align: right;">$1.68</td></tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="padding: 0.9rem 1rem; text-align: right; color: var(--text);">TOTAL COST:</td>
+                  <td style="padding: 0.9rem 1rem; text-align: right; color: var(--accent-ochre); font-family: var(--font-mono);">$96.19</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -697,7 +914,7 @@
         <h2 class="section-title">09 // TECHNICAL HARDWARE GALLERY</h2>
         <p style="margin-bottom: 2rem; color: var(--muted);">High-resolution CAD renderings, strain-gauge test setups, and battery pack integration. Click any image to launch the uncropped lightbox modal preview.</p>
 
-        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="gallery-grid">
           
           <!-- Image 1 -->
           <figure class="tech-figure">

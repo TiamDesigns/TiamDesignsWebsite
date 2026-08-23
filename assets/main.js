@@ -530,7 +530,7 @@ function initLightbox() {
 
   // 2. Select Images
   // Targeting images inside specific containers to specific galleries or feature images
-  const images = document.querySelectorAll('.gallery-grid figure img, .two-col-grid figure img, .feature-image, .analysis-table-img');
+  const images = document.querySelectorAll('.gallery-grid figure img, .two-col-grid figure img, .feature-image, .analysis-table-img, .tech-figure img, figure img');
 
   images.forEach(img => {
     img.style.cursor = 'zoom-in';
