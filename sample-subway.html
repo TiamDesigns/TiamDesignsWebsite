@@ -862,17 +862,17 @@
       <div class="container">
         <h2 class="section-title">06 // EMBEDDED C++ FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
         <p style="max-width: 860px; margin-bottom: 2rem; color: var(--muted); line-height: 1.65;">
-          Custom C++ firmware running on the ESP32-WROOM-C3 microcontroller for load cell acquisition, digital filtering, and Bluetooth + WiFi data logging. Bluetooth + WiFi communication was not a client constraint or core mandate, but an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board already featured integrated Bluetooth + WiFi hardware, it drastically reduced project spending. While Bluetooth + WiFi propagation faces limitations inside shielded production tubes, it served as a practical, cost-effective alternative for the test environment and tight budget, allowing the team to concentrate resources and engineering effort on the primary mechanical scraping, traction, and containment subsystems.
+          Custom C++ firmware and Python ground station toolchain developed for load cell acquisition, BTS7960 high-current scraping actuation, dual N20 locomotion, digital filtering, and Bluetooth telemetry data logging. Bluetooth communication was an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board featured integrated Bluetooth hardware, it drastically reduced project spending while allowing the team to concentrate resources on the primary mechanical scraping, traction, and containment subsystems.
         </p>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
           
-          <!-- Algorithm 1 -->
+          <!-- Module 01 -->
           <div class="firmware-card">
             <div>
               <span class="firmware-badge">MODULE 01 // DSP FILTER</span>
               <h3>100-Sample Moving Average Filter</h3>
-              <p>Reduces raw sensor fluctuation from <span class="tech-metric">[ ±100 mg ]</span> down to an acceptable noise floor of <span class="tech-metric">[ ±9.5 mg ]</span>.</p>
+              <p>Reduces raw load cell fluctuation from <span class="tech-metric">[ ±100 mg ]</span> down to an acceptable noise floor of <span class="tech-metric">[ ±9.5 mg ]</span> for accurate sample mass determination.</p>
             </div>
             <pre class="ide-code-block"><code><span class="syn-keyword">float</span> <span class="syn-fn">applyMovingAverage</span>(<span class="syn-keyword">float</span> <span class="syn-var">sample</span>) {
   <span class="syn-var">sum</span> -= <span class="syn-var">samples</span>[<span class="syn-var">index</span>];
@@ -883,32 +883,103 @@
 }</code></pre>
           </div>
 
-          <!-- Algorithm 2 -->
+          <!-- Module 02 -->
           <div class="firmware-card">
             <div>
               <span class="firmware-badge">MODULE 02 // CALIBRATION</span>
-              <h3>Time-Based Creep Drift Compensation</h3>
-              <p>Firmware routine executing every 30 seconds. If measured drift is below <span class="tech-metric">[ 10 mg ]</span>, the system automatically re-tares the scale to offset mechanical creep and thermal variance.</p>
+              <h3>Dynamic Creep Drift Auto-Tare</h3>
+              <p>Monitors 30-second thermal and physical sensor drift. If variance stays below <span class="tech-metric">[ 10 mg ]</span>, the routine auto-tares the scale to eliminate baseline creep.</p>
             </div>
-            <pre class="ide-code-block"><code><span class="syn-keyword">if</span> (<span class="syn-fn">millis</span>() - <span class="syn-var">lastCheck</span> &gt;= <span class="syn-num">30000</span>) {
-  <span class="syn-keyword">float</span> <span class="syn-var">drift</span> = <span class="syn-fn">fabs</span>(<span class="syn-var">currWt</span> - <span class="syn-var">baseWt</span>);
-  <span class="syn-keyword">if</span> (<span class="syn-var">drift</span> &lt; <span class="syn-num">10.0f</span>) {
-    <span class="syn-fn">autoTareSystem</span>(); <span class="syn-comment">// Auto-tare creep</span>
+            <pre class="ide-code-block"><code><span class="syn-keyword">long</span> <span class="syn-fn">correctCreep</span>(<span class="syn-keyword">long</span> <span class="syn-var">weight_mg</span>) {
+  <span class="syn-keyword">unsigned long</span> <span class="syn-var">curr</span> = <span class="syn-fn">millis</span>();
+  <span class="syn-keyword">if</span> (<span class="syn-var">curr</span> - <span class="syn-var">lastCreep</span> &gt;= <span class="syn-num">30000</span>) {
+    <span class="syn-keyword">float</span> <span class="syn-var">offset</span> = <span class="syn-var">weight_mg</span> - <span class="syn-var">prevWt</span>;
+    <span class="syn-keyword">if</span> (<span class="syn-fn">abs</span>(<span class="syn-var">offset</span>) &lt; <span class="syn-num">10.0f</span>) {
+      <span class="syn-var">scale</span>.<span class="syn-fn">tare</span>(); <span class="syn-comment">// Auto-tare drift</span>
+      <span class="syn-var">prevWt</span> = <span class="syn-num">0</span>; <span class="syn-keyword">return</span> <span class="syn-num">0</span>;
+    }
+    <span class="syn-var">prevWt</span> = <span class="syn-var">weight_mg</span>; <span class="syn-var">lastCreep</span> = <span class="syn-var">curr</span>;
   }
+  <span class="syn-keyword">return</span> <span class="syn-var">weight_mg</span>;
 }</code></pre>
           </div>
 
-          <!-- Algorithm 3 -->
+          <!-- Module 03 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">MODULE 03 // TELEMETRY</span>
-              <h3>Cost-Optimized Bluetooth + WiFi Logging</h3>
-              <p>ESP32 Bluetooth Serial (RFCOMM) streaming formatted CSV data packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>, <code>Creep State</code>) to ground monitoring software without requiring expensive external transceivers.</p>
+              <span class="firmware-badge">MODULE 03 // MOTOR ACTUATION</span>
+              <h3>BTS7960 PWM Scraping Control</h3>
+              <p>Drives the JGB37-520 12V high-torque motor with controlled PWM duty cycles (50% forward cutting, 75% clearing reverse) to prevent high-current BMS cutoffs.</p>
             </div>
-            <pre class="ide-code-block"><code><span class="syn-comment">// CSV RFCOMM Output Stream:</span>
-<span class="syn-fn">SerialBT.printf</span>(<span class="syn-str">"%lu,%.2f,%.2f,%d\n"</span>,
-  <span class="syn-var">timestamp</span>, <span class="syn-var">rawMg</span>, <span class="syn-var">filteredMg</span>,
-  <span class="syn-var">creepState</span>);</code></pre>
+            <pre class="ide-code-block"><code><span class="syn-keyword">void</span> <span class="syn-fn">executeScrapingCycle</span>() {
+  <span class="syn-fn">digitalWrite</span>(<span class="syn-var">REN</span>, <span class="syn-var">HIGH</span>); <span class="syn-fn">digitalWrite</span>(<span class="syn-var">LEN</span>, <span class="syn-var">HIGH</span>);
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">RPWM</span>, <span class="syn-num">127</span>); <span class="syn-comment">// 50% cutting torque</span>
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">LPWM</span>, <span class="syn-num">0</span>);
+  <span class="syn-fn">delay</span>(<span class="syn-num">3000</span>);            <span class="syn-comment">// 3-second cutting arc</span>
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">RPWM</span>, <span class="syn-num">0</span>);   <span class="syn-comment">// Spindle halt</span>
+  <span class="syn-fn">delay</span>(<span class="syn-num">1000</span>);
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">LPWM</span>, <span class="syn-num">191</span>); <span class="syn-comment">// 75% reverse clear</span>
+  <span class="syn-fn">delay</span>(<span class="syn-num">3000</span>);
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">LPWM</span>, <span class="syn-num">0</span>);
+}</code></pre>
+          </div>
+
+          <!-- Module 04 -->
+          <div class="firmware-card">
+            <div>
+              <span class="firmware-badge">MODULE 04 // LOCOMOTION</span>
+              <h3>Dual N20 Directional Drive</h3>
+              <p>Controls dual 12V 200 RPM drive motors through timed directional pulses and PWM enable staging for navigating 15-foot horizontal pipe sections.</p>
+            </div>
+            <pre class="ide-code-block"><code><span class="syn-keyword">void</span> <span class="syn-fn">traversePipe</span>(<span class="syn-keyword">int</span> <span class="syn-var">direction</span>, <span class="syn-keyword">int</span> <span class="syn-var">durationMs</span>) {
+  <span class="syn-fn">analogWrite</span>(<span class="syn-var">ENA</span>, <span class="syn-num">255</span>); <span class="syn-comment">// 100% drive duty</span>
+  <span class="syn-keyword">if</span> (<span class="syn-var">direction</span> == <span class="syn-num">1</span>) {  <span class="syn-comment">// Forward locomotion</span>
+    <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN1</span>, <span class="syn-var">HIGH</span>); <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN2</span>, <span class="syn-var">LOW</span>);
+  } <span class="syn-keyword">else</span> {               <span class="syn-comment">// Reverse locomotion</span>
+    <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN1</span>, <span class="syn-var">LOW</span>);  <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN2</span>, <span class="syn-var">HIGH</span>);
+  }
+  <span class="syn-fn">delay</span>(<span class="syn-var">durationMs</span>);
+  <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN1</span>, <span class="syn-var">LOW</span>);  <span class="syn-fn">digitalWrite</span>(<span class="syn-var">IN2</span>, <span class="syn-var">LOW</span>);
+}</code></pre>
+          </div>
+
+          <!-- Module 05 -->
+          <div class="firmware-card">
+            <div>
+              <span class="firmware-badge">MODULE 05 // TELEMETRY</span>
+              <h3>Secure Bluetooth Serial (RFCOMM)</h3>
+              <p>Streams paired 9600-baud CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>) to ground monitoring devices without requiring wired umbilical slip rings.</p>
+            </div>
+            <pre class="ide-code-block"><code><span class="syn-keyword">void</span> <span class="syn-fn">setupTelemetry</span>() {
+  <span class="syn-var">SerialBT</span>.<span class="syn-fn">begin</span>(<span class="syn-str">"ESP32_BT_Logger"</span>, <span class="syn-keyword">true</span>);
+  <span class="syn-var">SerialBT</span>.<span class="syn-fn">setPin</span>(<span class="syn-str">"1234"</span>); <span class="syn-comment">// Secure PIN pair</span>
+  <span class="syn-var">SerialBT</span>.<span class="syn-fn">println</span>(<span class="syn-str">"START"</span>);
+}
+
+<span class="syn-keyword">void</span> <span class="syn-fn">broadcastSample</span>(<span class="syn-keyword">unsigned long</span> <span class="syn-var">t</span>, <span class="syn-keyword">long</span> <span class="syn-var">mg</span>) {
+  <span class="syn-var">SerialBT</span>.<span class="syn-fn">printf</span>(<span class="syn-str">"DATA,%lu,%ld\n"</span>, <span class="syn-var">t</span>, <span class="syn-var">mg</span>);
+  <span class="syn-var">Serial</span>.<span class="syn-fn">printf</span>(<span class="syn-str">"%lu,%ld\n"</span>, <span class="syn-var">t</span>, <span class="syn-var">mg</span>);
+}</code></pre>
+          </div>
+
+          <!-- Module 06 -->
+          <div class="firmware-card">
+            <div>
+              <span class="firmware-badge">MODULE 06 // GROUND STATION</span>
+              <h3>Python Real-Time CSV Data Logger</h3>
+              <p>Ground monitoring script featuring automated COM-port reconnection, safe UTF-8 byte stream decoding, and continuous append logging to <code>scale_data.csv</code>.</p>
+            </div>
+            <pre class="ide-code-block"><code><span class="syn-keyword">import</span> <span class="syn-var">serial</span>, <span class="syn-var">time</span>
+
+<span class="syn-var">ser</span> = <span class="syn-var">serial</span>.<span class="syn-fn">Serial</span>(<span class="syn-str">"COM9"</span>, <span class="syn-num">9600</span>, <span class="syn-var">timeout</span>=<span class="syn-num">5</span>)
+<span class="syn-keyword">with</span> <span class="syn-fn">open</span>(<span class="syn-str">"scale_data.csv"</span>, <span class="syn-str">"w"</span>) <span class="syn-keyword">as</span> <span class="syn-var">f</span>:
+    <span class="syn-var">f</span>.<span class="syn-fn">write</span>(<span class="syn-str">"Time(ms),Weight(mg)\n"</span>)
+    <span class="syn-keyword">while</span> <span class="syn-keyword">True</span>:
+        <span class="syn-var">line</span> = <span class="syn-var">ser</span>.<span class="syn-fn">readline</span>().<span class="syn-fn">decode</span>(<span class="syn-str">"utf-8"</span>, <span class="syn-var">errors</span>=<span class="syn-str">"ignore"</span>).<span class="syn-fn">strip</span>()
+        <span class="syn-keyword">if</span> <span class="syn-var">line</span>.<span class="syn-fn">startswith</span>(<span class="syn-str">"DATA,"</span>):
+            <span class="syn-var">data</span> = <span class="syn-var">line</span>.<span class="syn-fn">replace</span>(<span class="syn-str">"DATA,"</span>, <span class="syn-str">""</span>)
+            <span class="syn-var">f</span>.<span class="syn-fn">write</span>(<span class="syn-var">data</span> + <span class="syn-str">"\n"</span>)
+            <span class="syn-fn">print</span>(<span class="syn-str">f"Logged: {data}"</span>)</code></pre>
           </div>
 
         </div>
