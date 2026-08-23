@@ -889,9 +889,9 @@ code, pre, .font-mono {
 .toggle-3d-btn::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   z-index: -1;
   pointer-events: none;
   transition: background-color var(--transition-fast);
@@ -941,9 +941,9 @@ code, pre, .font-mono {
 .reset-camera-btn::before {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 2px;
   background: var(--surface);
-  clip-path: var(--chamfer-sm);
+  clip-path: var(--chamfer-sm-inner);
   z-index: -1;
   pointer-events: none;
   transition: background-color var(--transition-fast);
@@ -2411,13 +2411,37 @@ figcaption,
 }
 
 .download-card .icon {
-  font-size: 1.4rem;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  padding: 0.5rem;
-  line-height: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.35rem;
+  background: var(--border-bold);
+  border: none;
   flex-shrink: 0;
   clip-path: var(--chamfer-sm);
+  line-height: 1;
+}
+
+.download-card .icon::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--surface-alt);
+  clip-path: var(--chamfer-sm-inner);
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color var(--transition-fast);
+}
+
+.download-card:hover .icon {
+  background: var(--accent-lime);
+}
+
+.download-card:hover .icon::before {
+  background: #ffffff;
 }
 
 .download-card .meta {

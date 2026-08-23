@@ -54,21 +54,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       position: relative;
       background: var(--border-bold);
       border: none;
       flex-shrink: 0;
-      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+      clip-path: var(--chamfer-sm);
     }
 
     .spec-icon-svg::before {
       content: '';
       position: absolute;
-      inset: 1.5px;
+      inset: 2px;
       background: var(--surface-alt);
-      clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
+      clip-path: var(--chamfer-sm-inner);
       z-index: 0;
       pointer-events: none;
       transition: background-color var(--transition-fast);
