@@ -409,10 +409,20 @@ function initElasticOverscroll() {
 
 // --- Lightbox Gallery Implementation ---
 function initLightbox() {
+  // Prevent duplicate lightbox elements
+  const existingLightbox = document.getElementById('lightbox');
+  if (existingLightbox) {
+    existingLightbox.remove();
+  }
+
   // 1. Create Lightbox HTML Structure
   const lightbox = document.createElement('div');
   lightbox.id = 'lightbox';
   lightbox.className = 'lightbox-overlay';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Image Lightbox');
+
   const content = document.createElement('div');
   content.className = 'lightbox-content';
 
@@ -426,16 +436,20 @@ function initLightbox() {
 
   const svgNS = 'http://www.w3.org/2000/svg';
 
+  // Zoom Out Button
   const zoomOutBtnElement = document.createElement('button');
   zoomOutBtnElement.id = 'lightbox-zoom-out';
+  zoomOutBtnElement.setAttribute('type', 'button');
   zoomOutBtnElement.setAttribute('aria-label', 'Zoom Out');
   const svgZoomOut = document.createElementNS(svgNS, 'svg');
-  svgZoomOut.setAttribute('width', '24');
-  svgZoomOut.setAttribute('height', '24');
+  svgZoomOut.setAttribute('width', '20');
+  svgZoomOut.setAttribute('height', '20');
   svgZoomOut.setAttribute('viewBox', '0 0 24 24');
   svgZoomOut.setAttribute('fill', 'none');
   svgZoomOut.setAttribute('stroke', 'currentColor');
   svgZoomOut.setAttribute('stroke-width', '2');
+  svgZoomOut.setAttribute('stroke-linecap', 'round');
+  svgZoomOut.setAttribute('stroke-linejoin', 'round');
   const circleOut = document.createElementNS(svgNS, 'circle');
   circleOut.setAttribute('cx', '11');
   circleOut.setAttribute('cy', '11');
@@ -453,16 +467,20 @@ function initLightbox() {
   svgZoomOut.append(circleOut, lineOut1, lineOut2);
   zoomOutBtnElement.appendChild(svgZoomOut);
 
+  // Zoom In Button
   const zoomInBtnElement = document.createElement('button');
   zoomInBtnElement.id = 'lightbox-zoom-in';
+  zoomInBtnElement.setAttribute('type', 'button');
   zoomInBtnElement.setAttribute('aria-label', 'Zoom In');
   const svgZoomIn = document.createElementNS(svgNS, 'svg');
-  svgZoomIn.setAttribute('width', '24');
-  svgZoomIn.setAttribute('height', '24');
+  svgZoomIn.setAttribute('width', '20');
+  svgZoomIn.setAttribute('height', '20');
   svgZoomIn.setAttribute('viewBox', '0 0 24 24');
   svgZoomIn.setAttribute('fill', 'none');
   svgZoomIn.setAttribute('stroke', 'currentColor');
   svgZoomIn.setAttribute('stroke-width', '2');
+  svgZoomIn.setAttribute('stroke-linecap', 'round');
+  svgZoomIn.setAttribute('stroke-linejoin', 'round');
   const circleIn = document.createElementNS(svgNS, 'circle');
   circleIn.setAttribute('cx', '11');
   circleIn.setAttribute('cy', '11');
@@ -485,16 +503,21 @@ function initLightbox() {
   svgZoomIn.append(circleIn, lineIn1, lineIn2, lineIn3);
   zoomInBtnElement.appendChild(svgZoomIn);
 
+  // Close Button
   const closeBtnElement = document.createElement('button');
   closeBtnElement.id = 'lightbox-close';
-  closeBtnElement.setAttribute('aria-label', 'Close');
+  closeBtnElement.className = 'lightbox-close-btn';
+  closeBtnElement.setAttribute('type', 'button');
+  closeBtnElement.setAttribute('aria-label', 'Close Lightbox');
   const svgClose = document.createElementNS(svgNS, 'svg');
-  svgClose.setAttribute('width', '24');
-  svgClose.setAttribute('height', '24');
+  svgClose.setAttribute('width', '20');
+  svgClose.setAttribute('height', '20');
   svgClose.setAttribute('viewBox', '0 0 24 24');
   svgClose.setAttribute('fill', 'none');
   svgClose.setAttribute('stroke', 'currentColor');
   svgClose.setAttribute('stroke-width', '2');
+  svgClose.setAttribute('stroke-linecap', 'round');
+  svgClose.setAttribute('stroke-linejoin', 'round');
   const lineClose1 = document.createElementNS(svgNS, 'line');
   lineClose1.setAttribute('x1', '18');
   lineClose1.setAttribute('y1', '6');
@@ -518,29 +541,53 @@ function initLightbox() {
   lightbox.appendChild(content);
   document.body.appendChild(lightbox);
 
-  const lightboxImg = document.getElementById('lightbox-img');
-  const closeBtn = document.getElementById('lightbox-close');
-  const zoomInBtn = document.getElementById('lightbox-zoom-in');
-  const zoomOutBtn = document.getElementById('lightbox-zoom-out');
-  const captionText = document.getElementById('lightbox-caption');
-
   let currentZoom = 1;
   let isDragging = false;
-  let startX, startY, translateX = 0, translateY = 0;
+  let startX = 0, startY = 0, translateX = 0, translateY = 0;
 
   // 2. Select Images
-  // Targeting images inside specific containers to specific galleries or feature images
   const images = document.querySelectorAll('.gallery-grid figure img, .two-col-grid figure img, .feature-image, .analysis-table-img, .tech-figure img, figure img');
 
-  images.forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      openLightbox(img);
+  images.forEach(imageEl => {
+    imageEl.style.cursor = 'zoom-in';
+    imageEl.addEventListener('click', (e) => {
+      if (imageEl.closest('a')) return;
+      openLightbox(imageEl);
     });
   });
 
+  function updateTransform() {
+    img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+    img.style.cursor = currentZoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default';
+  }
+
   // 3. Open Lightbox
-  function openLightbox(img) {
+  function openLightbox(sourceImg) {
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateTransform();
+
+    img.src = sourceImg.src || sourceImg.getAttribute('src') || '';
+    img.alt = sourceImg.alt || sourceImg.getAttribute('alt') || 'Zoomed Image';
+
+    // Try to find caption
+    const figcaption = sourceImg.closest('figure')?.querySelector('figcaption');
+    if (figcaption && figcaption.textContent.trim()) {
+      caption.textContent = figcaption.textContent.trim();
+      caption.style.display = 'block';
+    } else if (sourceImg.alt && sourceImg.alt.trim()) {
+      caption.textContent = sourceImg.alt.trim();
+      caption.style.display = 'block';
+    } else {
+      caption.textContent = '';
+      caption.style.display = 'none';
+    }
+
+    document.body.style.overflow = 'hidden';
+    lightbox.classList.add('active');
+    lightbox.style.pointerEvents = 'auto';
+
     if (typeof anime !== 'undefined') {
       anime({
         targets: lightbox,
@@ -549,109 +596,134 @@ function initLightbox() {
         easing: 'easeOutQuad',
         begin: () => {
           lightbox.style.display = 'flex';
-          lightboxImg.src = img.src;
-          lightboxImg.alt = img.alt;
-
-          // Try to find caption
-          const figcaption = img.closest('figure')?.querySelector('figcaption');
-          if (figcaption) {
-            captionText.textContent = figcaption.textContent;
-          } else {
-            captionText.textContent = img.alt;
-          }
-
-          currentZoom = 1;
-          translateX = 0;
-          translateY = 0;
-          updateTransform();
         }
       });
     } else {
       lightbox.style.display = 'flex';
       lightbox.style.opacity = '1';
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      // Caption logic same as above
-      const figcaption = img.closest('figure')?.querySelector('figcaption');
-      if (figcaption) {
-        captionText.textContent = figcaption.textContent;
-      } else {
-        captionText.textContent = img.alt;
-      }
     }
   }
 
   // 4. Close Lightbox
   function closeLightbox() {
+    document.body.style.overflow = '';
+    currentZoom = 1;
+    translateX = 0;
+    translateY = 0;
+    updateTransform();
+
     if (typeof anime !== 'undefined') {
       anime({
         targets: lightbox,
         opacity: 0,
-        duration: 300,
+        duration: 250,
         easing: 'easeOutQuad',
         complete: () => {
           lightbox.style.display = 'none';
-          lightboxImg.src = '';
+          lightbox.classList.remove('active');
+          lightbox.style.pointerEvents = 'none';
+          img.src = '';
         }
       });
     } else {
       lightbox.style.display = 'none';
+      lightbox.style.opacity = '0';
+      lightbox.classList.remove('active');
+      lightbox.style.pointerEvents = 'none';
+      img.src = '';
     }
   }
 
   // Event Listeners for controls
-  closeBtn.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
+  closeBtnElement.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeLightbox();
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-      closeLightbox();
-    }
-  });
-
-  // 5. Zoom Logic
-  zoomInBtn.addEventListener('click', () => {
-    currentZoom += 0.5;
-    updateTransform();
-  });
-
-  zoomOutBtn.addEventListener('click', () => {
-    if (currentZoom > 0.5) {
-      currentZoom -= 0.5;
+  zoomInBtnElement.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentZoom < 4) {
+      currentZoom = Math.min(4, Math.round((currentZoom + 0.5) * 10) / 10);
       updateTransform();
     }
   });
 
-  function updateTransform() {
-    lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX}px, ${translateY}px)`;
-    lightboxImg.style.cursor = currentZoom > 1 ? 'grab' : 'default';
-  }
+  zoomOutBtnElement.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentZoom > 1) {
+      currentZoom = Math.max(1, Math.round((currentZoom - 0.5) * 10) / 10);
+      if (currentZoom === 1) {
+        translateX = 0;
+        translateY = 0;
+      }
+      updateTransform();
+    }
+  });
 
-  // Pan Logic (Optional simple drag when zoomed)
-  lightboxImg.addEventListener('mousedown', (e) => {
+  // Backdrop click closes lightbox
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === content) {
+      closeLightbox();
+    }
+  });
+
+  // Stop clicks inside controls from closing
+  controls.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Escape key listener
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && (lightbox.classList.contains('active') || lightbox.style.display === 'flex')) {
+      closeLightbox();
+    }
+  });
+
+  // Pan / Drag Logic (Mouse)
+  img.addEventListener('mousedown', (e) => {
     if (currentZoom <= 1) return;
     isDragging = true;
     startX = e.clientX - translateX;
     startY = e.clientY - translateY;
-    lightboxImg.style.cursor = 'grabbing';
-    e.preventDefault(); // Prevent standard drag
+    img.style.cursor = 'grabbing';
+    e.preventDefault();
   });
 
-  document.addEventListener('mousemove', (e) => {
+  window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     translateX = e.clientX - startX;
     translateY = e.clientY - startY;
-    lightboxImg.style.transform = `scale(${currentZoom}) translate(${translateX / currentZoom}px, ${translateY / currentZoom}px)`;
+    updateTransform();
   });
 
-  document.addEventListener('mouseup', () => {
+  window.addEventListener('mouseup', () => {
     if (isDragging) {
       isDragging = false;
-      lightboxImg.style.cursor = 'grab';
+      updateTransform();
     }
   });
+
+  // Touch Pan / Drag Logic
+  let touchStartX = 0, touchStartY = 0;
+  img.addEventListener('touchstart', (e) => {
+    if (currentZoom <= 1 || e.touches.length !== 1) return;
+    isDragging = true;
+    touchStartX = e.touches[0].clientX - translateX;
+    touchStartY = e.touches[0].clientY - translateY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    translateX = e.touches[0].clientX - touchStartX;
+    translateY = e.touches[0].clientY - touchStartY;
+    updateTransform();
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    if (isDragging) {
+      isDragging = false;
+    }
+  }, { passive: true });
 }
 
 // --- Masonry Grid Logic ---

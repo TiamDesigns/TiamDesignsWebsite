@@ -1309,59 +1309,9 @@
     </div>
   </footer>
 
-  <!-- LIGHTBOX MODAL OVERLAY -->
-  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
-    <div class="lightbox-backdrop"></div>
-    <div class="lightbox-content">
-      <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
-      <img id="lightbox-img" src="" alt="" />
-      <p id="lightbox-caption" class="lightbox-caption"></p>
-    </div>
-  </div>
-
   <!-- Scripts -->
   <script src="assets/anime.min.js?v=1.0.1" defer></script>
   <script src="assets/main.js?v=2.0.0" defer></script>
-
-  <!-- Lightbox Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('lightbox-modal');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const lightboxCaption = document.getElementById('lightbox-caption');
-      const closeBtn = document.getElementById('lightbox-close');
-      const backdrop = modal.querySelector('.lightbox-backdrop');
-
-      function openLightbox(src, captionText) {
-        lightboxImg.src = src;
-        lightboxCaption.textContent = captionText || '';
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      document.querySelectorAll('.tech-figure img, figure img').forEach((img) => {
-        img.addEventListener('click', () => {
-          const caption = img.closest('figure')?.querySelector('figcaption')?.textContent || img.alt;
-          openLightbox(img.src, caption);
-        });
-      });
-
-      closeBtn?.addEventListener('click', closeLightbox);
-      backdrop?.addEventListener('click', closeLightbox);
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    });
-  </script>
 
   <!-- Three.js and dependencies for 3D Viewer -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>

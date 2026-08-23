@@ -2464,6 +2464,7 @@ figcaption,
 
 /* Lightbox Modal Overlay */
 .lightbox-modal,
+.lightbox-overlay,
 #lightbox {
   position: fixed;
   inset: 0;
@@ -2473,18 +2474,23 @@ figcaption,
   justify-content: center;
   opacity: 0;
   pointer-events: none;
+  background: rgba(18, 22, 31, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.5rem;
+  box-sizing: border-box;
   transition: opacity var(--transition);
 }
 
 .lightbox-modal.active,
+.lightbox-overlay.active,
 #lightbox.active {
   display: flex;
   opacity: 1;
   pointer-events: auto;
 }
 
-.lightbox-backdrop,
-.lightbox-overlay {
+.lightbox-backdrop {
   position: absolute;
   inset: 0;
   background: rgba(18, 22, 31, 0.88);
@@ -2500,32 +2506,98 @@ figcaption,
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  pointer-events: auto;
 }
 
 .lightbox-content img,
 #lightbox-img {
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 75vh;
   width: auto;
   height: auto;
   object-fit: contain;
-  border: none;
+  border: 1px solid var(--border-bold);
   background: #ffffff;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out;
+}
+
+.lightbox-controls {
+  position: relative;
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border-bold);
+  padding: 0.4rem 0.8rem;
+  box-shadow: var(--shadow-hard);
+  clip-path: var(--chamfer-sm);
+  z-index: 10002;
+  pointer-events: auto;
+}
+
+.lightbox-controls button,
+.lightbox-close-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-bold);
+  color: var(--text-bright);
+  cursor: pointer;
+  padding: 0.4rem;
+  width: 36px;
+  height: 36px;
+  clip-path: var(--chamfer-sm);
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-controls button:hover,
+.lightbox-close-btn:hover {
+  background: var(--accent-lime);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.lightbox-controls button:active,
+.lightbox-close-btn:active {
+  transform: translateY(1px);
+}
+
+.lightbox-controls button#lightbox-close:hover {
+  background: var(--accent-orange);
+  color: #ffffff;
+}
+
+.lightbox-controls button svg,
+.lightbox-close-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  pointer-events: none;
 }
 
 .lightbox-caption,
 #lightbox-caption {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: #ffffff;
   text-align: center;
   max-width: 700px;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
 }
 
-.lightbox-close,
-.lightbox-close-btn {
+.lightbox-close {
   position: absolute;
   top: -45px;
   right: 0;
@@ -2541,10 +2613,12 @@ figcaption,
   justify-content: center;
   transition: background-color var(--transition), color var(--transition);
   clip-path: var(--chamfer-sm);
+  box-shadow: var(--shadow-hard);
+  z-index: 10003;
+  pointer-events: auto;
 }
 
-.lightbox-close:hover,
-.lightbox-close-btn:hover {
+.lightbox-close:hover {
   background: var(--accent-orange);
   color: #ffffff;
 }
