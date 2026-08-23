@@ -10,6 +10,7 @@ if (navToggle && navLinks) {
     e.stopPropagation();
     const isOpen = navLinks.classList.toggle('open');
     navLinks.classList.toggle('active', isOpen);
+    navToggle.classList.toggle('active', isOpen);
     navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
@@ -17,7 +18,18 @@ if (navToggle && navLinks) {
   document.addEventListener('click', (e) => {
     if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
       navLinks.classList.remove('open', 'active');
+      navToggle.classList.remove('active');
       navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close on Escape key press
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open', 'active');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.focus();
     }
   });
 
@@ -25,6 +37,7 @@ if (navToggle && navLinks) {
     const link = e.target.closest('a');
     if (link) {
       navLinks.classList.remove('open', 'active');
+      navToggle.classList.remove('active');
       navToggle.setAttribute('aria-expanded', 'false');
       const href = link.getAttribute('href');
       if (href && href.startsWith('#')) {
@@ -223,8 +236,8 @@ function initAnimations() {
             targets: '#toolbox-lid',
             keyframes: [
               { translateY: -65, translateX: 0, rotate: 0, duration: 450, easing: 'easeOutQuad' },
-              { translateY: -45, translateX: 220, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
-              { translateY: 62, translateX: 215, rotate: 0, duration: 500, easing: 'easeOutBounce' }
+              { translateY: -45, translateX: 210, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
+              { translateY: 62, translateX: 205, rotate: 0, duration: 500, easing: 'easeOutBounce' }
             ]
           }, '-=600')
           // 3. Pop out the tools-of-trade icons from INSIDE the box
@@ -239,7 +252,7 @@ function initAnimations() {
               return [0, [-80, -120, -80][i]];
             },
             translateX: function (el, i) {
-              return [0, [-100, 0, 100][i]]; // Spread out horizontally wider
+              return [0, [-90, 0, 90][i]]; // Centered balanced horizontal spread
             },
             scale: [0, 1],
             opacity: [0, 1],
