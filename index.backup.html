@@ -516,21 +516,29 @@
         </div>
         <form class="contact-form" action="https://formspree.io/f/mnnlwndb" method="POST">
           <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off">
-          <label>
+          <label for="backup-form-name">
             Name
-            <input type="text" name="name" placeholder="Jane Doe" required />
+            <div class="input-frame">
+              <input type="text" id="backup-form-name" name="name" placeholder="Jane Doe" required />
+            </div>
           </label>
-          <label>
+          <label for="backup-form-email">
             Email
-            <input type="email" name="email" placeholder="jane@example.com" required />
+            <div class="input-frame">
+              <input type="email" id="backup-form-email" name="email" placeholder="jane@example.com" required />
+            </div>
           </label>
-          <label>
+          <label for="backup-form-subject">
             Subject <span class="optional-tag">(Optional)</span>
-            <input type="text" name="subject" placeholder="Hardware Project / Role Discussion" />
+            <div class="input-frame">
+              <input type="text" id="backup-form-subject" name="subject" placeholder="Hardware Project / Role Discussion" />
+            </div>
           </label>
-          <label>
+          <label for="backup-form-message">
             Message
-            <textarea name="message" rows="4" placeholder="Tell me about your project or opportunity..." required></textarea>
+            <div class="input-frame">
+              <textarea id="backup-form-message" name="message" rows="4" placeholder="Tell me about your project or opportunity..." required></textarea>
+            </div>
           </label>
           <button type="submit" class="btn primary full-width">
             <span class="btn-text">Send Message</span>

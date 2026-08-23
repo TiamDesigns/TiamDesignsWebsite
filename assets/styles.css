@@ -1770,17 +1770,34 @@ code, pre, .font-mono {
 }
 
 .contact-meta {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--surface);
-  border: 1.5px solid var(--border-bold);
+  background: var(--border-bold);
+  border: none;
   font-size: 0.82rem;
   color: var(--accent-lime);
   font-family: var(--font-mono);
   font-weight: 700;
   clip-path: var(--chamfer-sm);
+  box-shadow: var(--shadow-hard);
+}
+
+.contact-meta::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: var(--surface);
+  clip-path: var(--chamfer-sm-inner);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contact-meta > * {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-meta .meta-icon {
@@ -1838,8 +1855,64 @@ code, pre, .font-mono {
   text-transform: none;
 }
 
-.contact-form input,
-.contact-form textarea {
+/* 2-Layer Chamfer Outline for Form Inputs & Textarea */
+.input-frame {
+  position: relative;
+  width: 100%;
+  margin-top: 0.35rem;
+  margin-bottom: 0.1rem;
+  background: var(--border-bold);
+  clip-path: var(--chamfer-sm);
+  padding: 1.5px;
+  display: block;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-frame:hover {
+  background: var(--muted);
+}
+
+.input-frame:focus-within {
+  background: var(--accent-lime);
+  box-shadow: 0 0 0 1px var(--accent-lime);
+}
+
+.input-frame input,
+.input-frame textarea {
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  border-radius: 0;
+  clip-path: var(--chamfer-sm-inner);
+  outline: none;
+  transition: background-color var(--transition-fast);
+}
+
+.input-frame textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.input-frame input::placeholder,
+.input-frame textarea::placeholder {
+  color: #717c8d;
+}
+
+.input-frame input:focus,
+.input-frame textarea:focus {
+  outline: none;
+  background: #ffffff;
+}
+
+/* Fallback direct styling if input/textarea is used without .input-frame */
+.contact-form input:not(.input-frame input),
+.contact-form textarea:not(.input-frame textarea) {
   width: 100%;
   margin-top: 0.35rem;
   margin-bottom: 0.1rem;
@@ -1854,13 +1927,13 @@ code, pre, .font-mono {
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
+.contact-form input:not(.input-frame input)::placeholder,
+.contact-form textarea:not(.input-frame textarea)::placeholder {
   color: #717c8d;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form input:not(.input-frame input):focus,
+.contact-form textarea:not(.input-frame textarea):focus {
   outline: none;
   border-color: var(--accent-lime);
   box-shadow: 0 0 0 1px var(--accent-lime);
