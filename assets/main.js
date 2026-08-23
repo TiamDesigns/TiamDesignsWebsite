@@ -236,8 +236,8 @@ function initAnimations() {
             targets: '#toolbox-lid',
             keyframes: [
               { translateY: -65, translateX: 0, rotate: 0, duration: 450, easing: 'easeOutQuad' },
-              { translateY: -45, translateX: 210, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
-              { translateY: 62, translateX: 205, rotate: 0, duration: 500, easing: 'easeOutBounce' }
+              { translateY: -45, translateX: 220, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
+              { translateY: 64, translateX: 215, rotate: 0, duration: 500, easing: 'easeOutBounce' }
             ]
           }, '-=600')
           // 3. Pop out the tools-of-trade icons from INSIDE the box
@@ -249,10 +249,10 @@ function initAnimations() {
           .add({
             targets: '.floating-icon',
             translateY: function (el, i) {
-              return [0, [-80, -120, -80][i]];
+              return [0, [-75, -115, -75][i]];
             },
             translateX: function (el, i) {
-              return [0, [-90, 0, 90][i]]; // Centered balanced horizontal spread
+              return [0, [-85, 0, 85][i]]; // Centered balanced horizontal spread
             },
             scale: [0, 1],
             opacity: [0, 1],
