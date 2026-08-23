@@ -220,7 +220,7 @@ function initAnimations() {
   if (document.querySelector('.hero-toolbox-svg')) {
     const tl = anime.timeline({
       easing: 'easeOutExpo',
-      delay: 150 // 0.15s delay to allow initial page scanning
+      delay: 750 // Increased delay to let hero text and buttons settle first
     });
 
         // 1. Fade in and slide up the ENTIRE toolbox
