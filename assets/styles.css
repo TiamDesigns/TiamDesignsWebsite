@@ -1505,15 +1505,10 @@ code, pre, .font-mono {
   object-fit: contain;
   background: #ffffff;
   clip-path: var(--chamfer-sm-inner);
-  transition: transform 0.4s cubic-bezier(0.05, 0.9, 0.2, 1);
 }
 
 .project-card:hover .project-hero {
   background: var(--accent-lime);
-}
-
-.project-card:hover .project-hero img {
-  transform: scale(1.03);
 }
 
 /* High-Contrast Visible Monospace Project Tags (Die-Cut Sticker Style) */
@@ -2436,22 +2431,6 @@ figure img,
   position: relative;
   z-index: 1;
   image-rendering: auto;
-  transition: transform 0.35s cubic-bezier(0.05, 0.9, 0.2, 1);
-}
-
-figure:not(.diagram-figure):not(.contain-figure):not(.mobile-ui-figure):not(.doc-figure):hover img {
-  transform: scale(1.025);
-}
-
-figure.diagram-figure:hover img,
-figure.contain-figure:hover img,
-figure.mobile-ui-figure:hover img,
-figure.doc-figure:hover img,
-.diagram-figure:hover img,
-.contain-figure:hover img,
-.mobile-ui-figure:hover img,
-.doc-figure:hover img {
-  transform: none !important;
 }
 
 /* Diagrams, Graphs, Timelines, Affinity Maps & Document Figures (Uncropped Display) */
