@@ -1483,7 +1483,19 @@ code, pre, .font-mono {
   pointer-events: none;
 }
 
-.project-hero picture,
+.project-hero picture {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: var(--chamfer-sm-inner);
+  box-sizing: border-box;
+}
+
 .project-hero img {
   position: relative;
   z-index: 1;
@@ -1501,7 +1513,7 @@ code, pre, .font-mono {
 }
 
 .project-card:hover .project-hero img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 /* High-Contrast Visible Monospace Project Tags (Die-Cut Sticker Style) */
@@ -2292,6 +2304,7 @@ figure,
   gap: 0.65rem;
   box-sizing: border-box;
   width: 100%;
+  overflow: hidden;
 }
 
 .gallery-grid figure,
@@ -2370,6 +2383,8 @@ figure picture,
   padding: 2px;
   overflow: hidden;
   box-sizing: border-box;
+  isolation: isolate;
+  contain: paint;
   transition: background-color var(--transition-fast);
 }
 
@@ -2421,16 +2436,165 @@ figure img,
   position: relative;
   z-index: 1;
   image-rendering: auto;
-  transition: transform 0.4s cubic-bezier(0.05, 0.9, 0.2, 1);
+  transition: transform 0.35s cubic-bezier(0.05, 0.9, 0.2, 1);
 }
 
-figure:hover img,
-.gallery-grid figure:hover img,
-.concept-gallery figure:hover img,
-.tech-figure:hover img,
-.overview-media figure:hover img,
-.two-col-grid figure:hover img {
-  transform: scale(1.04);
+figure:not(.diagram-figure):not(.contain-figure):not(.mobile-ui-figure):not(.doc-figure):hover img {
+  transform: scale(1.025);
+}
+
+figure.diagram-figure:hover img,
+figure.contain-figure:hover img,
+figure.mobile-ui-figure:hover img,
+figure.doc-figure:hover img,
+.diagram-figure:hover img,
+.contain-figure:hover img,
+.mobile-ui-figure:hover img,
+.doc-figure:hover img {
+  transform: none !important;
+}
+
+/* Diagrams, Graphs, Timelines, Affinity Maps & Document Figures (Uncropped Display) */
+.diagram-figure picture,
+.contain-figure picture,
+figure.diagram-figure picture,
+figure.contain-figure picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: auto;
+  min-height: 180px;
+  max-height: none;
+  background: var(--border-bold);
+  clip-path: var(--chamfer-sm);
+  padding: 2px;
+  overflow: hidden;
+  box-sizing: border-box;
+  isolation: isolate;
+  contain: paint;
+}
+
+.diagram-figure picture::before,
+.contain-figure picture::before,
+figure.diagram-figure picture::before,
+figure.contain-figure picture::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.diagram-figure img,
+.contain-figure img,
+figure.diagram-figure img,
+figure.contain-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+  background: transparent;
+  clip-path: var(--chamfer-sm-inner);
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile Application Screen Figures (9:18 - 9:20 Phone Displays) */
+.mobile-ui-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mobile-ui-figure picture,
+figure.mobile-ui-figure picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 9 / 18;
+  min-height: 440px;
+  max-height: 640px;
+  background: var(--border-bold);
+  clip-path: var(--chamfer-sm);
+  padding: 2px;
+  overflow: hidden;
+  box-sizing: border-box;
+  isolation: isolate;
+  contain: paint;
+}
+
+.mobile-ui-figure picture::before,
+figure.mobile-ui-figure picture::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #10131b;
+  clip-path: var(--chamfer-sm-inner);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mobile-ui-figure img,
+figure.mobile-ui-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  clip-path: var(--chamfer-sm-inner);
+  position: relative;
+  z-index: 1;
+}
+
+/* Ideation Sketches & Document Figures (Portrait 3:4) */
+.doc-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.doc-figure picture,
+figure.doc-figure picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 320px;
+  max-height: 480px;
+  background: var(--border-bold);
+  clip-path: var(--chamfer-sm);
+  padding: 2px;
+  overflow: hidden;
+  box-sizing: border-box;
+  isolation: isolate;
+  contain: paint;
+}
+
+.doc-figure picture::before,
+figure.doc-figure picture::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.doc-figure img,
+figure.doc-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ffffff;
+  clip-path: var(--chamfer-sm-inner);
+  position: relative;
+  z-index: 1;
 }
 
 figcaption,
