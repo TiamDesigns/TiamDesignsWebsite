@@ -2050,7 +2050,7 @@ code, pre, .font-mono {
 }
 
 .decision-table tr.selected-concept td:first-child {
-  border-left: 3px solid var(--accent-lime);
+  box-shadow: inset 3px 0 0 var(--accent-lime);
 }
 
 .selected-badge {
@@ -2066,6 +2066,19 @@ code, pre, .font-mono {
   white-space: nowrap;
   clip-path: var(--chamfer-sm);
   line-height: 1.2;
+}
+
+.bom-table thead,
+.bom-table-styled thead,
+.analysis-table thead,
+.decision-table thead,
+.matrix-table thead,
+.bom-table thead tr,
+.bom-table-styled thead tr,
+.analysis-table thead tr,
+.decision-table thead tr,
+.matrix-table thead tr {
+  background: var(--surface-alt);
 }
 
 .bom-table th,
