@@ -196,7 +196,7 @@ if (yearSpan) {
 })();
 // Animations
 function initAnimations() {
-  const heroElements = document.querySelectorAll('.hero h1, .hero h2, .hero-kicker, .hero-sans, .hero-display, .hero-subtitle, .hero-actions .btn');
+  const heroElements = document.querySelectorAll('.hero h1, .hero h2, .hero-kicker, .hero-sans, .hero-display, .hero-subtitle, .hero-team-credits, .hero-actions .btn');
   const projectCards = document.querySelectorAll('.project-card');
   const sectionHeaders = document.querySelectorAll('.section h2');
 

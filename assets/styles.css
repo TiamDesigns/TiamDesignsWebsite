@@ -529,24 +529,59 @@ code, pre, .font-mono {
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   text-wrap: balance;
 }
 
 .hero-kicker::before {
-  content: '////';
+  content: '//';
   color: var(--accent-lime);
-  font-size: 1.65rem;
+  font-size: 1em;
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   line-height: 1;
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  transform: scaleY(1.38) scaleX(1.08);
-  transform-origin: center left;
-  -webkit-text-stroke: 0.65px var(--accent-lime);
+  -webkit-text-stroke: 1.2px var(--accent-lime);
   text-shadow: 0 0 1px var(--accent-lime);
+}
+
+.hero-team-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1.15rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent-orange);
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  clip-path: var(--chamfer-sm);
+  box-shadow: 2px 2px 0px rgba(18, 22, 31, 0.08);
+  max-width: 620px;
+}
+
+.hero-team-credits .team-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent-orange);
+  text-transform: uppercase;
+}
+
+.hero-team-credits p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.hero-team-credits strong {
+  color: var(--text-bright);
+  font-weight: 700;
 }
 
 .hero-sans {
@@ -3207,8 +3242,8 @@ figcaption,
   }
 
   .hero-kicker::before {
-    font-size: 1.35rem;
-    transform: scaleY(1.3) scaleX(1.06);
+    font-size: 1em;
+    -webkit-text-stroke: 1px var(--accent-lime);
   }
 
   .hero-sans {
