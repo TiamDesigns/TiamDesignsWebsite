@@ -1083,6 +1083,7 @@ code, pre, .font-mono {
    ========================================================================== */
 .highlight-card,
 .skill-group,
+.coursework-card,
 .spec-card,
 .engineering-card,
 .arch-card,
@@ -1101,6 +1102,7 @@ code, pre, .font-mono {
 
 .highlight-card::before,
 .skill-group::before,
+.coursework-card::before,
 .spec-card::before,
 .engineering-card::before,
 .arch-card::before,
@@ -1120,6 +1122,7 @@ code, pre, .font-mono {
 
 .highlight-card:hover,
 .skill-group:hover,
+.coursework-card:hover,
 .spec-card:hover,
 .engineering-card:hover,
 .arch-card:hover,
@@ -1133,6 +1136,7 @@ code, pre, .font-mono {
 
 .highlight-card:hover::before,
 .skill-group:hover::before,
+.coursework-card:hover::before,
 .spec-card:hover::before,
 .engineering-card:hover::before,
 .arch-card:hover::before,
@@ -1144,6 +1148,7 @@ code, pre, .font-mono {
 
 .highlight-card > *,
 .skill-group > *,
+.coursework-card > *,
 .spec-card > *,
 .engineering-card > *,
 .arch-card > *,
@@ -1721,6 +1726,129 @@ code, pre, .font-mono {
 
 .project-links a:hover {
   text-decoration: underline;
+}
+
+/* ==========================================================================
+   Notable Engineering Coursework (Compact Grouped System)
+   ========================================================================== */
+.coursework-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.coursework-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.5rem;
+}
+
+.course-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: -0.25rem;
+}
+
+.course-group-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-orange);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.coursework-card .course-group-title {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-bright);
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.course-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.course-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.course-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.course-item-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.course-name {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.course-badge.ongoing {
+  color: #ffffff;
+  background: var(--accent-orange);
+}
+
+.course-badge.completed {
+  color: #ffffff;
+  background: var(--accent-lime);
+}
+
+.course-badge.scheduled {
+  color: var(--text);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+}
+
+.course-desc {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.course-desc strong {
+  color: var(--text);
+  font-weight: 700;
 }
 
 /* Experience Timeline */
@@ -3299,7 +3427,8 @@ figcaption,
     min-height: 320px;
   }
 
-  .projects-grid {
+  .projects-grid,
+  .coursework-grid {
     grid-template-columns: 1fr;
   }
 

@@ -95,6 +95,7 @@
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#coursework">Coursework</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -385,7 +386,7 @@
               <h3>Sample Subway &ndash; Nuclear Pressure Tube Sampling&nbsp;System</h3>
               <p>
                 An electromechanical tool designed to extract 30–80 mg material samples from CANDU
-                reactor pressure tubes remotely. Integrates DC motors, load cells, and
+                reactor pressure tubes remotely. Controlled by an ESP32 programmed in Arduino, integrating DC motors, load cells, and
                 a custom spring-loaded container for automated material&nbsp;extraction.
               </p>
             </a>
@@ -435,10 +436,180 @@
       </div>
     </section>
 
-    <!-- Work Experience -->
-    <section id="experience" class="section">
+    <!-- Coursework -->
+    <section id="coursework" class="section">
       <div class="container">
-        <h2>03 // WORK EXPERIENCE &amp;&nbsp;CHRONOLOGY</h2>
+        <div class="section-header">
+          <h2>03 // NOTABLE ENGINEERING&nbsp;COURSEWORK</h2>
+        </div>
+
+        <div class="coursework-grid">
+          <!-- Domain 1: Computer Systems & Architecture -->
+          <div class="coursework-card">
+            <div class="course-card-top">
+              <span class="course-group-tag">[ ARCHITECTURE &amp; SYSTEMS ]</span>
+            </div>
+            <h3 class="course-group-title">Computer Systems &amp; Architecture</h3>
+            <ul class="course-item-list">
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Computer Architecture I</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  Digital computer organization, datapath design, ALU logic, and instruction sets. <strong>Made a simple processor in lab</strong>.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Computer Architecture II</strong>
+                  <span class="course-badge ongoing">● ONGOING</span>
+                </div>
+                <p class="course-desc">
+                  Advanced computing systems, memory hierarchies, cache, and bus protocols. <strong>Working with C and embedded systems development</strong>.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Domain 2: Circuits & Electronics -->
+          <div class="coursework-card">
+            <div class="course-card-top">
+              <span class="course-group-tag">[ CIRCUITS &amp; ELECTRONICS ]</span>
+            </div>
+            <h3 class="course-group-title">Circuits &amp; Electronics</h3>
+            <ul class="course-item-list">
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Circuit Theory I</strong>
+                  <span class="course-badge ongoing">● ONGOING</span>
+                </div>
+                <p class="course-desc">
+                  Linear DC/AC circuit analysis, Kirchhoff's Laws (KVL/KCL), Thévenin and Norton equivalents, op-amps, and transient RLC circuits.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Circuit Theory II</strong>
+                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                </div>
+                <p class="course-desc">
+                  Advanced AC circuit analysis, Laplace transform techniques, frequency response, active/passive filters, resonance, and three-phase power.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Electronics I</strong>
+                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                </div>
+                <p class="course-desc">
+                  Semiconductor physics, PN-junction diode rectifiers, BJT and MOSFET amplifier DC biasing, and small-signal linear equivalent modeling.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Domain 3: Mathematics & Computational Methods -->
+          <div class="coursework-card">
+            <div class="course-card-top">
+              <span class="course-group-tag">[ MATHEMATICS &amp; ANALYSIS ]</span>
+            </div>
+            <h3 class="course-group-title">Mathematics &amp; Numerical Methods</h3>
+            <ul class="course-item-list">
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Linear Algebra</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  Vector spaces, linear transformations, matrix algebra, determinants, eigenvalues/eigenvectors, and linear system solutions.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Calculus I, II &amp; III</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  Single-variable differential and integral calculus, series convergence, multivariable calculus, partial derivatives, and multiple integrals.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Differential Equations &amp; Numerical Methods</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  First and higher-order ODEs, Laplace transform solutions, numerical approximation algorithms, error bounds, and dynamic systems modeling.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Domain 4: Physics & Electromagnetics -->
+          <div class="coursework-card">
+            <div class="course-card-top">
+              <span class="course-group-tag">[ APPLIED PHYSICS ]</span>
+            </div>
+            <h3 class="course-group-title">Physics &amp; Electromagnetics</h3>
+            <ul class="course-item-list">
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Physics I</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  Classical Newtonian mechanics foundation for engineering: kinematics, Newton's laws of motion, work-energy, momentum, rotational dynamics, and harmonic motion.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Physics: Electricity and Magnetism</strong>
+                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                </div>
+                <p class="course-desc">
+                  Core electromagnetism and field theory: electrostatic charge, Gauss's, Ampère's, and Faraday's laws, capacitance, inductance, and Maxwell's equations.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Domain 5: Engineering Design & Methodology -->
+          <div class="coursework-card">
+            <div class="course-card-top">
+              <span class="course-group-tag">[ DESIGN ENGINEERING ]</span>
+            </div>
+            <h3 class="course-group-title">Engineering Design &amp; Methodology</h3>
+            <ul class="course-item-list">
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Product Development for Engineers</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  End-to-end engineering product lifecycle: customer requirements translation, concept trade-off matrices, DFM/DFA, and physical prototype validation.
+                </p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Intro To Engineering Design</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">
+                  Multidisciplinary engineering fundamentals, client-driven problem formulation, collaborative design, 3D CAD modeling, and fabrication.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section id="experience" class="section section-alt">
+      <div class="container">
+        <h2>04 // WORK EXPERIENCE &amp;&nbsp;CHRONOLOGY</h2>
         <div class="experience-list">
           <div class="experience-item">
             <div class="experience-header">
@@ -506,7 +677,7 @@
     <!-- Skills -->
     <section id="skills" class="section">
       <div class="container">
-        <h2>04 // TECHNICAL SKILLS &amp;&nbsp;LAB TOOLS</h2>
+        <h2>05 // TECHNICAL SKILLS &amp;&nbsp;LAB TOOLS</h2>
         <div class="skills-grid">
 
           <!-- Card 1: Embedded & Hardware Engineering -->
@@ -621,7 +792,7 @@
     <section id="contact" class="section">
       <div class="container contact-grid">
         <div class="contact-info">
-          <h2>05 // TRANSMIT MESSAGE /&nbsp;CONTACT</h2>
+          <h2>06 // TRANSMIT MESSAGE /&nbsp;CONTACT</h2>
           <p class="contact-subtext">
             I'm currently open to embedded hardware, firmware, and PCB design opportunities. Whether you have an engineering role to discuss or a project in mind, let's&nbsp;talk.
           </p>

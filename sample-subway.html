@@ -292,7 +292,7 @@
               </div>
               <h4>Processing &amp; Logic</h4>
             </div>
-            <p class="spec-detail">ESP32-WROOM-C3 Microcontroller (C++ / Arduino IDE Firmware)</p>
+            <p class="spec-detail">ESP32-WROOM-C3 Microcontroller (Arduino Firmware)</p>
           </div>
 
           <!-- Card 2: Movement & Recovery -->
@@ -812,7 +812,7 @@
             <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem; line-height: 1.7; font-size: 0.88rem; color: var(--muted);">
               <li><strong style="color: var(--text);">Onshape (Parametric CAD):</strong> 3D geometry modeling, chassis assembly fit, and cross-sectional cutting arc simulation.</li>
               <li><strong style="color: var(--text);">KiCad (Electronic EDA):</strong> Power delivery tree schematic capture, buck converter routing, and noise rejection layout.</li>
-              <li><strong style="color: var(--text);">Arduino IDE (Embedded C++):</strong> Real-time ESP32 firmware, moving-average DSP filtering, and Bluetooth telemetry streaming.</li>
+              <li><strong style="color: var(--text);">Arduino IDE:</strong> Real-time Arduino firmware on ESP32, moving-average sensor filtering, and Bluetooth serial telemetry.</li>
               <li><strong style="color: var(--text);">Figma &amp; Keyshot:</strong> Interactive mobile operator UI/UX wireframing and high-fidelity photorealistic CAD rendering.</li>
             </ul>
           </div>
@@ -861,12 +861,12 @@
       </div>
     </section>
 
-    <!-- SECTION 06: EMBEDDED C++ FIRMWARE -->
+    <!-- SECTION 06: ARDUINO FIRMWARE -->
     <section class="section section-alt" id="firmware">
       <div class="container">
-        <h2 class="section-title">06 // EMBEDDED C++ FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
+        <h2 class="section-title">06 // ARDUINO FIRMWARE &amp; COMMUNICATION STRATEGY</h2>
         <p style="max-width: 860px; margin-bottom: 2rem; color: var(--muted); line-height: 1.65;">
-          Custom C++ firmware and Python ground station toolchain developed for load cell acquisition, BTS7960 high-current scraping actuation, dual N20 locomotion, digital filtering, and Bluetooth telemetry data logging. Bluetooth communication was an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board featured integrated Bluetooth hardware, it drastically reduced project spending while allowing the team to concentrate resources on the primary mechanical scraping, traction, and containment subsystems.
+          Custom Arduino firmware and Python data logging toolchain developed for load cell acquisition, BTS7960 motor scraping actuation, dual N20 locomotion, moving-average sensor filtering, and Bluetooth serial data logging. Bluetooth communication was an internal engineering decision adopted to eliminate the cost, weight, and failure modes of wired slip rings or umbilical cables. Because the low-cost ESP32 development board featured integrated Bluetooth hardware, it drastically reduced project spending while allowing the team to concentrate resources on the primary mechanical scraping, traction, and containment subsystems.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
@@ -874,7 +874,7 @@
           <!-- Module 01 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">MODULE 01 // DSP FILTER</span>
+              <span class="firmware-badge">MODULE 01 // SENSOR FILTERING</span>
               <h3>100-Sample Moving Average Filter</h3>
               <p>Reduces raw load cell fluctuation from <span class="tech-metric">[ ±100 mg ]</span> down to an acceptable noise floor of <span class="tech-metric">[ ±9.5 mg ]</span> for accurate sample mass determination.</p>
             </div>
@@ -950,9 +950,9 @@
           <!-- Module 05 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">MODULE 05 // TELEMETRY</span>
-              <h3>Secure Bluetooth Serial (RFCOMM)</h3>
-              <p>Streams paired 9600-baud CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>) to ground monitoring devices without requiring wired umbilical slip rings.</p>
+              <span class="firmware-badge">MODULE 05 // BLUETOOTH SERIAL</span>
+              <h3>Bluetooth Serial Telemetry (RFCOMM)</h3>
+              <p>Streams paired 9600-baud CSV packets (<code>Timestamp</code>, <code>Raw Mass</code>, <code>Filtered Mass</code>) using the Arduino ESP32 BluetoothSerial library to ground monitoring devices without requiring wired umbilical slip rings.</p>
             </div>
             <pre class="ide-code-block"><code><span class="syn-keyword">void</span> <span class="syn-fn">setupTelemetry</span>() {
   <span class="syn-var">SerialBT</span>.<span class="syn-fn">begin</span>(<span class="syn-str">"ESP32_BT_Logger"</span>, <span class="syn-keyword">true</span>);
@@ -969,7 +969,7 @@
           <!-- Module 06 -->
           <div class="firmware-card">
             <div>
-              <span class="firmware-badge">MODULE 06 // GROUND STATION</span>
+              <span class="firmware-badge">MODULE 06 // DATA LOGGING</span>
               <h3>Python Real-Time CSV Data Logger</h3>
               <p>Ground monitoring script featuring automated COM-port reconnection, safe UTF-8 byte stream decoding, and continuous append logging to <code>scale_data.csv</code>.</p>
             </div>
