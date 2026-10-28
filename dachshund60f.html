@@ -4,13 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <meta name="theme-color" content="#141615">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Dachshund60F &mdash; AI-Assisted Tri-Mode Keyboard | Tiam Designs</title>
-  <meta name="description" content="Dachshund60F: a tri-mode 60% keyboard designed from scratch with AI assistance, testing where AI helps and where engineering judgement is still needed.">
+  <meta name="description" content="A tri-mode 60% keyboard designed from scratch with AI doing the legwork: PCBs, firmware, driver, app and case, and a record of where engineering judgement still mattered." />
+  <link rel="canonical" href="https://tiamdesigns.com/dachshund60f.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Tiam Designs" />
+  <meta property="og:title" content="Dachshund60F: Testing AI on a Full Keyboard Build | Tiam Bennett" />
+  <meta property="og:description" content="A tri-mode 60% keyboard designed from scratch with AI doing the legwork: PCBs, firmware, driver, app and case, and a record of where engineering judgement still mattered." />
+  <meta property="og:url" content="https://tiamdesigns.com/dachshund60f.html" />
+  <meta property="og:image" content="https://tiamdesigns.com/assets/og/dachshund60f.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload"
@@ -23,7 +30,7 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
   </noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/styles.css?v=2.1.0">
 </head>
 
 <body id="top">
@@ -37,12 +44,12 @@
                 <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
               </filter>
               <linearGradient id="td-accent-grad-dachshund" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#94cb45"/>
-                <stop offset="100%" stop-color="#5c8238"/>
+                <stop offset="0%" stop-color="#8bb85a"/>
+                <stop offset="100%" stop-color="#4d7030"/>
               </linearGradient>
               <linearGradient id="td-orange-grad-dachshund" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff7a00"/>
-                <stop offset="100%" stop-color="#c44d18"/>
+                <stop offset="0%" stop-color="#e0621f"/>
+                <stop offset="100%" stop-color="#ad4314"/>
               </linearGradient>
             </defs>
             <g transform="skewX(-9) translate(14, 4)" filter="url(#td-logo-shadow-dachshund)">
@@ -93,6 +100,7 @@
         <ul class="nav-links">
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#coursework">Coursework</a></li>
           <li><a href="index.html#experience">Experience</a></li>
           <li><a href="index.html#skills">Skills</a></li>
           <li><a href="index.html#contact">Contact</a></li>
@@ -111,6 +119,7 @@
           <div class="hero-team-credits">
             <span class="team-label">// STATUS: PRE-PCB ORDER</span>
             <p>All three boards are designed and the firmware is built and tested on a PC and in CI. <strong>No PCBs have been ordered yet</strong>, so nothing has run on real hardware. The project is still in development and testing.</p>
+            <p><strong>Design &rarr; Engineering:</strong> the AI's checks all passed, but it still picked an encoder that turned the wrong way and a push switch nobody could reach. Reviewing the design as an object someone will hold is what caught both.</p>
           </div>
           <div class="hero-actions">
             <a href="#details" class="btn primary"><span class="btn-text">View Details</span></a>
@@ -119,9 +128,9 @@
         </div>
         <div class="hero-visual hero-3d-visual" id="3d-container-wrapper">
           <div id="3d-container" class="hero-canvas"></div>
-          <div id="model-loader" class="model-loader-overlay">
+          <div id="model-loader" class="model-loader-overlay model-loader-poster" style="background-image: url('assets/Dachshund60F/01-front-left-mobile.webp');">
             <svg style="width: 36px; height: 36px; margin-bottom: 0.75rem; animation: spin 1s linear infinite;"
-              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-ochre)" stroke-width="2"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
             </svg>
@@ -156,7 +165,7 @@
             where the AI held up, where I had to step in, and what value I bring that it doesn't.
           </p>
 
-          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">// BOARD SPECIFICATIONS</h3>
+          <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">// BOARD SPECIFICATIONS</h3>
           <ul class="feature-list">
             <li><strong>MCU:</strong> nRF52840 (Raytac MDBT50Q-P1MV2 pre-certified module)</li>
             <li><strong>Layout:</strong> 60% with F-row, 80 switch positions, hot-swap, screw-in stabilisers</li>
@@ -199,7 +208,7 @@
         </p>
         <div class="two-col-grid">
           <div class="highlight-card">
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What the AI Did</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What the AI Did</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">PCB Grind</strong>
@@ -220,7 +229,7 @@
             </ul>
           </div>
           <div class="highlight-card">
-            <h3 style="color: var(--accent-ochre); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What I Did</h3>
+            <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What I Did</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">Scope &amp; Architecture</strong>
@@ -314,7 +323,7 @@
         </p>
         <div class="two-col-grid">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 01: Wrong Encoder Orientation</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 01: Wrong Encoder Orientation</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               The roller needs an encoder whose shaft runs <strong>parallel</strong> to the board, so it turns like a mouse wheel.
               The AI put the <strong>PEC12R-4220F</strong> in the BOM: Bourns' axial part, whose shaft points straight up like a
@@ -333,7 +342,7 @@
             </figure>
           </div>
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 02: A Button You Couldn't Press</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 02: A Button You Couldn't Press</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               The AI also had the push-button wrong. It treated the click as a press <strong>down</strong> on the wheel, but on
               this encoder the switch is pressed <strong>along the shaft</strong> (0.5 mm of travel), and the end of the wheel was
@@ -353,7 +362,7 @@
         </div>
         <div class="two-col-grid" style="margin-top: 2rem;">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 03: Gasket Visual Issues</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 03: Gasket Visual Issues</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               The gasket socks and their pockets in the case are generated from parameters, and the result still has visual
               issues. This is one I've decided to resolve myself rather than hand back to the AI: how a gasket sits and
@@ -379,7 +388,7 @@
         <h2>05 // THE SOFTWARE SIDE</h2>
         <div class="two-col-grid">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Firmware, Protocol &amp; Driver</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Firmware, Protocol &amp; Driver</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               The firmware is custom, on Zephyr / nRF Connect SDK, rather than a fork of QMK or ZMK. The keymap logic is plain C with no hardware in it, so it
               runs as unit tests on a PC. One YAML file defines the config protocol, and both the C and TypeScript sides are
@@ -394,7 +403,7 @@
             </ul>
           </div>
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Doghouse Configurator</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Doghouse Configurator</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               Keymap editing, advanced keys, macros, settings and firmware updates, in the browser over WebHID or as a
               self-updating desktop app for Windows, macOS and Linux. The boards are named after dogs, so the app is where
@@ -420,7 +429,7 @@
         <h2>06 // STATUS &amp; WHAT I'VE LEARNT</h2>
         <div class="two-col-grid">
           <div class="highlight-card">
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Where It Stands</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Where It Stands</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">Done in Software</strong>
@@ -437,7 +446,7 @@
             </ul>
           </div>
           <div class="highlight-card">
-            <h3 style="color: var(--accent-ochre); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">The Value I Bring</h3>
+            <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">The Value I Bring</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">AI Is Fast at the Grind</strong>
