@@ -21,18 +21,19 @@
   --text: #12161f;                /* Deep stark charcoal black for headings/body */
   --text-bright: #090a0d;         /* Jet black display text */
   --muted: #4e5564;               /* Readable tactical slate grey */
-  --muted-dark: #6e7687;          /* Darker telemetry micro-text */
+  --muted-dark: #5f6676;          /* Darker telemetry micro-text */
   --text-dark: #ffffff;           /* Stark white on dark accent buttons/badges */
 
   /* Calibrated Matte Tactical Accents */
   --accent-lime: #4d7030;         /* Deep Tactical Sage / Olive Green (High Contrast) */
-  --accent-orange: #c44d18;       /* Industrial Terracotta / Safety Orange */
+  --accent-orange: #ad4314;       /* Industrial Terracotta / Safety Orange */
   --accent-crimson: #b32a28;      /* Action Crimson */
   --accent-cyan: #1e7d91;         /* Telemetry Slate Cyan */
-  --accent-sage: #4d7030;
-  --accent-ochre: #c44d18;
-  --accent-sand: #4d7030;
-  --accent-olive: #4d7030;
+  /* Legacy aliases kept for older markup; use --accent-lime / --accent-orange */
+  --accent-sage: var(--accent-lime);
+  --accent-ochre: var(--accent-orange);
+  --accent-sand: var(--accent-lime);
+  --accent-olive: var(--accent-lime);
 
   /* Aliases for legacy component compatibility */
   --accent: var(--accent-lime);
@@ -184,7 +185,7 @@ p {
 }
 
 a {
-  color: var(--accent-sand);
+  color: var(--accent-lime);
   text-decoration: none;
   transition: color var(--transition);
 }
@@ -220,11 +221,11 @@ code, pre, .font-mono {
 /* Section Title - Single Technical Hierarchy */
 .section-title,
 .section h2 {
-  font-family: var(--font-mono);
-  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   color: var(--text-bright);
   margin-bottom: 2rem;
   display: flex;
@@ -584,33 +585,45 @@ code, pre, .font-mono {
   font-weight: 700;
 }
 
-.hero-sans {
-  font-size: clamp(1.5rem, 5.2vw, 2.75rem);
+.hero-name {
+  font-family: var(--font-sans);
+  font-size: clamp(2.6rem, 6.5vw, 4.5rem);
   font-weight: 900;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.hero-lead {
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 600px;
+  text-wrap: pretty;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
-  margin: 0;
-  text-wrap: balance;
-  word-break: normal;
-  overflow-wrap: break-word;
 }
 
-.hero-display {
-  font-family: var(--font-mono);
-  font-size: clamp(1.15rem, 2.1vw, 1.65rem);
-  font-weight: 700;
-  color: var(--accent-lime);
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-wrap: balance;
-}
-
-.hero-display span {
-  color: var(--text);
+.hero-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-lime);
+  box-shadow: 0 0 0 3px rgba(77, 112, 48, 0.2);
+  flex-shrink: 0;
 }
 
 .hero-subtitle {
@@ -654,14 +667,52 @@ code, pre, .font-mono {
   justify-self: end;
 }
 
-.hero-toolbox-svg {
+.hero-work {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
   width: 100%;
-  max-width: 480px;
-  height: auto;
+}
+
+.hero-work-item {
+  position: relative;
   display: block;
-  filter: drop-shadow(0 12px 28px rgba(18, 22, 31, 0.14));
-  overflow: visible;
-  margin-left: auto;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--border-bold);
+  clip-path: var(--chamfer-md);
+  box-shadow: var(--shadow-hard);
+  aspect-ratio: 3 / 2;
+  transition: transform var(--transition-fast);
+}
+
+.hero-work-main {
+  grid-column: 1 / -1;
+}
+
+.hero-work-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-work-item:hover {
+  transform: translate(-2px, -2px);
+}
+
+.hero-work-label {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--border-bold);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* ==========================================================================
@@ -893,6 +944,40 @@ code, pre, .font-mono {
 .model-loader-overlay.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Static render shown while the 3D model loads (and if it fails to) */
+.model-loader-poster {
+  background:
+    url("SampleSubway/Hero%20Shot%20Render.webp") center 40% / 88% auto no-repeat,
+    rgb(235, 237, 240);
+  justify-content: flex-end;
+  padding-bottom: 4.5rem;
+}
+
+/* Project page hero: photo above the spec card */
+.hero-visual-stack {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+.project-hero-media {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--border-bold);
+  clip-path: var(--chamfer-md);
+  box-shadow: var(--shadow-hard);
+  aspect-ratio: 3 / 2;
+}
+
+.project-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Toggle 3D & Reset Camera Buttons */
@@ -1302,12 +1387,12 @@ code, pre, .font-mono {
 
 /* Site Palette Syntax Tokens */
 .syn-keyword {
-  color: #ff7a00; /* Vibrant Terracotta Orange */
+  color: #e0621f; /* Vibrant Terracotta Orange */
   font-weight: 700;
 }
 
 .syn-fn {
-  color: #94cb45; /* Tactical Sage Green */
+  color: #8bb85a; /* Tactical Sage Green */
   font-weight: 700;
 }
 
@@ -1316,11 +1401,11 @@ code, pre, .font-mono {
 }
 
 .syn-num {
-  color: #ff7a00; /* Numbers & Literals */
+  color: #e0621f; /* Numbers & Literals */
 }
 
 .syn-str {
-  color: #94cb45; /* String Literals */
+  color: #8bb85a; /* String Literals */
 }
 
 .syn-comment {
@@ -1351,11 +1436,11 @@ code, pre, .font-mono {
 }
 
 .lifecycle-step.step-sample {
-  border-left: 3.5px solid #c44d18;
+  border-left: 3.5px solid #ad4314;
 }
 .lifecycle-step.step-sample .step-num,
 .lifecycle-step.step-sample .step-label {
-  color: #c44d18;
+  color: #ad4314;
 }
 
 .lifecycle-step.step-contain {
@@ -1395,10 +1480,10 @@ code, pre, .font-mono {
    Post-Mortem & Future Roadmap Cards (Section 07)
    ========================================================================== */
 .pm-card.pm-orange {
-  border-top: 3.5px solid #c44d18;
+  border-top: 3.5px solid #ad4314;
 }
 .pm-card.pm-orange .pm-number {
-  color: #c44d18;
+  color: #ad4314;
 }
 
 .pm-card.pm-cyan {
@@ -1649,6 +1734,20 @@ code, pre, .font-mono {
   line-height: 1.6;
 }
 
+.project-card p strong {
+  color: var(--text);
+}
+
+.project-card .project-credit {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  line-height: 1.45;
+}
+
 .project-meta {
   list-style: none;
   padding-left: 0;
@@ -1661,7 +1760,7 @@ code, pre, .font-mono {
 .project-meta li {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--accent-sand);
+  color: var(--accent-lime);
   padding: 0.2rem 0.55rem;
   border: 1px solid var(--border);
   background: var(--surface-alt);
@@ -1696,7 +1795,7 @@ code, pre, .font-mono {
   text-transform: uppercase;
   border: 1px solid var(--border);
   background: var(--surface-alt);
-  color: var(--accent-sand);
+  color: var(--accent-lime);
   cursor: pointer;
   z-index: 3;
   transition: all var(--transition);
@@ -1704,8 +1803,8 @@ code, pre, .font-mono {
 }
 
 .skill-toggle:hover {
-  border-color: var(--accent-ochre);
-  color: var(--accent-ochre);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
 }
 
 .project-links {
@@ -1719,7 +1818,7 @@ code, pre, .font-mono {
 .project-links a {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: var(--accent-ochre);
+  color: var(--accent-orange);
   text-decoration: none;
   font-weight: 600;
 }
@@ -1922,7 +2021,7 @@ code, pre, .font-mono {
   top: 4px;
   width: 8px;
   height: 8px;
-  background: var(--accent-ochre);
+  background: var(--accent-orange);
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
@@ -1944,7 +2043,7 @@ code, pre, .font-mono {
 .experience-company {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--accent-sand);
+  color: var(--accent-lime);
   font-weight: 600;
 }
 
@@ -1997,7 +2096,7 @@ code, pre, .font-mono {
 .skill-cat {
   font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--accent-sand);
+  color: var(--accent-lime);
   display: inline;
   margin-right: 0.35rem;
   font-size: 0.82rem;
@@ -2011,7 +2110,7 @@ code, pre, .font-mono {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent-olive);
+  color: var(--accent-lime);
   text-transform: uppercase;
   margin-right: 0.35rem;
 }
@@ -3425,13 +3524,12 @@ figcaption,
     -webkit-text-stroke: 1px var(--accent-lime);
   }
 
-  .hero-sans {
-    font-size: clamp(1.35rem, 5.2vw, 1.85rem);
-    line-height: 1.15;
+  .hero-name {
+    font-size: clamp(2.2rem, 11vw, 2.8rem);
   }
 
-  .hero-display {
-    font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+  .hero-lead {
+    font-size: 0.95rem;
   }
 
   .hero-actions {
@@ -3455,15 +3553,18 @@ figcaption,
 
   .hero-visual {
     margin: 0 auto;
-    max-width: 290px;
+    max-width: 440px;
     width: 100%;
   }
 
-  .hero-toolbox-svg {
-    max-width: 290px;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
+  .hero-work {
+    gap: 0.5rem;
+  }
+
+  .hero-work-label {
+    left: 0.4rem;
+    bottom: 0.4rem;
+    font-size: 0.6rem;
   }
 
   .hazard-ribbon {
@@ -3488,4 +3589,35 @@ figcaption,
     align-items: flex-start;
     gap: 1rem;
   }
+}
+/* ==========================================================================
+   Reduced Motion: honour the OS setting
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hazard-ribbon-content {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Project pages with a hero photo: start the copy at the top, beside the photo */
+.hero-grid:has(.hero-visual-stack) {
+  align-items: start;
+  margin-top: 0;
+}
+
+/* Four engineering cards sit as a balanced 2 x 2 grid on desktop */
+.course-track.engineering .coursework-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
 }

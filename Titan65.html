@@ -4,12 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <meta name="theme-color" content="#141615">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Titan65 &mdash; Custom Mechanical Keyboard | Tiam Designs</title>
+  <meta name="description" content="A 65% mechanical keyboard taken from prototype to 450+ units shipped: CNC aluminum case, brass weight, gasket mount and an overseas supply chain." />
+  <link rel="canonical" href="https://tiamdesigns.com/Titan65.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Tiam Designs" />
+  <meta property="og:title" content="Titan65 Custom Mechanical Keyboard | Tiam Bennett" />
+  <meta property="og:description" content="A 65% mechanical keyboard taken from prototype to 450+ units shipped: CNC aluminum case, brass weight, gasket mount and an overseas supply chain." />
+  <meta property="og:url" content="https://tiamdesigns.com/Titan65.html" />
+  <meta property="og:image" content="https://tiamdesigns.com/assets/og/titan65.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload"
@@ -22,7 +30,7 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
   </noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/styles.css?v=2.1.0">
 </head>
 
 <body id="top">
@@ -36,12 +44,12 @@
                 <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
               </filter>
               <linearGradient id="td-accent-grad-titan" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#94cb45"/>
-                <stop offset="100%" stop-color="#5c8238"/>
+                <stop offset="0%" stop-color="#8bb85a"/>
+                <stop offset="100%" stop-color="#4d7030"/>
               </linearGradient>
               <linearGradient id="td-orange-grad-titan" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff7a00"/>
-                <stop offset="100%" stop-color="#c44d18"/>
+                <stop offset="0%" stop-color="#e0621f"/>
+                <stop offset="100%" stop-color="#ad4314"/>
               </linearGradient>
             </defs>
             <g transform="skewX(-9) translate(14, 4)" filter="url(#td-logo-shadow-titan)">
@@ -92,6 +100,7 @@
         <ul class="nav-links">
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#coursework">Coursework</a></li>
           <li><a href="index.html#experience">Experience</a></li>
           <li><a href="index.html#skills">Skills</a></li>
           <li><a href="index.html#contact">Contact</a></li>
@@ -112,7 +121,13 @@
             <a href="#gallery" class="btn ghost"><span class="btn-text">Gallery</span></a>
           </div>
         </div>
-        <div class="hero-visual">
+        <div class="hero-visual hero-visual-stack">
+          <div class="project-hero-media">
+            <picture>
+              <source srcset="assets/Titan65/Titan65hero_DSC07053-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <img src="assets/Titan65/Titan65hero_DSC07053.webp" alt="Titan65 keyboard in its production colourway" width="800" height="533" fetchpriority="high">
+            </picture>
+          </div>
           <div class="highlight-card">
             <div class="card-header">
               <span class="card-tag">PROJECT SPECIFICATIONS</span>
@@ -124,12 +139,20 @@
                 <span class="tech-desc">Industrial Design, Mechanical Engineering &amp; Sourcing</span>
               </li>
               <li>
+                <strong class="tech-title">Team &amp; Partners</strong>
+                <span class="tech-desc">Two-person team at Phase Studio, working daily with RapidDirect's engineering team on CNC parts</span>
+              </li>
+              <li>
                 <strong class="tech-title">Timeline &amp; Volume</strong>
                 <span class="tech-desc">6 Months · 450+ Production Units Shipped Worldwide</span>
               </li>
               <li>
                 <strong class="tech-title">Tooling &amp; Stack</strong>
                 <span class="tech-desc">Fusion 360, KeyShot, KiCad, SolidWorks</span>
+              </li>
+              <li>
+                <strong class="tech-title">Design &rarr; Engineering</strong>
+                <span class="tech-desc">Finish, gasket and brass-weight choices balanced acoustics and feel against what could be machined and anodized reliably at volume</span>
               </li>
             </ul>
           </div>
@@ -152,7 +175,7 @@
             iterative prototyping, and the coordination of a complex international supply chain. Over 450 units were manufactured to exact tolerances and delivered to enthusiasts worldwide.
           </p>
 
-          <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">// HARDWARE SPECIFICATIONS</h3>
+          <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">// HARDWARE SPECIFICATIONS</h3>
           <ul class="feature-list">
             <li><strong>Form Factor:</strong> 65% Compact Layout</li>
             <li><strong>Materials:</strong> CNC Aluminum 6063, Brass (Weighted Base Option)</li>
@@ -208,7 +231,7 @@
         <h2>03 // PHASE 1: DESIGN &amp; RAPID PROTOTYPING</h2>
         <div class="two-col-grid">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Engineering &amp; Standards</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Engineering &amp; Standards</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               I designed the <strong>plate and mounting system</strong> to provide a consistent typing feel and sound
               profile, a critical factor for enthusiasts. I also ensured all board dimensions met rigorous industry standards for switch and stabilizer compatibility.
@@ -232,7 +255,7 @@
             </figure>
           </div>
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Component Sourcing &amp; QC</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Component Sourcing &amp; QC</h3>
             <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
               I personally specified and sourced critical components, including M3/M2 fasteners, Kailh hotswap sockets, and custom 40-50 Shore A silicone gaskets.
             </p>
@@ -241,8 +264,8 @@
             </p>
             <figure class="tech-figure" style="margin-top: 1.5rem;">
               <picture>
-                <source srcset="assets/Titan65/Anodization Samples-mobile.webp" media="(max-width: 768px)" type="image/webp">
-                <source srcset="assets/Titan65/Anodization Samples.webp" type="image/webp">
+                <source srcset="assets/Titan65/Anodization%20Samples-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Titan65/Anodization%20Samples.webp" type="image/webp">
                 <img src="assets/Titan65/Anodization Samples.jpg" alt="Anodization Samples" class="feature-image"
                   loading="lazy">
               </picture>
@@ -262,7 +285,7 @@
         </p>
         <div class="two-col-grid">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Case Machining</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Case Machining</h3>
             <p style="color: var(--muted); font-size: 0.92rem;">
               <strong>RapidDirect</strong> remained our primary partner for 5-axis CNC machining. I maintained daily communication with their engineering team to quote and fabricate complex enclosure geometries and custom plates.
             </p>
@@ -277,7 +300,7 @@
             </figure>
           </div>
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">PCB Production &amp; Diagnostics</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">PCB Production &amp; Diagnostics</h3>
             <p style="color: var(--muted); font-size: 0.92rem;">
               Partnered with <strong>Dalian JY Electronics</strong> for PCB manufacturing. I worked on board layout verification, overseeing PCBA and firmware flashing.
               <br><br>
@@ -285,8 +308,8 @@
             </p>
             <figure class="tech-figure" style="margin-top: 1.5rem;">
               <picture>
-                <source srcset="assets/Titan65/PCB Production-mobile.webp" media="(max-width: 768px)" type="image/webp">
-                <source srcset="assets/Titan65/PCB Production.webp" type="image/webp">
+                <source srcset="assets/Titan65/PCB%20Production-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Titan65/PCB%20Production.webp" type="image/webp">
                 <img src="assets/Titan65/PCB Production.jpg" alt="PCB Production" class="feature-image" loading="lazy">
               </picture>
               <figcaption>PCB assembly and testing at the production facility.</figcaption>
@@ -305,7 +328,7 @@
         </p>
         <div class="two-col-grid">
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Global Launch Metrics</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Global Launch Metrics</h3>
             <p style="color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem;">
               We sold over <strong>120 units</strong> in North America on Day 1. Approximately 50% of orders included the premium brass base upgrade, validating our material decisions.
             </p>
@@ -314,7 +337,7 @@
             </p>
           </div>
           <div>
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Logistics Network</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Logistics Network</h3>
             <ul style="color: var(--muted); font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.6;">
               <li><strong>CandyKeys:</strong> EU Distribution</li>
               <li><strong>Deskhero:</strong> Canada Distribution</li>
@@ -335,7 +358,7 @@
         <h2>06 // KEY ACHIEVEMENTS &amp; CHALLENGES</h2>
         <div class="two-col-grid">
           <div class="highlight-card">
-            <h3 style="color: var(--accent-sand); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Key Achievements</h3>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Key Achievements</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">Market Validation</strong>
@@ -348,7 +371,7 @@
             </ul>
           </div>
           <div class="highlight-card">
-            <h3 style="color: var(--accent-ochre); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Challenges Overcome</h3>
+            <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Challenges Overcome</h3>
             <ul class="tech-list">
               <li>
                 <strong class="tech-title">Prototyping QC</strong>
@@ -490,7 +513,7 @@
     </div>
   </footer>
   <script src="assets/anime.min.js?v=1.0.1" defer></script>
-  <script src="assets/main.js?v=2.0.0" defer></script>
+  <script src="assets/main.js?v=2.1.0" defer></script>
 </body>
 
 </html>

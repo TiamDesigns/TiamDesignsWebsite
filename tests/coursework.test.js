@@ -102,16 +102,15 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       });
     });
 
-    it('groups engineering courses into 5 compact domain cards', () => {
+    it('groups engineering courses into 4 compact domain cards', () => {
       const courseworkSection = document.getElementById('coursework');
       const cards = courseworkSection.querySelectorAll('.course-track.engineering .coursework-card');
-      expect(cards.length).toBe(5);
+      expect(cards.length).toBe(4);
 
       const groupTitles = Array.from(cards).map(c => c.querySelector('.course-group-title')?.textContent.trim());
       expect(groupTitles).toContain('Computer Systems & Architecture');
       expect(groupTitles).toContain('Circuits & Electronics');
-      expect(groupTitles).toContain('Mathematics & Numerical Methods');
-      expect(groupTitles).toContain('Physics & Electromagnetics');
+      expect(groupTitles).toContain('Mathematics & Physics');
       expect(groupTitles).toContain('Engineering Design & Methodology');
     });
 
@@ -156,7 +155,7 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       expect(circuit1.textContent).toContain('ONGOING');
     });
 
-    it('marks Electronics I, Circuit Theory II, and Physics: Electricity and Magnetism for Winter semester', () => {
+    it('marks Electronics I, Circuit Theory II, and Physics: Electricity and Magnetism for Winter 2027', () => {
       const courseworkSection = document.getElementById('coursework');
       const items = Array.from(courseworkSection.querySelectorAll('.course-item'));
 
@@ -169,7 +168,7 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       winterCourses.forEach(title => {
         const item = items.find(i => i.querySelector('.course-name')?.textContent.includes(title));
         expect(item).toBeDefined();
-        expect(item.textContent).toContain('WINTER SEMESTER');
+        expect(item.textContent).toContain('WINTER 2027');
       });
     });
 
