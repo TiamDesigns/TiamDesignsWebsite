@@ -33,7 +33,16 @@ describe('Dachshund60F Project Page', () => {
     const text = document.body.textContent;
     expect(text).toContain('Wrong Encoder Orientation');
     expect(text).toContain('A Button You Couldn');
+    expect(text).toContain('An Unfinished Case');
     expect(text).toContain('Gasket Visual Issues');
+  });
+
+  it('lays out the next steps in a schedule section', () => {
+    document.documentElement.innerHTML = pageHtml;
+    const steps = document.querySelectorAll('#schedule .lifecycle-step');
+    expect(steps.length).toBe(4);
+    expect(steps[0].textContent).toContain('Order PCBs');
+    expect(steps[3].textContent).toContain('Final assembly');
   });
 
   it('references only image and model files that exist', () => {

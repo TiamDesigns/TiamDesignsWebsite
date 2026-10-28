@@ -2,19 +2,20 @@ function init3dViewer() {
   const container = document.getElementById('3d-container');
   if (!container) return;
 
-  if (typeof THREE === 'undefined' || typeof THREE.TrackballControls === 'undefined' || typeof THREE.GLTFLoader === 'undefined') {
+  if (typeof THREE === 'undefined' || typeof THREE.OrbitControls === 'undefined' || typeof THREE.GLTFLoader === 'undefined') {
     setTimeout(init3dViewer, 100);
     return;
   }
 
-  // Setup Scene, Camera, Renderer
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
-    45,
-    container.clientWidth / container.clientHeight,
-    0.1,
-    50000
+    40,
+    (container.clientWidth || 400) / (container.clientHeight || 400),
+    0.001,
+    100
   );
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -24,53 +25,58 @@ function init3dViewer() {
   renderer.domElement.style.touchAction = 'pan-y';
   container.appendChild(renderer.domElement);
 
-  // 1. Refined Studio Lighting Setup
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
-  scene.add(ambientLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
 
-  const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.7);
-  directionalLight1.position.set(6, 10, 6);
-  scene.add(directionalLight1);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 0.7);
+  keyLight.position.set(6, 10, 6);
+  scene.add(keyLight);
 
-  const directionalLight2 = new THREE.DirectionalLight(0x8fa8c0, 0.3);
-  directionalLight2.position.set(-6, -4, -6);
-  scene.add(directionalLight2);
+  const fillLight = new THREE.DirectionalLight(0x8fa8c0, 0.3);
+  fillLight.position.set(-6, -4, -6);
+  scene.add(fillLight);
 
-  // Trackball Controls
-  const controls = new THREE.TrackballControls(camera, renderer.domElement);
-  controls.rotateSpeed = 4.0;
-  controls.zoomSpeed = 1.2;
-  controls.panSpeed = 0.8;
-  controls.noZoom = true;
-  controls.noPan = false;
-  controls.staticMoving = false;
-  controls.dynamicDampingFactor = 0.05;
-
-  // Mobile Scroll Toggle (Interaction Lock) - Default is false (locked)
-  let isInteracting = false;
-  let isDragging = false;
+  // Orbit controls keep the keyboard upright: it turns around its own centre and
+  // the camera can't roll, so manual rotation stays predictable
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.12;
+  controls.rotateSpeed = 0.7;
+  controls.enablePan = false;
+  controls.enableZoom = false;
+  controls.minPolarAngle = 0.15;
+  controls.maxPolarAngle = Math.PI / 2;
+  controls.autoRotate = !reduceMotion;
+  controls.autoRotateSpeed = 1.2;
   controls.enabled = false;
+
+  // Interaction lock so the page still scrolls on touch screens until the visitor opts in
+  let isInteracting = false;
   container.style.pointerEvents = 'none';
 
   controls.addEventListener('start', () => {
-    isDragging = true;
-  });
-  controls.addEventListener('end', () => {
-    isDragging = false;
+    controls.autoRotate = false;
   });
 
-  // Load GLTF/GLB Model with Draco Compression support
   const dracoLoader = new THREE.DRACOLoader();
   dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
 
   const loader = new THREE.GLTFLoader();
   loader.setDRACOLoader(dracoLoader);
 
-  let activeModel = null;
+  const removeLoader = () => {
+    const loaderElement = document.getElementById('model-loader');
+    if (!loaderElement) return;
+    loaderElement.style.opacity = '0';
+    loaderElement.style.pointerEvents = 'none';
+    setTimeout(() => {
+      if (loaderElement.parentNode) {
+        loaderElement.parentNode.removeChild(loaderElement);
+      }
+    }, 600);
+  };
 
   const setupModel = (gltf) => {
     const model = gltf.scene;
-
 
     // CAD exports are Z-up; the scene is Y-up
     model.rotation.x = -Math.PI / 2;
@@ -86,108 +92,59 @@ function init3dViewer() {
 
     const box = new THREE.Box3().setFromObject(model);
     const center = box.getCenter(new THREE.Vector3());
-    model.position.set(-center.x, -center.y, -center.z);
+    model.position.sub(center);
+    scene.add(model);
 
-    const pivot = new THREE.Group();
-    pivot.add(model);
-
-    const sphere = box.getBoundingSphere(new THREE.Sphere());
-    const radius = sphere.radius;
-
-    pivot.rotation.set(0, -Math.PI / 5, 0);
-
-    scene.add(pivot);
-    activeModel = pivot;
-
-    camera.far = Math.max(camera.far, radius * 20);
-    camera.near = Math.max(0.1, radius * 0.01);
+    const radius = box.getBoundingSphere(new THREE.Sphere()).radius;
+    const distance = radius * 3.2;
+    camera.position.set(distance * 0.55, distance * 0.6, distance * 0.6);
+    camera.near = radius * 0.01;
+    camera.far = radius * 20;
     camera.updateProjectionMatrix();
-
-    // Fix Camera Distance Jump: Set initial position immediately to preferred scale from frame 1
-    const distance = radius * 1.6;
-    camera.position.set(distance, distance * 0.75, distance);
-    camera.lookAt(0, 0, 0);
     controls.target.set(0, 0, 0);
+    controls.update();
 
-    const loaderElement = document.getElementById('model-loader');
-    if (loaderElement) {
-      void loaderElement.offsetWidth;
-      loaderElement.style.opacity = '0';
-      loaderElement.style.pointerEvents = 'none';
-      setTimeout(() => {
-        if (loaderElement && loaderElement.parentNode) {
-          loaderElement.parentNode.removeChild(loaderElement);
-        }
-      }, 600);
-    }
-
-    controls.maxDistance = radius * 3;
-    controls.minDistance = radius * 0.3;
+    removeLoader();
   };
 
-  loader.load('assets/Dachshund60F/Dachshund60F-Draco.glb', (gltf) => {
-    setupModel(gltf);
-  }, undefined, (error) => {
+  loader.load('assets/Dachshund60F/Dachshund60F-Draco.glb', setupModel, undefined, (error) => {
     console.error('GLTF load failed:', error);
-    const loaderElement = document.getElementById('model-loader');
-    if (loaderElement && loaderElement.parentNode) {
-      loaderElement.parentNode.removeChild(loaderElement);
-    }
+    removeLoader();
   });
 
-  // Mobile Lock Button Toggle
   const toggleBtn = document.getElementById('toggle-3d-controls');
-
   if (toggleBtn) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       isInteracting = !isInteracting;
       const btnText = toggleBtn.querySelector('.btn-text');
 
-      if (isInteracting) {
-        container.style.pointerEvents = 'auto';
-        container.classList.add('interactive');
-        controls.enabled = true;
-        toggleBtn.classList.add('active');
-        if (btnText) btnText.textContent = 'Lock Model (Enable Page Scroll)';
-      } else {
-        container.style.pointerEvents = 'none';
-        container.classList.remove('interactive');
-        controls.enabled = false;
-        toggleBtn.classList.remove('active');
-        if (btnText) btnText.textContent = 'Tap to Interact with 3D Model';
+      container.style.pointerEvents = isInteracting ? 'auto' : 'none';
+      container.classList.toggle('interactive', isInteracting);
+      toggleBtn.classList.toggle('active', isInteracting);
+      controls.enabled = isInteracting;
+      if (btnText) {
+        btnText.textContent = isInteracting ? 'Lock Model (Enable Page Scroll)' : 'Tap to Interact with 3D Model';
       }
     });
   }
 
   const onResize = () => {
-    if (!container) return;
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
-
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    if (controls && controls.handleResize) {
-      controls.handleResize();
-    }
   };
 
   window.addEventListener('resize', onResize);
   setTimeout(onResize, 100);
   setTimeout(onResize, 500);
 
-  // Animation Loop (Slow Auto-Rotation pauses during active drag)
   const animate = () => {
     requestAnimationFrame(animate);
-
-    if (activeModel && !isDragging) {
-      activeModel.rotation.y += 0.004; // Slow auto-rotation
-    }
-
-    if (controls && controls.enabled) {
-      controls.update();
-    }
+    // Always update so damping and auto-rotation run even while the model is locked
+    controls.update();
     renderer.render(scene, camera);
   };
 
