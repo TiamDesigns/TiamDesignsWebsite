@@ -676,13 +676,13 @@ code, pre, .font-mono {
 
 .hero-work-item {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   background: var(--surface);
   border: 2px solid var(--border-bold);
   clip-path: var(--chamfer-md);
   box-shadow: var(--shadow-hard);
-  aspect-ratio: 3 / 2;
   transition: transform var(--transition-fast);
 }
 
@@ -692,7 +692,8 @@ code, pre, .font-mono {
 
 .hero-work-item img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
   display: block;
 }
@@ -702,10 +703,8 @@ code, pre, .font-mono {
 }
 
 .hero-work-label {
-  position: absolute;
-  left: 0.6rem;
-  bottom: 0.6rem;
-  padding: 0.2rem 0.5rem;
+  display: block;
+  padding: 0.35rem 0.6rem;
   background: var(--border-bold);
   color: #ffffff;
   font-family: var(--font-mono);
@@ -978,6 +977,13 @@ code, pre, .font-mono {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Drawings and renders that must show their full frame */
+.project-hero-media img.is-contain,
+.hero-work-item img.is-contain {
+  object-fit: contain;
+  background: #ffffff;
 }
 
 /* Toggle 3D & Reset Camera Buttons */
@@ -3562,8 +3568,7 @@ figcaption,
   }
 
   .hero-work-label {
-    left: 0.4rem;
-    bottom: 0.4rem;
+    padding: 0.3rem 0.45rem;
     font-size: 0.6rem;
   }
 
