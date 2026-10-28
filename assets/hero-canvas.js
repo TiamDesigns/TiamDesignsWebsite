@@ -184,8 +184,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let animationId;
     let isVisible = true;
 
+    // Draw a single static frame when the OS asks for reduced motion
+    const reduceMotion = typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     function animate() {
         if (!isVisible) return;
+        if (reduceMotion) {
+            render();
+            return;
+        }
         updateParticles();
         render();
         animationId = requestAnimationFrame(animate);
@@ -214,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             initParticles();
+            if (reduceMotion) render();
         }, 200);
     });
 

@@ -178,10 +178,8 @@ if (yearSpan) {
     document.documentElement.setAttribute('spellcheck', 'false');
 
     // Mark fields and content to opt-out where possible
-    document.querySelectorAll('input, textarea, [contenteditable]').forEach((el) => {
+    document.querySelectorAll('textarea, [contenteditable]').forEach((el) => {
       el.setAttribute('spellcheck', 'false');
-      el.setAttribute('autocomplete', 'off');
-      el.setAttribute('autocorrect', 'off');
       el.setAttribute('data-gramm', 'false');
       el.setAttribute('data-gramm_editor', 'false');
     });
@@ -195,8 +193,13 @@ if (yearSpan) {
   }
 })();
 // Animations
+function prefersReducedMotion() {
+  return typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function initAnimations() {
-  const heroElements = document.querySelectorAll('.hero h1, .hero h2, .hero-kicker, .hero-sans, .hero-display, .hero-subtitle, .hero-team-credits, .hero-actions .btn');
+  const heroElements = document.querySelectorAll('.hero h1, .hero-kicker, .hero-lead, .hero-status, .hero-subtitle, .hero-team-credits, .hero-actions .btn, .hero-work-item');
   const projectCards = document.querySelectorAll('.project-card');
   const sectionHeaders = document.querySelectorAll('.section h2');
 
@@ -206,89 +209,17 @@ function initAnimations() {
     return;
   }
 
-  // Initial Hero Animation
+  // Respect the OS "reduce motion" setting: leave content static
+  if (prefersReducedMotion()) return;
+
+  // Initial Hero Animation (short so content is readable almost immediately)
   anime({
     targets: heroElements,
     opacity: [0, 1],
-    translateY: [20, 0],
-    delay: anime.stagger(80, { start: 150 }),
+    translateY: [12, 0],
+    delay: anime.stagger(50),
     easing: 'easeOutQuad',
-    duration: 700
-  });
-
-  // SVG Toolbox Animation
-  if (document.querySelector('.hero-toolbox-svg')) {
-    const tl = anime.timeline({
-      easing: 'easeOutExpo',
-      delay: 750 // Increased delay to let hero text and buttons settle first
-    });
-
-        // 1. Fade in and slide up the ENTIRE toolbox
-        tl.add({
-          targets: '#toolbox-entire',
-          opacity: [0, 1],
-          translateY: [40, 0],
-          duration: 1200,
-          easing: 'easeOutQuart'
-        })
-          // 2. Lift lid straight up, move to the right, and place down beside the toolbox
-          .add({
-            targets: '#toolbox-lid',
-            keyframes: [
-              { translateY: -65, translateX: 0, rotate: 0, duration: 450, easing: 'easeOutQuad' },
-              { translateY: -45, translateX: 220, rotate: 12, duration: 550, easing: 'easeInOutQuad' },
-              { translateY: 64, translateX: 215, rotate: 0, duration: 500, easing: 'easeOutBounce' }
-            ]
-          }, '-=600')
-          // 3. Pop out the tools-of-trade icons from INSIDE the box
-          .add({
-            targets: '#toolbox-contents',
-            opacity: 1,
-            duration: 200
-          }, '-=1000')
-          .add({
-            targets: '.floating-icon',
-            translateY: function (el, i) {
-              return [0, [-75, -115, -75][i]];
-            },
-            translateX: function (el, i) {
-              return [0, [-85, 0, 85][i]]; // Centered balanced horizontal spread
-            },
-            scale: [0, 1],
-            opacity: [0, 1],
-            delay: anime.stagger(220),
-            duration: 1600,
-            easing: 'easeOutElastic(1, .75)',
-            complete: function () {
-              // Add continuous floating animation
-              anime({
-                targets: '.floating-icon',
-                translateY: function (el) {
-                  const currentY = anime.get(el, 'translateY');
-                  return [currentY, currentY - 18];
-                },
-                direction: 'alternate',
-                loop: true,
-                duration: function () { return anime.random(3000, 4200); },
-                easing: 'easeInOutSine',
-                delay: function () { return anime.random(0, 800); }
-              });
-            }
-          }, '-=1000');
-      }
-
-  // --- NEW: Navigation Stagger ---
-  const navItems = document.querySelectorAll('.nav-links li');
-  // Set initial state to invisible to avoid flash
-  anime.set(navItems, { opacity: 0, translateY: -10 });
-
-  anime({
-    targets: navItems,
-    opacity: [0, 1],
-    translateY: [-10, 0],
-    delay: anime.stagger(80, { start: 800 }), // Start after hero begins
-    easing: 'easeOutExpo',
-    duration: 800
+    duration: 400
   });
 
   // --- NEW: Elastic Button Hovers ---
@@ -316,7 +247,7 @@ function initAnimations() {
 
 // --- NEW: Expanded Project Page Animations ---
 function initScrollAnimations() {
-  if (typeof anime === 'undefined') return;
+  if (typeof anime === 'undefined' || prefersReducedMotion()) return;
 
   const projectCards = document.querySelectorAll('.project-card');
   const sectionHeaders = document.querySelectorAll('.section h2');

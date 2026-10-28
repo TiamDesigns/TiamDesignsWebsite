@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" spellcheck="false" data-gramm="false" data-gramm_editor="false" translate="no">
+<html lang="en" spellcheck="false" data-gramm="false" data-gramm_editor="false">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <meta name="theme-color" content="#141615">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Tiam Designs &mdash; Industrial Design &amp; Hardware Engineering</title>
+  <title>Tiam Bennett &mdash; Electrical Engineering &amp; Industrial Design Portfolio</title>
   <meta name="description"
-    content="Tiam Bennett is an industrial designer and hardware engineer based in Ottawa, specializing in embedded systems, prototyping, and consumer product design." />
-  <link rel="icon" type="image/png" href="assets/TD Logo Mastercopy.png" />
+    content="Tiam Bennett is an Electrical Engineering student at the University of Ottawa with an Industrial Design degree from Humber College, building embedded hardware from PCB and firmware to enclosure." />
+  <link rel="canonical" href="https://tiamdesigns.com/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tiam Designs" />
+  <meta property="og:title" content="Tiam Bennett: Electrical Engineering &amp; Industrial Design" />
+  <meta property="og:description" content="Electrical engineering student with an industrial design degree, building embedded hardware end to end: PCB, firmware and enclosure." />
+  <meta property="og:url" content="https://tiamdesigns.com/" />
+  <meta property="og:image" content="https://tiamdesigns.com/assets/og/home.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tiam Bennett",
+    "alternateName": "Tiam Bennett Morrow-Rogers",
+    "url": "https://tiamdesigns.com/",
+    "jobTitle": "Electrical Engineering Student",
+    "alumniOf": "Humber College",
+    "affiliation": "University of Ottawa",
+    "sameAs": ["https://github.com/TiamDesigns", "https://www.linkedin.com/in/tiam-morrow-rogers-40aa9212b"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload"
@@ -25,7 +44,7 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
   </noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=2.0.0">
+  <link rel="stylesheet" href="assets/styles.css?v=2.1.0">
 </head>
 
 <body id="top">
@@ -39,12 +58,12 @@
                 <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
               </filter>
               <linearGradient id="td-accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#94cb45"/>
-                <stop offset="100%" stop-color="#5c8238"/>
+                <stop offset="0%" stop-color="#8bb85a"/>
+                <stop offset="100%" stop-color="#4d7030"/>
               </linearGradient>
               <linearGradient id="td-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff7a00"/>
-                <stop offset="100%" stop-color="#c44d18"/>
+                <stop offset="0%" stop-color="#e0621f"/>
+                <stop offset="100%" stop-color="#ad4314"/>
               </linearGradient>
             </defs>
             <g transform="skewX(-9) translate(14, 4)" filter="url(#td-logo-shadow)">
@@ -104,137 +123,38 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="main">
     <section class="hero">
       <canvas id="hero-canvas" class="hero-canvas"></canvas>
       <div class="container hero-grid">
         <div class="hero-text">
-          <p class="hero-kicker">ELECTRICAL ENGINEERING STUDENT · EMBEDDED HARDWARE · INDUSTRIAL DESIGN</p>
-          <h1 class="hero-sans">Industrial Design &amp; Embedded Development.</h1>
-          <h2 class="hero-display"><span>OPERATOR //</span> TIAM&nbsp;BENNETT</h2>
+          <p class="hero-kicker">Electrical Engineering Student · Industrial Design Graduate</p>
+          <h1 class="hero-name">Tiam Bennett</h1>
+          <p class="hero-lead">I design and build hardware end to end, from user research and enclosure to PCB and firmware. Electrical Engineering at the University of Ottawa, with a completed Industrial Design degree from Humber&nbsp;College.</p>
+          <p class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span>Open to hardware, embedded and PCB design roles</p>
           <div class="hero-actions">
-            <a href="#projects" class="btn primary"><span class="btn-text">View Projects &gt;&gt;&gt;</span></a>
-            <a href="#contact" class="btn ghost"><span class="btn-text">Let’s work together</span></a>
+            <a href="#projects" class="btn primary"><span class="btn-text">View Projects</span></a>
+            <a href="assets/TiamBennett_Resume.pdf" class="btn ghost" target="_blank" rel="noopener noreferrer"><span class="btn-text">Resume (PDF)</span></a>
           </div>
         </div>
         <div class="hero-visual">
-          <svg class="hero-toolbox-svg" viewBox="0 -180 530 380" style="overflow: visible;"
-            xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="toolbox-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" />
-                <stop offset="100%" stop-color="#dce1e8" />
-              </linearGradient>
-              <linearGradient id="toolbox-inner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#cfd6e0" />
-                <stop offset="100%" stop-color="#b8c1cd" />
-              </linearGradient>
-              <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#4d7030" />
-                <stop offset="100%" stop-color="#c44d18" />
-              </linearGradient>
-              <filter id="icon-node-shadow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#12161f" flood-opacity="0.18"/>
-              </filter>
-            </defs>
-
-            <!-- Entire Toolbox Group for Entrance Animation -->
-            <g id="toolbox-entire" transform="translate(75, 180)">
-
-              <!-- 1. Back Wall & Interior Cavity (Rendered behind floating icons) -->
-              <g id="toolbox-back">
-                <!-- Back inner wall -->
-                <polygon points="16,-14 184,-14 184,25 16,25" fill="url(#toolbox-inner-grad)" stroke="#12161f" stroke-width="2" />
-                <!-- Left inner perspective wall -->
-                <polygon points="0,0 16,-14 16,25 0,35" fill="#aeb7c4" stroke="#12161f" stroke-width="1.5" />
-                <!-- Right inner perspective wall -->
-                <polygon points="200,0 184,-14 184,25 200,35" fill="#aeb7c4" stroke="#12161f" stroke-width="1.5" />
-                <!-- Interior top rim highlight line -->
-                <line x1="16" y1="-14" x2="184" y2="-14" stroke="#4d7030" stroke-width="2.5" stroke-opacity="0.9" />
-              </g>
-
-              <!-- 2. Floating Icons Group -->
-              <g id="toolbox-contents" transform="translate(100, 10)">
-
-                <!-- Electronics/PCB Node (MCU Chip with Sage Green Accent) -->
-                <g id="icon-electronics" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#ffffff" stroke="#12161f" stroke-width="2" filter="url(#icon-node-shadow)" />
-                  <!-- Pins (Tactical Sage Green) -->
-                  <line x1="-16" y1="-6" x2="-8" y2="-6" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-16" y1="0" x2="-8" y2="0" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-16" y1="6" x2="-8" y2="6" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="-6" x2="16" y2="-6" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="0" x2="16" y2="0" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="8" y1="6" x2="16" y2="6" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-6" y1="-16" x2="-6" y2="-8" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="0" y1="-16" x2="0" y2="-8" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="6" y1="-16" x2="6" y2="-8" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="-6" y1="8" x2="-6" y2="16" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="0" y1="8" x2="0" y2="16" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <line x1="6" y1="8" x2="6" y2="16" stroke="#4d7030" stroke-width="2" stroke-linecap="round" />
-                  <!-- Microchip Body (Light Grey) -->
-                  <rect x="-10" y="-10" width="20" height="20" rx="1.5" fill="#e1e5eb" stroke="#12161f" stroke-width="1.5" />
-                  <!-- Pin 1 Marker Dot -->
-                  <circle cx="-5" cy="-5" r="1.8" fill="#c44d18" />
-                </g>
-
-                <!-- Code/Embedded Node (Terracotta Orange) -->
-                <g id="icon-code" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#ffffff" stroke="#12161f" stroke-width="2" filter="url(#icon-node-shadow)" />
-                  <polyline points="-8,-6 -14,0 -8,6" fill="none" stroke="#c44d18" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                  <polyline points="8,-6 14,0 8,6" fill="none" stroke="#c44d18" stroke-width="2.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                  <line x1="-2" y1="10" x2="2" y2="-10" stroke="#12161f" stroke-width="2.5" stroke-linecap="round" />
-                </g>
-
-                <!-- Prototyping/Hardware Node (CAD Isometric Cube) -->
-                <g id="icon-hw" class="floating-icon">
-                  <circle cx="0" cy="0" r="28" fill="#ffffff" stroke="#12161f" stroke-width="2" filter="url(#icon-node-shadow)" />
-                  <!-- Top Face -->
-                  <polygon points="0,-16 14,-8 0,0 -14,-8" fill="#e2e6eb" stroke="#12161f" stroke-width="1.5"
-                    stroke-linejoin="round" />
-                  <!-- Left Face -->
-                  <polygon points="-14,-8 0,0 0,16 -14,8" fill="#ffffff" stroke="#12161f" stroke-width="1.5"
-                    stroke-linejoin="round" />
-                  <!-- Right Face -->
-                  <polygon points="0,0 14,-8 14,8 0,16" fill="#dce8d2" stroke="#4d7030" stroke-width="1.5"
-                    stroke-linejoin="round" />
-                  <!-- Center Y-axis line -->
-                  <line x1="0" y1="0" x2="0" y2="16" stroke="#4d7030" stroke-width="2" />
-                </g>
-              </g>
-
-              <!-- 3. Front Wall / Outer Body (Solid structural front in front of icons) -->
-              <g id="toolbox-front">
-                <!-- Main body: crisp solid rectangular front face -->
-                <rect x="0" y="0" width="200" height="90" rx="3" fill="url(#toolbox-grad)" stroke="#12161f"
-                  stroke-width="2.5" />
-                <!-- Structural top lip line -->
-                <line x1="0" y1="0" x2="200" y2="0" stroke="#12161f" stroke-width="2.5" />
-                <!-- Accent Stripes across front -->
-                <line x1="16" y1="26" x2="184" y2="26" stroke="#4d7030" stroke-width="2" stroke-opacity="0.95" />
-                <line x1="16" y1="64" x2="184" y2="64" stroke="#c44d18" stroke-width="2" stroke-opacity="0.95" />
-                <!-- Status LED with Ring -->
-                <circle cx="165" cy="45" r="4.5" fill="#ffffff" stroke="#12161f" stroke-width="1.5" />
-                <circle id="toolbox-led" cx="165" cy="45" r="2.8" fill="#4d7030" />
-              </g>
-
-              <!-- 4. Toolbox Lid -->
-              <g id="toolbox-lid">
-                <!-- Outer Lid Shell -->
-                <rect x="0" y="-26" width="200" height="26" rx="2" fill="url(#toolbox-grad)" stroke="#12161f"
-                  stroke-width="2.5" />
-                <!-- Handle -->
-                <path d="M 72,-26 L 72,-40 L 128,-40 L 128,-26" fill="none" stroke="#12161f" stroke-width="3"
-                  stroke-linecap="round" stroke-linejoin="round" />
-                <!-- Machined Accent Vents -->
-                <line x1="20" y1="-13" x2="42" y2="-13" stroke="#4d7030" stroke-width="2.5" stroke-linecap="round" />
-                <line x1="158" y1="-13" x2="180" y2="-13" stroke="#4d7030" stroke-width="2.5" stroke-linecap="round" />
-              </g>
-
-            </g>
-          </svg>
+          <div class="hero-work">
+            <a href="Titan65.html" class="hero-work-item hero-work-main">
+              <picture>
+                <source srcset="assets/Titan65/Titan65hero_DSC07053-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <img src="assets/Titan65/Titan65hero_DSC07053.webp" alt="Titan65 keyboard, 450+ units shipped" width="800" height="533" fetchpriority="high">
+              </picture>
+              <span class="hero-work-label">Titan65 · 450+ units shipped</span>
+            </a>
+            <a href="sample-subway.html" class="hero-work-item">
+              <img src="assets/SampleSubway/Hero%20Shot%20Render-mobile.webp" alt="Sample Subway sampling tool render" width="800" height="533" loading="lazy">
+              <span class="hero-work-label">Sample Subway · CNL</span>
+            </a>
+            <a href="thesis-project.html" class="hero-work-item">
+              <img src="assets/Thesis%20Project/Full%20Concept%20Drawing%20with%20platform%20base%20and%20leggings.webp" alt="Augmented Dance Education concept with smart floor and wearable" width="1600" height="971" loading="lazy">
+              <span class="hero-work-label">ID Thesis · Wearables</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -292,7 +212,7 @@
     <section id="about" class="section">
       <div class="container section-grid">
         <div class="about-bio">
-          <h2 class="about-heading">01 // SYSTEM OVERVIEW &amp;&nbsp;BACKGROUND</h2>
+          <h2 class="about-heading">01 // ABOUT</h2>
           <p class="about-p">
             I am an Electrical Engineering student at the University of Ottawa with a degree background in Industrial Design, seeking roles in hardware design and hardware verification. I build and prototype complete embedded hardware systems, bridging multi-layer PCB layout, component selection, board bring-up, and mechanical enclosure integration (DFM/CAD) into functional physical&nbsp;assemblies.
           </p>
@@ -311,21 +231,21 @@
         <div class="about-highlights">
           <div class="highlight-card">
             <div class="card-header">
-              <span class="card-tag">01.1 // HARDWARE &amp; TOOLCHAIN</span>
-              <h3>Design &amp; Verification Stack</h3>
+              <span class="card-tag">01.1 // WHAT I BRING</span>
+              <h3>Design + Engineering</h3>
             </div>
             <ul class="tech-list">
               <li>
-                <strong class="tech-title">PCB &amp; Hardware Design</strong>
-                <span class="tech-desc">Multi-layer board layout, schematic capture, component selection, DFM/DFA, power distribution, and signal routing using KiCad and&nbsp;Altium.</span>
+                <strong class="tech-title">User-Centred Hardware</strong>
+                <span class="tech-desc">Industrial design training means I start from the user. Research, ergonomics and usability testing shape the electrical and mechanical requirements before any board is&nbsp;laid&nbsp;out.</span>
               </li>
               <li>
-                <strong class="tech-title">Lab &amp; Board Bring-Up</strong>
-                <span class="tech-desc">Oscilloscopes, logic analyzers, DMMs, SMD soldering/rework, signal verification, and hardware protocols (SPI, I2C, UART,&nbsp;USB).</span>
+                <strong class="tech-title">Built With Engineering Teams</strong>
+                <span class="tech-desc">Group lead of a four-person team of electrical, civil and chemical engineering students building a sampling tool for Canadian Nuclear Laboratories. Worked daily with RapidDirect's engineers on Titan65 and with international engineering teams at&nbsp;APMA.</span>
               </li>
               <li>
-                <strong class="tech-title">Digital Logic &amp; Firmware</strong>
-                <span class="tech-desc">Verilog HDL, FPGA toolchains (Yosys, Vivado, Verilator), and C/C++ firmware development for microcontrollers (STM32, ESP32, ARM&nbsp;Cortex-M).</span>
+                <strong class="tech-title">Prototype to Production</strong>
+                <span class="tech-desc">Took Titan65 from prototype to 450+ units shipped worldwide, managing DFM, vendors and quality control across an overseas supply&nbsp;chain.</span>
               </li>
             </ul>
           </div>
@@ -340,7 +260,7 @@
                 <span class="status-indicator"></span>
                 <div>
                   <strong class="focus-title">Education &amp; Foundation</strong>
-                  <p class="focus-desc">B.A.Sc. Candidate in Electrical Engineering at the University of Ottawa, backed by a formal background and degree in Industrial&nbsp;Design.</p>
+                  <p class="focus-desc">B.A.Sc. Candidate in Electrical Engineering at the University of Ottawa, building on a completed Bachelor of Industrial Design from Humber&nbsp;College.</p>
                 </div>
               </li>
               <li>
@@ -367,7 +287,7 @@
     <section id="projects" class="section section-alt">
       <div class="container">
         <div class="section-header">
-          <h2>02 // SELECTED ENGINEERING&nbsp;PROJECTS</h2>
+          <h2>02 // SELECTED PROJECTS</h2>
         </div>
 
         <div class="projects-grid">
@@ -396,6 +316,7 @@
             <a href="sample-subway.html" class="card-link-wrapper"
               aria-label="View Project Data for Sample Subway System">
               <div class="project-tag"><span class="tag-text">[ HARDWARE // PRODUCT DESIGN ]</span></div>
+              <p class="project-credit">Team of 4 · Client: Canadian Nuclear Laboratories · Group lead</p>
               <div class="project-hero">
                 <picture>
                   <source srcset="assets/BWSampleSubway.webp" type="image/webp">
@@ -407,7 +328,7 @@
               <p>
                 An electromechanical tool designed to extract 30–80 mg material samples from CANDU
                 reactor pressure tubes remotely. Controlled by an ESP32 programmed in Arduino, integrating DC motors, load cells, and
-                a custom spring-loaded container for automated material&nbsp;extraction.
+                a custom spring-loaded container for automated material&nbsp;extraction. <strong>Working prototype delivered for CAD $96 against a $100&nbsp;budget.</strong>
               </p>
             </a>
           </article>
@@ -417,6 +338,7 @@
             <a href="Titan65.html" class="card-link-wrapper"
               aria-label="View Project Data for Titan65 Mechanical Keyboard">
               <div class="project-tag"><span class="tag-text">[ PRODUCT DESIGN // HARDWARE ]</span></div>
+              <p class="project-credit">Team of 2 · Phase Studio · Design, sourcing &amp; manufacturing</p>
               <div class="project-hero">
                 <picture>
                   <source srcset="assets/Keyboard.webp" type="image/webp">
@@ -426,8 +348,7 @@
               </div>
               <h3>Titan65 Custom Keyboard</h3>
               <p>
-                A custom mechanical keyboard with hot-swap PCB, brass plates,
-                and DfX-driven decisions for assembly, acoustic tuning, and volume&nbsp;manufacturing.
+                A custom 65% mechanical keyboard with a CNC aluminum case, hot-swap PCB and brass weight, with DfX-driven decisions for assembly, acoustic tuning and volume manufacturing. <strong>450+ units shipped&nbsp;worldwide.</strong>
               </p>
             </a>
           </article>
@@ -437,12 +358,11 @@
             <a href="thesis-project.html" class="card-link-wrapper"
               aria-label="View Project Data for Augmented Dance Education Thesis">
               <div class="project-tag"><span class="tag-text">[ RESEARCH // INDUSTRIAL DESIGN ]</span></div>
+              <p class="project-credit">Solo · Humber College ID thesis · Research, design &amp; prototyping</p>
               <div class="project-hero">
                 <picture>
-                  <source srcset="assets/Thesis Project/images/page_78_X418-mobile.webp" media="(max-width: 768px)"
-                    type="image/webp">
-                  <source srcset="assets/Thesis Project/images/page_78_X418.webp" type="image/webp">
-                  <img src="assets/Thesis Project/images/page_78_X418.png" alt="Augmented Dance Education Final Design"
+                  <source srcset="assets/Thesis%20Project/Full%20Concept%20Drawing%20with%20platform%20base%20and%20leggings.webp" type="image/webp">
+                  <img src="assets/Thesis%20Project/Full%20Concept%20Drawing%20with%20platform%20base%20and%20leggings.webp" alt="Augmented Dance Education smart floor and wearable concept"
                     loading="lazy" width="600" height="400" />
                 </picture>
               </div>
@@ -460,8 +380,17 @@
     <section id="coursework" class="section">
       <div class="container">
         <div class="section-header">
-          <h2>03 // NOTABLE ENGINEERING&nbsp;COURSEWORK</h2>
+          <h2>03 // EDUCATION &amp;&nbsp;COURSEWORK</h2>
         </div>
+        <p class="coursework-intro">
+          Two degrees, one workflow. Industrial design taught me to start from the user, sketch, prototype and test; electrical engineering gives me the circuits, firmware and computer architecture to build what goes inside the&nbsp;enclosure.
+        </p>
+
+        <div class="course-track engineering">
+          <div class="course-track-head">
+            <h3 class="course-track-title">B.A.Sc. Electrical Engineering</h3>
+            <span class="course-track-meta">University of Ottawa // In&nbsp;Progress</span>
+          </div>
 
         <div class="coursework-grid">
           <!-- Domain 1: Computer Systems & Architecture -->
@@ -511,7 +440,7 @@
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Circuit Theory II</strong>
-                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                  <span class="course-badge scheduled">● WINTER 2027</span>
                 </div>
                 <p class="course-desc">
                   Advanced AC circuit analysis, Laplace transform techniques, frequency response, active/passive filters, resonance, and three-phase power.
@@ -520,7 +449,7 @@
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Electronics I</strong>
-                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                  <span class="course-badge scheduled">● WINTER 2027</span>
                 </div>
                 <p class="course-desc">
                   Semiconductor physics, PN-junction diode rectifiers, BJT and MOSFET amplifier DC biasing, and small-signal linear equivalent modeling.
@@ -529,67 +458,47 @@
             </ul>
           </div>
 
-          <!-- Domain 3: Mathematics & Computational Methods -->
+          <!-- Domain 3: Mathematics & Physics foundations -->
           <div class="coursework-card">
             <div class="course-card-top">
-              <span class="course-group-tag">[ MATHEMATICS &amp; ANALYSIS ]</span>
+              <span class="course-group-tag">[ MATH &amp; APPLIED PHYSICS ]</span>
             </div>
-            <h3 class="course-group-title">Mathematics &amp; Numerical Methods</h3>
+            <h3 class="course-group-title">Mathematics &amp; Physics</h3>
             <ul class="course-item-list">
-              <li class="course-item">
-                <div class="course-item-head">
-                  <strong class="course-name">Linear Algebra</strong>
-                  <span class="course-badge completed">● COMPLETED</span>
-                </div>
-                <p class="course-desc">
-                  Vector spaces, linear transformations, matrix algebra, determinants, eigenvalues/eigenvectors, and linear system solutions.
-                </p>
-              </li>
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Calculus I, II &amp; III</strong>
                   <span class="course-badge completed">● COMPLETED</span>
                 </div>
-                <p class="course-desc">
-                  Single-variable differential and integral calculus, series convergence, multivariable calculus, partial derivatives, and multiple integrals.
-                </p>
+                <p class="course-desc">Single and multivariable calculus, series and multiple integrals.</p>
+              </li>
+              <li class="course-item">
+                <div class="course-item-head">
+                  <strong class="course-name">Linear Algebra</strong>
+                  <span class="course-badge completed">● COMPLETED</span>
+                </div>
+                <p class="course-desc">Vector spaces, matrix algebra, eigenvalues and linear systems.</p>
               </li>
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Differential Equations &amp; Numerical Methods</strong>
                   <span class="course-badge completed">● COMPLETED</span>
                 </div>
-                <p class="course-desc">
-                  First and higher-order ODEs, Laplace transform solutions, numerical approximation algorithms, error bounds, and dynamic systems modeling.
-                </p>
+                <p class="course-desc">ODEs, Laplace transforms, numerical approximation and dynamic systems modeling.</p>
               </li>
-            </ul>
-          </div>
-
-          <!-- Domain 4: Physics & Electromagnetics -->
-          <div class="coursework-card">
-            <div class="course-card-top">
-              <span class="course-group-tag">[ APPLIED PHYSICS ]</span>
-            </div>
-            <h3 class="course-group-title">Physics &amp; Electromagnetics</h3>
-            <ul class="course-item-list">
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Physics I</strong>
                   <span class="course-badge completed">● COMPLETED</span>
                 </div>
-                <p class="course-desc">
-                  Classical Newtonian mechanics foundation for engineering: kinematics, Newton's laws of motion, work-energy, momentum, rotational dynamics, and harmonic motion.
-                </p>
+                <p class="course-desc">Newtonian mechanics, energy, momentum and rotational dynamics.</p>
               </li>
               <li class="course-item">
                 <div class="course-item-head">
                   <strong class="course-name">Physics: Electricity and Magnetism</strong>
-                  <span class="course-badge scheduled">● WINTER SEMESTER</span>
+                  <span class="course-badge scheduled">● WINTER 2027</span>
                 </div>
-                <p class="course-desc">
-                  Core electromagnetism and field theory: electrostatic charge, Gauss's, Ampère's, and Faraday's laws, capacitance, inductance, and Maxwell's equations.
-                </p>
+                <p class="course-desc">Electrostatics, Gauss, Amp&egrave;re and Faraday laws, capacitance, inductance and Maxwell&rsquo;s equations.</p>
               </li>
             </ul>
           </div>
@@ -622,6 +531,82 @@
             </ul>
           </div>
         </div>
+        </div>
+
+        <div class="course-track design">
+          <div class="course-track-head">
+            <h3 class="course-track-title">Bachelor of Industrial Design</h3>
+            <span class="course-track-meta">Humber College // Completed</span>
+          </div>
+
+          <div class="coursework-grid">
+            <!-- Domain 1: Industrial Design -->
+            <div class="coursework-card">
+              <div class="course-card-top">
+                <span class="course-group-tag">[ PRODUCT &amp; INDUSTRIAL DESIGN ]</span>
+              </div>
+              <h3 class="course-group-title">Industrial Design Studio</h3>
+              <ul class="course-item-list">
+                <li class="course-item">
+                  <div class="course-item-head">
+                    <strong class="course-name">Industrial Design Studios</strong>
+                    <span class="course-badge completed">● COMPLETED</span>
+                  </div>
+                  <p class="course-desc">
+                    Concept sketching, form development, materials and manufacturing processes, 3D CAD, rendering, and physical model&nbsp;making.
+                  </p>
+                </li>
+                <li class="course-item">
+                  <div class="course-item-head">
+                    <strong class="course-name">Graduation Thesis</strong>
+                    <span class="course-badge completed">● COMPLETED</span>
+                  </div>
+                  <p class="course-desc">
+                    Year-long research and design project. <strong><a href="thesis-project.html">Augmented Dance Education</a></strong>: a sensor-driven biofeedback system taken from user research to working&nbsp;prototype.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Domain 2: UX Design -->
+            <div class="coursework-card">
+              <div class="course-card-top">
+                <span class="course-group-tag">[ USER EXPERIENCE ]</span>
+              </div>
+              <h3 class="course-group-title">UX &amp; Interaction Design</h3>
+              <ul class="course-item-list">
+                <li class="course-item">
+                  <div class="course-item-head">
+                    <strong class="course-name">UX Design</strong>
+                    <span class="course-badge completed">● COMPLETED</span>
+                  </div>
+                  <p class="course-desc">
+                    User research, personas, journey mapping, wireframing, interactive prototyping, and usability testing. <strong>Turning user needs into testable requirements</strong>.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Domain 3: Graphic Design -->
+            <div class="coursework-card">
+              <div class="course-card-top">
+                <span class="course-group-tag">[ VISUAL COMMUNICATION ]</span>
+              </div>
+              <h3 class="course-group-title">Graphic Design</h3>
+              <ul class="course-item-list">
+                <li class="course-item">
+                  <div class="course-item-head">
+                    <strong class="course-name">Graphic Design</strong>
+                    <span class="course-badge completed">● COMPLETED</span>
+                  </div>
+                  <p class="course-desc">
+                    Typography, layout, branding, and visual hierarchy. <strong>Clear technical documentation, diagrams, and presentations</strong> for engineering and non-technical&nbsp;audiences.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -629,7 +614,7 @@
     <!-- Work Experience -->
     <section id="experience" class="section section-alt">
       <div class="container">
-        <h2>04 // WORK EXPERIENCE &amp;&nbsp;CHRONOLOGY</h2>
+        <h2>04 // EXPERIENCE</h2>
         <div class="experience-list">
           <div class="experience-item">
             <div class="experience-header">
@@ -662,7 +647,7 @@
               <span class="experience-date">Jan 2019 &ndash; July 2022</span>
             </div>
             <ul class="experience-details">
-              <li><strong>Hardware &amp; Firmware QA:</strong> Debugged firmware and board-level defects using C, KiCad, and SolidWorks across 400+ deployed&nbsp;units.</li>
+              <li><strong>Hardware &amp; Firmware QA:</strong> Debugged firmware and board-level defects using C, KiCad, and SolidWorks across 450+ shipped&nbsp;units.</li>
               <li><strong>Overseas DFM &amp; Manufacturing:</strong> Managed end-to-end hardware development and manufacturing (DFM/DFA) in China, establishing PCB quality testing standards to drive $225k+ in single-month&nbsp;revenue.</li>
             </ul>
           </div>
@@ -675,7 +660,7 @@
             </div>
             <ul class="experience-details">
               <li><strong>3D CAD &amp; Visualization:</strong> Modeled high-fidelity 3D assets in SolidWorks and Fusion 360 to accelerate technical visualization for CES 2023 product&nbsp;demos.</li>
-              <li><strong>Engineering Coordination:</strong> Bridge technical specifications between international engineering teams and executive leadership to hit tight exhibition&nbsp;deadlines.</li>
+              <li><strong>Engineering Coordination:</strong> Bridged technical specifications between international engineering teams and executive leadership to hit tight exhibition&nbsp;deadlines.</li>
             </ul>
           </div>
 
@@ -697,7 +682,7 @@
     <!-- Skills -->
     <section id="skills" class="section">
       <div class="container">
-        <h2>05 // TECHNICAL SKILLS &amp;&nbsp;LAB TOOLS</h2>
+        <h2>05 // SKILLS &amp; LAB TOOLS</h2>
         <div class="skills-grid">
 
           <!-- Card 1: Embedded & Hardware Engineering -->
@@ -812,7 +797,7 @@
     <section id="contact" class="section">
       <div class="container contact-grid">
         <div class="contact-info">
-          <h2>06 // TRANSMIT MESSAGE /&nbsp;CONTACT</h2>
+          <h2>06 // CONTACT</h2>
           <p class="contact-subtext">
             I'm currently open to embedded hardware, firmware, and PCB design opportunities. Whether you have an engineering role to discuss or a project in mind, let's&nbsp;talk.
           </p>
@@ -821,7 +806,7 @@
               <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <span class="meta-text">LOCATION: OTTAWA, ON, CANADA // TIMEZONE: UTC-4</span>
+            <span class="meta-text">LOCATION: OTTAWA, ON, CANADA // TIME ZONE: EASTERN (ET)</span>
           </div>
         </div>
         <form class="contact-form" action="https://formspree.io/f/mnnlwndb" method="POST">
@@ -899,8 +884,8 @@
   </footer>
 
   <script src="assets/anime.min.js?v=1.0.1" defer></script>
-  <script src="assets/main.js?v=2.0.0" defer></script>
-  <script src="assets/hero-canvas.js?v=2.0.0" defer></script>
+  <script src="assets/main.js?v=2.1.0" defer></script>
+  <script src="assets/hero-canvas.js?v=2.1.0" defer></script>
 </body>
 
 </html>
