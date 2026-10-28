@@ -1851,6 +1851,57 @@ code, pre, .font-mono {
   font-weight: 700;
 }
 
+.course-desc a {
+  color: var(--accent-lime);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.coursework-intro {
+  max-width: 760px;
+  margin: -1rem 0 2.25rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.course-track + .course-track {
+  margin-top: 3rem;
+}
+
+.course-track-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.25rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--accent-lime);
+}
+
+.course-track.design .course-track-head {
+  border-left-color: var(--accent-orange);
+}
+
+.course-track-title {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.course-track-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* Experience Timeline */
 .experience-list {
   display: flex;

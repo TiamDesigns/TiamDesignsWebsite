@@ -102,9 +102,9 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       });
     });
 
-    it('groups courses into 5 compact domain cards', () => {
+    it('groups engineering courses into 5 compact domain cards', () => {
       const courseworkSection = document.getElementById('coursework');
-      const cards = courseworkSection.querySelectorAll('.coursework-card');
+      const cards = courseworkSection.querySelectorAll('.course-track.engineering .coursework-card');
       expect(cards.length).toBe(5);
 
       const groupTitles = Array.from(cards).map(c => c.querySelector('.course-group-title')?.textContent.trim());
@@ -113,6 +113,19 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       expect(groupTitles).toContain('Mathematics & Numerical Methods');
       expect(groupTitles).toContain('Physics & Electromagnetics');
       expect(groupTitles).toContain('Engineering Design & Methodology');
+    });
+
+    it('presents the completed Humber College Industrial Design degree as its own track', () => {
+      const designTrack = document.querySelector('#coursework .course-track.design');
+      expect(designTrack).not.toBeNull();
+
+      const text = designTrack.textContent;
+      expect(text).toContain('Bachelor of Industrial Design');
+      expect(text).toContain('Humber College');
+
+      const groupTitles = Array.from(designTrack.querySelectorAll('.course-group-title')).map(t => t.textContent.trim());
+      expect(groupTitles).toEqual(['Industrial Design Studio', 'UX & Interaction Design', 'Graphic Design']);
+      expect(designTrack.querySelector('a[href="thesis-project.html"]')).not.toBeNull();
     });
 
     it('correctly notes Computer Architecture I lab processor project', () => {
