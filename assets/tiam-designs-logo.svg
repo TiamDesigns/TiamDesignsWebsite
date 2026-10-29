@@ -7,12 +7,12 @@
     
     <!-- Gradients -->
     <linearGradient id="td-accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#94cb45"/>
-      <stop offset="100%" stop-color="#5c8238"/>
+      <stop offset="0%" stop-color="#8bb85a"/>
+      <stop offset="100%" stop-color="#4d7030"/>
     </linearGradient>
     <linearGradient id="td-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff7a00"/>
-      <stop offset="100%" stop-color="#c44d18"/>
+      <stop offset="0%" stop-color="#e0621f"/>
+      <stop offset="100%" stop-color="#ad4314"/>
     </linearGradient>
   </defs>
 
