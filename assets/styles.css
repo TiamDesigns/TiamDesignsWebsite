@@ -2076,6 +2076,14 @@ code, pre, .font-mono {
   color: var(--text);
 }
 
+.experience-details a {
+  color: var(--accent-lime);
+}
+
+.experience-resume {
+  margin-top: 2rem;
+}
+
 /* Skills Specifications Grid */
 .skills-grid {
   display: grid;
