@@ -40,7 +40,9 @@ describe('Notable Coursework Section & Sample Subway Accuracy', () => {
       const firmwareSection = document.getElementById('firmware');
       expect(firmwareSection).not.toBeNull();
       const firmwareHeading = firmwareSection.querySelector('h2');
-      expect(firmwareHeading.textContent).toContain('06 // ARDUINO FIRMWARE & COMMUNICATION STRATEGY');
+      expect(firmwareHeading.textContent).toContain('Arduino firmware & communication strategy');
+      const firmwareEyebrow = firmwareSection.querySelector('.section-head .eyebrow');
+      expect(firmwareEyebrow.textContent).toContain('06 //');
       expect(firmwareSection.textContent).toContain('Custom Arduino firmware and Python data logging toolchain');
       
       // No bare-metal claims

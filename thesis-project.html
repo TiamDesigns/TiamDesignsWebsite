@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#141615">
+  <meta name="theme-color" content="#ebedf0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12161f" media="(prefers-color-scheme: dark)">
+  <script>
+    /* Apply a saved theme choice before first paint */
+    try { var t = localStorage.getItem('td-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Augmented Dance Education &mdash; Thesis | Tiam Designs</title>
   <meta name="description" content="Industrial design thesis: wearables and a smart floor that give dancers real-time biofeedback to reduce injury." />
   <link rel="canonical" href="https://tiamdesigns.com/thesis-project.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <meta property="og:type" content="article" />
@@ -30,71 +36,22 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
   </noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=2.1.0">
+  <link rel="stylesheet" href="assets/styles.css?v=3.0.0">
 </head>
 
 <body id="top">
   
   <header class="site-header">
     <div class="container nav-container">
-      <a href="index.html" class="logo" aria-label="Tiam Designs">
-          <svg class="logo-wordmark-svg site-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 70" fill="none" role="img" aria-label="TIAM DESIGNS Logo">
-            <defs>
-              <filter id="td-logo-shadow-thesis" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="3.5" dy="3.5" stdDeviation="0" flood-color="#000000" flood-opacity="0.95"/>
-              </filter>
-              <linearGradient id="td-accent-grad-thesis" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8bb85a"/>
-                <stop offset="100%" stop-color="#4d7030"/>
-              </linearGradient>
-              <linearGradient id="td-orange-grad-thesis" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#e0621f"/>
-                <stop offset="100%" stop-color="#ad4314"/>
-              </linearGradient>
-            </defs>
-            <g transform="skewX(-9) translate(14, 4)" filter="url(#td-logo-shadow-thesis)">
-              <!-- 2XKO Heavy Outer Contour (Black Casing) -->
-              <g stroke="#050608" stroke-width="12" stroke-linejoin="round" stroke-miterlimit="2" fill="#050608">
-                <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
-                <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
-                <!-- A (Smooth Industrial Counter) -->
-                <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 40 L 91 40 L 88 54 Z M 93.5 33 L 98.5 33 Q 102 33 101 30.5 L 98.5 23.5 Q 96 20.5 93.5 23.5 L 91 30.5 Q 90 33 93.5 33 Z" />
-                <!-- M -->
-                <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
-                <!-- DESIGNS Heavy Chamfered Plate (Balanced Spacing) -->
-                <path d="M 192 7 L 392 7 L 402 17 L 402 47 L 392 57 L 192 57 L 182 47 L 182 17 Z" />
-              </g>
-              <!-- 2XKO Accent Sub-Outline -->
-              <g stroke="url(#td-accent-grad-thesis)" stroke-width="3.5" stroke-linejoin="round" stroke-miterlimit="2" fill="none">
-                <!-- T -->
-                <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" />
-                <!-- I -->
-                <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" />
-                <!-- A -->
-                <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 40 L 91 40 L 88 54 Z M 93.5 33 L 98.5 33 Q 102 33 101 30.5 L 98.5 23.5 Q 96 20.5 93.5 23.5 L 91 30.5 Q 90 33 93.5 33 Z" />
-                <!-- M -->
-                <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" />
-                <!-- DESIGNS Frame Accent -->
-                <path d="M 192 7 L 392 7 L 402 17 L 402 47 L 392 57 L 192 57 L 182 47 L 182 17 Z" stroke-width="2.5" />
-              </g>
-              <!-- Foreground Letterforms -->
-              <path d="M 12 10 L 50 10 L 50 23 L 37 23 L 37 54 L 25 54 L 25 23 L 12 23 Z" fill="#ffffff" />
-              <path d="M 56 10 L 68 10 L 68 54 L 56 54 Z" fill="#ffffff" />
-              <path d="M 75 54 L 86 10 L 106 10 L 117 54 L 104 54 L 101 40 L 91 40 L 88 54 Z M 93.5 33 L 98.5 33 Q 102 33 101 30.5 L 98.5 23.5 Q 96 20.5 93.5 23.5 L 91 30.5 Q 90 33 93.5 33 Z" fill="#ffffff" fill-rule="evenodd" />
-              <path d="M 122 54 L 122 10 L 137 10 L 145 31 L 153 10 L 168 10 L 168 54 L 156 54 L 156 25 L 149 40 L 141 40 L 134 25 L 134 54 Z" fill="#ffffff" />
-              <!-- DESIGNS Prominent Block -->
-              <path d="M 192 7 L 392 7 L 402 17 L 402 47 L 392 57 L 192 57 L 182 47 L 182 17 Z" fill="#141822" />
-              <g fill="url(#td-orange-grad-thesis)">
-                <polygon points="200,19 210,19 203,43 193,43" />
-                <polygon points="214,19 224,19 217,43 207,43" />
-              </g>
-              <text x="232" y="40.5" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="25" letter-spacing="2.2" fill="#ffffff" text-anchor="start">DESIGNS</text>
-              <circle cx="384" cy="19" r="3.5" fill="url(#td-accent-grad-thesis)" />
-            </g>
-          </svg>
+      <a href="index.html" class="logo" aria-label="Tiam Designs, home">
+        <span class="td-wordmark" aria-hidden="true"><svg class="td-wordmark__mark" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><path class="td-mark-bg" d="M18 4H78L92 18V78Q92 92 78 92H18L4 78V18Q4 4 18 4Z"/><path class="td-mark-t" d="M18 26H46V36H37V70H27V36H18Z"/><path class="td-mark-slash" d="M48 70H56L66 26H58Z M60 70H68L78 26H70Z"/></svg><span class="td-wordmark__tiam">TIAM</span><span class="td-wordmark__slash">//</span><span class="td-wordmark__designs">DESIGNS</span></span>
       </a>
       <nav class="nav">
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links">
@@ -162,7 +119,10 @@
     <section class="section" id="details">
       <div class="container section-grid">
         <div class="content">
-          <h2>01 // PROJECT OVERVIEW</h2>
+          <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">01</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Project overview</h2>
+        </div>
           <p style="margin-bottom: 1rem;">
             Dance involves intense physical exertion. Research shows that <strong>81% of dancers report injuries within their first year of learning</strong>, and 58% suffer a substantial injury affecting both performance and daily tasks.
           </p>
@@ -192,7 +152,10 @@
     <!-- Research & Problem Definition -->
     <section class="section section-alt">
       <div class="container">
-        <h2>02 // RESEARCH &amp; PROBLEM DEFINITION</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">02</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Research &amp; problem definition</h2>
+        </div>
         <div class="skills-grid">
           <div class="skill-group">
             <h3>Injury Prevalence in Dance</h3>
@@ -213,7 +176,10 @@
     <!-- User Research -->
     <section class="section">
       <div class="container">
-        <h2>03 // USER ECOSYSTEM &amp; CONSTRAINTS</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">03</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>User ecosystem &amp; constraints</h2>
+        </div>
         <div class="skills-grid" style="margin-top: 2rem;">
           <div class="skill-group">
             <h3>Primary User: The Student</h3>
@@ -242,7 +208,10 @@
     <!-- Affinity Mapping & Analysis -->
     <section class="section section-alt">
       <div class="container">
-        <h2>04 // AFFINITY MAPPING &amp; ANALYSIS</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">04</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Affinity mapping &amp; analysis</h2>
+        </div>
         <p style="margin-bottom: 1.5rem; color: var(--muted);">
           Synthesizing research data into themes to identify key areas for mechanical and sensor intervention.
         </p>
@@ -260,7 +229,10 @@
     <!-- Ideation & Concepts -->
     <section class="section">
       <div class="container">
-        <h2>05 // IDEATION &amp; PHYSICAL CONCEPTS</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">05</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Ideation &amp; physical concepts</h2>
+        </div>
         <p style="margin-bottom: 1.5rem; color: var(--muted);">
           Concept exploration focused on the leggings, ankle exercise devices, and floor panels.
         </p>
@@ -311,7 +283,10 @@
     <!-- The Solution -->
     <section class="section section-alt">
       <div class="container">
-        <h2>06 // THE AUGMENTED SOLUTION</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">06</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>The augmented solution</h2>
+        </div>
         <div class="skills-grid">
           <div class="skill-group">
             <h3>Wearable Sensor Feedback</h3>
@@ -367,7 +342,10 @@
     <!-- Design Process & Prototyping -->
     <section class="section">
       <div class="container">
-        <h2>07 // DESIGN PROCESS &amp; PROTOTYPING</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">07</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Design process &amp; prototyping</h2>
+        </div>
         <div style="margin-bottom: 2rem;">
           <figure class="tech-figure diagram-figure">
             <picture>
@@ -422,7 +400,10 @@
     <!-- Final Design Renders -->
     <section class="section section-alt">
       <div class="container">
-        <h2>08 // FINAL SYSTEM RENDERINGS</h2>
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">08</span> <span class="eyebrow-slash">//</span> 08</span>
+          <h2>Final system renderings</h2>
+        </div>
         <div style="display: flex; flex-direction: column; gap: 2rem;">
           <figure class="tech-figure diagram-figure">
             <picture>
@@ -481,7 +462,7 @@
   </footer>
 
   <script src="assets/anime.min.js?v=1.0.1" defer></script>
-  <script src="assets/main.js?v=2.1.0" defer></script>
+  <script src="assets/main.js?v=3.0.0" defer></script>
 </body>
 
 </html>

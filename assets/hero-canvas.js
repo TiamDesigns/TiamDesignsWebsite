@@ -62,13 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ctx = canvas.getContext('2d', { alpha: true });
 
-    // Config - Calibrated Tactical Light Theme Palette
+    // Palette follows the design system theme: ink nodes and sage mouse links.
+    const PALETTES = {
+        light: { node: '18, 22, 31', link: '18, 22, 31', accent: '77, 112, 48' },
+        dark: { node: '246, 239, 228', link: '246, 239, 228', accent: '139, 184, 90' }
+    };
+    function currentPalette() {
+        const forced = document.documentElement.getAttribute('data-theme');
+        if (forced === 'dark' || forced === 'light') return PALETTES[forced];
+        const prefersDark = typeof window.matchMedia === 'function' &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return prefersDark ? PALETTES.dark : PALETTES.light;
+    }
+
     const config = {
         particleCount: 150, // Number of particles
         particleRadius: 1.5,
-        particleColor: 'rgba(20, 25, 35, 0.45)', // Deep slate nodes
-        linkColor: 'rgba(40, 50, 65, 0.14)', // Subtle dark link
-        accentColor: 'rgba(77, 112, 48, 0.65)', // Tactical sage green accent
         backgroundColor: 'transparent',
         linkDistance: 120, // Max distance to draw a line between particles
         mouseLinkDistance: 150, // Max distance to draw a line to the mouse
@@ -124,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, width, height);
 
         ctx.lineWidth = 1;
+        const palette = currentPalette();
 
         const linkDistanceSq = config.linkDistance * config.linkDistance;
         const mouseLinkDistanceSq = config.mouseLinkDistance * config.mouseLinkDistance;
@@ -147,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(40, 50, 65, ${opacity * 0.14})`;
+                    ctx.strokeStyle = `rgba(${palette.link}, ${opacity * 0.14})`;
                     ctx.stroke();
                 }
             }
@@ -164,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(77, 112, 48, ${opacity * 0.65})`;
+                    ctx.strokeStyle = `rgba(${palette.accent}, ${opacity * 0.65})`;
                     ctx.stroke();
                 }
             }
@@ -175,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let p = particles[i];
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = config.particleColor;
+            ctx.fillStyle = `rgba(${palette.node}, 0.4)`;
             ctx.fill();
         }
     }
@@ -239,6 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mouse.x = -1000;
         mouse.y = -1000;
     });
+
+    // Redraw the static frame when the theme changes
+    document.addEventListener('themechange', () => { if (reduceMotion) render(); });
 
     // Initialize
     initParticles();
