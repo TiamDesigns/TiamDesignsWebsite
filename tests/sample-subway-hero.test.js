@@ -33,9 +33,9 @@ describe('Sample Subway Hero & Header UI', () => {
     expect(text).toContain('rotated responsibilities');
   });
 
-  it('configures .hero-kicker::before with double slashes // matching height and line width', () => {
+  it('leads the hero kicker with a terracotta // and no glow (design system eyebrow)', () => {
     expect(stylesCss).toMatch(/\.hero-kicker::before\s*\{[^}]*content:\s*'(\/\/)';/);
-    expect(stylesCss).toMatch(/\.hero-kicker::before\s*\{[^}]*-webkit-text-stroke:\s*1\.2px/);
-    expect(stylesCss).toMatch(/\.hero-kicker::before\s*\{[^}]*font-size:\s*1em/);
+    expect(stylesCss).toMatch(/\.hero-kicker::before\s*\{[^}]*color:\s*var\(--terracotta\)/);
+    expect(stylesCss).not.toMatch(/\.hero-kicker::before\s*\{[^}]*text-shadow/);
   });
 });

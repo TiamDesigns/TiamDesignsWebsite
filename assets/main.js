@@ -193,6 +193,9 @@ if (yearSpan) {
   }
 })();
 // Animations
+// Design system motion: one curve, cubic-bezier(0.05, 0.9, 0.2, 1)
+const SNAP_EASING = 'cubicBezier(0.05, 0.9, 0.2, 1)';
+
 function prefersReducedMotion() {
   return typeof window.matchMedia === 'function' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -217,31 +220,9 @@ function initAnimations() {
     targets: heroElements,
     opacity: [0, 1],
     translateY: [12, 0],
-    delay: anime.stagger(50),
-    easing: 'easeOutQuad',
-    duration: 400
-  });
-
-  // --- NEW: Elastic Button Hovers ---
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      anime.remove(btn);
-      anime({
-        targets: btn,
-        scale: 1.05,
-        duration: 800,
-        easing: 'easeOutElastic(1, .6)'
-      });
-    });
-    btn.addEventListener('mouseleave', () => {
-      anime.remove(btn);
-      anime({
-        targets: btn,
-        scale: 1,
-        duration: 600,
-        easing: 'easeOutElastic(1, .6)'
-      });
-    });
+    delay: anime.stagger(40),
+    easing: SNAP_EASING,
+    duration: 300
   });
 }
 
@@ -286,9 +267,9 @@ function initScrollAnimations() {
         anime({
           targets: entry.target,
           opacity: [0, 1],
-          translateY: [30, 0], // Slightly larger movement for content
-          easing: 'easeOutCubic',
-          duration: 1000,
+          translateY: [16, 0],
+          easing: SNAP_EASING,
+          duration: 300,
           delay: entry.target.dataset.delay || 0
         });
 
@@ -744,3 +725,41 @@ document.addEventListener('DOMContentLoaded', () => {
   initMasonryGrid();
 });
 
+
+// Theme toggle: light is the default, dark follows the OS until the visitor
+// picks one. The choice is saved per browser.
+(function initThemeToggle() {
+  const toggle = document.querySelector('.theme-toggle');
+  if (!toggle) return;
+  const root = document.documentElement;
+  const media = typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-color-scheme: dark)')
+    : null;
+
+  function currentTheme() {
+    const forced = root.getAttribute('data-theme');
+    if (forced === 'dark' || forced === 'light') return forced;
+    return media && media.matches ? 'dark' : 'light';
+  }
+
+  function sync() {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    toggle.setAttribute('aria-label', `Switch to ${next} theme`);
+  }
+
+  toggle.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('td-theme', next); } catch (e) { /* storage blocked */ }
+    sync();
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
+  });
+
+  if (media && typeof media.addEventListener === 'function') {
+    media.addEventListener('change', () => {
+      sync();
+      document.dispatchEvent(new CustomEvent('themechange'));
+    });
+  }
+  sync();
+})();
