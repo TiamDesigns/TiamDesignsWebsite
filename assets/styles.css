@@ -92,6 +92,11 @@
   --chamfer-lg-inner: polygon(13.17px 0, calc(100% - 13.17px) 0, 100% 13.17px, 100% calc(100% - 13.17px), calc(100% - 13.17px) 100%, 13.17px 100%, 0 calc(100% - 13.17px), 0 13.17px);
   --chamfer-card: var(--chamfer-lg);
   --chamfer-card-inner: var(--chamfer-lg-inner);
+  /* 2px chamfered border rings, drawn as an overlay on top of a framed
+     image so the corner bevels stay visible whatever the image covers. */
+  --chamfer-sm-ring: polygon(evenodd, 6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px, 6px 0, 6.83px 2px, calc(100% - 6.83px) 2px, calc(100% - 2px) 6.83px, calc(100% - 2px) calc(100% - 6.83px), calc(100% - 6.83px) calc(100% - 2px), 6.83px calc(100% - 2px), 2px calc(100% - 6.83px), 2px 6.83px, 6.83px 2px);
+  --chamfer-md-ring: polygon(evenodd, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px, 10px 0, 10.83px 2px, calc(100% - 10.83px) 2px, calc(100% - 2px) 10.83px, calc(100% - 2px) calc(100% - 10.83px), calc(100% - 10.83px) calc(100% - 2px), 10.83px calc(100% - 2px), 2px calc(100% - 10.83px), 2px 10.83px, 10.83px 2px);
+  --chamfer-lg-ring: polygon(evenodd, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px, 14px 0, 14.83px 2px, calc(100% - 14.83px) 2px, calc(100% - 2px) 14.83px, calc(100% - 2px) calc(100% - 14.83px), calc(100% - 14.83px) calc(100% - 2px), 14.83px calc(100% - 2px), 2px calc(100% - 14.83px), 2px 14.83px, 14.83px 2px);
 
   /* Older names used across the page styles, mapped onto the tokens */
   --text: var(--ink);
@@ -1188,6 +1193,7 @@ code, pre, .font-mono {
 }
 
 .project-hero-media {
+  position: relative;
   margin: 0;
   width: 100%;
   overflow: hidden;
@@ -1881,11 +1887,12 @@ code, pre, .font-mono {
   outline-offset: 4px;
 }
 
-/* Media well: full image, never cropped */
+/* Media well: thumbnail zoomed to fill the whole well (set --thumb-focus
+   on the .project-hero to steer the crop) */
 .project-hero {
   position: relative;
-  width: calc(100% + 2 * var(--space-6) - 2 * var(--border-width));
-  margin: calc(-1 * var(--space-6) + var(--border-width)) calc(-1 * var(--space-6) + var(--border-width)) var(--space-1);
+  width: calc(100% + 2 * var(--space-6));
+  margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-1);
   aspect-ratio: 16 / 9;
   background: #ffffff;
   clip-path: polygon(var(--chamfer-lg-size) 0, calc(100% - var(--chamfer-lg-size)) 0, 100% var(--chamfer-lg-size), 100% 100%, 0 100%, 0 var(--chamfer-lg-size));
@@ -1908,8 +1915,25 @@ code, pre, .font-mono {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  background: #ffffff;
+  object-fit: cover;
+  object-position: var(--thumb-focus, center);
+}
+
+/* The thumbnail runs under the card's frame; this redraws the frame's top
+   and sides over it so no seam or gap can show at the bevelled corners. */
+.project-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--border-bold);
+  clip-path: polygon(evenodd, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%, 0 14px, 14px 0, 14.83px 2px, calc(100% - 14.83px) 2px, calc(100% - 2px) 14.83px, calc(100% - 2px) 100%, 2px 100%, 2px 14.83px, 14.83px 2px);
+  transition: background-color var(--transition);
+}
+
+.project-card:hover .project-hero::after {
+  background: var(--sage);
 }
 
 /* Discipline eyebrow above the title */
@@ -3846,4 +3870,36 @@ figcaption,
 /* Four engineering cards sit as a balanced 2 x 2 grid on desktop */
 .course-track.engineering .coursework-grid {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+
+/* Chamfer ring overlays: the frame's 2px bevelled border is redrawn on top of
+   the image, so an image that reaches the corners can never hide a bevel. */
+.hero-work-item::after,
+.project-hero-media::after,
+figure picture::after,
+.tech-figure picture::after,
+.gallery-grid picture::after,
+.concept-gallery picture::after,
+.overview-media picture::after,
+.two-col-grid picture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero-work-item::after,
+.project-hero-media::after {
+  clip-path: var(--chamfer-md-ring);
+}
+
+figure picture::after,
+.tech-figure picture::after,
+.gallery-grid picture::after,
+.concept-gallery picture::after,
+.overview-media picture::after,
+.two-col-grid picture::after {
+  clip-path: var(--chamfer-sm-ring);
 }
