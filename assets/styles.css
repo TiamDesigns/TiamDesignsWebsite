@@ -1891,11 +1891,11 @@ code, pre, .font-mono {
    on the .project-hero to steer the crop) */
 .project-hero {
   position: relative;
-  width: calc(100% + 2 * var(--space-6) - 2 * var(--border-width));
-  margin: calc(-1 * var(--space-6) + var(--border-width)) calc(-1 * var(--space-6) + var(--border-width)) var(--space-1);
+  width: calc(100% + 2 * var(--space-6));
+  margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-1);
   aspect-ratio: 16 / 9;
   background: #ffffff;
-  clip-path: polygon(13.17px 0, calc(100% - 13.17px) 0, 100% 13.17px, 100% 100%, 0 100%, 0 13.17px);
+  clip-path: polygon(var(--chamfer-lg-size) 0, calc(100% - var(--chamfer-lg-size)) 0, 100% var(--chamfer-lg-size), 100% 100%, 0 100%, 0 var(--chamfer-lg-size));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1917,6 +1917,23 @@ code, pre, .font-mono {
   height: 100%;
   object-fit: cover;
   object-position: var(--thumb-focus, center);
+}
+
+/* The thumbnail runs under the card's frame; this redraws the frame's top
+   and sides over it so no seam or gap can show at the bevelled corners. */
+.project-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--border-bold);
+  clip-path: polygon(evenodd, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%, 0 14px, 14px 0, 14.83px 2px, calc(100% - 14.83px) 2px, calc(100% - 2px) 14.83px, calc(100% - 2px) 100%, 2px 100%, 2px 14.83px, 14.83px 2px);
+  transition: background-color var(--transition);
+}
+
+.project-card:hover .project-hero::after {
+  background: var(--sage);
 }
 
 /* Discipline eyebrow above the title */
