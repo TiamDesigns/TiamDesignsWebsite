@@ -1,0 +1,31 @@
+name: 'External link check'
+
+# Outside sites change without warning, so this runs weekly instead of on
+# every PR. A failed run lists the dead links in its summary.
+on:
+  schedule:
+    - cron: '17 13 * * 1' # Mondays, morning Eastern time
+  workflow_dispatch:
+
+permissions:
+  contents: 'read'
+
+jobs:
+  links:
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
+    steps:
+      - uses: 'actions/checkout@v5'
+
+      - name: 'Check links'
+        uses: 'lycheeverse/lychee-action@v2'
+        with:
+          # Local files are already covered by CI; this only checks the web.
+          args: >-
+            --no-progress
+            --scheme https --scheme http
+            --exclude 'linkedin\.com'
+            --exclude 'fonts\.(googleapis|gstatic)\.com'
+            --max-retries 3
+            './*.html'
+          fail: true
