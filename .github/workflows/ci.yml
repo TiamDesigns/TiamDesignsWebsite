@@ -1,0 +1,50 @@
+name: 'CI'
+
+# Fast, free checks that run on every pull request and every push to main.
+# Run the same thing locally with `npm run check`.
+on:
+  pull_request:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+concurrency:
+  group: 'ci-${{ github.event.pull_request.number || github.ref }}'
+  cancel-in-progress: true
+
+permissions:
+  contents: 'read'
+
+jobs:
+  check:
+    name: 'Tests, build and site checks'
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
+    steps:
+      - uses: 'actions/checkout@v5'
+
+      - uses: 'pnpm/action-setup@v4'
+        with:
+          version: 9
+
+      - uses: 'actions/setup-node@v5'
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      # --frozen-lockfile fails if pnpm-lock.yaml is out of date, which is the
+      # same thing that would break a Cloudflare Pages build.
+      - name: 'Install'
+        run: 'pnpm install --frozen-lockfile'
+
+      - name: 'Unit tests (Jest)'
+        run: 'pnpm test'
+
+      - name: 'Build dist/'
+        run: 'pnpm run build'
+
+      - name: 'HTML and accessibility lint'
+        run: 'pnpm run lint:html'
+
+      - name: 'Local links, alt text and image sizes'
+        run: 'pnpm run check:site'

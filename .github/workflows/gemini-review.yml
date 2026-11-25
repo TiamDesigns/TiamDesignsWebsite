@@ -41,6 +41,17 @@ jobs:
       - name: 'Checkout repository'
         uses: 'actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8' # ratchet:actions/checkout@v6
 
+      # Without a key the CLI waits for a sign-in that never comes and the job
+      # times out, so stop early with a clear message instead.
+      - name: 'Check Gemini credentials'
+        env:
+          HAS_KEY: "${{ secrets.GEMINI_API_KEY != '' || secrets.GOOGLE_API_KEY != '' || vars.GCP_WIF_PROVIDER != '' }}"
+        run: |-
+          if [ "${HAS_KEY}" != 'true' ]; then
+            echo "::error::No Gemini credentials. Add a GEMINI_API_KEY repository secret (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+
       - name: 'Run Gemini pull request review'
         uses: 'google-github-actions/run-gemini-cli@v0' # ratchet:exclude
         id: 'gemini_pr_review'
@@ -58,7 +69,9 @@ jobs:
           gcp_service_account: '${{ vars.SERVICE_ACCOUNT_EMAIL }}'
           gcp_workload_identity_provider: '${{ vars.GCP_WIF_PROVIDER }}'
           gemini_api_key: '${{ secrets.GEMINI_API_KEY }}'
-          gemini_cli_version: '${{ vars.GEMINI_CLI_VERSION }}'
+          # Pinned: Gemini CLI 0.70.0 and 0.71.x can't install git-cloned extensions
+          # ("Use of GIT_CONFIG_SYSTEM is not permitted"), which breaks the review.
+          gemini_cli_version: '0.68.0'
           gemini_debug: '${{ fromJSON(vars.GEMINI_DEBUG || vars.ACTIONS_STEP_DEBUG || false) }}'
           gemini_model: '${{ vars.GEMINI_MODEL }}'
           google_api_key: '${{ secrets.GOOGLE_API_KEY }}'

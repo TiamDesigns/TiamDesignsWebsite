@@ -10,6 +10,7 @@ on:
   pull_request:
     types:
       - 'opened'
+      - 'ready_for_review'
   issues:
     types:
       - 'opened'
@@ -43,13 +44,15 @@ jobs:
           env | grep '^DEBUG_'
 
   dispatch:
-    # For PRs: only if not from a fork
+    # For PRs: only if not from a fork and not a draft (a draft gets its
+    # review when it is marked ready)
     # For issues: only on open/reopen
     # For comments: only if user types @gemini-cli and is OWNER/MEMBER/COLLABORATOR
     if: |-
       (
         github.event_name == 'pull_request' &&
-        github.event.pull_request.head.repo.fork == false
+        github.event.pull_request.head.repo.fork == false &&
+        github.event.pull_request.draft == false
       ) || (
         github.event_name == 'issues' &&
         contains(fromJSON('["opened", "reopened"]'), github.event.action)
@@ -93,7 +96,7 @@ jobs:
             const request = process.env.REQUEST;
             core.setOutput('request', request);
 
-            if (eventType === 'pull_request.opened') {
+            if (['pull_request.opened', 'pull_request.ready_for_review'].includes(eventType)) {
               core.setOutput('command', 'review');
             } else if (['issues.opened', 'issues.reopened'].includes(eventType)) {
               core.setOutput('command', 'triage');
@@ -113,7 +116,11 @@ jobs:
               core.setOutput('command', 'fallthrough');
             }
 
+      # Automatic PR reviews skip this comment: the review itself shows up as
+      # a check on the PR, so the comment was only noise.
       - name: 'Acknowledge request'
+        if: |-
+          ${{ github.event_name != 'pull_request' }}
         env:
           GITHUB_TOKEN: '${{ steps.mint_identity_token.outputs.token || secrets.GITHUB_TOKEN || github.token }}'
           ISSUE_NUMBER: '${{ github.event.pull_request.number || github.event.issue.number }}'
