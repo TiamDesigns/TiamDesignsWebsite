@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ebedf0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12161f" media="(prefers-color-scheme: dark)">
+  <script>
+    /* Apply a saved theme choice before first paint */
+    try { var t = localStorage.getItem('td-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Dachshund70 &mdash; Testing AI on Hardware Development | Tiam Designs</title>
+  <meta name="description" content="A tri-mode keyboard I'm designing from scratch to test AI on real hardware development: PCBs, case, firmware and app, with a record of the decisions I made and the issues I caught." />
+  <link rel="canonical" href="https://tiamdesigns.com/dachshund70.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Tiam Designs" />
+  <meta property="og:title" content="Dachshund70: Testing AI on Hardware Development | Tiam Bennett" />
+  <meta property="og:description" content="A tri-mode keyboard I'm designing from scratch to test AI on real hardware development: PCBs, case, firmware and app, with a record of the decisions I made and the issues I caught." />
+  <meta property="og:url" content="https://tiamdesigns.com/dachshund70.html" />
+  <meta property="og:image" content="https://tiamdesigns.com/assets/og/dachshund70.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    as="style">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="assets/styles.css?v=3.0.0">
+</head>
+
+<body id="top">
+  
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Tiam Designs, home">
+        <span class="td-wordmark" aria-hidden="true"><svg class="td-wordmark__mark" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><path class="td-mark-bg" d="M18 4H78L92 18V78Q92 92 78 92H18L4 78V18Q4 4 18 4Z"/><path class="td-mark-t" d="M18 26H46V36H37V70H27V36H18Z"/><path class="td-mark-slash" d="M48 70H56L66 26H58Z M60 70H68L78 26H70Z"/></svg><span class="td-wordmark__tiam">TIAM</span><span class="td-wordmark__slash">//</span><span class="td-wordmark__designs">DESIGNS</span></span>
+      </a>
+      <nav class="nav">
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#coursework">Coursework</a></li>
+          <li><a href="index.html#experience">Experience</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content hero-text">
+          <p class="hero-kicker">HARDWARE + SOFTWARE · AI EXPERIMENT · IN DEVELOPMENT</p>
+          <h1>Dachshund70 &ndash; Testing AI on Real Hardware Development</h1>
+          <p class="hero-subtitle">A wireless keyboard I'm designing from scratch to find out how much of a hardware product an AI can build: PCBs, a switch plate, a machined case, firmware, a configuration protocol, a driver and a desktop app. Claude Code does most of the drafting, routing, coding and CAD. I set the direction, make the calls and review every result, and I keep a record of where my judgement changed the design.</p>
+          <div class="hero-team-credits">
+            <span class="team-label">// STATUS: PRE-PCB ORDER</span>
+            <p>The boards are designed, the firmware is built and tested on a PC and in CI, and the case is on its third revision. <strong>No PCBs have been ordered yet</strong>, so nothing has run on real hardware. The schedule is in <a href="#schedule">section 06</a>.</p>
+            <p><strong>Design &rarr; Engineering:</strong> every one of the AI's designs passed its own checks. The problems I caught were about how a part is pressed, printed, assembled or machined, which is where my industrial design training does the work.</p>
+          </div>
+          <div class="hero-actions">
+            <a href="#catches" class="btn primary"><span class="btn-text">What I Caught</span></a>
+            <a href="https://github.com/TiamDesigns/Dachshund70" class="btn ghost" target="_blank" rel="noopener noreferrer"><span class="btn-text">GitHub Repo</span></a>
+          </div>
+        </div>
+        <div class="hero-visual hero-visual-stack">
+          <div class="project-hero-media">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-hero-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-hero.webp" type="image/webp">
+              <img src="assets/Dachshund70/rev3-hero.jpg" alt="Dachshund70 rev 3 render: dark aluminium case with an amber accent ring, a knurled roller wheel and an e-paper screen beside the arrow keys" width="1500" height="1000" fetchpriority="high">
+            </picture>
+          </div>
+          <div class="highlight-card">
+            <div class="card-header">
+              <span class="card-tag">PROJECT SPECIFICATIONS</span>
+              <h3>Dachshund70</h3>
+            </div>
+            <ul class="tech-list">
+              <li><strong class="tech-title">MCU</strong><span class="tech-desc">nRF52840 (Raytac MDBT50Q-P1MV2 module), plus a second one in the 2.4 GHz dongle</span></li>
+              <li><strong class="tech-title">Connectivity</strong><span class="tech-desc">USB, Bluetooth LE and a 1 kHz 2.4 GHz dongle</span></li>
+              <li><strong class="tech-title">Case</strong><span class="tech-desc">CNC aluminium at 4&deg;, laser-cut accent ring, gasket-mounted FR4 plate</span></li>
+              <li><strong class="tech-title">My role</strong><span class="tech-desc">Solo: direction, decisions, design review and industrial design</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01: The experiment -->
+    <section class="section" id="details">
+      <div class="container section-grid">
+        <div class="content">
+          <div class="section-head">
+            <span class="eyebrow"><span class="eyebrow-num">01</span> <span class="eyebrow-slash">//</span> 09</span>
+            <h2>The experiment</h2>
+          </div>
+          <p style="margin-bottom: 1.25rem;">
+            AI tools are starting to do work that engineers have always done. I wanted first-hand evidence of how far that
+            goes in hardware, where a mistake costs a board order or a machined part. So I picked a product big enough to
+            test it properly: a tri-mode keyboard with its own electronics, firmware, software and enclosure.
+          </p>
+          <p style="margin-bottom: 1.25rem;">
+            I set up the project so the results would be honest. <strong>Claude Code does the legwork, and I make every
+            decision that has more than one reasonable answer.</strong> Each change goes through a pull request with CI, the
+            repository logs which calls were mine, and I review the CAD and PCBs myself in Fusion 360 and KiCad before
+            anything is kept. Where I can, I check the design physically with printed test parts.
+          </p>
+          <p style="margin-bottom: 1.5rem;">
+            The project was called the Dachshund60F until November 2026, when I renamed it the Dachshund70.
+          </p>
+
+          <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">// THE BOARD</h3>
+          <ul class="feature-list">
+            <li><strong>Layout:</strong> 60% with an F-row, hot-swap switches and screw-in stabilisers</li>
+            <li><strong>Input:</strong> a Bourns PEC12R encoder on its own module, used as a roller that turns like a mouse wheel</li>
+            <li><strong>Mount:</strong> FR4 plate on six gasket points with silicone socks, between a top and bottom shell</li>
+            <li><strong>Power:</strong> 1S LiPo, MCP73831 charger with a load-sharing power path</li>
+            <li><strong>Status:</strong> five indicator LEDs and a status screen (touch e-paper is the current direction)</li>
+            <li><strong>Boards:</strong> mainboard, USB-C daughterboard, encoder module, screen board, dongle and plate, all in KiCad 10</li>
+          </ul>
+        </div>
+        <div class="overview-media">
+          <figure class="tech-figure contain-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-side-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-side.webp" type="image/webp">
+              <img width="1800" height="600" src="assets/Dachshund70/rev3-side.jpg" alt="Side profile of case rev 3 at its 4 degree typing angle with the amber accent ring" class="feature-image" loading="lazy">
+            </picture>
+            <figcaption>Case rev 3 in profile at 4&deg;, rendered from the Fusion 360 model.</figcaption>
+          </figure>
+          <figure class="tech-figure contain-figure" style="margin-top: 1.5rem;">
+            <picture>
+              <source srcset="assets/Dachshund70/keyboard-layout.webp" type="image/webp">
+              <img width="884" height="357" src="assets/Dachshund70/keyboard-layout.jpg" alt="Dachshund70 key layout" class="feature-image" loading="lazy">
+            </picture>
+            <figcaption>The layout I defined in Keyboard Layout Editor, the starting point for every board file.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02: Division of labour -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">02</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>Who did what</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--muted);">
+          Claude Code produced most of the files. I made the decisions, reviewed the results and sent work back when it was wrong.
+        </p>
+        <div class="two-col-grid">
+          <div class="highlight-card">
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What the AI Did</h3>
+            <ul class="tech-list">
+              <li>
+                <strong class="tech-title">PCB Work</strong>
+                <span class="tech-desc">Schematic entry, routing passes, footprint checks, DRC and ERC runs and STEP exports across six KiCad projects.</span>
+              </li>
+              <li>
+                <strong class="tech-title">Firmware &amp; Tests</strong>
+                <span class="tech-desc">Zephyr firmware over 15 phases, a hardware-free keymap engine with host unit tests, and a fuzzed protocol parser.</span>
+              </li>
+              <li>
+                <strong class="tech-title">Software Stack</strong>
+                <span class="tech-desc">A protocol code generator, a TypeScript host library, and the Doghouse configurator with desktop packaging.</span>
+              </li>
+              <li>
+                <strong class="tech-title">Case CAD &amp; Docs</strong>
+                <span class="tech-desc">Python scripts that build and export the Fusion 360 case, the renders on this page, CI, a bring-up test plan and a detailed progress log.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="highlight-card">
+            <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">What I Did</h3>
+            <ul class="tech-list">
+              <li>
+                <strong class="tech-title">Scope &amp; Architecture</strong>
+                <span class="tech-desc">Chose the MCU, the wired-first build order, custom firmware over a QMK or ZMK fork, and a driverless HID design.</span>
+              </li>
+              <li>
+                <strong class="tech-title">Engineering Trade-offs</strong>
+                <span class="tech-desc">Picked between workable options for the power path, charge current, LED logic levels, polling rate, encoder and screen.</span>
+              </li>
+              <li>
+                <strong class="tech-title">Design Review</strong>
+                <span class="tech-desc">Reviewed every board and case revision as a product someone will press, assemble and machine. Most of the AI's serious mistakes turned up here (section 04).</span>
+              </li>
+              <li>
+                <strong class="tech-title">Industrial Design</strong>
+                <span class="tech-desc">Set the case form, materials, gasket mount, accent ring, the roller's look and feel, and which top shell goes to production.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: Decisions -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">03</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>Decisions I made</h2>
+        </div>
+        <p style="margin-bottom: 1.5rem; color: var(--muted);">
+          A selection from the decision log in the repository. Each one had more than one reasonable answer.
+        </p>
+        <div class="table-frame" style="margin: 0.5rem 0 1rem 0;">
+          <div class="table-container">
+            <table class="decision-table">
+              <thead>
+                <tr>
+                  <th>Decision</th>
+                  <th>What I Chose</th>
+                  <th>Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Microcontroller</strong></td>
+                  <td>nRF52840 on the keyboard and the dongle</td>
+                  <td>RP2040 and STM32 have no Bluetooth. Using one chip family at both ends means one toolchain.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Build Order</strong></td>
+                  <td>Tri-mode, built wired first</td>
+                  <td>Wireless doubles the firmware. Getting USB solid first keeps radio bugs separate from keymap bugs.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Driver</strong></td>
+                  <td>A vendor HID interface plus a user-space library, with no kernel driver</td>
+                  <td>Kernel drivers need signing on Windows and entitlements on macOS. This works on any computer with nothing to install.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Power Path</strong></td>
+                  <td>Load-sharing circuit (P-MOSFET + Schottky) on the charger</td>
+                  <td>The first design only ran from the battery. Now it runs from USB with the switch off or no cell fitted.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">LED Data Line</strong></td>
+                  <td>SN74LV1T34 level-shifting buffer</td>
+                  <td>On USB the LEDs see about 4.7 V, so a 3.3 V data line has no margin. I chose a proper buffer over a diode drop.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Polling Rate</strong></td>
+                  <td>Stay at 1 kHz on the nRF52840 and cut latency in firmware</td>
+                  <td>Going higher meant a new module, bootloader and board. Debounce and tap-hold are the bigger delays, and those I control.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Screen Placement</strong></td>
+                  <td>The screen and status LEDs moved off the mainboard onto their own board</td>
+                  <td>The mainboard flexes with the gasket-mounted plate, and a rigid screen shouldn't. It also lets the same mainboard go into a cheaper version with no screen or encoder.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Screen Type</strong></td>
+                  <td>Touch e-paper, after trying a Sharp memory LCD and an AMOLED</td>
+                  <td>I'll mostly use the screen to change settings, and an AMOLED showing static settings screens risks burn-in.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Case Weight</strong></td>
+                  <td>Dropped the brass weight and lowered the whole stack onto a foam floor</td>
+                  <td>It lets the plate, PCB and keycaps sit 2 mm lower with a thinner battery. I can design a weight later.</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--text-bright);">Fasteners</strong></td>
+                  <td>Heat-set inserts and flush countersunk screws</td>
+                  <td>Inserts survive the case being opened again and again, so I reverted a change to thread-forming screws. Flush heads keep the bottom clean.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: What I caught -->
+    <section class="section section-alt" id="catches">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">04</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>Issues I caught</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--muted);">
+          The AI's work passed its own checks: DRC was clean and the tests were green. The serious problems were physical
+          ones, about how a part moves under a finger, how a gasket seats or how a case gets made. I found them by
+          reviewing the design as an object someone will use, which is what my industrial design training taught me to do.
+        </p>
+        <div class="two-col-grid">
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 01: Wrong Encoder Orientation</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              The roller needs an encoder whose shaft runs <strong>parallel</strong> to the board, so it turns like a mouse wheel.
+              The AI put the <strong>PEC12R-4220F</strong> in the BOM: Bourns' axial part, whose shaft points straight up like a
+              volume knob. Its own cross-check had the two part families backwards, and the footprint was right, so nothing
+              automated flagged it. I caught the mismatch and moved it to the radial PEC12R-22xxF family.
+            </p>
+            <figure class="tech-figure" style="margin-top: 1.5rem;">
+              <picture>
+                <source srcset="assets/Dachshund70/16-section-encoder-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Dachshund70/16-section-encoder.webp" type="image/webp">
+                <img width="1760" height="1100" src="assets/Dachshund70/16-section-encoder.jpg" alt="Section through the roller encoder along its shaft" class="feature-image" loading="lazy">
+              </picture>
+              <figcaption>Section along the corrected encoder in the first case: shaft parallel to the board.</figcaption>
+            </figure>
+          </div>
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 02: A Button You Couldn't Press</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              The AI treated the encoder's click as a press <strong>down</strong> on the wheel. On this part the switch is
+              pressed <strong>along the shaft</strong> (0.5 mm of travel), and the end of the wheel was buried inside the case
+              wall. The model looked fine, and nobody could have used the button. I had the wheel brought out through the end
+              wall so a finger can push its end in.
+            </p>
+            <figure class="tech-figure" style="margin-top: 1.5rem;">
+              <picture>
+                <source srcset="assets/Dachshund70/19-roller-end-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Dachshund70/19-roller-end.webp" type="image/webp">
+                <img width="1800" height="1100" src="assets/Dachshund70/19-roller-end.jpg" alt="Close-up of the roller wheel end with its push cap" class="feature-image" loading="lazy">
+              </picture>
+              <figcaption>The reworked wheel end in the first case, exposed so the push switch can be pressed.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="two-col-grid" style="margin-top: 2rem;">
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 03: Gaskets Facing the Wrong Way</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              The AI misread my description of the plate's gasket tabs, then modelled the gaskets pointing out toward the case wall,
+              where they couldn't seat under the bezel. I had the tabs redrawn as branched nubs with the silicone socks lying
+              along the plate edge. In rev 3 the retainers screw up into the top shell, so the shell, plate, socks and
+              retainers come out as one sub-assembly.
+            </p>
+            <figure class="tech-figure" style="margin-top: 1.5rem;">
+              <picture>
+                <source srcset="assets/Dachshund70/rev3-gasket-retainers-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Dachshund70/rev3-gasket-retainers.webp" type="image/webp">
+                <img width="1800" height="1100" src="assets/Dachshund70/rev3-gasket-retainers.jpg" alt="Plate sitting in the rev 3 bottom shell with silicone gasket socks on the plate edge" class="feature-image" loading="lazy">
+              </picture>
+              <figcaption>Rev 3: the plate in the case, with the gasket socks lying along its edge.</figcaption>
+            </figure>
+          </div>
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Catch 04: A Case You Couldn't Machine</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              After many rounds of edits, the AI's top shell was full of leftovers: stray holes, thin slivers, patched faces and
+              cylinder stubs that read as holes from outside. None of it failed a check, and all of it would cost money on a
+              CNC quote. I had shell A rebuilt as one clean outer skin with a single underside pocket and consistent corner radii.
+            </p>
+            <figure class="tech-figure" style="margin-top: 1.5rem;">
+              <picture>
+                <source srcset="assets/Dachshund70/rev3-top-a-shell-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Dachshund70/rev3-top-a-shell.webp" type="image/webp">
+                <img width="1800" height="1012" src="assets/Dachshund70/rev3-top-a-shell.jpg" alt="Rev 3 top shell A without the plate or keycaps, showing clean pockets" class="feature-image" loading="lazy">
+              </picture>
+              <figcaption>Top shell A after the rebuild: clean pockets for the gaskets, screen and roller.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="highlight-card" style="margin-top: 2rem;">
+          <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">More Catches</h3>
+          <ul class="tech-list">
+            <li>
+              <strong class="tech-title">Screw Heads Standing Proud</strong>
+              <span class="tech-desc">I printed a test case, and the bottom screw heads stood out of the surface. The AI had cut the countersinks at about &Oslash;5.8 mm, too small for a DIN 7991 M3 head. They're now &Oslash;6.6 mm at 90&deg;, with the heads 0.3 mm below the face to leave room for anodising.</span>
+            </li>
+            <li>
+              <strong class="tech-title">Bare Patches in the Ground Pour</strong>
+              <span class="tech-desc">I spotted gaps in the back copper pour around several switches. They were pockets fully boxed in by tracks, which KiCad strips as unconnected islands. Each one big enough now has a ground via.</span>
+            </li>
+            <li>
+              <strong class="tech-title">A Header in the Way of the Battery</strong>
+              <span class="tech-desc">The SWD debug header sat in front of the battery connector, so the plug couldn't go in. It moved to the back of the board.</span>
+            </li>
+            <li>
+              <strong class="tech-title">Connectors on the Wrong Side</strong>
+              <span class="tech-desc">Two connectors were on the front of the mainboard, which ruled out single-sided assembly at JLCPCB. Every part is now on the back, and the scattered ground vias went from 199 to 91.</span>
+            </li>
+            <li>
+              <strong class="tech-title">An Open, Unfinished First Case</strong>
+              <span class="tech-desc">The AI's first case left the screen uncovered, showed the plate beside the arrow keys, and had a 510 g brass weight exposed through the bottom with its screws facing the wrong way.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: How the design changed -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">05</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>How the design changed</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--muted);">
+          The AI's first case was a parametric CadQuery script at a 7&deg; typing angle. I moved the case into Fusion 360,
+          where I can review and edit the model directly, and directed three revisions from there. Rev 3 came from a
+          14-point list I wrote after reviewing rev 2.
+        </p>
+        <div class="two-col-grid">
+          <figure class="tech-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/01-front-left-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/01-front-left.webp" type="image/webp">
+              <img width="1603" height="1001" src="assets/Dachshund70/01-front-left.jpg" alt="The AI's first case design, generated from a CadQuery script" class="feature-image" loading="lazy">
+            </picture>
+            <figcaption>Where it started: the AI's first case, generated from a script at 7&deg;.</figcaption>
+          </figure>
+          <figure class="tech-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-top-a-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-top-a.webp" type="image/webp">
+              <img width="1800" height="1012" src="assets/Dachshund70/rev3-top-a.jpg" alt="Case rev 3 with top shell A" class="feature-image" loading="lazy">
+            </picture>
+            <figcaption>Rev 3: 4&deg;, lower, a laser-cut accent ring at the seam, and the roller and screen in one column.</figcaption>
+          </figure>
+        </div>
+        <div class="two-col-grid" style="margin-top: 2rem; align-items: start;">
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Two Top Shells, One Choice</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              I asked for a second top shell to compare against the sloped one: shell B, with flat sides and a front thumb
+              slope. Both use the same bottom shell, plate and boards. I chose shell A for production. It also needs less aluminium
+              (131 cm&sup3; against 166 cm&sup3;), which matters on a CNC quote.
+            </p>
+            <ul style="color: var(--muted); font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.6;">
+              <li>Plate, PCB and keycaps 2 mm lower, on a 1.2 mm floor with room for 3 mm of foam</li>
+              <li>A thinner 7 mm battery, turned and moved to the back</li>
+              <li>Eight hidden M3 countersunk screws into heat-set inserts</li>
+              <li>A split PETG version of the case for test prints on a 256 mm printer bed</li>
+            </ul>
+          </div>
+          <figure class="tech-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-top-b-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-top-b.webp" type="image/webp">
+              <img width="1800" height="1012" src="assets/Dachshund70/rev3-top-b.jpg" alt="Case rev 3 with the alternative top shell B, flat sides and a thumb slope" class="feature-image" loading="lazy">
+            </picture>
+            <figcaption>Shell B, the alternative I compared against: flat sides with a front thumb slope.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06: Schedule -->
+    <section class="section section-alt" id="schedule">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">06</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>Status &amp; schedule</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--muted);">
+          The electronics and firmware are done on paper and on a PC, and I'm finishing the case and the screen now. I'm
+          also designing a wired version alongside it, with an RP2350 and a USB hub on the back. The next steps, in order:
+        </p>
+        <div class="highlight-card">
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="lifecycle-step step-deploy">
+              <span class="step-num">01</span>
+              <div class="step-text"><strong class="step-label">Order PCBs:</strong> the mainboard, USB-C daughterboard, encoder module, screen board, dongle and FR4 plate, with assembly at JLCPCB. The roller encoders have a 16-week lead time, so they get ordered first.</div>
+            </div>
+            <div class="lifecycle-step step-sample">
+              <span class="step-num">02</span>
+              <div class="step-text"><strong class="step-label">Bring-up &amp; testing:</strong> flash the bootloader and firmware, then work through the bring-up plan: rail voltages, current draw in every power state, scan rate, latency and radio range. Fix what the real boards show.</div>
+            </div>
+            <div class="lifecycle-step step-contain">
+              <span class="step-num">03</span>
+              <div class="step-text"><strong class="step-label">Order the case:</strong> test-fit a printed PETG case around the real boards, then order the CNC aluminium shells and the laser-cut accent ring.</div>
+            </div>
+            <div class="lifecycle-step step-retract">
+              <span class="step-num">04</span>
+              <div class="step-text"><strong class="step-label">Final assembly:</strong> fit the switches, stabilisers, gaskets and battery, then test the finished keyboard over USB, Bluetooth and the dongle with Doghouse.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07: Software -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">07</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>The software side</h2>
+        </div>
+        <div class="two-col-grid">
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Firmware, Protocol &amp; Driver</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              The firmware is written from scratch on Zephyr / nRF Connect SDK. The keymap logic is plain C with no hardware
+              dependencies, so it runs as unit tests on a PC. One YAML file defines the configuration protocol, and the C and
+              TypeScript code for both ends is generated from it.
+            </p>
+            <ul style="color: var(--muted); font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.6;">
+              <li><strong>USB:</strong> NKRO with boot-protocol fallback, media keys, suspend and remote wakeup.</li>
+              <li><strong>Advanced keys:</strong> tap-hold, combos, tap dance, macros, Caps Word, Auto Shift, Leader, mouse keys.</li>
+              <li><strong>Wireless:</strong> BLE HID with multiple hosts, and a 1 kHz 2.4 GHz link through the dongle.</li>
+              <li><strong>Safety:</strong> every index and length from the host is checked, and the parser is fuzzed. A configuration channel that can write macros could otherwise make the keyboard type commands.</li>
+              <li><strong>Process:</strong> one PR per phase, CI on every change, and versioned, CRC-checked settings in flash.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: var(--accent-lime); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase;">Doghouse Configurator</h3>
+            <p style="margin-bottom: 1rem; color: var(--muted); font-size: 0.92rem;">
+              Doghouse edits keymaps, advanced keys, macros and settings, and installs firmware updates. It runs in Chrome or
+              Edge over WebHID, or as a desktop app for Windows, macOS and Linux that updates itself. The boards are named
+              after dogs, which is where the name comes from.
+            </p>
+            <figure class="tech-figure contain-figure" style="margin-top: 1.5rem;">
+              <picture>
+                <source srcset="assets/Dachshund70/doghouse-configurator-mobile.webp" media="(max-width: 768px)" type="image/webp">
+                <source srcset="assets/Dachshund70/doghouse-configurator.webp" type="image/webp">
+                <img width="1800" height="1125" src="assets/Dachshund70/doghouse-configurator.jpg" alt="Doghouse configurator showing the keymap editor" class="feature-image" loading="lazy">
+              </picture>
+              <figcaption>Doghouse in demo mode, editing the base layer of a simulated board.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08: What I've learnt -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">08</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>What I've learnt about AI in hardware</h2>
+        </div>
+        <div class="highlight-card" style="margin-bottom: 2rem;">
+          <ul class="tech-list">
+            <li>
+              <strong class="tech-title">Where It Helps</strong>
+              <span class="tech-desc">Routing passes, boilerplate, tests, documentation and CAD iterations come quickly and in large amounts.</span>
+            </li>
+            <li>
+              <strong class="tech-title">Where I'm Needed</strong>
+              <span class="tech-desc">Decisions with several workable answers, and anything about how a part moves, fits, feels or gets made. Every catch in section 04 passed the AI's own checks first.</span>
+            </li>
+            <li>
+              <strong class="tech-title">CAD Drifts</strong>
+              <span class="tech-desc">After many small edits, the AI's models collect leftover geometry it doesn't see. I now ask for clean rebuilds at each milestone and check the model myself in Fusion 360.</span>
+            </li>
+            <li>
+              <strong class="tech-title">How I Keep It Honest</strong>
+              <span class="tech-desc">Checks I can trust: DRC and ERC, tests that compare the pin map against the PCB, CI on every change, printed test parts, and a bring-up plan with measured numbers.</span>
+            </li>
+          </ul>
+        </div>
+        <p style="margin-bottom: 1rem; color: var(--muted);">
+          A keyboard looks simple, but doing one properly covers USB device design, Bluetooth LE, a proprietary radio link,
+          SPI and I2C displays, addressable LEDs, flash storage and power management. I needed to understand each well enough
+          to judge whether the AI's work was right. I'm taking <strong>Computer Architecture II (CEG3136)</strong> at uOttawa
+          while building this and using it directly: flash memory maps, timers and interrupts for matrix scanning, and SPI and
+          I2C display drivers.
+        </p>
+        <div class="skills-grid" style="margin-top: 1.5rem;">
+          <div class="skill-group">
+            <h3>USB</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Descriptors, interfaces and report IDs; boot protocol vs NKRO for BIOS and KVM support; the 1 kHz polling ceiling of full-speed USB; USB-C sink design with CC pull-downs, ESD clamping and a PTC fuse.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Radio &amp; Wireless</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Antenna keep-outs on a module design, Bluetooth LE HID with bonding and multiple hosts, and Nordic's ESB protocol for a dongle link with a latency budget of about 1 ms.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Power</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Load sharing between the charger and the system, keeping charge current inside a 500 mA USB budget, logic-level margins for SK6812 LEDs, and LiPo charging and safety.</p>
+          </div>
+          <div class="skill-group">
+            <h3>PCB Design</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">KiCad 10 end to end with custom design rules, matched USB differential pairs, ground pours, single-sided assembly, and where an autorouter falls short.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Mechanical</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Gasket mounts, heat-set inserts, countersink sizing, tolerances for printed and machined parts, and designing a shell for 3-axis CNC.</p>
+          </div>
+          <div class="skill-group">
+            <h3>Firmware &amp; Protocols</h3>
+            <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem;">Zephyr and devicetree, debounce algorithms, wear-levelled settings storage, protocol versioning and code generation, and fuzzing a parser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09: Renders & files -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow"><span class="eyebrow-num">09</span> <span class="eyebrow-slash">//</span> 09</span>
+          <h2>Renders &amp; project files</h2>
+        </div>
+        <p style="color: var(--muted); margin-bottom: 0;">Rev 3 renders from the Fusion 360 model. Nothing has been machined yet.</p>
+        <div class="gallery-grid" style="margin-top: 2rem;">
+          <figure class="tech-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-plate-in-case-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-plate-in-case.webp" type="image/webp">
+              <img width="1800" height="1012" src="assets/Dachshund70/rev3-plate-in-case.jpg" alt="Rev 3 bottom shell with the plate, gasket retainers, roller and screen in place" loading="lazy">
+            </picture>
+            <figcaption>Inside rev 3: the plate on its gaskets, the roller module and the screen tray.</figcaption>
+          </figure>
+          <figure class="tech-figure">
+            <picture>
+              <source srcset="assets/Dachshund70/rev3-bottom-shell-mobile.webp" media="(max-width: 768px)" type="image/webp">
+              <source srcset="assets/Dachshund70/rev3-bottom-shell.webp" type="image/webp">
+              <img width="1800" height="1000" src="assets/Dachshund70/rev3-bottom-shell.jpg" alt="Rev 3 bottom shell with the retainer bars and battery bay" loading="lazy">
+            </picture>
+            <figcaption>The rebuilt bottom shell: one plain cavity, retainer bars and the battery bay.</figcaption>
+          </figure>
+        </div>
+
+        <div class="highlight-card" style="margin-top: 2rem;">
+          <h3 style="color: var(--accent-orange); font-family: var(--font-mono); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.75rem;">Dig Into the Files</h3>
+          <p style="color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem;">Everything is public and open source. Critique is welcome.</p>
+          <ul class="tech-list">
+            <li>
+              <strong class="tech-title"><a href="https://github.com/TiamDesigns/Dachshund70/tree/main/hardware" target="_blank" rel="noopener noreferrer">PCBs &amp; STEP models</a></strong>
+              <span class="tech-desc">KiCad 10 projects for every board, fab exports and STEP files.</span>
+            </li>
+            <li>
+              <strong class="tech-title"><a href="https://github.com/TiamDesigns/Dachshund70/tree/main/hardware/case" target="_blank" rel="noopener noreferrer">Case CAD</a></strong>
+              <span class="tech-desc">The Fusion 360 archive, STEP and DXF exports, and the BOM.</span>
+            </li>
+            <li>
+              <strong class="tech-title"><a href="https://github.com/TiamDesigns/Dachshund70/blob/main/docs/design-decisions.md" target="_blank" rel="noopener noreferrer">Decision log</a></strong>
+              <span class="tech-desc">Every call I made myself, with the options I passed on.</span>
+            </li>
+            <li>
+              <strong class="tech-title"><a href="https://github.com/TiamDesigns/Dachshund70/blob/main/PROGRESS.md" target="_blank" rel="noopener noreferrer">Progress log</a></strong>
+              <span class="tech-desc">What changed in each revision, what's tested and the known issues.</span>
+            </li>
+            <li>
+              <strong class="tech-title"><a href="https://github.com/TiamDesigns/Dachshund70/blob/main/docs/bringup-test-plan.md" target="_blank" rel="noopener noreferrer">Bring-up test plan</a></strong>
+              <span class="tech-desc">The measurements I'll take when the boards arrive.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-info">
+        <p>&copy; <span id="year"></span> Tiam Bennett. All rights reserved.</p>
+      </div>
+      <div class="footer-socials">
+        <a href="mailto:tiambennett@gmail.com">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Email
+        </a>
+        <a href="https://github.com/TiamDesigns" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/tiam-morrow-rogers-40aa9212b" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+      <a href="#top" class="back-to-top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="assets/anime.min.js?v=1.0.1" defer></script>
+  <script src="assets/main.js?v=3.0.0" defer></script>
+</body>
+
+</html>
