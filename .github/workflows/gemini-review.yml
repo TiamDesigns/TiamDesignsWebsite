@@ -41,6 +41,17 @@ jobs:
       - name: 'Checkout repository'
         uses: 'actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8' # ratchet:actions/checkout@v6
 
+      # Without a key the CLI waits for a sign-in that never comes and the job
+      # times out, so stop early with a clear message instead.
+      - name: 'Check Gemini credentials'
+        env:
+          HAS_KEY: "${{ secrets.GEMINI_API_KEY != '' || secrets.GOOGLE_API_KEY != '' || vars.GCP_WIF_PROVIDER != '' }}"
+        run: |-
+          if [ "${HAS_KEY}" != 'true' ]; then
+            echo "::error::No Gemini credentials. Add a GEMINI_API_KEY repository secret (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+
       - name: 'Run Gemini pull request review'
         uses: 'google-github-actions/run-gemini-cli@v0' # ratchet:exclude
         id: 'gemini_pr_review'
